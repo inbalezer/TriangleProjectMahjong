@@ -31,7 +31,7 @@ namespace TriangleProject.Server.Controllers
         [HttpGet("data")]
         public async Task<IActionResult> GetSystemId()
         {
-            
+
 
             var configData = _config.GetSection("PortelemData");
             DataForSystem data = new DataForSystem()
@@ -66,7 +66,7 @@ namespace TriangleProject.Server.Controllers
                     return BadRequest("user creation error");
                 }
             }
-
+            // malka added this commet to test the git commands :)
             HttpContext.Session.SetInt32("userId", userId);
             return Ok(userId);
 

@@ -1,0 +1,9 @@
+.vscode
+.vs
+bin
+obj
+*.db
+Portelem.db
+*.db-shm
+*.db-wal
+appsetting.json

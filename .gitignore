@@ -1,0 +1,41 @@
+# Visual Studio files
+*.suo
+*.user
+*.ncb
+*.dll
+*.pdb
+*.exe
+*.cache
+*.log
+*.vspscc
+*.vssscc
+*_i.c
+*_p.c
+*.ncb
+*.scc
+*.tlb
+*.tlh
+*.bak
+*.[Cc]ache
+*.ilk
+*.log
+*.obj
+*.pch
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.sdf
+*.opensdf
+
+# .NET Core files
+bin/
+obj/
+*.dll
+*.exe
+*.log
+*.nupkg
+*.sqlite
+
+# Visual Studio Code files
+.vscode/

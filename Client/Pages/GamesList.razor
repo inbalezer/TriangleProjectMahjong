@@ -1,0 +1,96 @@
+﻿@page "/GamesList"
+@using TriangleProject.Shared.Models.Editor
+@inject HttpClient Http
+
+<h3>GamesList</h3>
+
+@if (user != null)
+{
+	<p>The Games:</p>
+	<table border=0>
+		<tr>
+			<th>ID</th>
+			<th>Game Name</th>
+			<th>Game Code</th>
+			<th>Publish</th>
+		</tr>
+
+		@foreach (GameForEditor game in user.UserGames)
+		{
+			<tr>
+				<td>@counter</td>
+				<td>@game.GameFullName</td>
+				<td>@game.GameCode</td>
+				<td>
+					@if (game.PublishStatus == "Not Eligible")
+					{
+						<input type="checkbox" disabled />
+					}
+					else if (game.PublishStatus == "Eligible")
+					{
+						<input type="checkbox"/>
+					}
+					else
+					{
+						<input type="checkbox" checked/>
+					}
+				</td>
+			</tr>
+			counter = counter + 1;
+		}
+	</table>
+
+}
+
+@inject NavigationManager Nav
+@if (msg != "")
+{
+	<p>@msg</p>
+	<input type="button" value="reload" @onclick=Navigate />
+}
+
+
+
+
+
+@code {
+
+	[CascadingParameter]
+	public int UserId { get; set; }
+
+	UserWithGames user;
+	int counter = 1;
+	string msg = "";
+
+	protected override async Task OnInitializedAsync() 
+	{
+		var userRes = await Http.GetAsync("api/Games/" + UserId);
+
+		if (userRes.IsSuccessStatusCode)
+		{
+			user = userRes.Content.ReadFromJsonAsync<UserWithGames>().Result;
+		}
+		else
+		{
+			string error = userRes.Content.ReadAsStringAsync().Result;
+			switch (error)
+			{
+				case "No Session":
+					msg = "Session error, please reload page";
+					break;
+				case "User Not Logged In":
+					msg = "You are not logged in, please reload page to try again";
+					break;
+				case "User Not Found":
+					msg = "the user details not found, please reload page to try again";
+					break;
+			}
+		}
+	}
+
+	void Navigate()
+	{
+		Nav.NavigateTo("./", true);
+	}
+
+}

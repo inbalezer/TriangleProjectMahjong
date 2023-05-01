@@ -1,0 +1,34 @@
+﻿<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        @if (UserId > 0)
+        {
+                <CascadingValue Value="@UserId">
+                    <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+                    <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+                </CascadingValue>
+        }
+        else
+        {
+           <p>loading Portelem</p>
+        }
+
+    </Found>
+    <NotFound>
+        <PageTitle>Not found</PageTitle>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <p role="alert">Sorry, there's nothing at this address.</p>
+        </LayoutView>
+    </NotFound>
+</Router>
+
+@code {
+    int UserId = 0;
+
+    [Inject]
+    public Portelem.Auth.AuthHelper _Auth { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        UserId = await _Auth.Check();
+    }
+}

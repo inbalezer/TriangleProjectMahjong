@@ -12,5 +12,9 @@
   <ItemGroup>
     <None Remove="Models\" />
     <None Remove="Models\Users\" />
+    <None Remove="MudBlazor" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MudBlazor" Version="6.2.2" />
   </ItemGroup>
 </Project>

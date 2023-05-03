@@ -12,6 +12,7 @@
     <PackageReference Include="Dapper" Version="2.0.123" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
+    <PackageReference Include="MudBlazor" Version="6.2.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +26,7 @@
     <None Remove="Dapper" />
     <None Remove="Controllers\" />
     <None Remove="Microsoft.AspNetCore.Session" />
+    <None Remove="MudBlazor" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\uploadedFiles\" />

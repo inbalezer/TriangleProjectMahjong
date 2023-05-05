@@ -73,11 +73,10 @@ namespace TriangleProject.Server.Controllers
                             GameFullName = gameName,
                             GameCode = 0,
                             PublishStatus = "Not Eligible",
-                            // todo need to check if exists in the game table//
                             UserId = userId
 
                         };
-                        string insertGameQuery = "INSERT INTO Games (GameFullName, GameCode, PublishStatus, UserId) " +
+                        string insertGameQuery = "INSERT INTO Games (GameFullName, GameCode, PublishStatus,  UserId) " +
                                 "VALUES (@GameFullName, @GameCode, @PublishStatus, @UserId)";
                         int newGameId = await _db.InsertReturnId(insertGameQuery, newGameParam);
                         if (newGameId != 0)
@@ -112,6 +111,9 @@ namespace TriangleProject.Server.Controllers
             }
             return BadRequest("No Session");
         }
+
+    }
+}
 
     }
 }

@@ -73,13 +73,11 @@ namespace TriangleProject.Server.Controllers
                             GameFullName = gameName,
                             GameCode = 0,
                             PublishStatus = "Not Eligible",
-                            TimePertelm = 60,
-                            // todo need to check if exists in the game table//
                             UserId = userId
 
                         };
-                        string insertGameQuery = "INSERT INTO Games (GameFullName, GameCode, PublishStatus, TimePerItem, UserId) " +
-                                "VALUES (@GameFullName, @GameCode, @PublishStatus, @TimePertelm, @UserId)";
+                        string insertGameQuery = "INSERT INTO Games (GameFullName, GameCode, PublishStatus,  UserId) " +
+                                "VALUES (@GameFullName, @GameCode, @PublishStatus, @UserId)";
                         int newGameId = await _db.InsertReturnId(insertGameQuery, newGameParam);
                         if (newGameId != 0)
                         {

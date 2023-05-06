@@ -1,15 +1,13 @@
 ﻿<Properties StartupConfiguration="{C99128EA-5019-4208-90EE-04739CFCEEAD}|Default">
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.TriangleProject.Server PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Shared/Models/Matches/Game.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Server/Controllers/GamesController.cs">
     <Files>
       <File FileName="Server/Controllers/UnityController.cs" Line="50" Column="42" />
       <File FileName="Shared/Models/Matches/SingleMatchDetails.cs" Line="9" Column="18" />
       <File FileName="Shared/Models/Matches/Game.cs" Line="11" Column="60" />
+      <File FileName="Server/Controllers/PortelemController.cs" Line="51" Column="64" />
+      <File FileName="Server/Controllers/GamesController.cs" Line="93" Column="46" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -26,13 +24,7 @@
               <Node name="Pages" expanded="True" />
               <Node name="Properties" expanded="True" />
               <Node name="wwwroot" expanded="True" />
-            </Node>
-            <Node name="TriangleProject.Shared" expanded="True">
-              <Node name="Models" expanded="True">
-                <Node name="Matches" expanded="True">
-                  <Node name="Game.cs" selected="True" />
-                </Node>
-              </Node>
+              <Node name="TriangleDb.db" selected="True" />
             </Node>
           </Node>
         </State>
@@ -42,5 +34,9 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.TriangleProject.Server PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
 </Properties>

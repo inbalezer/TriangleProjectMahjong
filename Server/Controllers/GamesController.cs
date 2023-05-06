@@ -51,6 +51,66 @@ namespace TriangleProject.Server.Controllers
         }
 
 
+        //[HttpGet("addGame/{gameName}")]
+        //public async Task<IActionResult> AddGames(int userId, string gameName)
+        //{
+        //    int? sessionId = HttpContext.Session.GetInt32("userId");
+        //    if (sessionId != null)
+        //    {
+        //        if (userId == sessionId)
+        //        {
+        //            object param = new
+        //            {
+        //                UserId = userId
+        //            };
+        //            string userQuery = "SELECT FirstName FROM Users WHERE ID = @UserId";
+        //            var userRecords = await _db.GetRecordsAsync<UserWithGames>(userQuery, param);
+        //            UserWithGames user = userRecords.FirstOrDefault();
+        //            if (user != null)
+        //            {
+        //                object newGameParam = new
+        //                {
+        //                    GameFullName = gameName,
+        //                    GameCode = 0,
+        //                    PublishStatus = "Not Eligible",
+        //                    UserId = userId
+
+        //                };
+        //                string insertGameQuery = "INSERT INTO Games (GameFullName, GameCode, PublishStatus,  UserId) " +
+        //                        "VALUES (@GameFullName, @GameCode, @PublishStatus, @UserId)";
+        //                int newGameId = await _db.InsertReturnId(insertGameQuery, newGameParam);
+        //                if (newGameId != 0)
+        //                {
+        //                    int gameCode = newGameId + 100;
+        //                    object updateParam = new
+        //                    {
+        //                        ID = newGameId,
+        //                        GameCode = gameCode
+
+        //                    };
+        //                    string updateCodeQuery = "UPDATE Games SET GameCode = @GameCode	WHERE ID=@ID";
+        //                    bool isUpdate = await _db.SaveDataAsync(updateCodeQuery, updateParam);
+        //                    if (isUpdate == true)
+        //                    {
+        //                        object param2 = new
+        //                        {
+        //                            ID = newGameId
+        //                        };
+        //                        string gameQuery = "SELECT ID,GameFullName,GameCode,PublishStatus FROM Games WHERE ID = @ID";
+        //                        var gameRecord = await _db.GetRecordsAsync<Game>(gameQuery, param2);
+        //                        Game newGame = gameRecord.FirstOrDefault();
+        //                        return Ok(newGame);
+        //                    }
+
+        //                }
+        //                return BadRequest("Game not created");
+        //            }
+        //            return BadRequest("User Not Found");
+        //        }
+        //        return BadRequest("User Not Logged In");
+        //    }
+        //    return BadRequest("No Session");
+        //}
         [HttpGet("addGame/{gameName}")]
         public async Task<IActionResult> AddGames(int userId, string gameName)
         {
@@ -68,13 +128,39 @@ namespace TriangleProject.Server.Controllers
                     UserWithGames user = userRecords.FirstOrDefault();
                     if (user != null)
                     {
+                        // Check if the game name already exists
+                        object existingGameParam = new
+                        {
+                            GameFullName = gameName
+                        };
+                        string existingGameQuery = "SELECT COUNT(*) FROM Games WHERE GameFullName = @GameFullName";
+                        var existingGameCount1 = await _db.GetRecordsAsync<int>(existingGameQuery, existingGameParam);
+                        int existingGameCount = existingGameCount1.FirstOrDefault();
+                        if (existingGameCount > 0)
+                        {
+                            // Add a version number to the game name
+                            int versionNumber = 0;
+                            string newName = gameName + " (" + versionNumber + ")";
+                            while (existingGameCount > 0)
+                            {
+                                versionNumber++;
+                                newName = gameName + " (" + versionNumber + ")";
+                                existingGameParam = new
+                                {
+                                    GameFullName = newName
+                                };
+                                var existingGameCount2 = await _db.GetRecordsAsync<int>(existingGameQuery, existingGameParam);
+                                existingGameCount = existingGameCount2.FirstOrDefault();
+                            }
+                            gameName = newName;
+                        }
+
                         object newGameParam = new
                         {
                             GameFullName = gameName,
                             GameCode = 0,
                             PublishStatus = "Not Eligible",
                             UserId = userId
-
                         };
                         string insertGameQuery = "INSERT INTO Games (GameFullName, GameCode, PublishStatus,  UserId) " +
                                 "VALUES (@GameFullName, @GameCode, @PublishStatus, @UserId)";
@@ -86,9 +172,8 @@ namespace TriangleProject.Server.Controllers
                             {
                                 ID = newGameId,
                                 GameCode = gameCode
-
                             };
-                            string updateCodeQuery = "UPDATE Games SET GameCode = @GameCode	WHERE ID=@ID";
+                            string updateCodeQuery = "UPDATE Games SET GameCode = @GameCode WHERE ID=@ID";
                             bool isUpdate = await _db.SaveDataAsync(updateCodeQuery, updateParam);
                             if (isUpdate == true)
                             {
@@ -113,7 +198,7 @@ namespace TriangleProject.Server.Controllers
         }
 
     }
+
+
 }
 
-    }
-}

@@ -131,12 +131,14 @@ namespace TriangleProject.Server.Controllers
                         // Check if the game name already exists
                         object existingGameParam = new
                         {
-                            GameFullName = gameName
+                            GameFullName = gameName,
+                            UserId = userId
                         };
-                        string existingGameQuery = "SELECT COUNT(*) FROM Games WHERE GameFullName = @GameFullName";
+                        string existingGameQuery = "SELECT COUNT(*) FROM Games WHERE GameFullName = @GameFullName AND UserID = @UserId";
                         var existingGameCount1 = await _db.GetRecordsAsync<int>(existingGameQuery, existingGameParam);
                         int existingGameCount = existingGameCount1.FirstOrDefault();
                         if (existingGameCount > 0)
+
                         {
                             // Add a version number to the game name
                             int versionNumber = 0;
@@ -147,7 +149,9 @@ namespace TriangleProject.Server.Controllers
                                 newName = gameName + " (" + versionNumber + ")";
                                 existingGameParam = new
                                 {
-                                    GameFullName = newName
+                                    GameFullName = newName,
+                                    UserId = userId
+
                                 };
                                 var existingGameCount2 = await _db.GetRecordsAsync<int>(existingGameQuery, existingGameParam);
                                 existingGameCount = existingGameCount2.FirstOrDefault();

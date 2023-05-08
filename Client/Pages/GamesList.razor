@@ -1,5 +1,7 @@
 ﻿@page "/GamesList"
 @using TriangleProject.Shared.Models.Editor
+@using TriangleProject.Shared.Models.Matches
+
 @inject HttpClient Http
 
 <h3>GamesList</h3>
@@ -28,11 +30,11 @@
 					}
 					else if (game.PublishStatus == "Eligible")
 					{
-						<input type="checkbox"/>
+						<input type="checkbox" @onchange="(()=> changePublish(game))"/>
 					}
 					else
 					{
-						<input type="checkbox" checked/>
+						<input type="checkbox" checked @onchange="(()=> changePublish(game))" />
 					}
 				</td>
 			</tr>
@@ -93,4 +95,56 @@
 		Nav.NavigateTo("./", true);
 	}
 
+	protected async Task changePublish(GameForEditor game)
+	{
+		GamePublish gameToSend = new GamePublish();
+		gameToSend.ID = game.ID;
+		gameToSend.PublishStatus = game.PublishStatus;
+
+		if (gameToSend.PublishStatus == "Eligible")
+		{
+			gameToSend.PublishStatus = "Published";
+		}
+		else
+		{
+			gameToSend.PublishStatus = "Eligible";
+		}
+
+		var userRes = await Http.PostAsJsonAsync("api/Games/" + UserId + "/publishGame", gameToSend);
+
+		if (userRes.IsSuccessStatusCode)
+		{
+			int index = user.UserGames.IndexOf(game);
+			if (user.UserGames[index].PublishStatus == "Eligible")
+			{
+				user.UserGames[index].PublishStatus = "Published";
+			}
+			else
+			{
+				user.UserGames[index].PublishStatus = "Eligible";
+			}
+			
+		}
+
+		else
+		{
+			string error = userRes.Content.ReadAsStringAsync().Result;
+			
+			switch (error)
+			{
+				case "No Session":
+					msg = "Session error, please reload page";
+					break;
+
+				case "User Not Logged In":
+					msg = "You are not logged in, please reload page to try again";
+					break;
+
+				case "It's Not Your Game":
+					msg = "You tried to update a game that is not associated with your user ";
+					break;
+			}
+
+		}
+	}
 }

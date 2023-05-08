@@ -111,6 +111,7 @@ namespace TriangleProject.Server.Controllers
         //    }
         //    return BadRequest("No Session");
         //}
+
         [HttpGet("addGame/{gameName}")]
         public async Task<IActionResult> AddGames(int userId, string gameName)
         {
@@ -200,9 +201,62 @@ namespace TriangleProject.Server.Controllers
             }
             return BadRequest("No Session");
         }
+        
+        //aaaaaaaaaaaaaaaa
+
+        [HttpPost("publishGame")]
+        public async Task<IActionResult> publishGame(int userId, GamePublish gameToPublish)
+        {
+            int? sessionId = HttpContext.Session.GetInt32("userId");
+            if (sessionId != null)
+            {
+                if (userId == sessionId)
+                {
+                    object param = new
+                    {
+                        UserID = userId,
+                        ID = gameToPublish.ID
+                    };
+
+                    string checkQuery = "SELECT GameFullName FROM Games WHERE UserID = @UserID AND ID=@ID";
+                    var checkRecords = await _db.GetRecordsAsync<string>(checkQuery, param);
+                    string gameName = checkRecords.FirstOrDefault();
+
+                    if (gameName != null)
+                    {
+                        //bool gameValidation = false;
+
+                        //object param1 = new
+                        //{
+                        //    ID = gameToPublish.ID
+                        //};
+
+                        //string queryEligibleToPublish = "SELECT Games.PublishStatus FROM Games WHERE Games.ID = @ID AND LENGTH(Games.GameInstruction) > 31 AND (SELECT COUNT(*) FROM Matches WHERE Matches.GameID = Games.ID) >= 5";
+                        //var recordEligible = await _db.GetRecordsAsync<string>(queryEligibleToPublish, param1);
+                        //string PublishStatus = recordEligible.FirstOrDefault();
+
+
+                        string updateQuery = "UPDATE Games SET PublishStatus=@PublishStatus WHERE ID=@ID";
+                        bool isUpdate = await _db.SaveDataAsync(updateQuery, gameToPublish);
+
+                        if (isUpdate)
+                        {
+                            return Ok();
+                        }
+                        return BadRequest("Update Failed");
+                    }                 
+                    return BadRequest("It's Not Your Game");
+                }
+                return BadRequest("User Not Logged In");              
+            }
+            return BadRequest("No Session");
+        }
+
+
+
+
+
 
     }
-
-
 }
 

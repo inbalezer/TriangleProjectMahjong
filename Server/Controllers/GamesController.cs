@@ -224,26 +224,54 @@ namespace TriangleProject.Server.Controllers
 
                     if (gameName != null)
                     {
-                        //bool gameValidation = false;
+                        bool gameValidation = false;
 
-                        //object param1 = new
-                        //{
-                        //    ID = gameToPublish.ID
-                        //};
+                        object param1 = new
+                        {
+                            ID = gameToPublish.ID
+                        };
 
-                        //string queryEligibleToPublish = "SELECT Games.PublishStatus FROM Games WHERE Games.ID = @ID AND LENGTH(Games.GameInstruction) > 31 AND (SELECT COUNT(*) FROM Matches WHERE Matches.GameID = Games.ID) >= 5";
-                        //var recordEligible = await _db.GetRecordsAsync<string>(queryEligibleToPublish, param1);
-                        //string PublishStatus = recordEligible.FirstOrDefault();
+                        string queryEligibleToPublish = "SELECT count(*) FROM Games WHERE Games.ID = @ID AND LENGTH(Games.GameInstruction) > 31 AND (SELECT COUNT(*) FROM Matches WHERE Matches.GameID = Games.ID) >= 5";
+                        var recordEligible = await _db.GetRecordsAsync<int>(queryEligibleToPublish, param1);
+                        int EligibleToPublish = recordEligible.FirstOrDefault();
 
+                        if (EligibleToPublish == 1)
+                        {
+                            gameValidation = true;
+                        }
+                        
+                        if(gameValidation == false) 
+                        {
+                            gameToPublish.PublishStatus = "Not Eligible";
+                        }
 
-                        string updateQuery = "UPDATE Games SET PublishStatus=@PublishStatus WHERE ID=@ID";
-                        bool isUpdate = await _db.SaveDataAsync(updateQuery, gameToPublish);
+                        object pubParam = new
+                        {
+                            ID = gameToPublish.ID,
+                            PublishStatus = gameToPublish.PublishStatus
+                        };
+
+                        string updateQuery = "UPDATE Games SET PublishStatus = @PublishStatus WHERE ID=@ID";
+                        bool isUpdate = await _db.SaveDataAsync(updateQuery, pubParam);
 
                         if (isUpdate)
                         {
-                            return Ok();
+                            object param2 = new
+                            {
+                                ID = gameToPublish.ID
+                            };
+
+                            string gameQuery = "SELECT ID, GameFullName, GameCode, PublishStatus FROM Games WHERE ID = @ID";
+                            var gameRecord = await _db.GetRecordsAsync<GameForEditor>(gameQuery, param2);
+                            GameForEditor gameToReturn = gameRecord.FirstOrDefault();
+
+                            if (gameToReturn != null)
+                            {
+                                return Ok(gameToReturn);
+                            }
+
                         }
-                        return BadRequest("Update Failed");
+                        return BadRequest("Publish update Failed");
                     }                 
                     return BadRequest("It's Not Your Game");
                 }
@@ -251,12 +279,6 @@ namespace TriangleProject.Server.Controllers
             }
             return BadRequest("No Session");
         }
-
-
-
-
-
-
     }
 }
 

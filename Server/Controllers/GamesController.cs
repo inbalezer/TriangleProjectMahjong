@@ -363,6 +363,38 @@ namespace TriangleProject.Server.Controllers
             }
             return BadRequest("No Session");
         }
+
+        [HttpGet("FullGameToEdit/{GameId}")]
+        public async Task<IActionResult> GetFullGame(int userId, int GameId)
+        {
+            int? sessionId = HttpContext.Session.GetInt32("userId");
+            if (sessionId != null)
+            {
+                if (userId == sessionId)
+                {
+                    object param = new
+                    {
+                        ID = GameId
+                    };
+
+                    string GetGameQuery = "SELECT GameFullName, PublishStatus, GameInstruction FROM Games WHERE ID = @ID";
+                    string GetMatchesQuery = "SELECT FirstMatch, SecondMatch FROM Matches WHERE GameID = @ID";
+
+                    var recordGame = await _db.GetRecordsAsync<GameToShow>(GetGameQuery, param);
+                    GameToShow game = recordGame.FirstOrDefault();
+
+                    if(game != null)
+                    {
+                        var recordsMatches = await _db.GetRecordsAsync<MatchToShow>(GetMatchesQuery, param);
+                        game.MatchesList = recordsMatches.ToList();
+                        return Ok(game);
+                    }
+                    return BadRequest("Game not found");
+                }
+                return BadRequest("User Not Logged In");
+            }
+            return BadRequest("No Session");
+        }
     }
 }
 

@@ -1,0 +1,29 @@
+﻿@page "/EditGamePage"
+@using TriangleProject.Shared.Models.Editor
+@using TriangleProject.Shared.Models.Matches
+@using TriangleProject.Shared.Models.Portelem
+
+@inject HttpClient Http
+
+<h3>EditGamePage</h3>
+
+@inject NavigationManager Nav
+
+@if (msg != "")
+{
+    <p>@msg</p>
+    <input type="button" value="reload" @onclick=Navigate />
+}
+
+@code {
+
+    [CascadingParameter]
+    public int UserId { get; set; }
+    string msg = "";
+
+    void Navigate()
+    {
+        Nav.NavigateTo("./", true);
+    }
+
+}

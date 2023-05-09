@@ -209,9 +209,9 @@ namespace TriangleProject.Server.Controllers
                                 {
                                     ID = newGameId
                                 };
-                                string gameQuery = "SELECT ID,GameFullName,GameCode,PublishStatus FROM Games WHERE ID = @ID";
-                                var gameRecord = await _db.GetRecordsAsync<Game>(gameQuery, param2);
-                                Game newGame = gameRecord.FirstOrDefault();
+                                string gameQuery = "SELECT ID,GameFullName,PublishStatus,GameCode FROM Games WHERE ID = @ID";
+                                var gameRecord = await _db.GetRecordsAsync<GameForEditor>(gameQuery, param2);
+                                GameForEditor newGame = gameRecord.FirstOrDefault();
                                 return Ok(newGame);
                             }
 

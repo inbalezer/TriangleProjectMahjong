@@ -1,6 +1,7 @@
 ﻿@page "/GamesList"
 @using TriangleProject.Shared.Models.Editor
 @using TriangleProject.Shared.Models.Matches
+@using TriangleProject.Shared.Models.Portelem
 
 @inject HttpClient Http
 
@@ -8,6 +9,11 @@
 
 @if (user != null)
 {
+
+	<input type="text" @bind="gameName"/> <br/>
+	<input type="button" value="Create Game" @onclick=@(()=>AddNewGame(UserId, gameName))>
+
+
 	<p>The Games:</p>
 	<table border=0>
 		<tr>
@@ -20,7 +26,6 @@
 		@foreach (GameForEditor game in user.UserGames)
 		{
 			<tr>
-				<td>@counter</td>
 				<td>@game.GameFullName</td>
 				<td>@game.GameCode</td>
 				<td>
@@ -38,21 +43,18 @@
 					}
 				</td>
 			</tr>
-			counter = counter + 1;
 		}
 	</table>
 
 }
 
 @inject NavigationManager Nav
+
 @if (msg != "")
 {
 	<p>@msg</p>
 	<input type="button" value="reload" @onclick=Navigate />
 }
-
-
-
 
 
 @code {
@@ -61,8 +63,15 @@
 	public int UserId { get; set; }
 
 	UserWithGames user;
-	int counter = 1;
+	GameForEditor newGame;
+
 	string msg = "";
+	string gameName = "";
+
+	void Navigate()
+	{
+		Nav.NavigateTo("./", true);
+	}
 
 	protected override async Task OnInitializedAsync() 
 	{
@@ -90,10 +99,40 @@
 		}
 	}
 
-	void Navigate()
+	async Task AddNewGame(int UserId, string gameName)
 	{
-		Nav.NavigateTo("./", true);
+		var AddResopnse = await Http.PostAsJsonAsync("api/Games/" + UserId + "/" + "addGame/" , gameName);
+
+		if (AddResopnse.IsSuccessStatusCode)
+		{
+			newGame = new GameForEditor();
+						
+		}
+		else
+		{
+			string error = AddResopnse.Content.ReadAsStringAsync().Result;
+
+			switch (error)
+			{
+				case "No Session":
+					msg = "Session error, please reload page";
+					break;
+
+				case "User Not Logged In":
+					msg = "You are not logged in, please reload page to try again";
+					break;
+
+				case "User Not Found":
+					msg = "You tried to update a game that is not associated with your user ";
+					break;
+
+				case "Game not created":
+					msg = "The game you have tried to create, faild.";
+					break;
+			}
+		}
 	}
+
 
 	protected async Task changePublish(GameForEditor game)
 	{

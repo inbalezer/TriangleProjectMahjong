@@ -135,7 +135,7 @@ namespace TriangleProject.Server.Controllers
 
         //aaaaaaaaaaaaaaaa
 
-        [HttpGet("addGame/{gameName}")]
+        [HttpPost("addGame/{gameName}")]
         public async Task<IActionResult> AddGames(int userId, string gameName)
         {
             int? sessionId = HttpContext.Session.GetInt32("userId");
@@ -323,6 +323,8 @@ namespace TriangleProject.Server.Controllers
             return BadRequest("No Session");
 
         }
+
+        //aaaaaaaaaaaaaaaa
 
         [HttpPost("EditGame")]
 

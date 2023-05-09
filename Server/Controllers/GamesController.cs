@@ -19,11 +19,11 @@ namespace TriangleProject.Server.Controllers
             _db = db;
         }
 
-        private async Task<bool> canPublish(GamePublish gameToPublish)
+        private async Task<bool> canPublish(int gameId)
         {
             object param1 = new
             {
-                ID = gameToPublish.ID
+                ID = gameId
             };
 
             string queryEligibleToPublish = "SELECT count(*) FROM Games WHERE Games.ID = @ID AND LENGTH(Games.GameInstruction) > 31 AND (SELECT COUNT(*) FROM Matches WHERE Matches.GameID = Games.ID) >= 5";
@@ -247,7 +247,7 @@ namespace TriangleProject.Server.Controllers
 
                     if (gameName != null)
                     {
-                        bool gameValidation = await canPublish(gameToPublish);
+                        bool gameValidation = await canPublish(gameToPublish.ID);
     
                         if (gameValidation == false)
                         {
@@ -324,74 +324,43 @@ namespace TriangleProject.Server.Controllers
 
         }
 
-        //[HttpPost("EditGame")]
+        [HttpPost("EditGame")]
 
-        //public async Task<IActionResult> editGame(GameToUpdate gameToUpdate)
-        //{
-        //    object param = new
-        //    {
-        //        ID = gameToUpdate.ID,
-        //        GameFullName = gameToUpdate.GameFullName,
-        //        PublishStatus = gameToUpdate.PublishStatus,
-        //        GameInstruction = gameToUpdate.GameInstruction
-        //    };
+        public async Task<IActionResult> editGame(int userId, GameToUpdate gameToUpdate)
+        {
+            int? sessionId = HttpContext.Session.GetInt32("userId");
+            if (sessionId != null)
+            {
+                if (userId == sessionId)
+                {
+                    bool gameValidation = await canPublish(gameToUpdate.ID);
 
-        //    string UpdateCourseQuery = "UPDATE Courses set CourseName =  " +
-        //        "@CourseName, Department = @Department, Credits = @Credits," +
-        //        "Year = @Year where ID=@id";
-        //    bool isUpdate = await _db.SaveDataAsync(UpdateCourseQuery, param);
-        //    if (isUpdate)
-        //    {
-        //        object paramID = new
-        //        {
-        //            id = id
-        //        };
-        //        string queryTasks = "SELECT ID FROM Tasks WHERE CourseID=@id";
-        //        var recordsTasks = await
-        //         _db.GetRecordsAsync<int>(queryTasks, paramID);
-        //        List<int> idTasks = recordsTasks.ToList();
-        //        if (CourseToUpdate.tasks.Count > 0)
-        //        {
-        //            if (idTasks.Count == CourseToUpdate.tasks.Count)
-        //            {
-        //                int countTask = 0;
-        //                string UpdateTaskQuery = "UPDATE Tasks set " +
-        //                    "TaskName = @TaskName, Weight = @Weight, " +
-        //                    "TotalPages = @TotalPages," +
-        //                    "GroupSize = @GroupSize where ID = @id";
-        //                for (int i = 0; i < idTasks.Count; i++)
-        //                {
-        //                    object paramTask = new
-        //                    {
-        //                        TaskName = CourseToUpdate.tasks[i].TaskName,
-        //                        Weight = CourseToUpdate.tasks[i].Weight,
-        //                        TotalPages = CourseToUpdate.tasks[i].TotalPages,
-        //                        GroupSize = CourseToUpdate.tasks[i].GroupSize,
-        //                        id = idTasks[i]
-        //                    };
-        //                    bool isTaskUpdate = await
-        //                   _db.SaveDataAsync(UpdateTaskQuery, paramTask);
-        //                    if (isTaskUpdate)
-        //                    {
-        //                        countTask++;
-        //                    }
-        //                }
-        //                if (countTask == idTasks.Count)
-        //                {
-        //                    return Ok("update scuss");
-        //                }
-        //                int diff = idTasks.Count - countTask;
-        //                return BadRequest(diff + "task update");
+                    if (gameValidation == false)
+                    {
+                        gameToUpdate.PublishStatus = "Not Eligible";
+                    }
 
-        //            }
-        //            return BadRequest("tasks not equels");
-        //        }
+                    object updateParam = new
+                    {
+                        ID = gameToUpdate.ID,
+                        PublishStatus = gameToUpdate.PublishStatus,
+                        GameFullName = gameToUpdate.GameFullName,
+                        GameInstruction = gameToUpdate.GameInstruction
+                    };
 
-        //        return Ok("update scuss no task");
-        //    }
-        //    return BadRequest("update course faild");
-        //}
+                    string UpdateGameQuery = "UPDATE Games set GameFullName = @GameFullName, GameInstruction = @GameInstruction, PublishStatus = @PublishStatus where ID =@ID";
+                    bool isUpdate = await _db.SaveDataAsync(UpdateGameQuery, updateParam);
 
+                    if (isUpdate)
+                    {
+                        return Ok(gameToUpdate);
+                    }
+                    return BadRequest("update game faild");
+                }
+                return BadRequest("User Not Logged In");
+            }
+            return BadRequest("No Session");
+        }
     }
 }
 

@@ -1,13 +1,13 @@
 ﻿<Properties StartupConfiguration="{C99128EA-5019-4208-90EE-04739CFCEEAD}|Default">
-  <MonoDevelop.Ide.ItemProperties.TriangleProject.Server PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workbench ActiveDocument="Server/Controllers/GamesController.cs">
     <Files>
       <File FileName="Server/Controllers/UnityController.cs" Line="50" Column="42" />
       <File FileName="Shared/Models/Matches/SingleMatchDetails.cs" Line="9" Column="18" />
       <File FileName="Shared/Models/Matches/Game.cs" Line="11" Column="60" />
       <File FileName="Server/Controllers/PortelemController.cs" Line="51" Column="64" />
-      <File FileName="Server/Controllers/GamesController.cs" Line="93" Column="46" />
+      <File FileName="Server/Controllers/GamesController.cs" Line="139" Column="50" />
+      <File FileName="Shared/Models/Editor/GameForEditor.cs" Line="19" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -19,12 +19,18 @@
                 <Node name="PackageDependencies" expanded="True" />
                 <Node name="ProjectDependencies" expanded="True" />
               </Node>
-              <Node name="Controllers" expanded="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="GamesController.cs" selected="True" />
+              </Node>
               <Node name="Data" expanded="True" />
               <Node name="Pages" expanded="True" />
               <Node name="Properties" expanded="True" />
               <Node name="wwwroot" expanded="True" />
-              <Node name="TriangleDb.db" selected="True" />
+            </Node>
+            <Node name="TriangleProject.Shared" expanded="True">
+              <Node name="Models" expanded="True">
+                <Node name="Editor" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>
@@ -34,9 +40,10 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.TriangleProject.Server PreferredExecutionTarget="/Applications/Google Chrome.app" />
 </Properties>

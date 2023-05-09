@@ -135,7 +135,7 @@ namespace TriangleProject.Server.Controllers
 
         //aaaaaaaaaaaaaaaa
 
-        [HttpPost("addGame/{gameName}")]
+        [HttpGet("addGame/{gameName}")]
         public async Task<IActionResult> AddGames(int userId, string gameName)
         {
             int? sessionId = HttpContext.Session.GetInt32("userId");
@@ -224,7 +224,7 @@ namespace TriangleProject.Server.Controllers
             }
             return BadRequest("No Session");
         }
-        
+
         //aaaaaaaaaaaaaaaa
 
         [HttpPost("publishGame")]
@@ -248,7 +248,7 @@ namespace TriangleProject.Server.Controllers
                     if (gameName != null)
                     {
                         bool gameValidation = await canPublish(gameToPublish.ID);
-    
+
                         if (gameValidation == false)
                         {
                             gameToPublish.PublishStatus = "Not Eligible";
@@ -280,10 +280,10 @@ namespace TriangleProject.Server.Controllers
                             }
                         }
                         return BadRequest("Publish update Failed");
-                }
+                    }
                     return BadRequest("It's Not Your Game");
                 }
-                return BadRequest("User Not Logged In");              
+                return BadRequest("User Not Logged In");
             }
             return BadRequest("No Session");
         }
@@ -383,7 +383,7 @@ namespace TriangleProject.Server.Controllers
                     var recordGame = await _db.GetRecordsAsync<GameToShow>(GetGameQuery, param);
                     GameToShow game = recordGame.FirstOrDefault();
 
-                    if(game != null)
+                    if (game != null)
                     {
                         var recordsMatches = await _db.GetRecordsAsync<MatchToShow>(GetMatchesQuery, param);
                         game.MatchesList = recordsMatches.ToList();

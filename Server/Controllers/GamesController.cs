@@ -112,6 +112,8 @@ namespace TriangleProject.Server.Controllers
         //    return BadRequest("No Session");
         //}
 
+        //aaaaaaaaaaaaaaaa
+
         [HttpGet("addGame/{gameName}")]
         public async Task<IActionResult> AddGames(int userId, string gameName)
         {
@@ -269,7 +271,6 @@ namespace TriangleProject.Server.Controllers
                             {
                                 return Ok(gameToReturn);
                             }
-
                         }
                         return BadRequest("Publish update Failed");
                     }                 
@@ -278,6 +279,32 @@ namespace TriangleProject.Server.Controllers
                 return BadRequest("User Not Logged In");              
             }
             return BadRequest("No Session");
+        }
+
+        //aaaaaaaaaaaaaaaa
+
+        [HttpDelete("{GameIdToDelete}")]
+        public async Task<IActionResult> DeleteGame(int GameIdToDelete)
+        {
+
+            string DeleteMatchesQuery = "delete from Matches where GameID = @ID";
+            bool isMatchesDeleted = await _db.SaveDataAsync(DeleteMatchesQuery, new { ID = GameIdToDelete });
+
+            string DeleteQuery = "DELETE FROM Games WHERE ID=@ID";
+            bool isGameDeleted = await _db.SaveDataAsync(DeleteQuery, new { ID = GameIdToDelete });
+
+            if (isMatchesDeleted)
+            {
+                return Ok();
+            }
+            return BadRequest("Failed to delete matches");
+
+            if (isGameDeleted)
+            {
+                return Ok();
+            }
+            return BadRequest("Failed to delete game");
+
         }
     }
 }

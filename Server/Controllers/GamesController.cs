@@ -19,6 +19,27 @@ namespace TriangleProject.Server.Controllers
             _db = db;
         }
 
+        private async Task<bool> canPublish(GamePublish gameToPublish)
+        {
+            object param1 = new
+            {
+                ID = gameToPublish.ID
+            };
+
+            string queryEligibleToPublish = "SELECT count(*) FROM Games WHERE Games.ID = @ID AND LENGTH(Games.GameInstruction) > 31 AND (SELECT COUNT(*) FROM Matches WHERE Matches.GameID = Games.ID) >= 5";
+            var recordEligible = await _db.GetRecordsAsync<int>(queryEligibleToPublish, param1);
+            int EligibleToPublish = recordEligible.FirstOrDefault();
+
+            if (EligibleToPublish == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetGamesByUser(int userId)
         {
@@ -226,23 +247,9 @@ namespace TriangleProject.Server.Controllers
 
                     if (gameName != null)
                     {
-                        bool gameValidation = false;
-
-                        object param1 = new
-                        {
-                            ID = gameToPublish.ID
-                        };
-
-                        string queryEligibleToPublish = "SELECT count(*) FROM Games WHERE Games.ID = @ID AND LENGTH(Games.GameInstruction) > 31 AND (SELECT COUNT(*) FROM Matches WHERE Matches.GameID = Games.ID) >= 5";
-                        var recordEligible = await _db.GetRecordsAsync<int>(queryEligibleToPublish, param1);
-                        int EligibleToPublish = recordEligible.FirstOrDefault();
-
-                        if (EligibleToPublish == 1)
-                        {
-                            gameValidation = true;
-                        }
-                        
-                        if(gameValidation == false) 
+                        bool gameValidation = await canPublish(gameToPublish);
+    
+                        if (gameValidation == false)
                         {
                             gameToPublish.PublishStatus = "Not Eligible";
                         }
@@ -273,7 +280,7 @@ namespace TriangleProject.Server.Controllers
                             }
                         }
                         return BadRequest("Publish update Failed");
-                    }                 
+                }
                     return BadRequest("It's Not Your Game");
                 }
                 return BadRequest("User Not Logged In");              
@@ -284,28 +291,111 @@ namespace TriangleProject.Server.Controllers
         //aaaaaaaaaaaaaaaa
 
         [HttpDelete("{GameIdToDelete}")]
-        public async Task<IActionResult> DeleteGame(int GameIdToDelete)
+        public async Task<IActionResult> DeleteGame(int userId, int GameIdToDelete)
         {
-
-            string DeleteMatchesQuery = "delete from Matches where GameID = @ID";
-            bool isMatchesDeleted = await _db.SaveDataAsync(DeleteMatchesQuery, new { ID = GameIdToDelete });
-
-            string DeleteQuery = "DELETE FROM Games WHERE ID=@ID";
-            bool isGameDeleted = await _db.SaveDataAsync(DeleteQuery, new { ID = GameIdToDelete });
-
-            if (isMatchesDeleted)
+            int? sessionId = HttpContext.Session.GetInt32("userId");
+            if (sessionId != null)
             {
-                return Ok();
-            }
-            return BadRequest("Failed to delete matches");
+                if (userId == sessionId)
+                {
 
-            if (isGameDeleted)
-            {
-                return Ok();
+                    string DeleteMatchesQuery = "delete from Matches where GameID = @ID";
+                    bool isMatchesDeleted = await _db.SaveDataAsync(DeleteMatchesQuery, new { ID = GameIdToDelete });
+
+                    string DeleteQuery = "DELETE FROM Games WHERE ID=@ID";
+                    bool isGameDeleted = await _db.SaveDataAsync(DeleteQuery, new { ID = GameIdToDelete });
+
+                    if (isMatchesDeleted)
+                    {
+                        return Ok();
+                    }
+                    return BadRequest("Failed to delete matches");
+
+                    if (isGameDeleted)
+                    {
+                        return Ok();
+                    }
+                    return BadRequest("Failed to delete game");
+                }
+                return BadRequest("User Not Logged In");
+
             }
-            return BadRequest("Failed to delete game");
+            return BadRequest("No Session");
 
         }
+
+        //[HttpPost("EditGame")]
+
+        //public async Task<IActionResult> editGame(GameToUpdate gameToUpdate)
+        //{
+        //    object param = new
+        //    {
+        //        ID = gameToUpdate.ID,
+        //        GameFullName = gameToUpdate.GameFullName,
+        //        PublishStatus = gameToUpdate.PublishStatus,
+        //        GameInstruction = gameToUpdate.GameInstruction
+        //    };
+
+        //    string UpdateCourseQuery = "UPDATE Courses set CourseName =  " +
+        //        "@CourseName, Department = @Department, Credits = @Credits," +
+        //        "Year = @Year where ID=@id";
+        //    bool isUpdate = await _db.SaveDataAsync(UpdateCourseQuery, param);
+        //    if (isUpdate)
+        //    {
+        //        object paramID = new
+        //        {
+        //            id = id
+        //        };
+        //        string queryTasks = "SELECT ID FROM Tasks WHERE CourseID=@id";
+        //        var recordsTasks = await
+        //         _db.GetRecordsAsync<int>(queryTasks, paramID);
+        //        List<int> idTasks = recordsTasks.ToList();
+        //        if (CourseToUpdate.tasks.Count > 0)
+        //        {
+        //            if (idTasks.Count == CourseToUpdate.tasks.Count)
+        //            {
+        //                int countTask = 0;
+        //                string UpdateTaskQuery = "UPDATE Tasks set " +
+        //                    "TaskName = @TaskName, Weight = @Weight, " +
+        //                    "TotalPages = @TotalPages," +
+        //                    "GroupSize = @GroupSize where ID = @id";
+        //                for (int i = 0; i < idTasks.Count; i++)
+        //                {
+        //                    object paramTask = new
+        //                    {
+        //                        TaskName = CourseToUpdate.tasks[i].TaskName,
+        //                        Weight = CourseToUpdate.tasks[i].Weight,
+        //                        TotalPages = CourseToUpdate.tasks[i].TotalPages,
+        //                        GroupSize = CourseToUpdate.tasks[i].GroupSize,
+        //                        id = idTasks[i]
+        //                    };
+        //                    bool isTaskUpdate = await
+        //                   _db.SaveDataAsync(UpdateTaskQuery, paramTask);
+        //                    if (isTaskUpdate)
+        //                    {
+        //                        countTask++;
+        //                    }
+        //                }
+        //                if (countTask == idTasks.Count)
+        //                {
+        //                    return Ok("update scuss");
+        //                }
+        //                int diff = idTasks.Count - countTask;
+        //                return BadRequest(diff + "task update");
+
+        //            }
+        //            return BadRequest("tasks not equels");
+        //        }
+
+        //        return Ok("update scuss no task");
+        //    }
+        //    return BadRequest("update course faild");
+        //}
+
     }
 }
+
+
+
+
 

@@ -33,6 +33,9 @@
                     @if (game.PublishStatus == "Not Eligible")
                     {
                         <input type="checkbox" disabled />
+                        <input type="button" value="Delete" @onclick="(() =>DeleteGame(game))" />
+                        <input type="button" value="Update" @onclick="(() =>DeleteGame(game))" />
+
                     }
                     else if (game.PublishStatus == "Eligible")
                     {
@@ -192,4 +195,44 @@
 
         }
     }
+
+
+    protected async Task DeleteGame(GameForEditor gameToDelte)
+    {
+
+        var deleteResponse = await Http.DeleteAsync("api/Games/" + UserId + "/" + gameToDelte.ID);
+        if (deleteResponse.IsSuccessStatusCode)
+        {
+            user.UserGames.Remove(gameToDelte);
+        }
+
+        else
+        {
+            string error = deleteResponse.Content.ReadAsStringAsync().Result;
+
+            switch (error)
+            {
+                case "No Session":
+                    msg = "Session error, please reload page";
+                    break;
+
+                case "User Not Logged In":
+                    msg = "You are not logged in, please reload page to try again";
+                    break;
+
+                case "Failed to delete game":
+                    msg = "The game deleting process was failed ";
+                    break;
+
+                case "Failed to delete matches":
+                    msg = "The matches deleting process was failed ";
+                    break;
+
+                    
+            }
+        }
+        
+
+    }
+
 }

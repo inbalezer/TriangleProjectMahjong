@@ -13,6 +13,7 @@ namespace TriangleProject.Shared.Models.Editor
         public string GameFullName { get; set; }
         public string PublishStatus { get; set; }
         public int GameCode { get; set; }
+        public List <MatchToUpdate> Matches { get; set; }
 
     }
 }

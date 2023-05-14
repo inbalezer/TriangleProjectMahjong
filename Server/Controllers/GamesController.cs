@@ -364,6 +364,10 @@ namespace TriangleProject.Server.Controllers
             return BadRequest("No Session");
         }
 
+        //aaaaaaaaaaaaaaaa
+
+
+
         [HttpGet("FullGameToEdit/{GameId}")]
         public async Task<IActionResult> GetFullGame(int userId, int GameId)
         {

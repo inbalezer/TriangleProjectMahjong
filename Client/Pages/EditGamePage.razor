@@ -1,4 +1,4 @@
-﻿@page "/EditGamePage"
+﻿@page "/EditGamePage/{GameFullName}/{newGameID:int}"
 @using TriangleProject.Shared.Models.Editor
 @using TriangleProject.Shared.Models.Matches
 @using TriangleProject.Shared.Models.Portelem
@@ -9,21 +9,126 @@
 
 @inject NavigationManager Nav
 
+<table border=1>
+    <tr>
+        <th>"הגדרות כלליות"</th>
+    </tr>
+    <tr>
+            :שם המשחק <input type="text" @bind= "GameFullName" />
+    </tr>
+    <tr>
+        :הנחיית משחק לחצו והתאימו בין <input type="text" @bind= "GameInstruction" /> ורוקנו את הלוח 
+    </tr>
+    
+
+</table>
+
+<table border=1>
+    <tr>
+        <th>הוספת זוגות</th>
+    </tr>
+    <tr>
+        :התאמה ראשונה
+        <input type="text" @bind="newMatch.FirstMatch" />
+        @*<input type="checkbox" @onchange="(()=> isText($event.target.checked)) />
+
+        <input type="checkbox" @onchange="(()=> "isText($event.target.checked)" />*@
+
+    </tr>
+    <tr>
+        :התאמה שניה
+        <input type="text" @bind="newMatch.SecondMatch" /> ורוקנו את הלוח
+    </tr>
+    
+    <input type="button" @onclick="(() =>AddMatch(UserId,newMatch))" />
+
+</table>
+
+@if (allMatches !=null)
+{
+    <ul>
+      @foreach (MatchToUpdate match in allMatches)
+      {
+         <li>
+             @match.FirstMatch
+         </li>
+
+         <li>
+             @match.SecondMatch
+         </li>
+      }
+    </ul>
+}
+
+
 @if (msg != "")
 {
     <p>@msg</p>
     <input type="button" value="reload" @onclick=Navigate />
 }
 
+
+
+
+
+
 @code {
 
     [CascadingParameter]
     public int UserId { get; set; }
     string msg = "";
+    bool FirstIsText;
+    bool SecondIsText;
 
+
+    [Parameter]
+    public string GameFullName { get; set; }
+
+    [Parameter]
+    public int newGameID { get; set; }
+
+    MatchToUpdate newMatch;
+    List<MatchToUpdate> allMatches;
+
+    string GameInstruction = "";
     void Navigate()
     {
         Nav.NavigateTo("./", true);
+    }
+
+    protected async Task AddMatch(int UserId, MatchToUpdate newMatch)
+    {
+        var AddResopnse = await Http.PostAsync("api/Matches/" + UserId + "/AddMatch/" + newMatch);
+
+        if (AddResopnse.IsSuccessStatusCode)
+        {
+            MatchToUpdate match = AddResopnse.Content.ReadFromJsonAsync<MatchToUpdate>().Result;            
+            allMatches.Add(match);
+            
+        }
+        else
+        {
+            string error = AddResopnse.Content.ReadAsStringAsync().Result;
+
+            switch (error)
+            {
+                case "No Session":
+                    msg = "Session error, please reload page";
+                    break;
+
+                case "User Not Logged In":
+                    msg = "You are not logged in, please reload page to try again";
+                    break;
+
+                case "User Not Found":
+                    msg = "You tried to update a game that is not associated with your user ";
+                    break;
+
+                case "Game not created":
+                    msg = "The game you have tried to create, faild.";
+                    break;
+            }
+        }
     }
 
 }

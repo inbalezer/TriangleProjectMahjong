@@ -4,6 +4,8 @@
 @using TriangleProject.Shared.Models.Portelem
 
 @inject HttpClient Http
+@inject NavigationManager nav
+
 
 <h3>GamesList</h3>
 
@@ -34,7 +36,7 @@
                     {
                         <input type="checkbox" disabled />
                         <input type="button" value="Delete" @onclick="(() =>DeleteGame(game))" />
-                        <input type="button" value="Update" @onclick="(() =>DeleteGame(game))" />
+                        <input type="button" value="Update" @onclick="(() =>DeleteGame(game))" /> //!!!!!!!!!!!!!!!!!!!
 
                     }
                     else if (game.PublishStatus == "Eligible")
@@ -73,6 +75,7 @@
 
     string msg = "";
     string gameName = "";
+
 
     void Navigate()
     {
@@ -114,7 +117,7 @@
 
             GameForEditor newGame = AddResopnse.Content.ReadFromJsonAsync<GameForEditor>().Result;
             user.UserGames.Add(newGame);
-
+            nav.NavigateTo("./EditGamePage/" + newGame.GameFullName + "/" + newGame.ID);
 
         }
         else

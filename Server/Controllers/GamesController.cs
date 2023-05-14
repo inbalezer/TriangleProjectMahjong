@@ -326,7 +326,7 @@ namespace TriangleProject.Server.Controllers
 
         //aaaaaaaaaaaaaaaa
 
-        [HttpPost("EditGame")]
+        [HttpPost("EditGame")]  // מה שקורה בלחיצה על חץ אחורה
 
         public async Task<IActionResult> editGame(int userId, GameToUpdate gameToUpdate)
         {
@@ -368,7 +368,7 @@ namespace TriangleProject.Server.Controllers
 
 
 
-        [HttpGet("FullGameToEdit/{GameId}")]
+        [HttpGet("FullGameToEdit/{GameId}")] // מה שקורה שלוחצים על עריכה אחרי שיש משחק
         public async Task<IActionResult> GetFullGame(int userId, int GameId)
         {
             int? sessionId = HttpContext.Session.GetInt32("userId");

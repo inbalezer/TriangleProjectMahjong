@@ -65,10 +65,12 @@ namespace TriangleProject.Server.Controllers
                             if (isText)
                             {
                                 singleMatch.MatchText = match;
+                                
                             }
                             else
                             {
                                 singleMatch.MatchImg = match;
+                                
                             }
 
                             game.FirstMatchesContent.Add(singleMatch);
@@ -89,10 +91,14 @@ namespace TriangleProject.Server.Controllers
                             if (isText)
                             {
                                 singleMatch.MatchText = match;
+                                
+
                             }
                             else
                             {
                                 singleMatch.MatchImg = match;
+                                
+
                             }
 
                             game.SecondMatchesContent.Add(singleMatch);

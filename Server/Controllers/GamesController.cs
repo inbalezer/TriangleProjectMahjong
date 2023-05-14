@@ -18,7 +18,7 @@ namespace TriangleProject.Server.Controllers
         {
             _db = db;
         }
-
+        //פונקציית עזר//
         private async Task<bool> canPublish(int gameId)
         {
             object param1 = new

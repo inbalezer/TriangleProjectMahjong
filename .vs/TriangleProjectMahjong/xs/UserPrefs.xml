@@ -1,27 +1,34 @@
 ﻿<Properties StartupConfiguration="{C99128EA-5019-4208-90EE-04739CFCEEAD}|Default">
+  <MonoDevelop.Ide.ItemProperties.TriangleProject.Server PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Server/Controllers/GamesController.cs">
     <Files>
       <File FileName="Server/Controllers/UnityController.cs" Line="50" Column="42" />
-      <File FileName="Shared/Models/Matches/SingleMatchDetails.cs" Line="9" Column="18" />
+      <File FileName="Shared/Models/Matches/SingleMatchDetails.cs" Line="1" Column="1" />
       <File FileName="Shared/Models/Matches/Game.cs" Line="11" Column="60" />
       <File FileName="Server/Controllers/PortelemController.cs" Line="51" Column="64" />
-      <File FileName="Server/Controllers/GamesController.cs" Line="139" Column="50" />
+      <File FileName="Server/Controllers/GamesController.cs" Line="332" Column="10" />
       <File FileName="Shared/Models/Editor/GameForEditor.cs" Line="19" Column="1" />
+      <File FileName="Client/Pages/GamesList.razor" Line="23" Column="31" />
+      <File FileName="Shared/Models/Editor/UserWithGames.cs" Line="11" Column="36" />
+      <File FileName="Server/Controllers/MatchesController.cs" Line="55" Column="44" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="TriangleProjectMahjong" expanded="True">
+          <Node name="TriangleProjectMahjong" expanded="True" selected="True">
+            <Node name="TriangleProject.Client" expanded="True">
+              <Node name="Pages" expanded="True" />
+            </Node>
             <Node name="TriangleProject.Server" expanded="True">
               <Node name="Dependencies" expanded="True">
                 <Node name="FrameworkReferences" expanded="True" />
                 <Node name="PackageDependencies" expanded="True" />
                 <Node name="ProjectDependencies" expanded="True" />
               </Node>
-              <Node name="Controllers" expanded="True">
-                <Node name="GamesController.cs" selected="True" />
-              </Node>
+              <Node name="Controllers" expanded="True" />
               <Node name="Data" expanded="True" />
               <Node name="Pages" expanded="True" />
               <Node name="Properties" expanded="True" />
@@ -43,7 +50,4 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.TriangleProject.Server PreferredExecutionTarget="/Applications/Google Chrome.app" />
 </Properties>

@@ -4,10 +4,10 @@
 @using TriangleProject.Shared.Models.Portelem
 
 @inject HttpClient Http
+@inject NavigationManager Nav
 
 <h3>EditGamePage</h3>
 
-@inject NavigationManager Nav
 
 <table border=1>
     <tr>
@@ -40,8 +40,8 @@
         <input type="text" @bind="newMatch.SecondMatch" /> ורוקנו את הלוח
     </tr>
     
-    <input type="button" @onclick="(() =>AddMatch(UserId,newMatch))" />
-
+@*    <input type="button" @onclick="(() =>AddMatch(UserId,newMatch))" />
+*@
 </table>
 
 @if (allMatches !=null)
@@ -87,8 +87,12 @@
     [Parameter]
     public int newGameID { get; set; }
 
-    MatchToUpdate newMatch;
-    List<MatchToUpdate> allMatches;
+    //MatchToUpdate newMatch;
+    //List<MatchToUpdate> allMatches;
+
+    MatchToUpdate newMatch = new MatchToUpdate();
+    List<MatchToUpdate> allMatches = new List<MatchToUpdate>();
+
 
     string GameInstruction = "";
     void Navigate()
@@ -96,39 +100,39 @@
         Nav.NavigateTo("./", true);
     }
 
-    protected async Task AddMatch(int UserId, MatchToUpdate newMatch)
-    {
-        var AddResopnse = await Http.GetAsync("api/Matches/" + UserId + "/AddMatch/" + newMatch);
+    //protected async Task AddMatch(int UserId, MatchToUpdate newMatch)
+    //{
+    //    var AddResopnse = await Http.GetAsync("api/Matches/" + UserId + "/AddMatch/" + newMatch);
 
-        if (AddResopnse.IsSuccessStatusCode)
-        {
-            MatchToUpdate match = AddResopnse.Content.ReadFromJsonAsync<MatchToUpdate>().Result;            
-            allMatches.Add(match);
+    //    if (AddResopnse.IsSuccessStatusCode)
+    //    {
+    //        MatchToUpdate match = AddResopnse.Content.ReadFromJsonAsync<MatchToUpdate>().Result;            
+    //        allMatches.Add(match);
             
-        }
-        else
-        {
-            string error = AddResopnse.Content.ReadAsStringAsync().Result;
+    //    }
+    //    else
+    //    {
+    //        string error = AddResopnse.Content.ReadAsStringAsync().Result;
 
-            switch (error)
-            {
-                case "No Session":
-                    msg = "Session error, please reload page";
-                    break;
+    //        switch (error)
+    //        {
+    //            case "No Session":
+    //                msg = "Session error, please reload page";
+    //                break;
 
-                case "User Not Logged In":
-                    msg = "You are not logged in, please reload page to try again";
-                    break;
+    //            case "User Not Logged In":
+    //                msg = "You are not logged in, please reload page to try again";
+    //                break;
 
-                case "User Not Found":
-                    msg = "You tried to update a game that is not associated with your user ";
-                    break;
+    //            case "User Not Found":
+    //                msg = "You tried to update a game that is not associated with your user ";
+    //                break;
 
-                case "Game not created":
-                    msg = "The game you have tried to create, faild.";
-                    break;
-            }
-        }
-    }
+    //            case "Game not created":
+    //                msg = "The game you have tried to create, faild.";
+    //                break;
+    //        }
+    //    }
+    //}
 
 }

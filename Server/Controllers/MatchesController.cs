@@ -68,7 +68,7 @@ namespace TriangleProject.Server.Controllers
 
         //aaaaaaaaaaaaaaaa
 
-        [HttpPost("addMatch")]
+        [HttpGet("addMatch")]
         public async Task<IActionResult> AddMatch(int userId, MatchToUpdate matchToInsert)
         {
             int? sessionId = HttpContext.Session.GetInt32("userId");

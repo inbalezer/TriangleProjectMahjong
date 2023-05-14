@@ -98,7 +98,7 @@
 
     protected async Task AddMatch(int UserId, MatchToUpdate newMatch)
     {
-        var AddResopnse = await Http.PostAsync("api/Matches/" + UserId + "/AddMatch/" + newMatch);
+        var AddResopnse = await Http.GetAsync("api/Matches/" + UserId + "/AddMatch/" + newMatch);
 
         if (AddResopnse.IsSuccessStatusCode)
         {

@@ -68,6 +68,14 @@
 }
 
 
+<label for="FileInputID"> בחר תמונה </label>
+<InputFile id="FileInputID" OnChange="UploadFile" hidden />
+<br />
+
+@if (myFileImage != "")
+{
+    <img src="@myFileImage" width="150" />
+}
 
 
 
@@ -108,7 +116,7 @@
     //    {
     //        MatchToUpdate match = AddResopnse.Content.ReadFromJsonAsync<MatchToUpdate>().Result;            
     //        allMatches.Add(match);
-            
+
     //    }
     //    else
     //    {
@@ -134,5 +142,36 @@
     //        }
     //    }
     //}
+
+
+    string myFileImage = "";
+    long maxFileSize = 4194304;
+
+    private async Task UploadFile(InputFileChangeEventArgs e)
+    {
+        var imageFiles = e.GetMultipleFiles();
+        foreach (var file in imageFiles)
+        {
+            if (file.Size <= maxFileSize)
+            {
+                var buffer = new byte[file.Size];
+                await file.OpenReadStream(maxFileSize).ReadAsync(buffer);
+                var imageBase64 = Convert.ToBase64String(buffer);
+                var saveResponse = await Http.PostAsJsonAsync("api/Media/upload", imageBase64);
+
+                if (saveResponse.IsSuccessStatusCode == true)
+                {
+                    string resizeUrl = saveResponse.Content.ReadAsStringAsync().Result;
+
+                    myFileImage = "uploadedFiles/" + resizeUrl;
+                }
+            }
+            else
+            {
+                msg = "לא ניתן להעלות את התמונה- היא גדולה מדיי";
+            }
+        }
+    }
+
 
 }

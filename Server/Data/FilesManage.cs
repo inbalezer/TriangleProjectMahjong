@@ -13,7 +13,7 @@ namespace TriangleFileStorage
             _env = env;
         }
 
-        public void DeleteFile(string fileName, string containerName)
+        public bool DeleteFile(string fileName, string containerName)
         {
             string folderPath = Path.Combine(_env.WebRootPath, containerName);
 
@@ -22,6 +22,11 @@ namespace TriangleFileStorage
             if (File.Exists(savingPath))
             {
                 File.Delete(savingPath);
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 

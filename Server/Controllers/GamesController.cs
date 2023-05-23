@@ -298,24 +298,40 @@ namespace TriangleProject.Server.Controllers
             {
                 if (userId == sessionId)
                 {
+                    string checkMatchesQuery = "SELECT count(*) from Games, Matches where Games.ID = Matches.GameID and Matches.GameID = @ID";
+                    var isMatchesExist = await _db.GetRecordsAsync<int>(checkMatchesQuery, new { ID = GameIdToDelete });
+                    int MatchesExist = isMatchesExist.FirstOrDefault();
 
-                    string DeleteMatchesQuery = "delete from Matches where GameID = @ID";
-                    bool isMatchesDeleted = await _db.SaveDataAsync(DeleteMatchesQuery, new { ID = GameIdToDelete });
-
-                    string DeleteQuery = "DELETE FROM Games WHERE ID=@ID";
-                    bool isGameDeleted = await _db.SaveDataAsync(DeleteQuery, new { ID = GameIdToDelete });
-
-                    if (isMatchesDeleted)
+                    if (MatchesExist > 0)
                     {
-                        return Ok();
-                    }
-                    return BadRequest("Failed to delete matches");
+                        string DeleteMatchesQuery = "delete from Matches where GameID = @ID";
+                        bool isMatchesDeleted = await _db.SaveDataAsync(DeleteMatchesQuery, new { ID = GameIdToDelete });
 
-                    if (isGameDeleted)
-                    {
-                        return Ok();
+                        if (isMatchesDeleted)
+                        {
+                            string DeleteQuery = "DELETE FROM Games WHERE ID=@ID";
+                            bool isGameDeleted = await _db.SaveDataAsync(DeleteQuery, new { ID = GameIdToDelete });
+
+                            if (isGameDeleted)
+                            {
+                                return Ok();
+                            }
+                            return BadRequest("Failed to delete game");
+                        }
+                        return BadRequest("Failed to delete matches");
                     }
-                    return BadRequest("Failed to delete game");
+                    else
+                    {
+                        string DeleteQuery = "DELETE FROM Games WHERE ID=@ID";
+                        bool isGameDeleted = await _db.SaveDataAsync(DeleteQuery, new { ID = GameIdToDelete });
+
+                        if (isGameDeleted)
+                        {
+                            return Ok();
+                        }
+                        return BadRequest("Failed to delete game");
+                    }
+                   
                 }
                 return BadRequest("User Not Logged In");
 

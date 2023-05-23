@@ -2,9 +2,12 @@
 @using TriangleProject.Shared.Models.Editor
 @using TriangleProject.Shared.Models.Matches
 @using TriangleProject.Shared.Models.Portelem
+@using TriangleProject.Client.Components
+
 
 @inject HttpClient Http
 @inject NavigationManager nav
+@inject NavigationManager Nav
 
 
 <h3>GamesList</h3>
@@ -20,7 +23,7 @@
     <p>The Games:</p>
     <table border=0>
         <tr>
-            <th>ID</th>
+@*            <th>ID</th>*@
             <th>Game Name</th>
             <th>Game Code</th>
             <th>Publish</th>
@@ -32,11 +35,24 @@
                 <td>@game.GameFullName</td>
                 <td>@game.GameCode</td>
                 <td>
+                    <span>
+                        <img src="/trash3.svg" alt="Icon" @onclick="(() => showMessage(game.GameFullName, true))" />
+                        @if (isClicked)
+                        {
+
+                            <PopupComp Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" gameName="@gameName" Text2="@deleteTextPopUp2" GameIdToDelete="@(async () => await DeleteGame(game))" ShowMsg="closedPopUp"></PopupComp>
+
+                        }
+                    </span>
+
+                    <input type="button" value="Update" @onclick="(() =>DeleteGame(game))" /> @*//!!!!!!!!!!!!!!!!!!!*@
+                </td>
+                <td>
                     @if (game.PublishStatus == "Not Eligible")
                     {
                         <input type="checkbox" disabled />
-                        <input type="button" value="Delete" @onclick="(() =>DeleteGame(game))" />
-                        <input type="button" value="Update" @onclick="(() =>DeleteGame(game))" /> //!!!!!!!!!!!!!!!!!!!
+                        @*<input type="button" value="Delete"  />*@
+                        @*<span><img src="/trash3.svg" alt="Icon" @onclick="(() =>DeleteGame(game))" /> </span>*@    
 
                     }
                     else if (game.PublishStatus == "Eligible")
@@ -56,7 +72,7 @@
 
 }
 
-@inject NavigationManager Nav
+
 
 @if (msg != "")
 {
@@ -67,14 +83,38 @@
 
 @code {
 
+
     [CascadingParameter]
     public int UserId { get; set; }
 
     UserWithGames user;
+    GameForEditor gameToDelete = new GameForEditor();
     List<GameForEditor> newGame;
 
+    bool isClicked = false;
     string msg = "";
     string gameName = "";
+    string deleteHeadLinePopUp = "מחיקת משחק";
+    string deleteTextPopUp1 = "אתה עומד למחוק את המשחק " ;
+    string deleteTextPopUp2 = "?האם אתה בטוח" ;
+
+
+    void showMessage(string gameFromList, bool windowStatus)
+    {
+        isClicked = true;
+        gameName = gameFromList;
+    }
+
+    void closedPopUp()
+    {
+        isClicked = false;
+    }
+
+
+
+
+
+
 
 
     void Navigate()
@@ -200,13 +240,13 @@
     }
 
 
-    protected async Task DeleteGame(GameForEditor gameToDelte)
+    protected async Task DeleteGame(GameForEditor gameToDelete)
     {
 
-        var deleteResponse = await Http.DeleteAsync("api/Games/" + UserId + "/" + gameToDelte.ID);
+        var deleteResponse = await Http.DeleteAsync("api/Games/" + UserId + "/" + gameToDelete.ID);
         if (deleteResponse.IsSuccessStatusCode)
         {
-            user.UserGames.Remove(gameToDelte);
+            user.UserGames.Remove(gameToDelete);
         }
 
         else

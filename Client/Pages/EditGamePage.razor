@@ -78,6 +78,27 @@
 }
 
 
+@if (myFileImage != "")
+{
+    <img src="@myFileImage" width="150" />
+    <input type="button" value="העבר למחיקה " @onclick="MakeDeleteList" />
+}
+
+
+@if (DeletedImages.Count > 0)
+{
+    <ul>
+        @foreach (string img in DeletedImages)
+        {
+
+            <li>@img     <img src="@img" width="50" /> </li>
+        }
+    </ul>
+
+    <input type="button" value="מחק תמונות נבחרות " @onclick="DeleteImage" />
+}
+<p>@msg</p>
+
 
 
 @code {
@@ -173,5 +194,26 @@
         }
     }
 
+    List<string> DeletedImages = new List<string>();
 
+    private void MakeDeleteList() // הוספת שם התמונה לרשימת התמונות הכוללת המועמדת למחיקה- לא מחיקה בפועל מהדאטה בייס
+    {
+        DeletedImages.Add(myFileImage);
+        myFileImage = "";
+    }
+
+    private async Task DeleteImage()
+    {
+        var saveResponse = await Http.PostAsJsonAsync("api/Media/deleteImages", DeletedImages);
+
+        if (saveResponse.IsSuccessStatusCode == true)
+        {
+            msg = "התמונות נמחקו בהצלחה";
+            DeletedImages.Clear();
+        }
+        else
+        {
+            msg = "בעיה במחיקה ";
+        }
+    }
 }

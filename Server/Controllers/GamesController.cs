@@ -152,7 +152,7 @@ namespace TriangleProject.Server.Controllers
                     UserWithGames user = userRecords.FirstOrDefault();
                     if (user != null)
                     {
-                        // Check if the game name already exists
+                        // Checka if the game name already exists
                         object existingGameParam = new
                         {
                             GameFullName = gameName,
@@ -331,7 +331,7 @@ namespace TriangleProject.Server.Controllers
                         }
                         return BadRequest("Failed to delete game");
                     }
-                   
+
                 }
                 return BadRequest("User Not Logged In");
 

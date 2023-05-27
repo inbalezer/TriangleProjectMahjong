@@ -80,8 +80,8 @@ namespace TriangleProject.Server.Controllers
                     int newMatchId = await _db.InsertReturnId(insertMatchQuery, matchToInsert);
 
                     if (newMatchId != 0)
-                    {                      
-                        return Ok(newMatchId);                          
+                    {
+                        return Ok(newMatchId);
                     }
 
                     return BadRequest("Match not created");
@@ -91,5 +91,78 @@ namespace TriangleProject.Server.Controllers
             return BadRequest("No Session");
         }
 
+        [HttpPost("addInstruction")]
+        public async Task<IActionResult> AddInstruction(int userId, gameInsrtuctionToInsert gameInstructionToInsert)
+        {
+            int? sessionId = HttpContext.Session.GetInt32("userId");
+            if (sessionId != null)
+            {
+                if (userId == sessionId)
+                {
+
+
+
+                    object newInstructionParam = new
+                    {
+                        ID = gameInstructionToInsert.ID,
+                        GameInstruction = gameInstructionToInsert.GameInstruction
+
+                    };
+
+                    string UpdateGameInstructionQuery = "UPDATE Games SET GameInstruction=@GameInstruction WHERE ID=@ID";
+                    bool isInstructionUpdate = await _db.SaveDataAsync(UpdateGameInstructionQuery, newInstructionParam);
+
+                    if (isInstructionUpdate)
+                    {
+                        object param = new
+                        {
+                            ID = gameInstructionToInsert.ID
+
+                        };
+                        string gameCheckQuery = "SELECT GameFullName FROM Games WHERE ID = @ID";
+                        var instructionRecord = await _db.GetRecordsAsync<string>(gameCheckQuery, param);
+                        string gameCheckToReturn = instructionRecord.FirstOrDefault();
+
+                        if (gameCheckToReturn != null)
+                        {
+
+                            if (gameCheckToReturn != gameInstructionToInsert.GameFullName)
+                            {
+                                object newNameParam = new
+                                {
+                                    ID = gameInstructionToInsert.ID,
+                                    GameFullName = gameInstructionToInsert.GameFullName
+
+                                };
+
+                                string UpdateGameNameQuery = "UPDATE Games SET GameFullName=@GameFullName WHERE ID=@ID";
+                                bool isUpdate = await _db.SaveDataAsync(UpdateGameNameQuery, newNameParam);
+
+                                if (isUpdate)
+                                {
+                                    return Ok(gameInstructionToInsert.GameFullName + "," + gameInstructionToInsert.GameInstruction);
+                                }
+                                return BadRequest("update game name failed");
+
+                            }
+                            return Ok("same name:" + gameInstructionToInsert.GameFullName + "," + gameInstructionToInsert.GameInstruction);
+
+                        }
+                        return BadRequest("Game not found");
+
+
+                    }
+
+                    return BadRequest("update Game Instruction failed");
+                }
+
+                return BadRequest("User Not Logged In");
+            }
+            return BadRequest("No Session");
+        }
+
     }
+
+
+
 }

@@ -5,6 +5,39 @@ using TriangleProject.Shared.Models.Matches;
 
 namespace TriangleProject.Server.Controllers
 {
+
+
+    //{
+    //    private bool ContainsHebrewLetters(string text)
+    //    {
+    //        // Check if the text contains Hebrew Unicode characters
+    //        foreach (char c in text)
+    //        {
+    //            if (IsHebrewLetter(c))
+    //            {
+    //                return true;
+    //            }
+    //        }
+
+    //        return false;
+    //    }
+
+    //    private string ReverseHebrew(string text)
+    //    {
+    //        // Reverse the order of Hebrew characters in the text
+    //        char[] charArray = text.ToCharArray();
+    //        Array.Reverse(charArray);
+    //        return new string(charArray);
+    //    }
+
+    //    private bool IsHebrewLetter(char c)
+    //    {
+    //        // Check if the character is a Hebrew Unicode character range
+    //        // Modify this condition based on the specific Unicode range for Hebrew letters
+    //        return c >= 0x0590 && c <= 0x05FF;
+    //    }
+
+
     [Route("api/[controller]")]
     [ApiController]
     public class UnityController : ControllerBase
@@ -18,6 +51,11 @@ namespace TriangleProject.Server.Controllers
         [HttpGet("{GameCode}")]
         public async Task<IActionResult> GetGames(string GameCode)
         {
+
+            //if (ContainsHebrewLetters(GameCode))
+            //{
+            //    GameCode = ReverseHebrew(GameCode);
+            //}
             object param1 = new
             {
                 GameCode = GameCode
@@ -47,7 +85,7 @@ namespace TriangleProject.Server.Controllers
                         string queryGame = "SELECT GameInstruction FROM Games WHERE ID = @ID";
                         var recordGame = await _db.GetRecordsAsync<Game>(queryGame, param);
                         Game game = recordGame.FirstOrDefault();
-                        game.FirstMatchesContent  = new List<SingleMatchDetails>();
+                        game.FirstMatchesContent = new List<SingleMatchDetails>();
                         game.SecondMatchesContent = new List<SingleMatchDetails>();
 
 
@@ -65,12 +103,12 @@ namespace TriangleProject.Server.Controllers
                             if (isText)
                             {
                                 singleMatch.MatchText = match;
-                                
+
                             }
                             else
                             {
                                 singleMatch.MatchImg = match;
-                                
+
                             }
 
                             game.FirstMatchesContent.Add(singleMatch);
@@ -91,13 +129,13 @@ namespace TriangleProject.Server.Controllers
                             if (isText)
                             {
                                 singleMatch.MatchText = match;
-                                
+
 
                             }
                             else
                             {
                                 singleMatch.MatchImg = match;
-                                
+
 
                             }
 
@@ -122,6 +160,10 @@ namespace TriangleProject.Server.Controllers
             }
         }
     }
+
+
+
+
 }
 
 

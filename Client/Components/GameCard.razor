@@ -1,0 +1,77 @@
+﻿
+@using Microsoft.AspNetCore.Components.Web
+
+
+<div class="game-card">
+    <div class="title">@GameName</div>
+    <div class="content">
+        <input type="text" gameCode="@gameCode" />
+        <input type="text" gameStatus="סטטוס פרסום" />
+        <button class="toggle-button">Toggle</button>
+        <div class="delete-button-container">
+            <button class="delete-button" @onclick="(() => showMessage(GameName, true))">Delete</button>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string GameName { get; set; }
+
+    [Parameter]
+    public int gameCode { get; set; }
+
+    [Parameter]
+    public bool isClicked { get; set; }
+
+    void showMessage(string gameFromList, bool windowStatus)
+    {
+        isClicked = true;
+
+
+
+    }
+
+}
+
+
+}
+
+<style>
+    .game-card {
+        width: 100%;
+        max-width: 254px;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        background-color: white;
+        padding: 10px;
+    }
+
+    .title {
+        background-color: #d0e6f5;
+        text-align: center;
+        padding: 5px 0;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .content {
+        margin-top: 10px;
+    }
+
+    .toggle-button {
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .delete-button-container {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .delete-button {
+        /* Add your styling for the delete button here */
+    }
+</style>
+

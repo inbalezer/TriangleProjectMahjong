@@ -8,10 +8,11 @@
             </div>
             <h3>@Headline</h3>
             <p> @gameName :@Text1 </p>
-            <p>@Text2 </p>                
+            <p>@Text2 </p>
+
             <div class="popup-buttons">
                 <button class="popup-button" style="background-color: red; color: white;" @onclick="()=> DeleteGameFromList                 (true)">מחק משחק</button>
-                <button class="popup-button" style="background-color: white; color: red; border: 2px solid red;"                        @onclick="IsDeleteButtonClicked">בטל</button>
+                <button class="popup-button" style="background-color: white; color: red; border: 2px solid red;" @onclick="IsDeleteButtonClicked">בטל</button>
             </div>
         </div>
     </div>
@@ -94,7 +95,7 @@
     public string Text1 { get; set; }
 
     [Parameter]
-    public string Text2 { get; set; } 
+    public string Text2 { get; set; }
 
     [Parameter]
     public EventCallback<bool> ShowMsg { get; set; }
@@ -117,5 +118,5 @@
         notDeleted = true;
         ShowMsg.InvokeAsync(notDeleted);
     }
-    
+
 }

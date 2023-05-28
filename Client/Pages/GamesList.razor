@@ -39,36 +39,37 @@
                 <td>@game.GameCode</td>
                 <td>
                     <span>
-                       <img src="/trash3.svg" alt="Icon" @onclick="(() => showMessage(game.GameFullName, true))" />
-                       @if (isClicked)
+                        <GameCard GameFullName="@game.GameFullName" gameCode="@game.GameCode" GamePublishStatus="@game.PublishStatus" isCheckboxClicked="@(async () => await changePublish(game))" showMsg="(() => showMessage(game.GameFullName))" />
+
+                        @*<img src="/trash3.svg" alt="Icon" @onclick="(() => showMessage(game.GameFullName, true))" />*@
+                        @if (isClicked)
                         {
 
                             <PopupComp Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" gameName="@gameNameToDelete" Text2="@deleteTextPopUp2" GameIdToDelete="@(async () => await DeleteGame(game))" ShowMsg="closedPopUp"></PopupComp>
 
 
                         }
-                    </span>                 
+                    </span>
                 </td>
                 <td>
-                   @* @if (game.PublishStatus == "Not Eligible")
-                    {
-                        <input type="checkbox" disabled />
-                        @*<input type="button" value="Delete"  />*@
-                        @*<span><img src="/trash3.svg" alt="Icon" @onclick="(() =>DeleteGame(game))" /> </span>*@
+                    @* @if (game.PublishStatus == "Not Eligible")
+                        {
+                            <input type="checkbox" disabled />
+                            @*<input type="button" value="Delete"  />*@
+                    @*<span><img src="/trash3.svg" alt="Icon" @onclick="(() =>DeleteGame(game))" /> </span>*@
 
-                   @* }
-                    else if (game.PublishStatus == "Eligible")
-                    {
-                        <input type="checkbox" @onchange="(()=> changePublish(game))" />
-                    }
-                    else
-                    {
-                        <input type="checkbox" checked @onchange="(()=> changePublish(game))" />
-                    }*@
+                    @* }
+                        else if (game.PublishStatus == "Eligible")
+                        {
+                            <input type="checkbox" @onchange="(()=> changePublish(game))" />
+                        }
+                        else
+                        {
+                            <input type="checkbox" checked @onchange="(()=> changePublish(game))" />
+                        }*@
                 </td>
             </tr>
 
-            @*<GameCard GameFullName="@game.GameFullName" gameCode="@game.GameCode" GamePublishStatus="@game.PublishStatus" gameToPublish="@(async () => await changePublish(game))" />*@
         }
     </table>
 }
@@ -102,10 +103,10 @@
     string gameNameToDelete = "";
 
 
-    void showMessage(string gameFromList, bool windowStatus)
+    void showMessage(string gName)
     {
+        gameNameToDelete = gName;
         isClicked = true;
-        gameNameToDelete = gameFromList;
     }
 
     void closedPopUp()

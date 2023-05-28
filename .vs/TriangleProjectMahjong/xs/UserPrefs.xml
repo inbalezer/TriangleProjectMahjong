@@ -1,32 +1,27 @@
 ﻿<Properties StartupConfiguration="{C99128EA-5019-4208-90EE-04739CFCEEAD}|Default">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workbench ActiveDocument="Client/Pages/GamesList.razor">
     <Files>
-      <File FileName="Client/Pages/GamesList.razor" Line="44" Column="1" />
-      <File FileName="Client/Components/PopupComp.razor" Line="13" Column="11" />
+      <File FileName="Client/Pages/GamesList.razor" Line="23" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="TriangleProjectMahjong" expanded="True">
             <Node name="TriangleProject.Client" expanded="True">
-              <Node name="Dependencies" expanded="True" />
               <Node name="Components" expanded="True" />
               <Node name="Pages" expanded="True" />
-              <Node name="PortelemFiles" expanded="True" />
-              <Node name="Properties" expanded="True" />
-              <Node name="Shared" expanded="True" />
             </Node>
             <Node name="TriangleProject.Server" expanded="True">
-              <Node name="Dependencies" expanded="True" />
-              <Node name="wwwroot" expanded="True">
-                <Node name="uploadedFiles" expanded="True" />
-              </Node>
+              <Node name="Controllers" expanded="True" />
             </Node>
             <Node name="TriangleProject.Shared" expanded="True">
               <Node name="Models" expanded="True">
-                <Node name="Matches" expanded="True" />
+                <Node name="Editor" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -37,9 +32,6 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.TriangleProject.Server PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.TriangleProject.Server PreferredExecutionTarget="/Applications/Google Chrome.app" />
 </Properties>

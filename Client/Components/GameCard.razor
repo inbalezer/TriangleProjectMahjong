@@ -13,8 +13,9 @@
 <div class="game-card">
     <div class="title">@GameFullName</div>
     <div class="content">
-        <input type="button" value="Update" @onclick="updateNavigate" /> 
-        <input type="text" gameCode="@gameCode" />
+        <input type="button" value="Update" @onclick="updateNavigate" />
+        <div>@gameCode</div>
+
         <input type="text" gameStatus="סטטוס פרסום" />
         <div>
             @if (GamePublishStatus == "Not Eligible")
@@ -26,15 +27,15 @@
             }
             else if (GamePublishStatus == "Eligible")
             {
-                <input type="checkbox" @onchange="(()=> changePublish(gameToPublish))" />
+                <input type="checkbox" @onchange="changePublish" />
             }
             else
             {
-                <input type="checkbox" checked @onchange="(()=> changePublish(gameToPublish))" />
+                <input type="checkbox" checked @onchange="changePublish" />
             }
         </div>
         <div class="delete-button-container">
-            <button class="delete-button" @onclick="(() => showMessage(GameFullName, true))">Delete</button>
+            <button class="delete-button" @onclick="deleteGame">Delete</button>
 
         </div>
     </div>
@@ -52,7 +53,7 @@
         public string GameName { get; set; }
     }
 
-    showMsgInfo showMsg = new showMsgInfo();
+    @*showMsgInfo showMsg = new showMsgInfo();*@
 
     [Parameter]
     public GameForEditor gameToPublish { get; set; }
@@ -71,34 +72,29 @@
 
     [Parameter]
     public EventCallback<string> GamePublish { get; set; }
-
     [Parameter]
-    public EventCallback<showMsgInfo> ShowMsg { get; set; }
+    public EventCallback<bool> isCheckboxClicked { get; set; }
+    [Parameter]
+    public EventCallback<bool> showMsg { get; set; }
 
-    void changePublish(GameForEditor gameToPublish)
-    {
-        GamePublish.InvokeAsync();
-    }
-
-    void showMessage(string GameName, bool windowStatus)
+    void changePublish()
     {
 
-        showMsg.GameName = GameName;
-        showMsg.MsgStatus = windowStatus;
-
-        ShowMsg.InvokeAsync(showMsg);
+        isCheckboxClicked.InvokeAsync(true);
     }
+
+    void deleteGame()
+    {
+
+        showMsg.InvokeAsync(true);
+    }
+
 
 
     void updateNavigate()
     {
         nav.NavigateTo("./EditGamePage/" + GameFullName + "/" + UserId);
     }
-
-
-
-
-
 
 
 }

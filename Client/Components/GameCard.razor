@@ -1,22 +1,67 @@
 ﻿
 @using Microsoft.AspNetCore.Components.Web
+@using TriangleProject.Shared.Models.Editor
+@using TriangleProject.Shared.Models.Matches
+@using TriangleProject.Shared.Models.Portelem
+@using TriangleProject.Client.Components
+
+@inject HttpClient Http
+@inject NavigationManager nav
+@inject NavigationManager Nav
 
 
 <div class="game-card">
-    <div class="title">@GameName</div>
+    <div class="title">@GameFullName</div>
     <div class="content">
+        <input type="button" value="Update" @onclick="updateNavigate" /> 
         <input type="text" gameCode="@gameCode" />
         <input type="text" gameStatus="סטטוס פרסום" />
-        <button class="toggle-button">Toggle</button>
+        <div>
+            @if (GamePublishStatus == "Not Eligible")
+            {
+                <input type="checkbox" disabled />
+                @*<input type="button" value="Delete"  />*@
+                @*<span><img src="/trash3.svg" alt="Icon" @onclick="(() =>DeleteGame(game))" /> </span>*@
+
+            }
+            else if (GamePublishStatus == "Eligible")
+            {
+                <input type="checkbox" @onchange="(()=> changePublish(gameToPublish))" />
+            }
+            else
+            {
+                <input type="checkbox" checked @onchange="(()=> changePublish(gameToPublish))" />
+            }
+        </div>
         <div class="delete-button-container">
-            <button class="delete-button" @onclick="(() => showMessage(GameName, true))">Delete</button>
+            <button class="delete-button" @onclick="(() => showMessage(GameFullName, true))">Delete</button>
+
         </div>
     </div>
 </div>
 
 @code {
+
+    [CascadingParameter]
+    public int UserId { get; set; }
+
+
+    public class showMsgInfo
+    {
+        public bool MsgStatus { get; set; }
+        public string GameName { get; set; }
+    }
+
+    showMsgInfo showMsg = new showMsgInfo();
+
     [Parameter]
-    public string GameName { get; set; }
+    public GameForEditor gameToPublish { get; set; }
+
+    [Parameter]
+    public string GameFullName { get; set; }
+
+    [Parameter]
+    public string GamePublishStatus { get; set; }
 
     [Parameter]
     public int gameCode { get; set; }
@@ -24,18 +69,42 @@
     [Parameter]
     public bool isClicked { get; set; }
 
-    void showMessage(string gameFromList, bool windowStatus)
+    [Parameter]
+    public EventCallback<string> GamePublish { get; set; }
+
+    [Parameter]
+    public EventCallback<showMsgInfo> ShowMsg { get; set; }
+
+    void changePublish(GameForEditor gameToPublish)
     {
-        isClicked = true;
-
-
-
+        GamePublish.InvokeAsync();
     }
 
+    void showMessage(string GameName, bool windowStatus)
+    {
+
+        showMsg.GameName = GameName;
+        showMsg.MsgStatus = windowStatus;
+
+        ShowMsg.InvokeAsync(showMsg);
+    }
+
+
+    void updateNavigate()
+    {
+        nav.NavigateTo("./EditGamePage/" + GameFullName + "/" + UserId);
+    }
+
+
+
+
+
+
+
 }
 
 
-}
+
 
 <style>
     .game-card {

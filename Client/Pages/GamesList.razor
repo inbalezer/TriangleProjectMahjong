@@ -28,6 +28,7 @@
             @*            <th>ID</th>*@
             <th>Game Name</th>
             <th>Game Code</th>
+            <th>Delete</th>
             <th>Publish</th>
         </tr>
 
@@ -38,27 +39,24 @@
                 <td>@game.GameCode</td>
                 <td>
                     <span>
-                        <img src="/trash3.svg" alt="Icon" @onclick="(() => showMessage(game.GameFullName, true))" />
-                        @if (isClicked)
+                       <img src="/trash3.svg" alt="Icon" @onclick="(() => showMessage(game.GameFullName, true))" />
+                       @if (isClicked)
                         {
 
                             <PopupComp Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" gameName="@gameNameToDelete" Text2="@deleteTextPopUp2" GameIdToDelete="@(async () => await DeleteGame(game))" ShowMsg="closedPopUp"></PopupComp>
 
 
                         }
-                    </span>
-
-
-                    <input type="button" value="Update" @onclick="(() =>DeleteGame(game))" /> @*//!!!!!!!!!!!!!!!!!!!*@
+                    </span>                 
                 </td>
                 <td>
-                    @if (game.PublishStatus == "Not Eligible")
+                   @* @if (game.PublishStatus == "Not Eligible")
                     {
                         <input type="checkbox" disabled />
                         @*<input type="button" value="Delete"  />*@
                         @*<span><img src="/trash3.svg" alt="Icon" @onclick="(() =>DeleteGame(game))" /> </span>*@
 
-                    }
+                   @* }
                     else if (game.PublishStatus == "Eligible")
                     {
                         <input type="checkbox" @onchange="(()=> changePublish(game))" />
@@ -66,18 +64,13 @@
                     else
                     {
                         <input type="checkbox" checked @onchange="(()=> changePublish(game))" />
-                    }
+                    }*@
                 </td>
             </tr>
 
-            @*<GameCard GameName="@game.GameFullName" gameCode="@game.GameCode" />*@
-
+            @*<GameCard GameFullName="@game.GameFullName" gameCode="@game.GameCode" GamePublishStatus="@game.PublishStatus" gameToPublish="@(async () => await changePublish(game))" />*@
         }
-
     </table>
-
-
-
 }
 
 
@@ -113,19 +106,12 @@
     {
         isClicked = true;
         gameNameToDelete = gameFromList;
-
-
     }
+
     void closedPopUp()
     {
         isClicked = false;
     }
-
-
-
-
-
-
 
 
     void Navigate()

@@ -17,61 +17,28 @@
 @if (user != null)
 {
 
-    <input type="text" @bind="gameName" />
+    <input style="border:2px solid blue" type="text" @bind="gameName" />
     <br />
     <input type="button" value="Create Game" @onclick=@(()=>AddNewGame(UserId, gameName))>
 
 
     <p>The Games:</p>
-    <table border=0>
-        <tr>
-            @*            <th>ID</th>*@
-            <th>Game Name</th>
-            <th>Game Code</th>
-            <th>Delete</th>
-            <th>Publish</th>
-        </tr>
 
-        @foreach (GameForEditor game in user.UserGames)
-        {
-            <tr>
-                <td>@game.GameFullName</td>
-                <td>@game.GameCode</td>
-                <td>
-                    <span>
-                        <GameCard GameFullName="@game.GameFullName" gameCode="@game.GameCode" GamePublishStatus="@game.PublishStatus" isCheckboxClicked="@(async () => await changePublish(game))" showMsg="(() => showMessage(game.GameFullName))" />
+    @foreach (GameForEditor game in user.UserGames)
+    {
+        
+        <span>
+            <GameCard GameFullName="@game.GameFullName" gameCode="@game.GameCode" GamePublishStatus="@game.PublishStatus" isCheckboxClicked="@(async () => await changePublish(game))" showMsg="(() => showMessage(game.GameFullName))" gameId="@game.ID" />
 
-                        @*<img src="/trash3.svg" alt="Icon" @onclick="(() => showMessage(game.GameFullName, true))" />*@
-                        @if (isClicked)
-                        {
+            @*<img src="/trash3.svg" alt="Icon" @onclick="(() => showMessage(game.GameFullName, true))" />*@
+            @if (isClicked)
+            {
+                <PopupComp Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" gameName="@gameNameToDelete" Text2="@deleteTextPopUp2" GameIdToDelete="@(async () => await DeleteGame(game))" ShowMsg="closedPopUp"></PopupComp>
 
-                            <PopupComp Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" gameName="@gameNameToDelete" Text2="@deleteTextPopUp2" GameIdToDelete="@(async () => await DeleteGame(game))" ShowMsg="closedPopUp"></PopupComp>
+            }
+        </span>
 
-
-                        }
-                    </span>
-                </td>
-                <td>
-                    @* @if (game.PublishStatus == "Not Eligible")
-                        {
-                            <input type="checkbox" disabled />
-                            @*<input type="button" value="Delete"  />*@
-                    @*<span><img src="/trash3.svg" alt="Icon" @onclick="(() =>DeleteGame(game))" /> </span>*@
-
-                    @* }
-                        else if (game.PublishStatus == "Eligible")
-                        {
-                            <input type="checkbox" @onchange="(()=> changePublish(game))" />
-                        }
-                        else
-                        {
-                            <input type="checkbox" checked @onchange="(()=> changePublish(game))" />
-                        }*@
-                </td>
-            </tr>
-
-        }
-    </table>
+    }
 }
 
 
@@ -157,7 +124,7 @@
             GameForEditor newGame = AddResopnse.Content.ReadFromJsonAsync<GameForEditor>
                 ().Result;
             user.UserGames.Add(newGame);
-            nav.NavigateTo("./EditGamePage/" + newGame.GameFullName + "/" + newGame.ID);
+            nav.NavigateTo("./EditGamePage/" + newGame.GameFullName + "/" + newGame.ID + "/" + false);
 
         }
         else
@@ -214,7 +181,6 @@
             {
                 user.UserGames[index].PublishStatus = "Eligible";
             }
-
         }
 
         else
@@ -235,7 +201,6 @@
                     msg = "You tried to update a game that is not associated with your user ";
                     break;
             }
-
         }
     }
 
@@ -271,11 +236,7 @@
                     msg = "The matches deleting process was failed ";
                     break;
 
-
             }
         }
-
-
     }
-
 }

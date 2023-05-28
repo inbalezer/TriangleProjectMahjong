@@ -68,6 +68,9 @@
     public int gameCode { get; set; }
 
     [Parameter]
+    public int gameId { get; set; }
+
+    [Parameter]
     public bool isClicked { get; set; }
 
     [Parameter]
@@ -93,9 +96,10 @@
 
     void updateNavigate()
     {
-        nav.NavigateTo("./EditGamePage/" + GameFullName + "/" + UserId);
+        //    nav.NavigateTo("./EditGamePage/" + GameFullName + "/" + UserId);
+        
+        nav.NavigateTo("./EditGamePage/" + GameFullName + "/" + gameId + "/" + true);
     }
-
 
 }
 

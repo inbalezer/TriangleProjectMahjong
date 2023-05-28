@@ -99,9 +99,6 @@ namespace TriangleProject.Server.Controllers
             {
                 if (userId == sessionId)
                 {
-
-
-
                     object newInstructionParam = new
                     {
                         ID = gameInstructionToInsert.ID,
@@ -146,22 +143,20 @@ namespace TriangleProject.Server.Controllers
 
                             }
                             return Ok("same name:" + gameInstructionToInsert.GameFullName + "," + gameInstructionToInsert.GameInstruction);
-
                         }
                         return BadRequest("Game not found");
-
-
                     }
-
                     return BadRequest("update Game Instruction failed");
                 }
-
                 return BadRequest("User Not Logged In");
             }
             return BadRequest("No Session");
         }
-
     }
+
+
+
+
 
 
 

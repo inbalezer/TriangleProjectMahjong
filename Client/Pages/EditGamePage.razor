@@ -1,4 +1,4 @@
-﻿@page "/EditGamePage/{GameFullName}/{newGameID:int}"
+﻿@page "/EditGamePage/{GameFullName}/{newGameID:int}/{updateMode:bool}"
 @using TriangleProject.Shared.Models.Editor
 @using TriangleProject.Shared.Models.Matches
 @using TriangleProject.Shared.Models.Portelem
@@ -15,11 +15,11 @@
     </tr>
     <tr>
         :שם המשחק
-        <input type="text" @bind="GameFullName" />
+        <input style="border:2px solid blue" type="text" @bind="GameFullName" />
     </tr>
     <tr>
         :הנחיית משחק לחצו והתאימו בין
-        <input type="text" @bind="GameInstruction" /> ורוקנו את הלוח
+        <input style="border:2px solid blue" type="text" @bind="fullGame.GameInstruction" /> ורוקנו את הלוח
     </tr>
 
 
@@ -27,7 +27,7 @@
 
 @*<input type="button" value="שמור" @onclick=Navigate />*@
 
-<MudButton value="שמור" @onclick=Navigate Color="Color.Primary">שמור</MudButton>
+<MudButton value="שמור" @onclick="(() => updateNameAndInstruction(gameWithInstruction))" Color="Color.Primary"> +שמור </MudButton>
 
 
 <table style="border:double">
@@ -104,17 +104,33 @@
 
     <input type="button" value="מחק תמונות נבחרות " @onclick="DeleteImage" />
 }
+
+@if (SettingMsg != "")
+{
+    <p>@SettingMsg</p>
+}
+
 <p>@msg</p>
 
+@if (fullGameMsg != "")
+{
+    <p>@fullGameMsg</p>
+}
 
+@if (updateMode)
+{
+    showFullGame(UserId,newGameID);
+}
 
 @code {
-
     [CascadingParameter]
     public int UserId { get; set; }
     string msg = "";
+    string SettingMsg = "";
+    string fullGameMsg = "";
     bool FirstIsText;
     bool SecondIsText;
+
 
 
     [Parameter]
@@ -123,11 +139,15 @@
     [Parameter]
     public int newGameID { get; set; }
 
+    [Parameter]
+    public bool updateMode { get; set; }
+
     //MatchToUpdate newMatch;
     //List<MatchToUpdate> allMatches;
 
     MatchToUpdate newMatch = new MatchToUpdate();
     gameInsrtuctionToInsert gameWithInstruction = new gameInsrtuctionToInsert();
+    GameToShow fullGame = new GameToShow();
     List<MatchToUpdate> allMatches = new List<MatchToUpdate>();
 
 
@@ -224,4 +244,82 @@
             msg = "בעיה במחיקה ";
         }
     }
+
+
+    protected async Task updateNameAndInstruction(gameInsrtuctionToInsert gameInsrtucToInsert)
+    {
+        gameInsrtucToInsert.ID = newGameID;
+        gameInsrtucToInsert.GameFullName = GameFullName;
+        gameInsrtucToInsert.GameInstruction = GameInstruction;
+
+        var userRes = await Http.PostAsJsonAsync("api/Matches/" + UserId + "/addInstruction", gameInsrtucToInsert);
+
+        if (userRes.IsSuccessStatusCode)
+        {
+            //משתנה שיפעיל אנימציה של וי 
+            SettingMsg = "קולולולו";
+        }
+
+        else
+        {
+            string error = userRes.Content.ReadAsStringAsync().Result;
+
+            switch (error)
+            {
+                case "No Session":
+                    SettingMsg = "Session error, please reload page";
+                    break;
+
+                case "User Not Logged In":
+                    SettingMsg = "You are not logged in, please reload page to try again";
+                    break;
+
+                case "It's Not Your Game":
+                    SettingMsg = "You tried to update a game that is not associated with your user ";
+                    break;
+
+                case "update Game Instruction failed":
+                    SettingMsg = " update Game Instruction failed";
+                    break;
+
+                case "update game name failed":
+                    SettingMsg = " update game name failed";
+                    break;
+            }
+        }
+
+    }
+
+    protected async Task showFullGame(int UserId, int newGameID)
+    {
+        var ShowGameRes = await Http.GetAsync("api/Matches/" + UserId + "/FullGameToEdit/" + newGameID);
+
+        if (ShowGameRes.IsSuccessStatusCode)
+        {
+
+            GameToShow gameFromDb = ShowGameRes.Content.ReadFromJsonAsync<GameToShow>().Result;
+            fullGame = gameFromDb;
+            
+        }
+        else
+        {
+            string error = ShowGameRes.Content.ReadAsStringAsync().Result;
+
+            switch (error)
+            {
+                case "No Session":
+                    msg = "Session error, please reload page";
+                    break;
+
+                case "User Not Logged In":
+                    msg = "You are not logged in, please reload page to try again";
+                    break;
+
+                case "Game not found":
+                    msg = "Game not found ";
+                    break;
+            }
+        }
+    }
 }
+

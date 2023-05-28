@@ -397,8 +397,8 @@ namespace TriangleProject.Server.Controllers
                         ID = GameId
                     };
 
-                    string GetGameQuery = "SELECT GameFullName, PublishStatus, GameInstruction FROM Games WHERE ID = @ID";
-                    string GetMatchesQuery = "SELECT FirstMatch, SecondMatch FROM Matches WHERE GameID = @ID";
+                    string GetGameQuery = "SELECT ID, GameFullName, PublishStatus, GameInstruction FROM Games WHERE ID = @ID";
+                    string GetMatchesQuery = "SELECT GameID, FirstMatch, SecondMatch FROM Matches WHERE GameID = @ID";
 
                     var recordGame = await _db.GetRecordsAsync<GameToShow>(GetGameQuery, param);
                     GameToShow game = recordGame.FirstOrDefault();

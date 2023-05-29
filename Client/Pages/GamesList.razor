@@ -29,13 +29,14 @@
 
         <span>
             <GameCard GameFullName="@game.GameFullName" gameCode="@game.GameCode" GamePublishStatus="@game.PublishStatus" isCheckboxClicked="@(async () => await changePublish(game))" showMsg="(() => showMessage(game.GameFullName))" gameId="@game.ID" />
-
+            <span> @game.ID </span>
             @*<img src="/trash3.svg" alt="Icon" @onclick="(() => showMessage(game.GameFullName, true))" />*@
             @if (isClicked)
             {
                 <PopupComp Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" gameName="@gameNameToDelete" Text2="@deleteTextPopUp2" GameIdToDelete="@(async () => await DeleteGame(game))" ShowMsg="closedPopUp"></PopupComp>
 
             }
+            <span> @game.ID </span>
         </span>
 
     }

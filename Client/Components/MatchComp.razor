@@ -1,0 +1,105 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@using TriangleProject.Shared.Models.Editor
+@using TriangleProject.Shared.Models.Matches
+@using TriangleProject.Shared.Models.Portelem
+@using TriangleProject.Client.Components
+
+@inject HttpClient Http
+@inject NavigationManager nav
+@inject NavigationManager Nav
+
+<div class="component">
+    <div class="container">
+        <div class="rectangle rectangle-1">
+            <div class="content">
+                <p>@matchText</p>
+            </div>
+            
+        </div>
+       
+        <div class="rectangle rectangle-2">
+            <div class="content">
+                <p>Y@matchText2</p>
+            </div>
+            
+        </div>
+        <div class="edit">
+            <img src="pencil-icon.png" alt="Edit" @onclick="editMatch" />
+        </div>
+        <div class="delete">
+            <img src="delete-icon-url" alt="Delete" @onclick="deleteMatch" />
+        </div>
+    </div>
+</div>
+
+<style>
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .rectangle {
+        width: 200px;
+        height: 100px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        margin: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .rectangle p {
+            text-align: center;
+            margin: 0;
+            padding: 10px;
+        }
+
+    .edit-button,
+    .delete-button {
+        width: 30px;
+        height: 30px;
+        background-color: #fff;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        margin: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .edit-button:hover,
+        .delete-button:hover {
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+</style>
+
+
+@code
+{
+    [Parameter]
+    public string matchText { get; set; }
+
+    [Parameter]
+    public string matchText2 { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> DeleteCallBack { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> EditMatchCallBack { get; set; }
+
+    void deleteMatch()
+    {
+        DeleteCallBack.InvokeAsync(true);
+    }
+
+    void editMatch()
+    {
+        EditMatchCallBack.InvokeAsync();
+    }
+    
+}

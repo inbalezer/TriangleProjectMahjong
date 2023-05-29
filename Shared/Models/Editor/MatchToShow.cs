@@ -8,6 +8,7 @@ namespace TriangleProject.Shared.Models.Editor
 {
     public class MatchToShow
     {
+        public int ID { get; set; }
         public int GameID { get; set; }
         public string FirstMatch { get; set; }
         public string SecondMatch { get; set; }

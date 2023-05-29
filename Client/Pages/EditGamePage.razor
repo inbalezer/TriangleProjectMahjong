@@ -2,6 +2,7 @@
 @using TriangleProject.Shared.Models.Editor
 @using TriangleProject.Shared.Models.Matches
 @using TriangleProject.Shared.Models.Portelem
+@using TriangleProject.Client.Components
 
 @inject HttpClient Http
 @inject NavigationManager Nav
@@ -36,7 +37,7 @@
     </tr>
     <tr>
         :התאמה ראשונה
-        <input type="text" @bind="newMatch.FirstMatch" />
+        <input style="border:2px solid blue" type="text" @bind="newMatch.FirstMatch" />
         @*<input type="checkbox" @onchange="(()=> isText($event.target.checked)) />
 
             <input type="checkbox" @onchange="(()=> "isText($event.target.checked)" />*@
@@ -44,7 +45,7 @@
     </tr>
     <tr>
         :התאמה שניה
-        <input type="text" @bind="newMatch.SecondMatch" /> ורוקנו את הלוח
+        <input style="border:2px solid blue" type="text" @bind="newMatch.SecondMatch" />
     </tr>
 
     @*    <input type="button" @onclick="(() =>AddMatch(UserId,newMatch))" />
@@ -56,6 +57,7 @@
     {
         @foreach (MatchToShow match in fullGame.MatchesList)
         {
+            <MatchComp matchText="@match.FirstMatch" matchText2="@match.SecondMatch" DeleteCallBack="@(async () => await DeleteMatchRow(match))"> </MatchComp>
             <p>@match.FirstMatch , @match.SecondMatch </p>
         }
     }
@@ -65,8 +67,10 @@
 @if (allMatches != null)
 {
     <ul>
+        
         @foreach (MatchToUpdate match in allMatches)
         {
+            
             <li>
                 @match.FirstMatch
             </li>
@@ -335,9 +339,37 @@
                     break;
             }
         }
-
     }
 
-    
+    protected async Task DeleteMatchRow(MatchToShow matchToDelete)
+    {
+        
+        var deleteMatchResponse = await Http.DeleteAsync("api/Matches/" + UserId + "/DeleteMatch" + "/" + matchToDelete.ID);
+        if (deleteMatchResponse.IsSuccessStatusCode)
+        {
+            fullGame.MatchesList.Remove(matchToDelete);
+        }
+
+        else
+        {
+            string error = deleteMatchResponse.Content.ReadAsStringAsync().Result;
+
+            switch (error)
+            {
+                case "No Session":
+                    msg = "Session error, please reload page";
+                    break;
+
+                case "User Not Logged In":
+                    msg = "You are not logged in, please reload page to try again";
+                    break;
+
+                case "Failed to delete match":
+                    msg = "Failed to delete match";
+                    break;             
+            }
+        }
+    }
+ 
 }
 

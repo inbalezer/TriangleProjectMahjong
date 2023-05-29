@@ -1,12 +1,14 @@
 ﻿<Properties StartupConfiguration="{C99128EA-5019-4208-90EE-04739CFCEEAD}|Default">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Client/Pages/GamesList.razor">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Client/Pages/EditGamePage.razor">
     <Files>
-      <File FileName="Client/Pages/GamesList.razor" Line="23" Column="1" />
+      <File FileName="Client/Pages/GamesList.razor" Line="209" Column="51" />
+      <File FileName="Client/Pages/EditGamePage.razor" Line="61" Column="9" />
+      <File FileName="Server/Controllers/GamesController.cs" Line="408" Column="83" />
+      <File FileName="Server/Controllers/MatchesController.cs" Line="29" Column="18" />
+      <File FileName="Shared/Models/Editor/GamePublish.cs" Line="9" Column="18" />
+      <File FileName="Client/Components/GameCard.razor" Line="89" Column="20" />
+      <File FileName="Shared/Models/Editor/UserWithGames.cs" Line="11" Column="36" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -32,6 +34,10 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.TriangleProject.Server PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
 </Properties>

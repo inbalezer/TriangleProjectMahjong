@@ -11,7 +11,7 @@
             <p>@Text2 </p>
 
             <div class="popup-buttons">
-                <button class="popup-button" style="background-color: red; color: white;" @onclick="()=> DeleteGameFromList                 (true)">מחק משחק</button>
+                <button class="popup-button" style="background-color: red; color: white;" @onclick="()=> DeleteGameFromList(true)">מחק משחק</button>
                 <button class="popup-button" style="background-color: white; color: red; border: 2px solid red;" @onclick="IsDeleteButtonClicked">בטל</button>
             </div>
         </div>
@@ -80,7 +80,7 @@
 
 @code {
 
-    
+
 
     [Parameter]
     public bool notDeleted { get; set; }

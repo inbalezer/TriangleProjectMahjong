@@ -58,19 +58,19 @@
         @foreach (MatchToShow match in fullGame.MatchesList)
         {
             <MatchComp matchText="@match.FirstMatch" matchText2="@match.SecondMatch" DeleteCallBack="@(async () => await DeleteMatchRow(match))"> </MatchComp>
-            <p>@match.FirstMatch , @match.SecondMatch </p>
-        }
-    }
+            @*<p>@match.FirstMatch , @match.SecondMatch </p>
+                }*@
+        }}
 </div>
 
 
 @if (allMatches != null)
 {
     <ul>
-        
+
         @foreach (MatchToUpdate match in allMatches)
         {
-            
+
             <li>
                 @match.FirstMatch
             </li>
@@ -132,10 +132,10 @@
     <p>@fullGameMsg</p>
 }
 @*
-@if (updateMode)
-{
-    showFullGame(UserId, newGameID);
-}*@
+    @if (updateMode)
+    {
+        showFullGame(UserId, newGameID);
+    }*@
 
 @code {
 
@@ -215,7 +215,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        
+
         var ShowGameRes = await Http.GetAsync("api/Games/" + UserId + "/FullGameToEdit/" + newGameID);
 
         if (ShowGameRes.IsSuccessStatusCode)
@@ -244,7 +244,7 @@
                     msg = "Game not found ";
                     break;
             }
-        }       
+        }
     }
 
 
@@ -343,7 +343,7 @@
 
     protected async Task DeleteMatchRow(MatchToShow matchToDelete)
     {
-        
+
         var deleteMatchResponse = await Http.DeleteAsync("api/Matches/" + UserId + "/DeleteMatch" + "/" + matchToDelete.ID);
         if (deleteMatchResponse.IsSuccessStatusCode)
         {
@@ -366,10 +366,10 @@
 
                 case "Failed to delete match":
                     msg = "Failed to delete match";
-                    break;             
+                    break;
             }
         }
     }
- 
+
 }
 

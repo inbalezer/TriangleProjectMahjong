@@ -6,8 +6,11 @@
 
 @inject HttpClient Http
 @inject NavigationManager Nav
+@inject NavigationManager nav
+
 
 <h3>EditGamePage</h3>
+<button style="background-color:blue" @onclick="showMessage">חזור</button>
 
 
 <table style="border:double">
@@ -125,17 +128,24 @@
     <p>@SettingMsg</p>
 }
 
+
+}
 <p>@msg</p>
 
 @if (fullGameMsg != "")
 {
     <p>@fullGameMsg</p>
 }
-@*
-    @if (updateMode)
-    {
-        showFullGame(UserId, newGameID);
-    }*@
+@if (isReturnClicked)
+{
+
+
+    <PopupComp Headline="@returnHeadLinePopUp" Text1="@returnTextPopUp1" GameIdToDelete="@(async () => await returnToHome(gameToReturn))" ShowMsg="closedReturnPopUp" actionButtonText="שמור וחזור ל״משחקים שלי״ " cancelButtonText="בטל"></PopupComp>
+
+}
+
+
+
 
 @code {
 
@@ -146,7 +156,13 @@
     string fullGameMsg = "";
     bool FirstIsText;
     bool SecondIsText;
-
+    bool isReturnClicked = false;
+    @*string msg = "";*@
+    string returnHeadLinePopUp = "חזור למסך ״המשחקים שלי?";
+    string returnTextPopUp1 = "אתה עומד לחזור למסך ״המשחקים שלי״.\nאם קיים זוג חדש שטרם שמרת, הוא לא ישמר. ";
+    GameToUpdate gameToReturn;
+    string gameNameToReturn = "";
+    GameForEditor game1;
 
 
     [Parameter]
@@ -173,6 +189,16 @@
         Nav.NavigateTo("./", true);
     }
 
+    void closedReturnPopUp()
+    {
+        isReturnClicked = false;
+    }
+
+    void showMessage()
+    {
+
+        isReturnClicked = true;
+    }
     //protected async Task AddMatch(int UserId, MatchToUpdate newMatch)
     //{
     //    var AddResopnse = await Http.GetAsync("api/Matches/" + UserId + "/AddMatch/" + newMatch);
@@ -370,6 +396,53 @@
             }
         }
     }
+
+    protected async Task returnToHome(GameToUpdate gameToReturn1)
+    {
+        gameToReturn1.ID = fullGame.ID;
+        gameToReturn1.GameFullName = fullGame.GameFullName;
+        gameToReturn1.GameInstruction = fullGame.GameInstruction;
+        gameToReturn1.PublishStatus = fullGame.PublishStatus;
+
+        var userRes = await Http.PostAsJsonAsync("api/Games/" + UserId + "/EditGame", gameToReturn1);
+
+        if (userRes.IsSuccessStatusCode)
+        {
+            //משתנה שיפעיל אנימציה של וי
+            SettingMsg = "dfklmhdgjnfgsdlkf";
+            nav.NavigateTo("./GamesList/");
+
+        }
+
+        else
+        {
+            string error = userRes.Content.ReadAsStringAsync().Result;
+
+            switch (error)
+            {
+                case "No Session":
+                    SettingMsg = "Session error, please reload page";
+                    break;
+
+                case "User Not Logged In":
+                    SettingMsg = "You are not logged in, please reload page to try again";
+                    break;
+
+                case "It's Not Your Game":
+                    SettingMsg = "You tried to update a game that is not associated with your user ";
+                    break;
+
+                case "update Game Instruction failed":
+                    SettingMsg = " update Game Instruction failed";
+                    break;
+
+                case "update game name failed":
+                    SettingMsg = " update game name failed";
+                    break;
+            }
+        }
+    }
+
 
 }
 

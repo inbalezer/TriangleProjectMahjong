@@ -13,7 +13,6 @@
 
 
 
-
 @if (user != null)
 {
 
@@ -35,7 +34,7 @@
             {
 
 
-                <PopupComp Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" gameName="@gameNameToDelete" Text2="@deleteTextPopUp2" GameIdToDelete="@(async () => await DeleteGame(game1))" ShowMsg="closedPopUp"></PopupComp>
+                <PopupComp Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" gameName="@gameNameToDelete" Text2="@deleteTextPopUp2" GameIdToDelete="@(async () => await DeleteGame(game1))" ShowMsg="closedPopUp" actionButtonText="מחק משחק" cancelButtonText="בטל"></PopupComp>
 
             }
             <span> @game.ID </span>

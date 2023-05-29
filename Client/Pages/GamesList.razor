@@ -26,7 +26,7 @@
 
     @foreach (GameForEditor game in user.UserGames)
     {
-        
+
         <span>
             <GameCard GameFullName="@game.GameFullName" gameCode="@game.GameCode" GamePublishStatus="@game.PublishStatus" isCheckboxClicked="@(async () => await changePublish(game))" showMsg="(() => showMessage(game.GameFullName))" gameId="@game.ID" />
 

@@ -19,7 +19,7 @@
     </tr>
     <tr>
         :הנחיית משחק לחצו והתאימו בין
-        <input style="border:2px solid blue" type="text" @bind="fullGame.GameInstruction" /> ורוקנו את הלוח
+        <input style="border:2px solid blue" type="text" @bind="GameInstruction" /> ורוקנו את הלוח
     </tr>
 
 
@@ -50,6 +50,18 @@
     @*    <input type="button" @onclick="(() =>AddMatch(UserId,newMatch))" />
     *@
 </table>
+
+<div>
+    @if (fullGame.MatchesList != null)
+    {
+        @foreach (MatchToShow match in fullGame.MatchesList)
+        {
+            @match;
+        }
+
+    }
+</div>
+
 
 @if (allMatches != null)
 {
@@ -119,7 +131,38 @@
 
 @if (updateMode)
 {
-    showFullGame(UserId,newGameID);
+    async Task showFullGame(int UserId, int newGameID)
+    {
+        var ShowGameRes = await Http.GetAsync("api/Games/" + UserId + "/FullGameToEdit/" + newGameID);
+
+        if (ShowGameRes.IsSuccessStatusCode)
+        {
+
+            fullGame = ShowGameRes.Content.ReadFromJsonAsync<GameToShow>().Result;
+            GameInstruction = fullGame.GameInstruction;
+            Console.WriteLine(fullGame.GameInstruction);
+
+        }
+        else
+        {
+            string error = ShowGameRes.Content.ReadAsStringAsync().Result;
+
+            switch (error)
+            {
+                case "No Session":
+                    msg = "Session error, please reload page";
+                    break;
+
+                case "User Not Logged In":
+                    msg = "You are not logged in, please reload page to try again";
+                    break;
+
+                case "Game not found":
+                    msg = "Game not found ";
+                    break;
+            }
+        }
+    }
 }
 
 @code {
@@ -256,7 +299,7 @@
 
         if (userRes.IsSuccessStatusCode)
         {
-            //משתנה שיפעיל אנימציה של וי 
+            //משתנה שיפעיל אנימציה של וי
             SettingMsg = "קולולולו";
         }
 
@@ -292,14 +335,15 @@
 
     protected async Task showFullGame(int UserId, int newGameID)
     {
-        var ShowGameRes = await Http.GetAsync("api/Matches/" + UserId + "/FullGameToEdit/" + newGameID);
+        var ShowGameRes = await Http.GetAsync("api/Games/" + UserId + "/FullGameToEdit/" + newGameID);
 
         if (ShowGameRes.IsSuccessStatusCode)
         {
 
-            GameToShow gameFromDb = ShowGameRes.Content.ReadFromJsonAsync<GameToShow>().Result;
-            fullGame = gameFromDb;
-            
+            fullGame = ShowGameRes.Content.ReadFromJsonAsync<GameToShow>().Result;
+            GameInstruction = fullGame.GameInstruction;
+            Console.WriteLine(fullGame.GameInstruction);
+
         }
         else
         {

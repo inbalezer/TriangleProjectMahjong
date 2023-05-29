@@ -1,4 +1,4 @@
-﻿@page "/EditGamePage/{GameFullName}/{newGameID:int}/{updateMode:bool}"
+﻿@page "/EditGamePage/{GameFullName}/{newGameID:int}"
 @using TriangleProject.Shared.Models.Editor
 @using TriangleProject.Shared.Models.Matches
 @using TriangleProject.Shared.Models.Portelem
@@ -56,9 +56,8 @@
     {
         @foreach (MatchToShow match in fullGame.MatchesList)
         {
-            @match;
+            <p>@match.FirstMatch , @match.SecondMatch </p>
         }
-
     }
 </div>
 
@@ -128,44 +127,14 @@
 {
     <p>@fullGameMsg</p>
 }
-
+@*
 @if (updateMode)
 {
-    async Task showFullGame(int UserId, int newGameID)
-    {
-        var ShowGameRes = await Http.GetAsync("api/Games/" + UserId + "/FullGameToEdit/" + newGameID);
-
-        if (ShowGameRes.IsSuccessStatusCode)
-        {
-
-            fullGame = ShowGameRes.Content.ReadFromJsonAsync<GameToShow>().Result;
-            GameInstruction = fullGame.GameInstruction;
-            Console.WriteLine(fullGame.GameInstruction);
-
-        }
-        else
-        {
-            string error = ShowGameRes.Content.ReadAsStringAsync().Result;
-
-            switch (error)
-            {
-                case "No Session":
-                    msg = "Session error, please reload page";
-                    break;
-
-                case "User Not Logged In":
-                    msg = "You are not logged in, please reload page to try again";
-                    break;
-
-                case "Game not found":
-                    msg = "Game not found ";
-                    break;
-            }
-        }
-    }
-}
+    showFullGame(UserId, newGameID);
+}*@
 
 @code {
+
     [CascadingParameter]
     public int UserId { get; set; }
     string msg = "";
@@ -238,6 +207,42 @@
 
     string myFileImage = "";
     long maxFileSize = 4194304;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        
+        var ShowGameRes = await Http.GetAsync("api/Games/" + UserId + "/FullGameToEdit/" + newGameID);
+
+        if (ShowGameRes.IsSuccessStatusCode)
+        {
+
+            fullGame = ShowGameRes.Content.ReadFromJsonAsync<GameToShow>().Result;
+            GameInstruction = fullGame.GameInstruction;
+            Console.WriteLine(fullGame.GameInstruction);
+
+        }
+        else
+        {
+            string error = ShowGameRes.Content.ReadAsStringAsync().Result;
+
+            switch (error)
+            {
+                case "No Session":
+                    msg = "Session error, please reload page";
+                    break;
+
+                case "User Not Logged In":
+                    msg = "You are not logged in, please reload page to try again";
+                    break;
+
+                case "Game not found":
+                    msg = "Game not found ";
+                    break;
+            }
+        }       
+    }
+
 
     private async Task UploadFile(InputFileChangeEventArgs e)
     {
@@ -333,37 +338,6 @@
 
     }
 
-    protected async Task showFullGame(int UserId, int newGameID)
-    {
-        var ShowGameRes = await Http.GetAsync("api/Games/" + UserId + "/FullGameToEdit/" + newGameID);
-
-        if (ShowGameRes.IsSuccessStatusCode)
-        {
-
-            fullGame = ShowGameRes.Content.ReadFromJsonAsync<GameToShow>().Result;
-            GameInstruction = fullGame.GameInstruction;
-            Console.WriteLine(fullGame.GameInstruction);
-
-        }
-        else
-        {
-            string error = ShowGameRes.Content.ReadAsStringAsync().Result;
-
-            switch (error)
-            {
-                case "No Session":
-                    msg = "Session error, please reload page";
-                    break;
-
-                case "User Not Logged In":
-                    msg = "You are not logged in, please reload page to try again";
-                    break;
-
-                case "Game not found":
-                    msg = "Game not found ";
-                    break;
-            }
-        }
-    }
+    
 }
 

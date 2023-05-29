@@ -124,7 +124,7 @@
             GameForEditor newGame = AddResopnse.Content.ReadFromJsonAsync<GameForEditor>
                 ().Result;
             user.UserGames.Add(newGame);
-            nav.NavigateTo("./EditGamePage/" + newGame.GameFullName + "/" + newGame.ID + "/" + false);
+            nav.NavigateTo("./EditGamePage/" + newGame.GameFullName + "/" + newGame.ID);
 
         }
         else

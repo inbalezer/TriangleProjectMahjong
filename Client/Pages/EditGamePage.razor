@@ -3,6 +3,7 @@
 @using TriangleProject.Shared.Models.Matches
 @using TriangleProject.Shared.Models.Portelem
 @using TriangleProject.Client.Components
+@using System.ComponentModel.DataAnnotations;
 
 @inject HttpClient Http
 @inject NavigationManager Nav
@@ -34,26 +35,60 @@
 <MudButton value="שמור" @onclick="(() => updateNameAndInstruction(gameWithInstruction))" Color="Color.Primary"> +שמור </MudButton>
 
 
-<table style="border:double">
-    <tr>
-        <th>הוספת זוגות</th>
-    </tr>
-    <tr>
-        :התאמה ראשונה
-        <input style="border:2px solid blue" type="text" @bind="newMatch.FirstMatch" />
-        @*<input type="checkbox" @onchange="(()=> isText($event.target.checked)) />
 
-            <input type="checkbox" @onchange="(()=> "isText($event.target.checked)" />*@
+        <p>הוספת זוגות</p>
+  
+    <EditForm Model="newMatch" OnValidSubmit="(() =>AddMatch(UserId,newMatch))">
+        <DataAnnotationsValidator />
 
-    </tr>
-    <tr>
-        :התאמה שניה
-        <input style="border:2px solid blue" type="text" @bind="newMatch.SecondMatch" />
-    </tr>
+    <p>:התאמה ראשונה</p>
+        <InputCheckbox style="background-color:aquamarine" @bind-Value="newMatch.FirstIsText" />
 
-    @*    <input type="button" @onclick="(() =>AddMatch(UserId,newMatch))" />
-    *@
-</table>
+    @if (!newMatch.FirstIsText)
+         {             
+            <input style="border:2px solid blue" type="text" @bind="newMatch.FirstMatch" />
+
+         }
+         else
+         {
+             newMatch.FirstMatch = myFileImage;
+            <label for="FileInֵputID"> העלה תמונה</label>
+            <InputFile id="FileInֵputID" OnChange="UploadFile" hidden></InputFile>
+        <br />
+         }
+       
+        
+    
+
+        <p>:התאמה שניה</p>
+    <InputCheckbox style="background-color:aquamarine" @bind-Value="newMatch.SecondIsText" />
+
+    @if(!newMatch.SecondIsText)
+        {
+             newMatch.SecondMatch = myFileImage;
+            <label for="FileInֵputID"> העלה תמונה</label>
+            <InputFile id="FileInֵputID" OnChange="UploadFile" hidden></InputFile>
+            <br />
+        }
+        else
+        {
+            <input style="border:2px solid blue" type="text" @bind="newMatch.SecondMatch" />
+        }
+
+
+        <input type="submit" value="שמור זוג" @onclick="(() =>AddMatch(UserId,newMatch))" />
+        
+
+    </EditForm>
+
+
+
+
+    
+
+
+    
+
 
 <div>
     @if (fullGame.MatchesList != null)
@@ -67,35 +102,12 @@
 </div>
 
 
-@if (allMatches != null)
-{
-    <ul>
-
-        @foreach (MatchToUpdate match in allMatches)
-        {
-
-            <li>
-                @match.FirstMatch
-            </li>
-
-            <li>
-                @match.SecondMatch
-            </li>
-        }
-    </ul>
-}
-
-
 @if (msg != "")
 {
     <p>@msg</p>
     <input type="button" value="reload" @onclick=Navigate />
 }
 
-
-<label for="FileInֵputID"> בחר תמונה </label>
-<InputFile id="FileInputID" OnChange="UploadFile" hidden />
-<br />
 
 @if (myFileImage != "")
 {
@@ -144,24 +156,10 @@
 
 
 
-
 @code {
 
     [CascadingParameter]
     public int UserId { get; set; }
-    string msg = "";
-    string SettingMsg = "";
-    string fullGameMsg = "";
-    bool FirstIsText;
-    bool SecondIsText;
-    bool isReturnClicked = false;
-    @*string msg = "";*@
-    string returnHeadLinePopUp = "חזור למסך ״המשחקים שלי?";
-    string returnTextPopUp1 = "אתה עומד לחזור למסך ״המשחקים שלי״.\nאם קיים זוג חדש שטרם שמרת, הוא לא ישמר. ";
-
-    string gameNameToReturn = "";
-
-
 
     [Parameter]
     public string GameFullName { get; set; }
@@ -172,6 +170,22 @@
     [Parameter]
     public bool updateMode { get; set; }
 
+    string msg = "";
+    string SettingMsg = "";
+    string fullGameMsg = "";
+    bool FirstIsText;
+    bool SecondIsText;
+    bool isReturnClicked = false;
+    bool textChanged = false;
+    bool text2Changed = false;
+    @*string msg = "";*@
+    string returnHeadLinePopUp = "חזור למסך ״המשחקים שלי?";
+    string returnTextPopUp1 = "אתה עומד לחזור למסך ״המשחקים שלי״.\nאם קיים זוג חדש שטרם שמרת, הוא לא ישמר. ";
+    string gameNameToReturn = "";
+    string myFileImage = "";
+    long maxFileSize = 4194304;
+
+
     //MatchToUpdate newMatch;
     //List<MatchToUpdate> allMatches;
 
@@ -180,7 +194,7 @@
     GameToShow fullGame = new GameToShow();
     //GameToUpdate gameToReturn1;
     GameForEditor game1;
-    List<MatchToUpdate> allMatches = new List<MatchToUpdate>();
+    //List<MatchToUpdate> allMatches = new List<MatchToUpdate>();
 
 
 
@@ -201,44 +215,43 @@
     }
 
 
-    //protected async Task AddMatch(int UserId, MatchToUpdate newMatch)
-    //{
-    //    var AddResopnse = await Http.GetAsync("api/Matches/" + UserId + "/AddMatch/" + newMatch);
+    protected async Task AddMatch(int UserId, MatchToUpdate newMatch)
+    {
+        newMatch.GameID = newGameID;
 
-    //    if (AddResopnse.IsSuccessStatusCode)
-    //    {
-    //        MatchToUpdate match = AddResopnse.Content.ReadFromJsonAsync<MatchToUpdate>().Result;
-    //        allMatches.Add(match);
+        var AddMatch = await Http.PostAsJsonAsync("api/Matches/" + UserId + "/AddMatch", newMatch);
 
-    //    }
-    //    else
-    //    {
-    //        string error = AddResopnse.Content.ReadAsStringAsync().Result;
+        if (AddMatch.IsSuccessStatusCode)
+        {
+            MatchToShow match1 = AddMatch.Content.ReadFromJsonAsync<MatchToShow>().Result;
+            fullGame.MatchesList.Add(match1);
 
-    //        switch (error)
-    //        {
-    //            case "No Session":
-    //                msg = "Session error, please reload page";
-    //                break;
+        }
+        else
+        {
+            string error = AddMatch.Content.ReadAsStringAsync().Result;
 
-    //            case "User Not Logged In":
-    //                msg = "You are not logged in, please reload page to try again";
-    //                break;
+            switch (error)
+            {
+                case "No Session":
+                    msg = "Session error, please reload page";
+                    break;
 
-    //            case "User Not Found":
-    //                msg = "You tried to update a game that is not associated with your user ";
-    //                break;
+                case "User Not Logged In":
+                    msg = "You are not logged in, please reload page to try again";
+                    break;
 
-    //            case "Game not created":
-    //                msg = "The game you have tried to create, faild.";
-    //                break;
-    //        }
-    //    }
-    //}
+                case "User Not Found":
+                    msg = "You tried to update a game that is not associated with your user ";
+                    break;
 
+                case "Game not created":
+                    msg = "The game you have tried to create, faild.";
+                    break;
+            }
+        }
+    }
 
-    string myFileImage = "";
-    long maxFileSize = 4194304;
 
 
     protected override async Task OnInitializedAsync()
@@ -288,7 +301,7 @@
                 var imageBase64 = Convert.ToBase64String(buffer);
                 var saveResponse = await Http.PostAsJsonAsync("api/Media/upload", imageBase64);
 
-                if (saveResponse.IsSuccessStatusCode == true)
+                if (saveResponse.IsSuccessStatusCode)
                 {
                     string resizeUrl = saveResponse.Content.ReadAsStringAsync().Result;
 

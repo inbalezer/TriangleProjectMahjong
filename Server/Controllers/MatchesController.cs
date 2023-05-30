@@ -68,7 +68,7 @@ namespace TriangleProject.Server.Controllers
 
         //aaaaaaaaaaaaaaaa
 
-        [HttpGet("addMatch")]
+        [HttpPost("addMatch")]
         public async Task<IActionResult> AddMatch(int userId, MatchToUpdate matchToInsert)
         {
             int? sessionId = HttpContext.Session.GetInt32("userId");
@@ -81,7 +81,22 @@ namespace TriangleProject.Server.Controllers
 
                     if (newMatchId != 0)
                     {
-                        return Ok(newMatchId);
+                        object param = new
+                        {
+                            ID = newMatchId,
+                           GameID = matchToInsert.GameID
+                        };
+
+                        string GetMatchesQuery = "SELECT ID, GameID, FirstMatch, SecondMatch FROM Matches WHERE ID = @ID AND GameID = @GameID";
+                        var recordsMatches = await _db.GetRecordsAsync<MatchToShow>(GetMatchesQuery, param);
+                        MatchToShow match = recordsMatches.FirstOrDefault();
+
+                        if (match != null)
+                        {
+                            return Ok(match);
+                        }
+                        return BadRequest("Match not found");
+
                     }
 
                     return BadRequest("Match not created");
@@ -90,6 +105,8 @@ namespace TriangleProject.Server.Controllers
             }
             return BadRequest("No Session");
         }
+
+
 
         [HttpPost("addInstruction")]
         public async Task<IActionResult> AddInstruction(int userId, gameInsrtuctionToInsert gameInstructionToInsert)

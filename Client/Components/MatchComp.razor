@@ -13,6 +13,7 @@
         <div class="rectangle rectangle-1">
             <div class="content">
                 <p>@matchText</p>
+                <img src="@uploadedImg" />
             </div>
             
         </div>
@@ -20,6 +21,7 @@
         <div class="rectangle rectangle-2">
             <div class="content">
                 <p>@matchText2</p>
+                <img src="@uploadedImg2" />
             </div>
             
         </div>
@@ -78,16 +80,28 @@
 </style>
 
 
+
+
 @code
 {
     [Parameter]
     public string matchText { get; set; }
 
     [Parameter]
+    public string uploadedImg { get; set; }
+
+    [Parameter]
+    public string uploadedImg2 { get; set; }
+
+    [Parameter]
     public string matchText2 { get; set; }
 
     [Parameter]
     public EventCallback<bool> DeleteCallBack { get; set; }
+
+    //[Parameter]
+    //public EventCallback<bool> ShowImageCallBack { get; set; }
+
 
     [Parameter]
     public EventCallback<bool> EditMatchCallBack { get; set; }
@@ -101,5 +115,10 @@
     {
         EditMatchCallBack.InvokeAsync();
     }
+
+    //void imageToShow()
+    //{
+    //    ShowImageCallBack.InvokeAsync(true);
+    //}
     
 }

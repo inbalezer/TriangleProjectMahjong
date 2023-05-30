@@ -42,52 +42,45 @@
         <DataAnnotationsValidator />
 
     <p>:התאמה ראשונה</p>
-        <InputCheckbox style="background-color:aquamarine" @bind-Value="newMatch.FirstIsText" />
+    <InputCheckbox style="background-color:aquamarine" @bind-Value="textChanged" />
 
-    @if (!newMatch.FirstIsText)
-         {             
+    @if (!textChanged)
+         {
+            newMatch.FirstIsText = true;
             <input style="border:2px solid blue" type="text" @bind="newMatch.FirstMatch" />
 
          }
          else
          {
+            newMatch.FirstIsText = false;
              newMatch.FirstMatch = myFileImage;
             <label for="FileInֵputID"> העלה תמונה</label>
             <InputFile id="FileInֵputID" OnChange="UploadFile" hidden></InputFile>
         <br />
          }
-       
-        
-    
 
         <p>:התאמה שניה</p>
-    <InputCheckbox style="background-color:aquamarine" @bind-Value="newMatch.SecondIsText" />
+    <InputCheckbox style="background-color:aquamarine" @bind-Value="text2Changed" />
 
-    @if(!newMatch.SecondIsText)
+    @if (!text2Changed)
         {
-             newMatch.SecondMatch = myFileImage;
+            newMatch.SecondIsText = false;
+            newMatch.SecondMatch = myFileImage;
             <label for="FileInֵputID"> העלה תמונה</label>
             <InputFile id="FileInֵputID" OnChange="UploadFile" hidden></InputFile>
             <br />
         }
         else
         {
+            newMatch.SecondIsText = true;
             <input style="border:2px solid blue" type="text" @bind="newMatch.SecondMatch" />
         }
 
 
-        <input type="submit" value="שמור זוג" @onclick="(() =>AddMatch(UserId,newMatch))" />
+        <input type="submit" value="שמור זוג" />
         
 
     </EditForm>
-
-
-
-
-    
-
-
-    
 
 
 <div>
@@ -95,7 +88,25 @@
     {
         @foreach (MatchToShow match in fullGame.MatchesList)
         {
-            <MatchComp matchText="@match.FirstMatch" matchText2="@match.SecondMatch" DeleteCallBack="@(async () => await DeleteMatchRow(match))"> </MatchComp>
+
+            if (newMatch.FirstIsText)
+            {
+                match.FirstMatch = myFileImage;
+                <MatchComp matchText2="@match.SecondMatch" uploadedImg="@match.FirstMatch" DeleteCallBack="@(async () => await DeleteMatchRow(match))"> </MatchComp>
+            }
+            else
+            {
+                <MatchComp matchText="@match.FirstMatch"  DeleteCallBack="@(async () => await DeleteMatchRow(match))"> </MatchComp>
+            }
+
+            if (newMatch.SecondIsText)
+            {
+                match.SecondMatch = myFileImage;
+                <MatchComp matchText2="@match.SecondMatch" uploadedImg="@match.FirstMatch" DeleteCallBack="@(async () => await DeleteMatchRow(match))"> </MatchComp>
+            }
+                <MatchComp matchText="@match.FirstMatch" matchText2="@match.SecondMatch" uploadedImg="@myFileImage" uploadedImg2="@myFileImage" DeleteCallBack="@(async () => await DeleteMatchRow(match))"> </MatchComp>
+            }
+            
             @*<p>@match.FirstMatch , @match.SecondMatch </p>
                 }*@
         }}
@@ -107,13 +118,6 @@
     <p>@msg</p>
     <input type="button" value="reload" @onclick=Navigate />
 }
-
-
-@if (myFileImage != "")
-{
-    <img src="@myFileImage" width="150" />
-}
-
 
 @if (myFileImage != "")
 {
@@ -178,6 +182,7 @@
     bool isReturnClicked = false;
     bool textChanged = false;
     bool text2Changed = false;
+    bool showImg = false;
     @*string msg = "";*@
     string returnHeadLinePopUp = "חזור למסך ״המשחקים שלי?";
     string returnTextPopUp1 = "אתה עומד לחזור למסך ״המשחקים שלי״.\nאם קיים זוג חדש שטרם שמרת, הוא לא ישמר. ";

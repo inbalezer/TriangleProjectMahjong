@@ -10,7 +10,7 @@
 
 
 <h3>EditGamePage</h3>
-<button style="background-color:blue" @onclick="showMessage">חזור</button>
+<button style="background-color:pink" @onclick="showMessage">חזור</button>
 
 
 <table style="border:double">
@@ -138,9 +138,7 @@
 }
 @if (isReturnClicked)
 {
-
-
-    <PopupComp Headline="@returnHeadLinePopUp" Text1="@returnTextPopUp1" GameIdToDelete="@(async () => await returnToHome(gameToReturn))" ShowMsg="closedReturnPopUp" actionButtonText="שמור וחזור ל״משחקים שלי״ " cancelButtonText="בטל"></PopupComp>
+    <PopupComp Headline="@returnHeadLinePopUp" Text1="@returnTextPopUp1" GameIdToDelete="@(async () => await returnToHome())" ShowMsg="closedReturnPopUp" actionButtonText="שמור וחזור ל״משחקים שלי״ " cancelButtonText="בטל"></PopupComp>
 
 }
 
@@ -160,9 +158,9 @@
     @*string msg = "";*@
     string returnHeadLinePopUp = "חזור למסך ״המשחקים שלי?";
     string returnTextPopUp1 = "אתה עומד לחזור למסך ״המשחקים שלי״.\nאם קיים זוג חדש שטרם שמרת, הוא לא ישמר. ";
-    GameToUpdate gameToReturn;
+
     string gameNameToReturn = "";
-    GameForEditor game1;
+
 
 
     [Parameter]
@@ -180,7 +178,10 @@
     MatchToUpdate newMatch = new MatchToUpdate();
     gameInsrtuctionToInsert gameWithInstruction = new gameInsrtuctionToInsert();
     GameToShow fullGame = new GameToShow();
+    //GameToUpdate gameToReturn1;
+    GameForEditor game1;
     List<MatchToUpdate> allMatches = new List<MatchToUpdate>();
+
 
 
     string GameInstruction = "";
@@ -196,9 +197,10 @@
 
     void showMessage()
     {
-
         isReturnClicked = true;
     }
+
+
     //protected async Task AddMatch(int UserId, MatchToUpdate newMatch)
     //{
     //    var AddResopnse = await Http.GetAsync("api/Matches/" + UserId + "/AddMatch/" + newMatch);
@@ -397,16 +399,18 @@
         }
     }
 
-    protected async Task returnToHome(GameToUpdate gameToReturn1)
+    protected async Task returnToHome()
     {
+        GameToUpdate gameToReturn1 = new GameToUpdate();
         gameToReturn1.ID = fullGame.ID;
-        gameToReturn1.GameFullName = fullGame.GameFullName;
-        gameToReturn1.GameInstruction = fullGame.GameInstruction;
+        gameToReturn1.GameFullName = GameFullName;
         gameToReturn1.PublishStatus = fullGame.PublishStatus;
+        gameToReturn1.GameInstruction = GameInstruction;
 
-        var userRes = await Http.PostAsJsonAsync("api/Games/" + UserId + "/EditGame", gameToReturn1);
 
-        if (userRes.IsSuccessStatusCode)
+        var userResRETURN = await Http.PostAsJsonAsync("api/Games/" + UserId + "/EditGame", gameToReturn1);
+
+        if (userResRETURN.IsSuccessStatusCode)
         {
             //משתנה שיפעיל אנימציה של וי
             SettingMsg = "dfklmhdgjnfgsdlkf";
@@ -416,7 +420,7 @@
 
         else
         {
-            string error = userRes.Content.ReadAsStringAsync().Result;
+            string error = userResRETURN.Content.ReadAsStringAsync().Result;
 
             switch (error)
             {
@@ -428,17 +432,11 @@
                     SettingMsg = "You are not logged in, please reload page to try again";
                     break;
 
-                case "It's Not Your Game":
+                case "update game faild":
                     SettingMsg = "You tried to update a game that is not associated with your user ";
                     break;
 
-                case "update Game Instruction failed":
-                    SettingMsg = " update Game Instruction failed";
-                    break;
-
-                case "update game name failed":
-                    SettingMsg = " update game name failed";
-                    break;
+               
             }
         }
     }

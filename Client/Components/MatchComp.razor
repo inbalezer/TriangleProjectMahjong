@@ -12,13 +12,12 @@
     <div class="container">
         <div class="rectangle rectangle-1">
             <div class="content">
-                @if (matchText.Contains("uploadedFiles/"))
+                @if (@matchText.Contains("uploadedFiles/"))
                 {
                     <img src="@matchText" width="75" />
                 }
                 else
                 {
-                    
                     <p>@matchText</p>
 
                 }

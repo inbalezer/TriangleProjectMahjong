@@ -42,7 +42,7 @@
     <DataAnnotationsValidator />
 
     <p>:התאמה ראשונה</p>
-    <InputCheckbox style="background-color:aquamarine" @bind-Value="textChanged" />
+    <InputCheckbox style="background-color:aquamarine" @bind-Value="textChanged"/>
 
     @if (!textChanged)
     {
@@ -54,8 +54,8 @@
     {
         newMatch.FirstIsText = false;
         newMatch.FirstMatch = myFileImage;
-        <label for="FileInֵputID"> העלה תמונה</label>
-        <InputFile id="FileInֵputID" OnChange="UploadFile" hidden></InputFile>
+        <label for="FileInֵputID1"> העלה תמונה</label>
+        <InputFile id="FileInֵputID" OnChange="(e) => UploadFile(e, "first")" hidden></InputFile>
         <br />
         @if (myFileImage != "")
         {
@@ -70,13 +70,13 @@
     @if (!text2Changed)
     {
         newMatch.SecondIsText = false;
-        newMatch.SecondMatch = myFileImage;
+        newMatch.SecondMatch = myFileImage2;
         <label for="FileInֵputID"> העלה תמונה</label>
-        <InputFile id="FileInֵputID" OnChange="UploadFile" hidden></InputFile>
+        <InputFile id="FileInֵputID" OnChange="(e) => UploadFile(e, second)" hidden></InputFile>
         <br />
-        @if (myFileImage != "")
+        @if (myFileImage2 != "")
         {
-            <img src="@myFileImage" width="150" />
+            <img src="@myFileImage2" width="150" />
             @*<input type="button" value="העבר למחיקה " @onclick="MakeDeleteList" />*@
         }
     }
@@ -179,6 +179,7 @@
     string returnTextPopUp1 = "אתה עומד לחזור למסך ״המשחקים שלי״.\nאם קיים זוג חדש שטרם שמרת, הוא לא ישמר. ";
     string gameNameToReturn = "";
     string myFileImage = "";
+    string myFileImage2 = "";
     string GameInstruction = "";
     @*string msg = "";*@
     bool FirstIsText;
@@ -187,6 +188,8 @@
     bool textChanged = false;
     bool text2Changed = false;
     bool showImg = false;
+    //string firstMatchImage = "";
+    //string secondMatchImage = "";   
     long maxFileSize = 4194304;
 
 
@@ -229,6 +232,8 @@
             MatchToShow match1 = AddMatch.Content.ReadFromJsonAsync<MatchToShow>().Result;
             fullGame.MatchesList.Add(match1);
 
+            newMatch.FirstMatch = "";
+            newMatch.SecondMatch = "";
         }
         else
         {
@@ -292,9 +297,10 @@
     }
 
 
-    private async Task UploadFile(InputFileChangeEventArgs e)
+    private async Task UploadFile(InputFileChangeEventArgs e, string MatchImage)
     {
-        var imageFiles = e.GetMultipleFiles();
+        var imageFiles = e.GetMultipleFiles();        
+
         foreach (var file in imageFiles)
         {
             if (file.Size <= maxFileSize)
@@ -308,7 +314,16 @@
                 {
                     string resizeUrl = saveResponse.Content.ReadAsStringAsync().Result;
 
-                    myFileImage = "uploadedFiles/" + resizeUrl;
+                    if (MatchImage == "first")
+                    {
+                        myFileImage = "uploadedFiles/" + resizeUrl;
+                    }
+                    
+                    if (MatchImage == "second")
+                    {
+                        myFileImage2 = "uploadedFiles/" + resizeUrl;                       
+                    }
+                    
                 }
             }
             else

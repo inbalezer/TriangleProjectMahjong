@@ -46,6 +46,7 @@
 
     @if (!textChanged)
     {
+        newMatch.FirstMatch = "";
         newMatch.FirstIsText = true;
         <input style="border:2px solid blue" type="text" @bind="newMatch.FirstMatch" />
 
@@ -53,13 +54,13 @@
     else
     {
         newMatch.FirstIsText = false;
-        newMatch.FirstMatch = myFileImage;
+        newMatch.FirstMatch = myFileImage1;
         <label for="FileInֵputID"> העלה תמונה</label>
-        <InputFile id="FileInֵputID" OnChange="UploadFile" hidden></InputFile>
+        <InputFile id="FileInputID" OnChange="((e) => UploadFile(e, true))" style=""></InputFile>
         <br />
-        @if (myFileImage != "")
+        @if (myFileImage1 != "")
         {
-            <img src="@myFileImage" width="150" />
+            <img src="@myFileImage1" width="150" />
             @*<input type="button" value="העבר למחיקה " @onclick="MakeDeleteList" />*@
         }
     }
@@ -70,18 +71,19 @@
     @if (!text2Changed)
     {
         newMatch.SecondIsText = false;
-        newMatch.SecondMatch = myFileImage;
+        newMatch.SecondMatch = myFileImage2;
         <label for="FileInֵputID"> העלה תמונה</label>
-        <InputFile id="FileInֵputID" OnChange="UploadFile" hidden></InputFile>
+        <InputFile id="FileInputID" OnChange="((e) => UploadFile(e, false))"></InputFile>
         <br />
-        @if (myFileImage != "")
+        @if (myFileImage2 != "")
         {
-            <img src="@myFileImage" width="150" />
+            <img src="@myFileImage2" width="150" />
             @*<input type="button" value="העבר למחיקה " @onclick="MakeDeleteList" />*@
         }
     }
     else
     {
+        newMatch.SecondMatch = "";
         newMatch.SecondIsText = true;
         <input style="border:2px solid blue" type="text" @bind="newMatch.SecondMatch" />
     }
@@ -179,6 +181,8 @@
     string returnTextPopUp1 = "אתה עומד לחזור למסך ״המשחקים שלי״.\nאם קיים זוג חדש שטרם שמרת, הוא לא ישמר. ";
     string gameNameToReturn = "";
     string myFileImage = "";
+    string myFileImage1 = "";
+    string myFileImage2 = "";
     string GameInstruction = "";
     @*string msg = "";*@
     bool FirstIsText;
@@ -292,7 +296,7 @@
     }
 
 
-    private async Task UploadFile(InputFileChangeEventArgs e)
+    private async Task UploadFile(InputFileChangeEventArgs e, bool isFirstImg)
     {
         var imageFiles = e.GetMultipleFiles();
         foreach (var file in imageFiles)
@@ -308,7 +312,16 @@
                 {
                     string resizeUrl = saveResponse.Content.ReadAsStringAsync().Result;
 
-                    myFileImage = "uploadedFiles/" + resizeUrl;
+                    if (isFirstImg)
+                    {
+                        myFileImage1 = "uploadedFiles/" + resizeUrl;
+                    }
+                    else
+                    {
+                        myFileImage2 = "uploadedFiles/" + resizeUrl;
+
+                    }
+                    @*myFileImage = "uploadedFiles/" + resizeUrl;*@
                 }
             }
             else

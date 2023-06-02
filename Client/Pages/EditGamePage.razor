@@ -46,27 +46,38 @@
 
     @if (!textChanged)
     {
-        currentValue = newMatch.FirstMatch;
+        if (editMatch.FirstMatch == "")
 
-        if (newMatch.FirstMatch != null)
         {
-            if (newMatch.FirstMatch.Contains("uploadedFiles/"))
-            {
-                newMatch.FirstMatch = "";
-                Console.WriteLine("empty");
+            currentValue = newMatch.FirstMatch;
 
-            }
-            else
+            if (newMatch.FirstMatch != null)
             {
-                newMatch.FirstMatch = currentValue;
-                Console.WriteLine(newMatch.FirstMatch + "im in the stupid else");
+                if (newMatch.FirstMatch.Contains("uploadedFiles/"))
+                {
+                    newMatch.FirstMatch = "";
+                    Console.WriteLine("empty");
 
+                }
+                else
+                {
+                    newMatch.FirstMatch = currentValue;
+                    Console.WriteLine(newMatch.FirstMatch + "im in the stupid else");
+
+                }
             }
+
+            @*newMatch.FirstMatch = "";*@
+
+            newMatch.FirstIsText = true;
+            <input style="border:2px solid blue" type="text" @bind="newMatch.FirstMatch" />
         }
 
-        @*newMatch.FirstMatch = "";*@
-        newMatch.FirstIsText = true;
-        <input style="border:2px solid blue" type="text" @bind="newMatch.FirstMatch" />
+        else
+        {
+            <input style="border:2px solid blue" type="text" @bind="editMatch.FirstMatch" />
+        }
+
 
     }
     else
@@ -113,27 +124,36 @@
         currentValue2 = newMatch.SecondMatch;
         newMatch.SecondIsText = true;
 
-
-        if (currentValue2 != null)
+        if (editMatch.SecondMatch == "")
         {
-            if (!currentValue2.Contains("uploadedFiles/"))
+            if (currentValue2 != null)
             {
-                newMatch.SecondMatch = currentValue2;
-                Console.WriteLine(newMatch.SecondMatch + "im in the stupid else");
+                if (!currentValue2.Contains("uploadedFiles/"))
+                {
+                    newMatch.SecondMatch = currentValue2;
+                    Console.WriteLine(newMatch.SecondMatch + "im in the stupid else");
 
 
-            }
-            else
+                }
+                else
 
-            {
-                newMatch.SecondMatch = "";
-                Console.WriteLine("empty");
+                {
+                    newMatch.SecondMatch = "";
+                    Console.WriteLine("empty");
 
 
+                }
+
+                <input style="border:2px solid blue" type="text" @bind="newMatch.SecondMatch" />
             }
         }
+        else
+        {
+            <input style="border:2px solid blue" type="text" @bind="editMatch.SecondMatch" />
 
-        <input style="border:2px solid blue" type="text" @bind="newMatch.SecondMatch" />
+        }
+
+
     }
 
 
@@ -149,7 +169,7 @@
         @foreach (MatchToShow match in fullGame.MatchesList)
         {
 
-            <MatchComp matchText="@match.FirstMatch" matchText2="@match.SecondMatch" uploadedImg="" uploadedImg2="" DeleteCallBack="@(async () => await DeleteMatchRow(match))" EditMatchCallBack="@(async ()=> await EditMatchRow(match.ID))" ></MatchComp>
+            <MatchComp matchText="@match.FirstMatch" matchText2="@match.SecondMatch" uploadedImg="" uploadedImg2="" DeleteCallBack="@(async () => await DeleteMatchRow(match))" EditMatchCallBack="@(async ()=> await EditMatchRow(match.ID))"></MatchComp>
 
 
         }
@@ -255,7 +275,7 @@
     gameInsrtuctionToInsert gameWithInstruction = new gameInsrtuctionToInsert();
     GameToShow fullGame = new GameToShow();
     GameForEditor game1;
-    MatchToEdit editMatch;
+    MatchToEdit editMatch = new MatchToEdit();
 
 
     void Navigate()

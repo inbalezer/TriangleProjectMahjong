@@ -68,8 +68,6 @@
         newMatch.FirstIsText = true;
         <input style="border:2px solid blue" type="text" @bind="newMatch.FirstMatch" />
 
-
-
     }
     else
     {
@@ -151,7 +149,7 @@
         @foreach (MatchToShow match in fullGame.MatchesList)
         {
 
-            <MatchComp matchText="@match.FirstMatch" matchText2="@match.SecondMatch" uploadedImg="" uploadedImg2="" DeleteCallBack="@(async () => await DeleteMatchRow(match))"> </MatchComp>
+            <MatchComp matchText="@match.FirstMatch" matchText2="@match.SecondMatch" uploadedImg="" uploadedImg2="" DeleteCallBack="@(async () => await DeleteMatchRow(match))" EditMatchCallBack="@(async ()=> await EditMatchRow(match.ID))" ></MatchComp>
 
 
         }
@@ -257,6 +255,7 @@
     gameInsrtuctionToInsert gameWithInstruction = new gameInsrtuctionToInsert();
     GameToShow fullGame = new GameToShow();
     GameForEditor game1;
+    MatchToEdit editMatch;
 
 
     void Navigate()
@@ -476,6 +475,36 @@
 
                 case "Failed to delete match":
                     msg = "Failed to delete match";
+                    break;
+            }
+        }
+    }
+
+    protected async Task EditMatchRow(int matchIdToEdit)
+    {
+
+        var editMatchResponse = await Http.GetAsync("api/Matches/" + UserId + "/TempEdit" + "/" + matchIdToEdit);
+        if (editMatchResponse.IsSuccessStatusCode)
+        {
+            editMatch = editMatchResponse.Content.ReadFromJsonAsync<MatchToEdit>().Result;
+        }
+
+        else
+        {
+            string error = editMatchResponse.Content.ReadAsStringAsync().Result;
+
+            switch (error)
+            {
+                case "No Session":
+                    msg = "Session error, please reload page";
+                    break;
+
+                case "User Not Logged In":
+                    msg = "You are not logged in, please reload page to try again";
+                    break;
+
+                case "Pulling match Failed":
+                    msg = "Failed to pull match";
                     break;
             }
         }

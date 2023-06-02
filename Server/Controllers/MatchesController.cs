@@ -43,7 +43,38 @@ namespace TriangleProject.Server.Controllers
 
         //aaaaaaaaaaaaaaaa
 
-        [HttpPost("EditMatch")]
+        [HttpGet("TempEdit/{MatchId}")] // מה שקורה כשלוחצים על עריכת זוג 
+        public async Task<IActionResult> GetFullGame(int userId, int MatchId)
+        {
+            int? sessionId = HttpContext.Session.GetInt32("userId");
+            if (sessionId != null)
+            {
+                if (userId == sessionId)
+                {
+                    object param = new
+                    {
+                        ID = MatchId
+                    };
+
+                    string GetMatcheQuery = "SELECT FirstMatch, SecondMatch, FirstIsText, SecondIsText FROM Matches WHERE ID = @ID";
+                    var gameRecord = await _db.GetRecordsAsync<MatchToEdit>(GetMatcheQuery, param);
+                    MatchToEdit matchToEdit = gameRecord.FirstOrDefault();
+
+                    if (matchToEdit != null)
+                    {
+                        return Ok(matchToEdit);
+                    }
+                    return BadRequest("Pulling match Failed");
+                }
+                return BadRequest("User Not Logged In");
+            }
+            return BadRequest("No Session");
+        }
+
+
+    //aaaaaaaaaaaaaaaa
+
+    [HttpPost("EditMatch")]
 
         public async Task<IActionResult> EditMatch(int userId, MatchToUpdate matchToUpdate)
         {

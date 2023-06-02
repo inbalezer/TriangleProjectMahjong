@@ -46,15 +46,39 @@
 
     @if (!textChanged)
     {
-        newMatch.FirstMatch = "";
+        currentValue = newMatch.FirstMatch;
+
+        if (newMatch.FirstMatch != null)
+        {
+            if (newMatch.FirstMatch.Contains("uploadedFiles/"))
+            {
+                newMatch.FirstMatch = "";
+                Console.WriteLine("empty");
+
+            }
+            else
+            {
+                newMatch.FirstMatch = currentValue;
+                Console.WriteLine(newMatch.FirstMatch + "im in the stupid else");
+
+            }
+        }
+
+        @*newMatch.FirstMatch = "";*@
         newMatch.FirstIsText = true;
         <input style="border:2px solid blue" type="text" @bind="newMatch.FirstMatch" />
+
+
 
     }
     else
     {
         newMatch.FirstIsText = false;
-        newMatch.FirstMatch = myFileImage1;
+        if (myFileImage1 != "")
+        {
+            newMatch.FirstMatch = myFileImage1;
+        }
+
         <label for="FileInֵputID"> העלה תמונה</label>
         <InputFile id="FileInputID" OnChange="((e) => UploadFile(e, true))" style=""></InputFile>
         <br />
@@ -71,7 +95,11 @@
     @if (!text2Changed)
     {
         newMatch.SecondIsText = false;
-        newMatch.SecondMatch = myFileImage2;
+        if (myFileImage2 != "")
+        {
+            newMatch.SecondMatch = myFileImage2;
+
+        }
         <label for="FileInֵputID"> העלה תמונה</label>
         <InputFile id="FileInputID" OnChange="((e) => UploadFile(e, false))"></InputFile>
         <br />
@@ -80,11 +108,33 @@
             <img src="@myFileImage2" width="150" />
             @*<input type="button" value="העבר למחיקה " @onclick="MakeDeleteList" />*@
         }
+
     }
     else
     {
-        newMatch.SecondMatch = "";
+        currentValue2 = newMatch.SecondMatch;
         newMatch.SecondIsText = true;
+
+
+        if (currentValue2 != null)
+        {
+            if (!currentValue2.Contains("uploadedFiles/"))
+            {
+                newMatch.SecondMatch = currentValue2;
+                Console.WriteLine(newMatch.SecondMatch + "im in the stupid else");
+
+
+            }
+            else
+
+            {
+                newMatch.SecondMatch = "";
+                Console.WriteLine("empty");
+
+
+            }
+        }
+
         <input style="border:2px solid blue" type="text" @bind="newMatch.SecondMatch" />
     }
 
@@ -184,6 +234,9 @@
     string myFileImage1 = "";
     string myFileImage2 = "";
     string GameInstruction = "";
+    string currentValue = "";
+    string currentValue2 = "";
+
     @*string msg = "";*@
     bool FirstIsText;
     bool SecondIsText;

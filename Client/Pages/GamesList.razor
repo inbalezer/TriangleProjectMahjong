@@ -60,6 +60,7 @@
     UserWithGames user;
     GameForEditor gameToDelete = new GameForEditor();
     List<GameForEditor> newGame;
+    List<GameForEditor> filteredGames;
 
     bool isClicked = false;
     string msg = "";
@@ -68,8 +69,11 @@
     string deleteTextPopUp1 = "אתה עומד למחוק את המשחק ";
     string deleteTextPopUp2 = "?האם אתה בטוח";
     string gameNameToDelete = "";
+    string searchQuery = "";
     GameForEditor game1;
 
+    
+   
 
     void showMessage(string gName, GameForEditor g)
     {

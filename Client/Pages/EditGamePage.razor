@@ -52,6 +52,7 @@
         {
             currentMatchToShow = newMatch;
         }
+        currentMatchToShow.FirstIsText = true;
 
         if (currentMatchToShow.FirstMatch == "")
         {
@@ -72,8 +73,7 @@
 
                 }
             }
-
-            currentMatchToShow.FirstIsText = true;
+          
         }
         <input style="border:2px solid blue" type="text" @bind="currentMatchToShow.FirstMatch" />
 
@@ -136,14 +136,12 @@
                     newMatch.SecondMatch = currentValue2;
                     Console.WriteLine(newMatch.SecondMatch + "im in the stupid else");
 
-
                 }
                 else
 
                 {
                     newMatch.SecondMatch = "";
                     Console.WriteLine("empty");
-
 
                 }
 
@@ -302,7 +300,7 @@
             if (UpdatedMatch.IsSuccessStatusCode)
             {
                 MatchToUpdate match1 = UpdatedMatch.Content.ReadFromJsonAsync<MatchToUpdate>().Result;
-                //editMatch.ID = match1.ID;
+
                 editMatch.FirstMatch = match1.FirstMatch;
                 editMatch.SecondMatch = match1.SecondMatch;
 
@@ -318,8 +316,11 @@
                     }
                 }
 
+                currentMatchToShow = new MatchToUpdate();
                 editMatch = new MatchToEdit();
-                updatedMatchToShow = new MatchToShow();
+                //newMatch = new MatchToUpdate();
+                myFileImage1 = "";
+                myFileImage2 = "";
 
             }
             else
@@ -351,9 +352,12 @@
             if (AddMatch.IsSuccessStatusCode)
             {
                 MatchToShow match1 = AddMatch.Content.ReadFromJsonAsync<MatchToShow>().Result;
-                fullGame.MatchesList.Add(match1);
-
+                fullGame.MatchesList.Add(match1);                              
+                currentMatchToShow = new MatchToUpdate();                
+                myFileImage1 = "";
+                myFileImage2 = "";
             }
+
             else
             {
                 string error = AddMatch.Content.ReadAsStringAsync().Result;
@@ -378,50 +382,10 @@
                 }
             }
         }
-        
+
+
+
     }
-
-
-    //protected async Task UpdateMatch(MatchToUpdate updateCurrentMatch)
-    //{
-    //    updateCurrentMatch.GameID = newGameID;
-
-    //    var UpdatedMatch = await Http.PostAsJsonAsync("api/Matches/" + UserId + "/EditMatch", updateCurrentMatch);
-
-    //    if (UpdatedMatch.IsSuccessStatusCode)
-    //    {
-    //        MatchToShow match1 = UpdatedMatch.Content.ReadFromJsonAsync<MatchToShow>().Result;
-    //        foreach (MatchToShow updatedMatch1 in fullGame.MatchesList)
-    //        {
-    //            if (updatedMatch1.ID == match1.ID)
-    //            {
-    //                int index = fullGame.MatchesList.IndexOf(updatedMatch1);
-    //                fullGame.MatchesList[index] = match1;
-    //            }
-    //        }
-    //        editMatch = new MatchToEdit();
-
-    //    }
-    //    else
-    //    {
-    //        string error = UpdatedMatch.Content.ReadAsStringAsync().Result;
-
-    //        switch (error)
-    //        {
-    //            case "No Session":
-    //                msg = "Session error, please reload page";
-    //                break;
-
-    //            case "User Not Logged In":
-    //                msg = "You are not logged in, please reload page to try again";
-    //                break;
-
-    //            case "update match faild":
-    //                msg = "update match faild";
-    //                break;
-    //        }
-    //    }
-    //}
 
 
     protected override async Task OnInitializedAsync()
@@ -484,7 +448,7 @@
                         myFileImage2 = "uploadedFiles/" + resizeUrl;
 
                     }
-    @*myFileImage = "uploadedFiles/" + resizeUrl;*@
+                    @*myFileImage = "uploadedFiles/" + resizeUrl;*@
                 }
             }
             else
@@ -603,8 +567,29 @@
             currentMatchToShow.FirstIsText = editMatch.FirstIsText;
             currentMatchToShow.SecondMatch = editMatch.SecondMatch;
             currentMatchToShow.SecondIsText = editMatch.SecondIsText;
-            textChanged = editMatch.FirstIsText;
-            text2Changed = editMatch.SecondIsText;
+            if (!editMatch.FirstIsText)
+            {
+                textChanged = true;
+                myFileImage1 = currentMatchToShow.FirstMatch;
+
+            }
+            else
+            {
+                textChanged = false;
+            }
+
+            if (!editMatch.SecondIsText)
+            {
+                text2Changed = false;
+                myFileImage2 = currentMatchToShow.SecondMatch;
+
+            }
+            else
+            {
+                text2Changed = true;
+            }
+            //textChanged = editMatch.FirstIsText;
+            //text2Changed = !editMatch.SecondIsText;
         }
 
         else

@@ -11,13 +11,13 @@
 
 <h3>GamesList</h3>
 
-<input type="text" value="@searchQuery" @oninput="UpdateSearchQuery" @onblur="FilterGames" />
+<input type="text" style="border:2px solid pink" value="@searchQuery" @oninput="UpdateSearchQuery" @onblur="FilterGames" placeholder="חפש משחק..." />
 
 
 @if (user != null)
 {
-
-    <input style="border:2px solid blue" type="text" @bind="gameName" />
+    <br />
+    <input style="border:2px solid blue" type="text" @bind="gameName" placeholder="הקלד שם משחק..." />
     <br />
     <input type="button" value="Create Game" @onclick=@(()=>AddNewGame(UserId, gameName))>
 

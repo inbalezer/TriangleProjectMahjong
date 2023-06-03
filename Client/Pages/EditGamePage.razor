@@ -265,11 +265,11 @@
 
     MatchToUpdate newMatch = new MatchToUpdate();
     MatchToUpdate currentMatchToShow = new MatchToUpdate();
+    MatchToShow updatedMatchToShow = new MatchToShow();
+    MatchToEdit editMatch = new MatchToEdit();
     gameInsrtuctionToInsert gameWithInstruction = new gameInsrtuctionToInsert();
     GameToShow fullGame = new GameToShow();
     GameForEditor game1;
-    MatchToShow updatedMatchToShow = new MatchToShow();
-    MatchToEdit editMatch = new MatchToEdit();
 
 
     void Navigate()
@@ -289,13 +289,13 @@
 
 
 
-    protected async Task AddMatch(MatchToUpdate newMatch)
+    protected async Task AddMatch(MatchToUpdate newMatchForIdentify)
     {
-        if(editMatch.ID > 0)
+        if(editMatch.ID > 0) // EDIT MATCH
         {
-            newMatch.GameID = newGameID;
+            newMatchForIdentify.GameID = newGameID;
 
-            var UpdatedMatch = await Http.PostAsJsonAsync("api/Matches/" + UserId + "/EditMatch", newMatch);
+            var UpdatedMatch = await Http.PostAsJsonAsync("api/Matches/" + UserId + "/EditMatch", newMatchForIdentify);
 
             if (UpdatedMatch.IsSuccessStatusCode)
             {
@@ -318,12 +318,11 @@
 
                 currentMatchToShow = new MatchToUpdate();
                 editMatch = new MatchToEdit();
-                //newMatch = new MatchToUpdate();
+                newMatch = new MatchToUpdate();
                 myFileImage1 = "";
                 myFileImage2 = "";
-
             }
-            else
+            else 
             {
                 string error = UpdatedMatch.Content.ReadAsStringAsync().Result;
 
@@ -343,17 +342,18 @@
                 }
             }
         }
-        else
+        else // NEW MATCH
         {
-            newMatch.GameID = newGameID;
+            newMatchForIdentify.GameID = newGameID;
 
-            var AddMatch = await Http.PostAsJsonAsync("api/Matches/" + UserId + "/AddMatch", newMatch);
+            var AddMatch = await Http.PostAsJsonAsync("api/Matches/" + UserId + "/AddMatch", newMatchForIdentify);
 
             if (AddMatch.IsSuccessStatusCode)
             {
                 MatchToShow match1 = AddMatch.Content.ReadFromJsonAsync<MatchToShow>().Result;
                 fullGame.MatchesList.Add(match1);                              
-                currentMatchToShow = new MatchToUpdate();                
+                currentMatchToShow = new MatchToUpdate();
+                newMatch = new MatchToUpdate();
                 myFileImage1 = "";
                 myFileImage2 = "";
             }

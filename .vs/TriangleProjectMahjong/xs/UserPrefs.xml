@@ -1,16 +1,17 @@
 ﻿<Properties StartupConfiguration="{C99128EA-5019-4208-90EE-04739CFCEEAD}|Default">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.TriangleProject.Server PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Client/Pages/GamesList.razor">
     <Files>
       <File FileName="Client/Components/PopupComp.razor" Line="1" Column="1" />
-      <File FileName="Client/Pages/GamesList.razor" Line="30" Column="162" />
+      <File FileName="Client/Pages/GamesList.razor" Line="18" Column="2" />
       <File FileName="Client/Components/GameCard.razor" Line="123" Column="10" />
-      <File FileName="Client/Pages/EditGamePage.razor" Line="442" Column="1" />
+      <File FileName="Client/Pages/EditGamePage.razor" Line="446" Column="1" />
       <File FileName="Server/Controllers/MatchesController.cs" Line="188" Column="70" />
       <File FileName="Server/Controllers/GamesController.cs" Line="301" Column="46" />
       <File FileName="Shared/Models/Editor/MatchToEdit.cs" Line="9" Column="18" />
@@ -21,9 +22,7 @@
           <Node name="TriangleProjectMahjong" expanded="True">
             <Node name="TriangleProject.Client" expanded="True">
               <Node name="Components" expanded="True" />
-              <Node name="Pages" expanded="True">
-                <Node name="GamesList.razor" selected="True" />
-              </Node>
+              <Node name="Pages" expanded="True" />
             </Node>
             <Node name="TriangleProject.Server" expanded="True">
               <Node name="Controllers" expanded="True" />
@@ -41,5 +40,4 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.TriangleProject.Server PreferredExecutionTarget="/Applications/Google Chrome.app" />
 </Properties>

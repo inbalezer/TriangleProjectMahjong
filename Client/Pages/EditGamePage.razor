@@ -69,11 +69,10 @@
                 else
                 {
                     currentMatchToShow.FirstMatch = currentValue;
-                    Console.WriteLine(currentMatchToShow.FirstMatch + "im in the stupid else");
 
                 }
             }
-          
+
         }
         <input style="border:2px solid blue" type="text" @bind="currentMatchToShow.FirstMatch" />
 
@@ -152,10 +151,11 @@
 
     }
 
-    @if(editAvailable)
+    @if (editAvailable)
     {
-        <input type="button" value="בטל עריכה" @onclick="@(async ()=> await EditMatchRow(currentMatchToShow.ID))" />
+        <input type="button" value="בטל עריכה" style="background-color: peru" @onclick="@(async ()=> await EditMatchRow(currentMatchToShow.ID))" />
     }
+    <br />
     <input type="submit" value="שמור זוג" />
 
 
@@ -221,7 +221,23 @@
 
 }
 
+<div style="background-color: white; width: 30%; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); border-radius: 5px;">
 
+    <p>
+        שם והנחיית המשחק
+    </p>
+    @if (isNameAndInstraction)
+    {
+        <p>--יש שם והוראה--</p>
+    }
+    <p>
+        מינימום 5 זוגות
+    </p>
+    @if (isEnoughMathces)
+    {
+        <p>---יש 5 זוגות ומעלה---</p>
+    }
+</div>
 
 @code {
 
@@ -274,7 +290,35 @@
     gameInsrtuctionToInsert gameWithInstruction = new gameInsrtuctionToInsert();
     GameToShow fullGame = new GameToShow();
     GameForEditor game1;
+    bool isEnoughMathces = false;
+    bool isNameAndInstraction = false;
 
+
+
+
+    void AreConditionsMet()
+    {
+        if (fullGame.MatchesList.Count >= 5)
+        {
+
+            isEnoughMathces = true;
+        }
+        else
+        {
+            isEnoughMathces = false;
+        }
+        if (GameInstruction.Length > 0 && GameFullName.Length > 0)
+        {
+
+            isNameAndInstraction = true;
+        }
+        else
+        {
+            isNameAndInstraction = false;
+        }
+
+
+    }
 
     void Navigate()
     {
@@ -295,7 +339,9 @@
 
     protected async Task AddMatch(MatchToUpdate newMatchForIdentify)
     {
-        if(editMatch.ID > 0) // EDIT MATCH
+
+
+        if (editMatch.ID > 0) // EDIT MATCH
         {
             newMatchForIdentify.GameID = newGameID;
 
@@ -312,7 +358,7 @@
                 {
                     if (updatedMatch1.ID == editMatch.ID)
                     {
-                        int index = fullGame.MatchesList.IndexOf(updatedMatch1);                       
+                        int index = fullGame.MatchesList.IndexOf(updatedMatch1);
                         fullGame.MatchesList[index].ID = editMatch.ID;
                         fullGame.MatchesList[index].FirstMatch = editMatch.FirstMatch;
                         fullGame.MatchesList[index].SecondMatch = editMatch.SecondMatch;
@@ -325,8 +371,10 @@
                 newMatch = new MatchToUpdate();
                 myFileImage1 = "";
                 myFileImage2 = "";
+                AreConditionsMet();
+
             }
-            else 
+            else
             {
                 string error = UpdatedMatch.Content.ReadAsStringAsync().Result;
 
@@ -355,11 +403,13 @@
             if (AddMatch.IsSuccessStatusCode)
             {
                 MatchToShow match1 = AddMatch.Content.ReadFromJsonAsync<MatchToShow>().Result;
-                fullGame.MatchesList.Add(match1);                              
+                fullGame.MatchesList.Add(match1);
                 currentMatchToShow = new MatchToUpdate();
                 newMatch = new MatchToUpdate();
                 myFileImage1 = "";
                 myFileImage2 = "";
+                AreConditionsMet();
+
             }
 
             else
@@ -388,7 +438,6 @@
         }
 
 
-
     }
 
 
@@ -403,7 +452,7 @@
             fullGame = ShowGameRes.Content.ReadFromJsonAsync<GameToShow>().Result;
             GameInstruction = fullGame.GameInstruction;
             Console.WriteLine(fullGame.GameInstruction);
-
+            AreConditionsMet();
         }
         else
         {
@@ -498,6 +547,7 @@
         {
             //משתנה שיפעיל אנימציה של וי
             SettingMsg = "קולולולו";
+            AreConditionsMet();
         }
 
         else
@@ -536,6 +586,7 @@
         if (deleteMatchResponse.IsSuccessStatusCode)
         {
             fullGame.MatchesList.Remove(matchToDelete);
+            AreConditionsMet();
         }
 
         else

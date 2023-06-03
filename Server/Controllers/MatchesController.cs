@@ -56,7 +56,7 @@ namespace TriangleProject.Server.Controllers
                         ID = MatchId
                     };
 
-                    string GetMatcheQuery = "SELECT FirstMatch, SecondMatch, FirstIsText, SecondIsText FROM Matches WHERE ID = @ID";
+                    string GetMatcheQuery = "SELECT ID, FirstMatch, SecondMatch, FirstIsText, SecondIsText FROM Matches WHERE ID = @ID";
                     var gameRecord = await _db.GetRecordsAsync<MatchToEdit>(GetMatcheQuery, param);
                     MatchToEdit matchToEdit = gameRecord.FirstOrDefault();
 

@@ -38,7 +38,9 @@
 
 <p>הוספת זוגות</p>
 
-<EditForm Model="newMatch" OnValidSubmit="(() =>AddMatch(UserId,newMatch))">
+
+
+<EditForm Model="currentMatchToShow" OnValidSubmit="(() =>AddMatch(currentMatchToShow))">
     <DataAnnotationsValidator />
 
     <p>:התאמה ראשונה</p>
@@ -46,46 +48,42 @@
 
     @if (!textChanged)
     {
-        if (editMatch.FirstMatch == "")
-
+        @if (editMatch.ID == 0)
         {
-            currentValue = newMatch.FirstMatch;
+            currentMatchToShow = newMatch;
+        }
 
-            if (newMatch.FirstMatch != null)
+        if (currentMatchToShow.FirstMatch == "")
+        {
+            currentValue = currentMatchToShow.FirstMatch;
+
+            if (currentMatchToShow.FirstMatch != null)
             {
-                if (newMatch.FirstMatch.Contains("uploadedFiles/"))
+                if (currentMatchToShow.FirstMatch.Contains("uploadedFiles/"))
                 {
-                    newMatch.FirstMatch = "";
+                    currentMatchToShow.FirstMatch = "";
                     Console.WriteLine("empty");
 
                 }
                 else
                 {
-                    newMatch.FirstMatch = currentValue;
-                    Console.WriteLine(newMatch.FirstMatch + "im in the stupid else");
+                    currentMatchToShow.FirstMatch = currentValue;
+                    Console.WriteLine(currentMatchToShow.FirstMatch + "im in the stupid else");
 
                 }
             }
 
-            @*newMatch.FirstMatch = "";*@
-
-            newMatch.FirstIsText = true;
-            <input style="border:2px solid blue" type="text" @bind="newMatch.FirstMatch" />
+            currentMatchToShow.FirstIsText = true;
         }
-
-        else
-        {
-            <input style="border:2px solid blue" type="text" @bind="editMatch.FirstMatch" />
-        }
-
+        <input style="border:2px solid blue" type="text" @bind="currentMatchToShow.FirstMatch" />
 
     }
     else
     {
-        newMatch.FirstIsText = false;
+        currentMatchToShow.FirstIsText = false;
         if (myFileImage1 != "")
         {
-            newMatch.FirstMatch = myFileImage1;
+            currentMatchToShow.FirstMatch = myFileImage1;
         }
 
         <label for="FileInֵputID"> העלה תמונה</label>
@@ -103,10 +101,15 @@
 
     @if (!text2Changed)
     {
-        newMatch.SecondIsText = false;
+        @if (editMatch.ID == 0)
+        {
+            currentMatchToShow = newMatch;
+        }
+
+        currentMatchToShow.SecondIsText = false;
         if (myFileImage2 != "")
         {
-            newMatch.SecondMatch = myFileImage2;
+            currentMatchToShow.SecondMatch = myFileImage2;
 
         }
         <label for="FileInֵputID"> העלה תמונה</label>
@@ -122,9 +125,9 @@
     else
     {
         currentValue2 = newMatch.SecondMatch;
-        newMatch.SecondIsText = true;
+        currentMatchToShow.SecondIsText = true;
 
-        if (editMatch.SecondMatch == "")
+        if (currentMatchToShow.SecondMatch == "")
         {
             if (currentValue2 != null)
             {
@@ -144,15 +147,10 @@
 
                 }
 
-                <input style="border:2px solid blue" type="text" @bind="newMatch.SecondMatch" />
             }
-        }
-        else
-        {
-            <input style="border:2px solid blue" type="text" @bind="editMatch.SecondMatch" />
 
         }
-
+        <input style="border:2px solid blue" type="text" @bind="currentMatchToShow.SecondMatch" />
 
     }
 
@@ -173,11 +171,7 @@
 
 
         }
-
-
-        @*<p>@match.FirstMatch , @match.SecondMatch </p>
-            }*@
-    }}
+    }
 </div>
 
 
@@ -272,9 +266,11 @@
 
 
     MatchToUpdate newMatch = new MatchToUpdate();
+    MatchToUpdate currentMatchToShow = new MatchToUpdate();
     gameInsrtuctionToInsert gameWithInstruction = new gameInsrtuctionToInsert();
     GameToShow fullGame = new GameToShow();
     GameForEditor game1;
+    MatchToShow updatedMatchToShow = new MatchToShow();
     MatchToEdit editMatch = new MatchToEdit();
 
 
@@ -294,43 +290,138 @@
     }
 
 
-    protected async Task AddMatch(int UserId, MatchToUpdate newMatch)
+
+    protected async Task AddMatch(MatchToUpdate newMatch)
     {
-        newMatch.GameID = newGameID;
-
-        var AddMatch = await Http.PostAsJsonAsync("api/Matches/" + UserId + "/AddMatch", newMatch);
-
-        if (AddMatch.IsSuccessStatusCode)
+        if(editMatch.ID > 0)
         {
-            MatchToShow match1 = AddMatch.Content.ReadFromJsonAsync<MatchToShow>().Result;
-            fullGame.MatchesList.Add(match1);
+            newMatch.GameID = newGameID;
 
+            var UpdatedMatch = await Http.PostAsJsonAsync("api/Matches/" + UserId + "/EditMatch", newMatch);
+
+            if (UpdatedMatch.IsSuccessStatusCode)
+            {
+                MatchToUpdate match1 = UpdatedMatch.Content.ReadFromJsonAsync<MatchToUpdate>().Result;
+                //editMatch.ID = match1.ID;
+                editMatch.FirstMatch = match1.FirstMatch;
+                editMatch.SecondMatch = match1.SecondMatch;
+
+                foreach (MatchToShow updatedMatch1 in fullGame.MatchesList)
+                {
+                    if (updatedMatch1.ID == editMatch.ID)
+                    {
+                        int index = fullGame.MatchesList.IndexOf(updatedMatch1);                       
+                        fullGame.MatchesList[index].ID = editMatch.ID;
+                        fullGame.MatchesList[index].FirstMatch = editMatch.FirstMatch;
+                        fullGame.MatchesList[index].SecondMatch = editMatch.SecondMatch;
+
+                    }
+                }
+
+                editMatch = new MatchToEdit();
+                updatedMatchToShow = new MatchToShow();
+
+            }
+            else
+            {
+                string error = UpdatedMatch.Content.ReadAsStringAsync().Result;
+
+                switch (error)
+                {
+                    case "No Session":
+                        msg = "Session error, please reload page";
+                        break;
+
+                    case "User Not Logged In":
+                        msg = "You are not logged in, please reload page to try again";
+                        break;
+
+                    case "update match faild":
+                        msg = "update match faild";
+                        break;
+                }
+            }
         }
         else
         {
-            string error = AddMatch.Content.ReadAsStringAsync().Result;
+            newMatch.GameID = newGameID;
 
-            switch (error)
+            var AddMatch = await Http.PostAsJsonAsync("api/Matches/" + UserId + "/AddMatch", newMatch);
+
+            if (AddMatch.IsSuccessStatusCode)
             {
-                case "No Session":
-                    msg = "Session error, please reload page";
-                    break;
+                MatchToShow match1 = AddMatch.Content.ReadFromJsonAsync<MatchToShow>().Result;
+                fullGame.MatchesList.Add(match1);
 
-                case "User Not Logged In":
-                    msg = "You are not logged in, please reload page to try again";
-                    break;
+            }
+            else
+            {
+                string error = AddMatch.Content.ReadAsStringAsync().Result;
 
-                case "User Not Found":
-                    msg = "You tried to update a game that is not associated with your user ";
-                    break;
+                switch (error)
+                {
+                    case "No Session":
+                        msg = "Session error, please reload page";
+                        break;
 
-                case "Game not created":
-                    msg = "The game you have tried to create, faild.";
-                    break;
+                    case "User Not Logged In":
+                        msg = "You are not logged in, please reload page to try again";
+                        break;
+
+                    case "User Not Found":
+                        msg = "You tried to update a game that is not associated with your user ";
+                        break;
+
+                    case "Game not created":
+                        msg = "The game you have tried to create, faild.";
+                        break;
+                }
             }
         }
+        
     }
 
+
+    //protected async Task UpdateMatch(MatchToUpdate updateCurrentMatch)
+    //{
+    //    updateCurrentMatch.GameID = newGameID;
+
+    //    var UpdatedMatch = await Http.PostAsJsonAsync("api/Matches/" + UserId + "/EditMatch", updateCurrentMatch);
+
+    //    if (UpdatedMatch.IsSuccessStatusCode)
+    //    {
+    //        MatchToShow match1 = UpdatedMatch.Content.ReadFromJsonAsync<MatchToShow>().Result;
+    //        foreach (MatchToShow updatedMatch1 in fullGame.MatchesList)
+    //        {
+    //            if (updatedMatch1.ID == match1.ID)
+    //            {
+    //                int index = fullGame.MatchesList.IndexOf(updatedMatch1);
+    //                fullGame.MatchesList[index] = match1;
+    //            }
+    //        }
+    //        editMatch = new MatchToEdit();
+
+    //    }
+    //    else
+    //    {
+    //        string error = UpdatedMatch.Content.ReadAsStringAsync().Result;
+
+    //        switch (error)
+    //        {
+    //            case "No Session":
+    //                msg = "Session error, please reload page";
+    //                break;
+
+    //            case "User Not Logged In":
+    //                msg = "You are not logged in, please reload page to try again";
+    //                break;
+
+    //            case "update match faild":
+    //                msg = "update match faild";
+    //                break;
+    //        }
+    //    }
+    //}
 
 
     protected override async Task OnInitializedAsync()
@@ -393,7 +484,7 @@
                         myFileImage2 = "uploadedFiles/" + resizeUrl;
 
                     }
-                    @*myFileImage = "uploadedFiles/" + resizeUrl;*@
+    @*myFileImage = "uploadedFiles/" + resizeUrl;*@
                 }
             }
             else
@@ -507,6 +598,13 @@
         if (editMatchResponse.IsSuccessStatusCode)
         {
             editMatch = editMatchResponse.Content.ReadFromJsonAsync<MatchToEdit>().Result;
+            currentMatchToShow.ID = editMatch.ID;
+            currentMatchToShow.FirstMatch = editMatch.FirstMatch;
+            currentMatchToShow.FirstIsText = editMatch.FirstIsText;
+            currentMatchToShow.SecondMatch = editMatch.SecondMatch;
+            currentMatchToShow.SecondIsText = editMatch.SecondIsText;
+            textChanged = editMatch.FirstIsText;
+            text2Changed = editMatch.SecondIsText;
         }
 
         else

@@ -11,6 +11,7 @@
 
 <h3>GamesList</h3>
 
+<input type="text" value="@searchQuery" @oninput="UpdateSearchQuery" @onblur="FilterGames" />
 
 
 @if (user != null)
@@ -23,23 +24,20 @@
 
     <p>The Games:</p>
 
-    @foreach (GameForEditor game in user.UserGames)
-    {
 
+    @foreach (GameForEditor game in user.UserGames.Where(g => string.IsNullOrEmpty(searchQuery) || g.GameFullName.ToLower().Contains(searchQuery.ToLower())))
+    {
         <span>
             <GameCard GameFullName="@game.GameFullName" gameCode="@game.GameCode" GamePublishStatus="@game.PublishStatus" isCheckboxClicked="@(async () => await changePublish(game))" showMsg="(() => showMessage(game.GameFullName, game))" gameId="@game.ID" />
             <span> </span>
             @*<img src="/trash3.svg" alt="Icon" @onclick="(() => showMessage(game.GameFullName, true))" />*@
             @if (isClicked)
             {
-
-
                 <PopupComp Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" gameName="@gameNameToDelete" Text2="@deleteTextPopUp2" GameIdToDelete="@(async () => await DeleteGame(game1))" ShowMsg="closedPopUp" actionButtonText="מחק משחק" cancelButtonText="בטל"></PopupComp>
-
-            }           
+            }
         </span>
-
     }
+
 }
 
 
@@ -72,8 +70,24 @@
     string searchQuery = "";
     GameForEditor game1;
 
-    
-   
+
+    void FilterGames()
+    {
+        if (!string.IsNullOrEmpty(searchQuery))
+        {
+            filteredGames = user.UserGames.Where(game => game.GameFullName.Contains(searchQuery)).ToList();
+            Console.WriteLine(filteredGames);
+        }
+        else
+        {
+            filteredGames = null; // Show all games if the search query is empty
+        }
+    }
+
+    void UpdateSearchQuery(ChangeEventArgs e)
+    {
+        searchQuery = e.Value.ToString();
+    }
 
     void showMessage(string gName, GameForEditor g)
     {

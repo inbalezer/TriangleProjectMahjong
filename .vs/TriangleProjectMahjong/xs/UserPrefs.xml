@@ -1,18 +1,19 @@
 ﻿<Properties StartupConfiguration="{C99128EA-5019-4208-90EE-04739CFCEEAD}|Default">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Client/Pages/EditGamePage.razor">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Client/Pages/GamesList.razor">
     <Files>
       <File FileName="Client/Components/PopupComp.razor" Line="1" Column="1" />
       <File FileName="Client/Pages/GamesList.razor" Line="30" Column="162" />
-      <File FileName="Client/Components/GameCard.razor" Line="29" Column="14" />
-      <File FileName="Client/Pages/EditGamePage.razor" Line="73" Column="1" />
-      <File FileName="Server/Controllers/MatchesController.cs" Line="52" Column="14" />
+      <File FileName="Client/Components/GameCard.razor" Line="123" Column="10" />
+      <File FileName="Client/Pages/EditGamePage.razor" Line="442" Column="1" />
+      <File FileName="Server/Controllers/MatchesController.cs" Line="188" Column="70" />
       <File FileName="Server/Controllers/GamesController.cs" Line="301" Column="46" />
-      <File FileName="Client/Components/MatchComp.razor" Line="15" Column="59" />
-      <File FileName="Shared/Models/Editor/MatchToUpdate.cs" Line="14" Column="23" />
+      <File FileName="Shared/Models/Editor/MatchToEdit.cs" Line="9" Column="18" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -20,10 +21,9 @@
           <Node name="TriangleProjectMahjong" expanded="True">
             <Node name="TriangleProject.Client" expanded="True">
               <Node name="Components" expanded="True" />
-              <Node name="Pages" expanded="True" />
-              <Node name="PortelemFiles" expanded="True" />
-              <Node name="Properties" expanded="True" />
-              <Node name="Shared" expanded="True" />
+              <Node name="Pages" expanded="True">
+                <Node name="GamesList.razor" selected="True" />
+              </Node>
             </Node>
             <Node name="TriangleProject.Server" expanded="True">
               <Node name="Controllers" expanded="True" />
@@ -41,7 +41,5 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.ItemProperties.TriangleProject.Server PreferredExecutionTarget="/Applications/Google Chrome.app" />
 </Properties>

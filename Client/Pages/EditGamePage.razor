@@ -152,7 +152,10 @@
 
     }
 
-
+    @if(editAvailable)
+    {
+        <input type="button" value="בטל עריכה" @onclick="@(async ()=> await EditMatchRow(currentMatchToShow.ID))" />
+    }
     <input type="submit" value="שמור זוג" />
 
 
@@ -254,6 +257,7 @@
     bool textChanged = false;
     bool text2Changed = false;
     bool showImg = false;
+    bool editAvailable = false;
     long maxFileSize = 4194304;
 
 
@@ -557,6 +561,7 @@
 
     protected async Task EditMatchRow(int matchIdToEdit)
     {
+        editAvailable = true;
 
         var editMatchResponse = await Http.GetAsync("api/Matches/" + UserId + "/TempEdit" + "/" + matchIdToEdit);
         if (editMatchResponse.IsSuccessStatusCode)

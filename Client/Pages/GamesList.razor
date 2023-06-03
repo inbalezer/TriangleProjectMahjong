@@ -10,16 +10,19 @@
 
 
 <h3>GamesList</h3>
-
+<p>חיפוש</p>
 <input type="text" style="border:2px solid pink" value="@searchQuery" @oninput="UpdateSearchQuery" @onblur="FilterGames" placeholder="חפש משחק..." />
 
 
 @if (user != null)
 {
-    <br />
+    <p>יצירת משחק חדש</p>
+
     <input style="border:2px solid blue" type="text" @bind="gameName" placeholder="הקלד שם משחק..." />
     <br />
-    <input type="button" value="Create Game" @onclick=@(()=>AddNewGame(UserId, gameName))>
+    <input type="button" value="צור משחק" @onclick=@(()=>AddNewGame(UserId, gameName))>
+    <input type="button" value="בטל" @onclick="ClearNewGame">
+
 
 
     <p>The Games:</p>
@@ -100,7 +103,10 @@
     {
         isClicked = false;
     }
-
+    void ClearNewGame()
+    {
+        gameName = "";
+    }
 
     void Navigate()
     {

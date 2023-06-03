@@ -75,8 +75,14 @@
             }
           
         }
-        <input style="border:2px solid blue" type="text" @bind="currentMatchToShow.FirstMatch" />
+        <div class="character-count-input">
+            <input style="border:2px solid blue" type="text" @bind="currentMatchToShow.FirstMatch" @oninput="UpdateCharactersCounter" />
 
+            @if (!string.IsNullOrEmpty(currentMatchToShow.FirstMatch))
+            {
+                <span class="character-count">Characters entered: @characterCount / @characterLimit </span>
+            }
+        </div>
     }
     else
     {
@@ -259,6 +265,9 @@
     bool showImg = false;
     bool editAvailable = false;
     long maxFileSize = 4194304;
+    int  characterLimit = 15;
+    int  characterCount = 0;
+
 
 
     //MatchToUpdate newMatch;
@@ -660,6 +669,43 @@
         }
     }
 
+    void UpdateCharactersCounter(ChangeEventArgs currEvent)
+    {
 
+        var inputText = (string)currEvent.Value;
+
+        currentMatchToShow.FirstMatch = inputText;
+        //characterCount = inputText.Length;
+       
+        characterCount = inputText.Length;
+
+
+        //if (inputText.Length > characterLimit)
+        //{
+        //    // Truncate the input to the character limit
+        //    currentMatchToShow.FirstMatch = inputText.Substring(0, characterLimit);
+        //    characterCount = characterLimit;  // Update character count to the limit
+        //    currEvent.PreventDefault();
+        //    // Prevent further input
+        //}
+        //else
+        //{
+        //    currentMatchToShow.FirstMatch = inputText;
+        //    characterCount = inputText.Length;
+        //}
+
+
+        if (inputText.Length >= characterLimit)
+        {
+            // Truncate the input to the character limit
+            currentMatchToShow.FirstMatch = inputText.Substring(0, characterLimit);
+        }
+        else
+        {
+            currentMatchToShow.FirstMatch = inputText;
+        }
+
+        characterCount = currentMatchToShow.FirstMatch.Length;
+
+    }
 }
-

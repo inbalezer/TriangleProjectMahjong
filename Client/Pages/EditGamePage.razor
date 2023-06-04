@@ -10,7 +10,7 @@
 @inject NavigationManager nav
 
 
-<h3>EditGamePage</h3>
+<h3>עריכת משחק @GameFullName</h3>
 <button style="background-color:pink" @onclick="showMessage">חזור</button>
 
 
@@ -19,12 +19,27 @@
         <th>"הגדרות כלליות"</th>
     </tr>
     <tr>
-        :שם המשחק
-        <input style="border:2px solid blue" type="text" @bind="GameFullName" />
+        <div class="character-count-input">
+            :שם המשחק
+            <input style="border:2px solid blue" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
+
+            @if (!string.IsNullOrEmpty(GameFullName))
+            {
+                <span class="character-count"> @characterCountGameName / @characterGameNameLimit </span>
+            }
+        </div>       
     </tr>
     <tr>
-        :הנחיית משחק לחצו והתאימו בין
-        <input style="border:2px solid blue" type="text" @bind="GameInstruction" /> ורוקנו את הלוח
+        <div class="character-count-input">
+            :הנחיית משחק לחצו והתאימו בין
+            <input style="border:2px solid blue" type="text" @bind="GameInstruction" @oninput='e => HandleInput(e, "gameInstruction")' /> ורוקנו את הלוח
+
+            @if (!string.IsNullOrEmpty(GameInstruction))
+            {
+                <span class="character-count"> @characterCountInstruction / @characterGameInstructionLimit </span>
+            }
+        </div>
+        
     </tr>
 
 
@@ -346,8 +361,12 @@ else
 
     long maxFileSize = 4194304;
     int  characterLimit = 15;
+    int  characterGameNameLimit = 17;
+    int  characterGameInstructionLimit = 50;
     int  characterCountFirst = 0;
     int  characterCountSecond = 0;
+    int  characterCountGameName = 0;
+    int  characterCountInstruction = 0;
 
 
 
@@ -835,6 +854,17 @@ else
             currentMatchToShow.SecondMatch = inputText;
             characterCountSecond = currentMatchToShow.SecondMatch.Length;
         }
+        else if (field == "gameName")
+        {
+            GameFullName = inputText;
+            characterCountGameName = GameFullName.Length;
+        }
+        else if (field == "gameInstruction")
+        {
+            currentMatchToShow.SecondMatch = inputText;
+            characterCountInstruction = currentMatchToShow.SecondMatch.Length;
+        }
+        
     }
  
 }

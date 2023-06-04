@@ -9,8 +9,7 @@
 @inject NavigationManager Nav
 
 
-<h3>GamesList</h3>
-<p>חיפוש</p>
+<h5>המשחקיקם שלי</h5>
 <input type="text" style="border:2px solid pink" value="@searchQuery" @oninput="UpdateSearchQuery" @onblur="FilterGames" placeholder="חפש משחק..." />
 
 
@@ -32,15 +31,27 @@
 
     @foreach (GameForEditor game in user.UserGames.Where(g => string.IsNullOrEmpty(searchQuery) || g.GameFullName.ToLower().Contains(searchQuery.ToLower())))
     {
-        <span>
-            <GameCard GameFullName="@game.GameFullName" gameCode="@game.GameCode" GamePublishStatus="@game.PublishStatus" isCheckboxClicked="@(async () => await changePublish(game))" showMsg="(() => showMessage(game.GameFullName, game))" gameId="@game.ID" />
-            <span> </span>
-            @*<img src="/trash3.svg" alt="Icon" @onclick="(() => showMessage(game.GameFullName, true))" />*@
-            @if (isClicked)
-            {
-                <PopupComp Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" gameName="@gameNameToDelete" Text2="@deleteTextPopUp2" GameIdToDelete="@(async () => await DeleteGame(game1))" ShowMsg="closedPopUp" actionButtonText="מחק משחק" cancelButtonText="בטל"></PopupComp>
-            }
-        </span>
+        @if(!isThereGames)
+        {
+            <span>
+                <GameCard GameFullName="@game.GameFullName" gameCode="@game.GameCode" GamePublishStatus="@game.PublishStatus" isCheckboxClicked="@(async () => await changePublish(game))" showMsg="(() => showMessage(game.GameFullName, game))" gameId="@game.ID" />
+                <span> </span>
+                @*<img src="/trash3.svg" alt="Icon" @onclick="(() => showMessage(game.GameFullName, true))" />*@
+                @if (isClicked)
+                {
+                    <PopupComp Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" gameName="@gameNameToDelete" Text2="@deleteTextPopUp2" GameIdToDelete="@(async () => await DeleteGame(game1))" ShowMsg="closedPopUp" actionButtonText="מחק משחק" cancelButtonText="בטל"></PopupComp>
+                }
+            </span>
+        }
+        else
+        {
+            <div>
+                היי, איזה כיף שבאת!
+                צור משחק בלחיצה על הפלוס
+                המשחקים שלך יופיעו כאן :)
+            </div>
+        }
+        
     }
 
 }
@@ -67,6 +78,7 @@
 
     bool isClicked = false;
     bool isPlusButtonClicked = false;
+    bool isThereGames => user.UserGames == null || user.UserGames.Count == 0;
     string msg = "";
     string gameName = "";
     string deleteHeadLinePopUp = "מחיקת משחק";

@@ -17,14 +17,16 @@
 @if (user != null)
 {
     <p>יצירת משחק חדש</p>
+    <input type="button" value="+" @onclick="showCreateGameField">
+    @if (isPlusButtonClicked)
+    {
+        <input style="border:2px solid blue" type="text" @bind="gameName" placeholder="הקלד שם משחק..." />
+        <br />
 
-    <input style="border:2px solid blue" type="text" @bind="gameName" placeholder="הקלד שם משחק..." />
-    <br />
-    <input type="button" value="צור משחק" @onclick=@(()=>AddNewGame(UserId, gameName))>
-    <input type="button" value="בטל" @onclick="ClearNewGame">
-
-
-
+        <input type="button" value="צור משחק" @onclick=@(()=>AddNewGame(UserId, gameName))>
+        <input type="button" value="בטל" @onclick="ClearNewGame">
+    }
+  
     <p>The Games:</p>
 
 
@@ -64,6 +66,7 @@
     List<GameForEditor> filteredGames;
 
     bool isClicked = false;
+    bool isPlusButtonClicked = false;
     string msg = "";
     string gameName = "";
     string deleteHeadLinePopUp = "מחיקת משחק";
@@ -73,6 +76,11 @@
     string searchQuery = "";
     GameForEditor game1;
 
+
+    void showCreateGameField()
+    {
+        isPlusButtonClicked = true;
+    }
 
     void FilterGames()
     {

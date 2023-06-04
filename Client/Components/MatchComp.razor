@@ -121,6 +121,8 @@
     [Parameter]
     public EventCallback<bool> EditMatchCallBack { get; set; }
 
+    
+
     void deleteMatch()
     {
         DeleteCallBack.InvokeAsync(true);
@@ -128,6 +130,7 @@
 
     void editMatch()
     {
+        
         EditMatchCallBack.InvokeAsync(true);
     }
 

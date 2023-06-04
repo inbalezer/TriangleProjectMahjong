@@ -9,7 +9,7 @@
 @inject NavigationManager Nav
 
 
-<h5>המשחקיקם שלי</h5>
+<h5>המשחקים שלי</h5>
 <input type="text" style="border:2px solid pink" value="@searchQuery" @oninput="UpdateSearchQuery" @onblur="FilterGames" placeholder="חפש משחק..." />
 
 
@@ -18,8 +18,12 @@
     <p>יצירת משחק חדש</p>
     <input type="button" value="+" @onclick="showCreateGameField">
     @if (isPlusButtonClicked)
-    {
-        <input style="border:2px solid blue" type="text" @bind="gameName" placeholder="הקלד שם משחק..." />
+    {       
+        <input style="border:2px solid blue" type="text" @bind="gameName" placeholder="הקלד שם משחק..." @oninput='e => HandleInputGameName(e, "gameName")' />
+        @if (!string.IsNullOrEmpty(gameName))
+        {
+            <span class="character-count"> @characterCountGameName / @characterGameNameLimit </span>
+        }
         <br />
 
         <input type="button" value="צור משחק" @onclick=@(()=>AddNewGame(UserId, gameName))>
@@ -86,7 +90,27 @@
     string deleteTextPopUp2 = "?האם אתה בטוח";
     string gameNameToDelete = "";
     string searchQuery = "";
+    int characterGameNameLimit = 17;
+    int characterCountGameName = 0;
     GameForEditor game1;
+
+
+    void HandleInputGameName(ChangeEventArgs e, string field)
+    {
+        var inputText = (string)e.Value;
+
+        if (inputText.Length > characterGameNameLimit)
+        {
+            // Truncate the input to the character limit
+            inputText = inputText.Substring(0, characterGameNameLimit);
+        }
+
+        else if (field == "gameName")
+        {
+            gameName = inputText;
+            characterCountGameName = gameName.Length;
+        }
+    }
 
 
     void showCreateGameField()
@@ -126,6 +150,7 @@
     void ClearNewGame()
     {
         gameName = "";
+        isPlusButtonClicked = false;
     }
 
     void Navigate()

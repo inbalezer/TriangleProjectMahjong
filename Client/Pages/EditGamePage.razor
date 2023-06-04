@@ -47,7 +47,7 @@
 
 @*<input type="button" value="שמור" @onclick=Navigate />*@
 
-<MudButton value="שמור" @onclick="(() => updateNameAndInstruction(gameWithInstruction))" Color="Color.Primary"> +שמור </MudButton>
+<MudButton value="שמור" @onclick="(() => updateNameAndInstruction(gameWithInstruction))" Color="Color.Primary" disabled="@isSaveButtonDisabled"> +שמור </MudButton>
 
 
 
@@ -355,6 +355,8 @@ else
     bool isNameAndInstraction = false;
     bool isLimitMatches => fullGame.MatchesList != null && fullGame.MatchesList.Count == 20;
     bool isThereMatches => fullGame.MatchesList == null || fullGame.MatchesList.Count == 0;
+    bool isSaveButtonDisabled => string.IsNullOrEmpty(GameInstruction) || string.IsNullOrEmpty(GameFullName);
+
     bool isNameAndInstruction = false;
 
     private bool IsButtonDisabled => string.IsNullOrEmpty(currentMatchToShow.SecondMatch) || string.IsNullOrEmpty(currentMatchToShow.FirstMatch);

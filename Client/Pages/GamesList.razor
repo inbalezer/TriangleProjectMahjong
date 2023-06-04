@@ -26,7 +26,7 @@
         }
         <br />
 
-        <input type="button" value="צור משחק" @onclick=@(()=>AddNewGame(UserId, gameName))>
+        <input type="button" value="צור משחק" @onclick=@(()=>AddNewGame(UserId, gameName)) disabled="@isCreateButtonDisabled">
         <input type="button" value="בטל" @onclick="ClearNewGame">
     }
   
@@ -83,6 +83,7 @@
     bool isClicked = false;
     bool isPlusButtonClicked = false;
     bool isThereGames => user.UserGames == null || user.UserGames.Count == 0;
+    bool isCreateButtonDisabled => string.IsNullOrEmpty(gameName);
     string msg = "";
     string gameName = "";
     string deleteHeadLinePopUp = "מחיקת משחק";

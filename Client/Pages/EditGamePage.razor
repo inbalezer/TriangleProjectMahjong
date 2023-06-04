@@ -75,11 +75,11 @@
 
         }
         <div class="character-count-input">
-            <input style="border:2px solid blue" type="text" @bind="currentMatchToShow.FirstMatch" @oninput="UpdateCharactersCounter" />
+            <input style="border:2px solid blue" type="text" @bind="currentMatchToShow.FirstMatch" @oninput='e => HandleInput(e, "first")' />
 
             @if (!string.IsNullOrEmpty(currentMatchToShow.FirstMatch))
             {
-                <span class="character-count">Characters entered: @characterCount / @characterLimit </span>
+                <span class="character-count">Characters entered: @characterCountFirst / @characterLimit </span>
             }
         </div>
     }
@@ -153,7 +153,16 @@
             }
 
         }
-        <input style="border:2px solid blue" type="text" @bind="currentMatchToShow.SecondMatch" />
+        <div class="character-count-input">
+            <input style="border:2px solid blue" type="text" @bind="currentMatchToShow.SecondMatch"
+               @oninput='e => HandleInput(e, "second")' />
+
+            @if (!string.IsNullOrEmpty(currentMatchToShow.SecondMatch))
+            {
+                <span class="character-count">Characters entered: @characterCountSecond / @characterLimit </span>
+            }
+        </div>
+        
 
     }
 
@@ -162,7 +171,8 @@
         <input type="button" value="בטל עריכה" style="background-color: peru" @onclick="@(async ()=> await EditMatchRow(currentMatchToShow.ID))" />
     }
     <br />
-    <input type="submit" value="שמור זוג" />
+
+    <input type="submit" value="שמור זוג" disabled="@IsButtonDisabled" />
 
 
 </EditForm>
@@ -280,9 +290,12 @@
     bool text2Changed = false;
     bool showImg = false;
     bool editAvailable = false;
+    private bool IsButtonDisabled => string.IsNullOrEmpty(currentMatchToShow.SecondMatch) || string.IsNullOrEmpty(currentMatchToShow.FirstMatch);
+
     long maxFileSize = 4194304;
     int  characterLimit = 15;
-    int  characterCount = 0;
+    int  characterCountFirst = 0;
+    int  characterCountSecond = 0;
 
 
 
@@ -720,43 +733,56 @@
         }
     }
 
-    void UpdateCharactersCounter(ChangeEventArgs currEvent)
+    //void HandleInput(ChangeEventArgs currEvent)
+    //{
+    //    var inputText = (string)currEvent.Value;
+
+    //    if (inputText.Length > characterLimit)
+    //    {
+    //        // Truncate the input to the character limit
+    //        currentMatchToShow.FirstMatch = inputText.Substring(0, characterLimit);
+    //    }
+    //    else
+    //    {
+    //        currentMatchToShow.FirstMatch = inputText;
+    //    }
+
+    //    characterCount = currentMatchToShow.FirstMatch.Length;
+
+    //    if (inputText.Length > characterLimit)
+    //    {
+    //        // Truncate the input to the character limit
+    //        currentMatchToShow.SecondMatch = inputText.Substring(0, characterLimit);
+    //    }
+    //    else
+    //    {
+    //        currentMatchToShow.SecondMatch = inputText;
+    //    }
+
+    //    characterCount = currentMatchToShow.SecondMatch.Length;
+
+    //}
+
+    void HandleInput(ChangeEventArgs e, string field)
     {
+        var inputText = (string)e.Value;
 
-        var inputText = (string)currEvent.Value;
-
-        currentMatchToShow.FirstMatch = inputText;
-        //characterCount = inputText.Length;
-       
-        characterCount = inputText.Length;
-
-
-        //if (inputText.Length > characterLimit)
-        //{
-        //    // Truncate the input to the character limit
-        //    currentMatchToShow.FirstMatch = inputText.Substring(0, characterLimit);
-        //    characterCount = characterLimit;  // Update character count to the limit
-        //    currEvent.PreventDefault();
-        //    // Prevent further input
-        //}
-        //else
-        //{
-        //    currentMatchToShow.FirstMatch = inputText;
-        //    characterCount = inputText.Length;
-        //}
-
-
-        if (inputText.Length >= characterLimit)
+        if (inputText.Length > characterLimit)
         {
             // Truncate the input to the character limit
-            currentMatchToShow.FirstMatch = inputText.Substring(0, characterLimit);
+            inputText = inputText.Substring(0, characterLimit);
         }
-        else
+
+        if (field == "first")
         {
             currentMatchToShow.FirstMatch = inputText;
+            characterCountFirst = currentMatchToShow.FirstMatch.Length;
         }
-
-        characterCount = currentMatchToShow.FirstMatch.Length;
-
+        else if (field == "second")
+        {
+            currentMatchToShow.SecondMatch = inputText;
+            characterCountSecond = currentMatchToShow.SecondMatch.Length;
+        }
     }
+ 
 }

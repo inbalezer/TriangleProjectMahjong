@@ -27,7 +27,7 @@
             {
                 <span class="character-count"> @characterCountGameName / @characterGameNameLimit </span>
             }
-        </div>       
+        </div>
     </tr>
     <tr>
         <div class="character-count-input">
@@ -39,7 +39,7 @@
                 <span class="character-count"> @characterCountInstruction / @characterGameInstructionLimit </span>
             }
         </div>
-        
+
     </tr>
 
 
@@ -53,7 +53,7 @@
 
 <p>הוספת זוגות</p>
 
-@if(isNameAndInstraction)
+@if (isNameAndInstraction)
 {
     @if (!isLimitMatches)
     {
@@ -172,7 +172,7 @@
                 }
                 <div class="character-count-input">
                     <input style="border:2px solid blue" type="text" @bind="currentMatchToShow.SecondMatch"
-               @oninput='e => HandleInput(e, "second")' />
+                           @oninput='e => HandleInput(e, "second")' />
 
                     @if (!string.IsNullOrEmpty(currentMatchToShow.SecondMatch))
                     {
@@ -208,8 +208,8 @@ else
 {
     <div>
         רגע לפני שמתחילים...
-מלאו את הנחיית המשחק למעלה
-וקדימה- להוספת הזוגות :)
+        מלאו את הנחיית המשחק למעלה
+        וקדימה- להוספת הזוגות :)
     </div>
 }
 
@@ -226,27 +226,27 @@ else
     }
     else if (fullGame.MatchesList != null)
     {
-        if (fullGame.MatchesList.Count <= 11 && fullGame.MatchesList.Count <=18)
+        if (fullGame.MatchesList.Count <= 11 && fullGame.MatchesList.Count <= 18)
         {
             <span>סה"כ @fullGame.MatchesList.Count זוגות</span>
-            
+
         }
         else if (fullGame.MatchesList.Count == 19)
         {
             <span>סה"כ @fullGame.MatchesList.Count זוגות</span>
             <span>שים לב, ניתן להוסיף רק עוד זוג אחד למאגר</span>
-           
+
         }
         else
         {
-            <span>סה"כ @fullGame.MatchesList.Count/@fullGame.MatchesList.Count זוגות</span>            
+            <span>סה"כ @fullGame.MatchesList.Count/@fullGame.MatchesList.Count זוגות</span>
         }
 
         @foreach (MatchToShow match in fullGame.MatchesList)
         {
 
             <MatchComp matchText="@match.FirstMatch" matchText2="@match.SecondMatch" uploadedImg="" uploadedImg2="" DeleteCallBack="@(async () => await DeleteMatchRow(match))" EditMatchCallBack="@(async ()=> await EditMatchRow(match.ID))"></MatchComp>
-            
+
 
         }
     }
@@ -315,6 +315,13 @@ else
         <p>---יש 5 זוגות ומעלה---</p>
     }
 </div>
+<input type="button" style="background-color: peru" value="@publishBtnValue" disabled="@isPublish" @onclick="publish" />
+
+@if (publishBtnValue == "פורסם")
+{
+    <PopupComp Headline="פורסם בהצלחה!" Text1="איזה כיף, המשחק מחכה לך במסך המשחקים שלך. קוד המשחק הוא:" Text2="@gameCodeToShow" actionButtonText="למשחק" ShowMsg="closedReturnPopUp" cancelButtonText="חזור למסך המשחקים"></PopupComp>
+
+}
 
 @code {
 
@@ -342,11 +349,13 @@ else
     string GameInstruction = "";
     string currentValue = "";
     string currentValue2 = "";
-
+    string publishBtnValue = "פרסם";
+    string publishMsg = " איזה כיף, המשחק שלך מחכה לך במסך המשחקים";
     @*string msg = "";*@
     bool FirstIsText;
     bool SecondIsText;
     bool isReturnClicked = false;
+    bool isPublish = true;
     bool textChanged = false;
     bool text2Changed = false;
     bool showImg = false;
@@ -362,13 +371,14 @@ else
     private bool IsButtonDisabled => string.IsNullOrEmpty(currentMatchToShow.SecondMatch) || string.IsNullOrEmpty(currentMatchToShow.FirstMatch);
 
     long maxFileSize = 4194304;
-    int  characterLimit = 15;
-    int  characterGameNameLimit = 17;
-    int  characterGameInstructionLimit = 50;
-    int  characterCountFirst = 0;
-    int  characterCountSecond = 0;
-    int  characterCountGameName = 0;
-    int  characterCountInstruction = 0;
+    int characterLimit = 15;
+    int characterGameNameLimit = 17;
+    int characterGameInstructionLimit = 50;
+    int characterCountFirst = 0;
+    int characterCountSecond = 0;
+    int characterCountGameName = 0;
+    int characterCountInstruction = 0;
+    string gameCodeToShow = "";
 
 
 
@@ -385,13 +395,14 @@ else
     gameInsrtuctionToInsert gameWithInstruction = new gameInsrtuctionToInsert();
     GameToShow fullGame = new GameToShow();
     GameForEditor game1;
-    
+
 
 
 
 
     void AreConditionsMet()
     {
+
         if (fullGame.MatchesList.Count >= 5)
         {
 
@@ -401,7 +412,8 @@ else
         {
             isEnoughMathces = false;
         }
-        if (GameInstruction.Length > 0 && GameFullName.Length > 0)
+
+        if (!string.IsNullOrEmpty(GameInstruction) && !string.IsNullOrEmpty(GameFullName))
         {
 
             isNameAndInstraction = true;
@@ -409,6 +421,16 @@ else
         else
         {
             isNameAndInstraction = false;
+        }
+
+        if (isNameAndInstraction && isEnoughMathces)
+        {
+            isPublish = false;
+        }
+        else
+        {
+            isPublish = true;
+
         }
 
 
@@ -429,7 +451,43 @@ else
         isReturnClicked = true;
     }
 
+    protected async Task publish()
+    {
+        GamePublish gameToPublishInEdit = new GamePublish();
+        gameToPublishInEdit.PublishStatus = "Published";
+        gameToPublishInEdit.ID = newGameID;
 
+        var userRes = await Http.PostAsJsonAsync("api/Games/" + UserId + "/publishGame", gameToPublishInEdit);
+
+        if (userRes.IsSuccessStatusCode)
+        {
+            GameForEditor GameoShow = userRes.Content.ReadFromJsonAsync<GameForEditor>().Result;
+            gameCodeToShow = GameoShow.GameCode.ToString();
+            publishBtnValue = "פורסם";
+
+        }
+
+        else
+        {
+            string error = userRes.Content.ReadAsStringAsync().Result;
+
+            switch (error)
+            {
+                case "No Session":
+                    msg = "Session error, please reload page";
+                    break;
+
+                case "User Not Logged In":
+                    msg = "You are not logged in, please reload page to try again";
+                    break;
+
+                case "It's Not Your Game":
+                    msg = "You tried to update a game that is not associated with your user ";
+                    break;
+            }
+        }
+
+    }
 
     protected async Task AddMatch(MatchToUpdate newMatchForIdentify)
     {
@@ -846,7 +904,7 @@ else
             inputText = inputText.Substring(0, characterLimit);
         }
 
-       
+
         if (field == "first")
         {
             currentMatchToShow.FirstMatch = inputText;
@@ -867,7 +925,7 @@ else
             currentMatchToShow.SecondMatch = inputText;
             characterCountInstruction = currentMatchToShow.SecondMatch.Length;
         }
-        
+
     }
- 
+
 }

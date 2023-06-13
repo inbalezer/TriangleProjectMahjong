@@ -18,8 +18,8 @@
     <p>יצירת משחק חדש</p>
     <input type="button" value="+" @onclick="showCreateGameField">
     @if (isPlusButtonClicked)
-    {       
-        <input style="border:2px solid blue" type="text" @bind="gameName" placeholder="הקלד שם משחק..." @oninput='e => HandleInputGameName(e, "gameName")' />
+    {
+        <input maxlength="17" style="border:2px solid blue" type="text" @bind="gameName" placeholder="הקלד שם משחק..." @oninput='e => HandleInputGameName(e, "gameName")' />
         @if (!string.IsNullOrEmpty(gameName))
         {
             <span class="character-count"> @characterCountGameName / @characterGameNameLimit </span>

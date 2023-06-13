@@ -4,6 +4,7 @@
 @using TriangleProject.Shared.Models.Portelem
 @using TriangleProject.Client.Components
 @using System.ComponentModel.DataAnnotations;
+@using Microsoft.AspNetCore.Components.Forms;
 
 @inject HttpClient Http
 @inject NavigationManager Nav
@@ -21,7 +22,7 @@
     <tr>
         <div class="character-count-input">
             :שם המשחק
-            <input style="border:2px solid blue" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
+            <input maxlength="17" style="border:2px solid blue" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")'  />
 
             @if (!string.IsNullOrEmpty(GameFullName))
             {
@@ -32,7 +33,7 @@
     <tr>
         <div class="character-count-input">
             :הנחיית משחק לחצו והתאימו בין
-            <input style="border:2px solid blue" type="text" @bind="GameInstruction" @oninput='e => HandleInput(e, "gameInstruction")' /> ורוקנו את הלוח
+            <input maxlength="50" style="border:2px solid blue" type="text" @bind="GameInstruction" @oninput='e => HandleInput(e, "gameInstruction")' /> ורוקנו את הלוח
 
             @if (!string.IsNullOrEmpty(GameInstruction))
             {
@@ -92,7 +93,7 @@
 
                 }
                 <div class="character-count-input">
-                    <input style="border:2px solid blue" type="text" @bind="currentMatchToShow.FirstMatch" @oninput='e => HandleInput(e, "first")' />
+                    <input maxlength="15" style="border:2px solid blue" type="text" @bind="currentMatchToShow.FirstMatch" @oninput='e => HandleInput(e, "first")' />
 
                     @if (!string.IsNullOrEmpty(currentMatchToShow.FirstMatch))
                     {
@@ -109,7 +110,12 @@
                 }
 
                 <label for="FileInֵputID"> העלה תמונה</label>
-                <InputFile id="FileInputID" OnChange="((e) => UploadFile(e, true))" style=""></InputFile>
+                <InputFile id="FileInputID" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, true))" style=""></InputFile>
+                if (unacceptedImg != "")
+                {
+                    <span>@unacceptedImg</span>
+                }
+
                 <br />
                 @if (myFileImage1 != "")
                 {
@@ -135,7 +141,12 @@
 
                 }
                 <label for="FileInֵputID"> העלה תמונה</label>
-                <InputFile id="FileInputID" OnChange="((e) => UploadFile(e, false))"></InputFile>
+                <InputFile id="FileInputID" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, false))"></InputFile>
+
+                if (unacceptedImg != "")
+                {
+                    <span>@unacceptedImg</span>
+                }
                 <br />
                 @if (myFileImage2 != "")
                 {
@@ -160,18 +171,14 @@
 
                         }
                         else
-
                         {
                             newMatch.SecondMatch = "";
                             Console.WriteLine("empty");
-
                         }
-
                     }
-
                 }
                 <div class="character-count-input">
-                    <input style="border:2px solid blue" type="text" @bind="currentMatchToShow.SecondMatch"
+                    <input maxlength="15" style="border:2px solid blue" type="text" @bind="currentMatchToShow.SecondMatch"
                            @oninput='e => HandleInput(e, "second")' />
 
                     @if (!string.IsNullOrEmpty(currentMatchToShow.SecondMatch))
@@ -190,10 +197,7 @@
             <br />
 
             <input type="submit" value="שמור זוג" disabled="@IsButtonDisabled" />
-
-
         </EditForm>
-
     }
     else
     {
@@ -351,6 +355,7 @@ else
     string currentValue2 = "";
     string publishBtnValue = "פרסם";
     string publishMsg = " איזה כיף, המשחק שלך מחכה לך במסך המשחקים";
+    string unacceptedImg = "";
     @*string msg = "";*@
     bool FirstIsText;
     bool SecondIsText;
@@ -395,8 +400,6 @@ else
     gameInsrtuctionToInsert gameWithInstruction = new gameInsrtuctionToInsert();
     GameToShow fullGame = new GameToShow();
     GameForEditor game1;
-
-
 
 
 
@@ -595,6 +598,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        characterCountGameName = GameFullName.Length;
 
         var ShowGameRes = await Http.GetAsync("api/Games/" + UserId + "/FullGameToEdit/" + newGameID);
 
@@ -603,6 +607,7 @@ else
 
             fullGame = ShowGameRes.Content.ReadFromJsonAsync<GameToShow>().Result;
             GameInstruction = fullGame.GameInstruction;
+            characterCountInstruction = GameInstruction.Length;
             Console.WriteLine(fullGame.GameInstruction);
             AreConditionsMet();
         }
@@ -631,6 +636,13 @@ else
     private async Task UploadFile(InputFileChangeEventArgs e, bool isFirstImg)
     {
         var imageFiles = e.GetMultipleFiles();
+        var file1 = e.File;
+
+        if (!IsFileAccepted(file1))
+        {
+            unacceptedImg = "התמונה שבחרת לא בפורמט נתמך. יש לבחור תמונה בפורמט PNG או JPEG";
+            return;
+        }
         foreach (var file in imageFiles)
         {
             if (file.Size <= maxFileSize)
@@ -661,6 +673,12 @@ else
                 msg = "לא ניתן להעלות את התמונה- היא גדולה מדיי";
             }
         }
+    }
+
+    private bool IsFileAccepted(IBrowserFile fileExepted)
+    {
+        // Perform client-side validation by checking the file type
+        return fileExepted.ContentType == "image/png" || fileExepted.ContentType == "image/jpeg";
     }
 
     List<string> DeletedImages = new List<string>();
@@ -864,46 +882,9 @@ else
         }
     }
 
-    //void HandleInput(ChangeEventArgs currEvent)
-    //{
-    //    var inputText = (string)currEvent.Value;
-
-    //    if (inputText.Length > characterLimit)
-    //    {
-    //        // Truncate the input to the character limit
-    //        currentMatchToShow.FirstMatch = inputText.Substring(0, characterLimit);
-    //    }
-    //    else
-    //    {
-    //        currentMatchToShow.FirstMatch = inputText;
-    //    }
-
-    //    characterCount = currentMatchToShow.FirstMatch.Length;
-
-    //    if (inputText.Length > characterLimit)
-    //    {
-    //        // Truncate the input to the character limit
-    //        currentMatchToShow.SecondMatch = inputText.Substring(0, characterLimit);
-    //    }
-    //    else
-    //    {
-    //        currentMatchToShow.SecondMatch = inputText;
-    //    }
-
-    //    characterCount = currentMatchToShow.SecondMatch.Length;
-
-    //}
-
     void HandleInput(ChangeEventArgs e, string field)
     {
         var inputText = (string)e.Value;
-
-        if (inputText.Length > characterLimit)
-        {
-            // Truncate the input to the character limit
-            inputText = inputText.Substring(0, characterLimit);
-        }
-
 
         if (field == "first")
         {
@@ -922,9 +903,10 @@ else
         }
         else if (field == "gameInstruction")
         {
-            currentMatchToShow.SecondMatch = inputText;
-            characterCountInstruction = currentMatchToShow.SecondMatch.Length;
+            GameInstruction = inputText;
+            characterCountInstruction = GameInstruction.Length;
         }
+
 
     }
 

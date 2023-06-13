@@ -19,14 +19,14 @@ namespace TriangleProject.Server.Controllers
             _db = db;
         }
         //פונקציית עזר//
-        private async Task<bool> canPublish(int gameId)
+        public async Task<bool> canPublish(int gameId)
         {
             object param1 = new
             {
                 ID = gameId
             };
 
-            string queryEligibleToPublish = "SELECT count(*) FROM Games WHERE Games.ID = @ID AND LENGTH(Games.GameInstruction) > 31 AND (SELECT COUNT(*) FROM Matches WHERE Matches.GameID = Games.ID) >= 5";
+            string queryEligibleToPublish = "SELECT count(*) FROM Games WHERE Games.ID = @ID AND LENGTH(Games.GameInstruction) > 0 AND LENGTH(Games.GameFullName) > 0 AND (SELECT COUNT(*) FROM Matches WHERE Matches.GameID = Games.ID) >= 5";
             var recordEligible = await _db.GetRecordsAsync<int>(queryEligibleToPublish, param1);
             int EligibleToPublish = recordEligible.FirstOrDefault();
 

@@ -24,8 +24,10 @@
     </tr>
     <tr>
         <div class="character-count-input">
-            :שם המשחק
-            <input maxlength="17" style="border:2px solid blue" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")'  />
+
+            :שם המשחק <input maxlength="17" style="border:2px solid blue" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
+            <p>(1-17 תווים)</p>
+            
 
             @if (!string.IsNullOrEmpty(GameFullName))
             {
@@ -39,8 +41,11 @@
     </tr>
     <tr>
         <div class="character-count-input">
-            :הנחיית משחק לחצו והתאימו בין
+            :הנחיית משחק  לחצו והתאימו בין
             <input maxlength="50" style="border:2px solid blue" type="text" @bind="GameInstruction" @oninput='e => HandleInput(e, "gameInstruction")' /> ורוקנו את הלוח
+
+            <p>(1-50 תווים)</p>
+           
 
             @if (!string.IsNullOrEmpty(GameInstruction))
             {
@@ -260,9 +265,13 @@ else
         @foreach (MatchToShow match in fullGame.MatchesList)
         {
 
-            <MatchComp matchText="@match.FirstMatch" matchText2="@match.SecondMatch" uploadedImg="" uploadedImg2="" DeleteCallBack="@(async () => await DeleteMatchRow(match))" EditMatchCallBack="@(async ()=> await EditMatchRow(match.ID))"></MatchComp>
+            <MatchComp matchText="@match.FirstMatch" matchText2="@match.SecondMatch" uploadedImg="" uploadedImg2="" DeleteCallBack="@deleteButtonClicked" EditMatchCallBack="@(async ()=> await EditMatchRow(match.ID))"></MatchComp>
 
-
+            if(isDeleteButtonClicked)
+            {
+                <PopupComp Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" GameIdToDelete="@(async () => await DeleteMatchRow(match))" ShowMsg="closedReturnPopUp" actionButtonText="מחק זוג " cancelButtonText="בטל"></PopupComp>
+                
+            }
         }
     }
 </div>
@@ -356,6 +365,8 @@ else
     string fullGameMsg = "";
     string returnHeadLinePopUp = "חזור למסך ״המשחקים שלי?";
     string returnTextPopUp1 = "אתה עומד לחזור למסך ״המשחקים שלי״.\nאם קיים זוג חדש שטרם שמרת, הוא לא ישמר. ";
+    string deleteHeadLinePopUp = "מחיקת זוג";
+    string deleteTextPopUp1 = "אתה עומד למחוק את הזוג. האם אתה בטוח?";
     string gameNameToReturn = "";
     string myFileImage = "";
     string myFileImage1 = "";
@@ -367,6 +378,7 @@ else
     string publishMsg = " איזה כיף, המשחק שלך מחכה לך במסך המשחקים";
     string unacceptedImg = "";
     string previousValue = "";
+    string gameCodeToShow = "";
 
     @*string msg = "";*@
     bool FirstIsText;
@@ -384,11 +396,10 @@ else
     bool isSaveButtonDisabled => string.IsNullOrEmpty(GameInstruction) || string.IsNullOrEmpty(GameFullName);
     bool isReturnButtonDisabled => string.IsNullOrEmpty(GameFullName);
     bool showWarningMessage = false;
+    bool isDeleteButtonClicked = false;
     bool isNameAndInstruction = false;
+    bool IsButtonDisabled => string.IsNullOrEmpty(currentMatchToShow.SecondMatch) || string.IsNullOrEmpty(currentMatchToShow.FirstMatch);
 
-    private bool IsButtonDisabled => string.IsNullOrEmpty(currentMatchToShow.SecondMatch) || string.IsNullOrEmpty(currentMatchToShow.FirstMatch);
-
-    long maxFileSize = 4194304;
     int characterLimit = 15;
     int characterGameNameLimit = 17;
     int characterGameInstructionLimit = 50;
@@ -396,9 +407,9 @@ else
     int characterCountSecond = 0;
     int characterCountGameName = 0;
     int characterCountInstruction = 0;
-    string gameCodeToShow = "";
+    long maxFileSize = 4194304;
 
-    
+
 
 
 
@@ -415,8 +426,6 @@ else
     gameInsrtuctionToInsert gameWithInstruction = new gameInsrtuctionToInsert();
     GameToShow fullGame = new GameToShow();
     GameForEditor game1;
-
-
 
     void AreConditionsMet()
     {
@@ -448,10 +457,7 @@ else
         else
         {
             isPublish = true;
-
         }
-
-
     }
 
     void Navigate()
@@ -504,13 +510,10 @@ else
                     break;
             }
         }
-
     }
 
     protected async Task AddMatch(MatchToUpdate newMatchForIdentify)
     {
-
-
         if (editMatch.ID > 0) // EDIT MATCH
         {
             newMatchForIdentify.GameID = newGameID;
@@ -579,7 +582,6 @@ else
                 myFileImage1 = "";
                 myFileImage2 = "";
                 AreConditionsMet();
-
             }
 
             else
@@ -606,8 +608,6 @@ else
                 }
             }
         }
-
-
     }
 
 
@@ -658,6 +658,7 @@ else
             unacceptedImg = "התמונה שבחרת לא בפורמט נתמך. יש לבחור תמונה בפורמט PNG או JPEG";
             return;
         }
+
         foreach (var file in imageFiles)
         {
             if (file.Size <= maxFileSize)
@@ -765,6 +766,11 @@ else
         }
     }
 
+    void deleteButtonClicked()
+    {
+        isDeleteButtonClicked = true;
+    }
+
     protected async Task DeleteMatchRow(MatchToShow matchToDelete)
     {
 
@@ -799,7 +805,7 @@ else
     protected async Task EditMatchRow(int matchIdToEdit)
     {
         editAvailable = true;
-
+       
         var editMatchResponse = await Http.GetAsync("api/Matches/" + UserId + "/TempEdit" + "/" + matchIdToEdit);
         if (editMatchResponse.IsSuccessStatusCode)
         {

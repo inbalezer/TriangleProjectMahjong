@@ -19,6 +19,7 @@
     <input type="button" value="+" @onclick="showCreateGameField">
     @if (isPlusButtonClicked)
     {
+        <p>(1-17 תווים)</p>
         <input maxlength="17" style="border:2px solid blue" type="text" @bind="gameName" placeholder="הקלד שם משחק..." @oninput='e => HandleInputGameName(e, "gameName")' />
         @if (!string.IsNullOrEmpty(gameName))
         {

@@ -12,7 +12,10 @@
 
 
 <h3>עריכת משחק @GameFullName</h3>
-<button style="background-color:pink" @onclick="showMessage">חזור</button>
+<div class="custom-tooltip" title="לא ניתן לחזור למסך המשחקים ללא שם משחק.">
+
+    <button style="background-color:pink" @onclick="showMessage" disabled="@isReturnButtonDisabled">חזור</button>
+</div>
 
 
 <table style="border:double">
@@ -379,6 +382,7 @@ else
     bool isLimitMatches => fullGame.MatchesList != null && fullGame.MatchesList.Count == 20;
     bool isThereMatches => fullGame.MatchesList == null || fullGame.MatchesList.Count == 0;
     bool isSaveButtonDisabled => string.IsNullOrEmpty(GameInstruction) || string.IsNullOrEmpty(GameFullName);
+    bool isReturnButtonDisabled => string.IsNullOrEmpty(GameFullName);
     bool showWarningMessage = false;
     bool isNameAndInstruction = false;
 
@@ -924,12 +928,7 @@ else
             {
                 showWarningMessage = false;
             }
-
             previousValue = inputText;
         }
-
-        
-
     }
-
 }

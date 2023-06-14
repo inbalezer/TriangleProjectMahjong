@@ -28,6 +28,10 @@
             {
                 <span class="character-count"> @characterCountGameName / @characterGameNameLimit </span>
             }
+            @if (GameFullName == "")
+            {
+                <span>לא ניתן לשמור משחק ללא שם.</span>
+            }
         </div>
     </tr>
     <tr>
@@ -38,6 +42,10 @@
             @if (!string.IsNullOrEmpty(GameInstruction))
             {
                 <span class="character-count"> @characterCountInstruction / @characterGameInstructionLimit </span>
+            }
+            @if (showWarningMessage)
+            {
+                <span class="warning-message">You need to fill the text box</span>
             }
         </div>
 
@@ -289,7 +297,6 @@ else
 }
 
 
-}
 <p>@msg</p>
 
 @if (fullGameMsg != "")
@@ -356,6 +363,8 @@ else
     string publishBtnValue = "פרסם";
     string publishMsg = " איזה כיף, המשחק שלך מחכה לך במסך המשחקים";
     string unacceptedImg = "";
+    string previousValue = "";
+
     @*string msg = "";*@
     bool FirstIsText;
     bool SecondIsText;
@@ -370,7 +379,7 @@ else
     bool isLimitMatches => fullGame.MatchesList != null && fullGame.MatchesList.Count == 20;
     bool isThereMatches => fullGame.MatchesList == null || fullGame.MatchesList.Count == 0;
     bool isSaveButtonDisabled => string.IsNullOrEmpty(GameInstruction) || string.IsNullOrEmpty(GameFullName);
-
+    bool showWarningMessage = false;
     bool isNameAndInstruction = false;
 
     private bool IsButtonDisabled => string.IsNullOrEmpty(currentMatchToShow.SecondMatch) || string.IsNullOrEmpty(currentMatchToShow.FirstMatch);
@@ -384,6 +393,8 @@ else
     int characterCountGameName = 0;
     int characterCountInstruction = 0;
     string gameCodeToShow = "";
+
+    
 
 
 
@@ -905,8 +916,19 @@ else
         {
             GameInstruction = inputText;
             characterCountInstruction = GameInstruction.Length;
+            if (string.IsNullOrEmpty(inputText) && !string.IsNullOrEmpty(previousValue))
+            {
+                showWarningMessage = true;
+            }
+            else
+            {
+                showWarningMessage = false;
+            }
+
+            previousValue = inputText;
         }
 
+        
 
     }
 

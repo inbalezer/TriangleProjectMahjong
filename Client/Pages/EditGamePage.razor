@@ -27,7 +27,7 @@
 
             :שם המשחק <input maxlength="17" style="border:2px solid blue" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
             <p>(1-17 תווים)</p>
-            
+
 
             @if (!string.IsNullOrEmpty(GameFullName))
             {
@@ -45,7 +45,7 @@
             <input maxlength="50" style="border:2px solid blue" type="text" @bind="GameInstruction" @oninput='e => HandleInput(e, "gameInstruction")' /> ורוקנו את הלוח
 
             <p>(1-50 תווים)</p>
-           
+
 
             @if (!string.IsNullOrEmpty(GameInstruction))
             {
@@ -123,10 +123,25 @@
                 if (myFileImage1 != "")
                 {
                     currentMatchToShow.FirstMatch = myFileImage1;
-                }
+                    <div class="custom-input-file">
+                        <label for="FileInputID">שנה תמונה</label>
+                    </div>
 
-                <label for="FileInֵputID"> העלה תמונה</label>
-                <InputFile id="FileInputID" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, true))" style=""></InputFile>
+
+                }
+                else
+                {
+                    <div class="custom-input-file">
+                        <label for="FileInputID">העלה תמונה</label>
+                    </div> }
+
+
+                @*<label for="FileInֵputID"> העלה תמונה</label>*@
+                @*<InputFile id="FileInputID" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, true))" class="custom-input-file"></InputFile>*@
+                <div class="custom-input-file">
+                    <InputFile id="FileInputID" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, true))"></InputFile>
+
+                </div>
                 if (unacceptedImg != "")
                 {
                     <span>@unacceptedImg</span>
@@ -267,10 +282,10 @@ else
 
             <MatchComp matchText="@match.FirstMatch" matchText2="@match.SecondMatch" uploadedImg="" uploadedImg2="" DeleteCallBack="@deleteButtonClicked" EditMatchCallBack="@(async ()=> await EditMatchRow(match.ID))"></MatchComp>
 
-            if(isDeleteButtonClicked)
+            if (isDeleteButtonClicked)
             {
                 <PopupComp Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" GameIdToDelete="@(async () => await DeleteMatchRow(match))" ShowMsg="closedReturnPopUp" actionButtonText="מחק זוג " cancelButtonText="בטל"></PopupComp>
-                
+
             }
         }
     }
@@ -345,6 +360,35 @@ else
     <PopupComp Headline="פורסם בהצלחה!" Text1="איזה כיף, המשחק מחכה לך במסך המשחקים שלך. קוד המשחק הוא:" Text2="@gameCodeToShow" actionButtonText="למשחק" ShowMsg="closedReturnPopUp" cancelButtonText="חזור למסך המשחקים"></PopupComp>
 
 }
+
+
+<style>
+    .custom-input-file {
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+        border-radius: 5px;
+    }
+
+        .custom-input-file input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .custom-input-file label {
+            display: inline-block;
+            padding: 10px;
+            background-color: blue;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+</style>
 
 @code {
 
@@ -805,7 +849,7 @@ else
     protected async Task EditMatchRow(int matchIdToEdit)
     {
         editAvailable = true;
-       
+
         var editMatchResponse = await Http.GetAsync("api/Matches/" + UserId + "/TempEdit" + "/" + matchIdToEdit);
         if (editMatchResponse.IsSuccessStatusCode)
         {

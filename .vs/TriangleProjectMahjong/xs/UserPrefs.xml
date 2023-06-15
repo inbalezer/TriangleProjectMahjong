@@ -1,20 +1,16 @@
 ﻿<Properties StartupConfiguration="{C99128EA-5019-4208-90EE-04739CFCEEAD}|Default">
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.TriangleProject.Server PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Client/Pages/GamesList.razor">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Client/Pages/EditGamePage.razor">
     <Files>
-      <File FileName="Client/Components/PopupComp.razor" Line="1" Column="1" />
-      <File FileName="Client/Pages/GamesList.razor" Line="18" Column="2" />
-      <File FileName="Client/Components/GameCard.razor" Line="123" Column="10" />
-      <File FileName="Client/Pages/EditGamePage.razor" Line="446" Column="1" />
+      <File FileName="Client/Components/PopupComp.razor" Line="11" Column="25" />
+      <File FileName="Client/Pages/GamesList.razor" Line="197" Column="27" />
+      <File FileName="Client/Pages/EditGamePage.razor" Line="317" Column="7" />
       <File FileName="Server/Controllers/MatchesController.cs" Line="188" Column="70" />
-      <File FileName="Server/Controllers/GamesController.cs" Line="301" Column="46" />
-      <File FileName="Shared/Models/Editor/MatchToEdit.cs" Line="9" Column="18" />
+      <File FileName="Server/Controllers/GamesController.cs" Line="152" Column="46" />
+      <File FileName="Shared/Models/Editor/GamePublish.cs" Line="9" Column="18" />
+      <File FileName="Shared/Models/Editor/GameForEditor.cs" Line="10" Column="18" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -40,4 +36,8 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.TriangleProject.Server PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>

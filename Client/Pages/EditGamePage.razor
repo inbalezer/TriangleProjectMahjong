@@ -111,6 +111,8 @@
                 <div class="character-count-input">
                     <input maxlength="15" style="border:2px solid blue" type="text" @bind="currentMatchToShow.FirstMatch" @oninput='e => HandleInput(e, "first")' />
 
+                    <p style="color:red"> ניתן להכניס בין 1-15 תווים </p>
+
                     @if (!string.IsNullOrEmpty(currentMatchToShow.FirstMatch))
                     {
                         <span class="character-count">Characters entered: @characterCountFirst / @characterLimit </span>
@@ -126,15 +128,13 @@
                     <div class="custom-input-file">
                         <label for="FileInputID">שנה תמונה</label>
                     </div>
-
-
                 }
                 else
                 {
                     <div class="custom-input-file">
                         <label for="FileInputID">העלה תמונה</label>
-                    </div> }
-
+                    </div> 
+                }
 
                 @*<label for="FileInֵputID"> העלה תמונה</label>*@
                 @*<InputFile id="FileInputID" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, true))" class="custom-input-file"></InputFile>*@
@@ -142,6 +142,8 @@
                     <InputFile id="FileInputID" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, true))"></InputFile>
 
                 </div>
+                <p style="color:red"> קבצי Png ,Jpeg בלבד </p>
+
                 if (unacceptedImg != "")
                 {
                     <span>@unacceptedImg</span>
@@ -169,11 +171,23 @@
                 if (myFileImage2 != "")
                 {
                     currentMatchToShow.SecondMatch = myFileImage2;
-
+                    <div class="custom-input-file">
+                        <label for="FileInputID2">שנה תמונה</label>
+                    </div>
                 }
-                <label for="FileInֵputID"> העלה תמונה</label>
-                <InputFile id="FileInputID" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, false))"></InputFile>
+                else
+                {
+                    <div class="custom-input-file">
+                        <label for="FileInputID2">העלה תמונה</label>
+                    </div> 
+                }
+                @*<label for="FileInֵputID"> העלה תמונה</label>
+                <InputFile id="FileInputID" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, false))"></InputFile>*@
+                <div class="custom-input-file">
+                    <InputFile id="FileInputID2" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, false))"></InputFile>
 
+                </div>
+                <p style="color:red"> קבצי Png ,Jpeg בלבד </p>
                 if (unacceptedImg != "")
                 {
                     <span>@unacceptedImg</span>
@@ -211,6 +225,7 @@
                 <div class="character-count-input">
                     <input maxlength="15" style="border:2px solid blue" type="text" @bind="currentMatchToShow.SecondMatch"
                            @oninput='e => HandleInput(e, "second")' />
+                    <p style="color:red"> ניתן להכניס בין 1-15 תווים </p>
 
                     @if (!string.IsNullOrEmpty(currentMatchToShow.SecondMatch))
                     {
@@ -288,6 +303,8 @@ else
 
             }
         }
+
+        <input style="background-color:aquamarine" type="button" value="שמור וחזור למסך המשחקים" @onclick="@(async ()=> await returnToHome())" />
     }
 </div>
 
@@ -388,6 +405,7 @@ else
             border-radius: 5px;
             cursor: pointer;
         }
+
 </style>
 
 @code {

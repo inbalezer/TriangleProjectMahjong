@@ -295,7 +295,7 @@ else
         @foreach (MatchToShow match in fullGame.MatchesList)
         {
 
-            <MatchComp matchText="@match.FirstMatch" matchText2="@match.SecondMatch" uploadedImg="" uploadedImg2="" DeleteCallBack="@deleteButtonClicked" EditMatchCallBack="@(async ()=> await EditMatchRow(match.ID))"></MatchComp>
+            <MatchComp matchText="@match.FirstMatch" matchText2="@match.SecondMatch" uploadedImg="" uploadedImg2="" DeleteCallBack="@deleteButtonClicked" EditMatchCallBack="@(async ()=> await EditMatchRow(match.ID))" isImageClickable=@isEditMode></MatchComp>
 
             if (isDeleteButtonClicked)
             {
@@ -370,6 +370,7 @@ else
         <p>---יש 5 זוגות ומעלה---</p>
     }
 </div>
+
 <input type="button" style="background-color: peru" value="@publishBtnValue" disabled="@isPublish" @onclick="publish" />
 
 @if (publishBtnValue == "פורסם")
@@ -460,6 +461,7 @@ else
     bool showWarningMessage = false;
     bool isDeleteButtonClicked = false;
     bool isNameAndInstruction = false;
+    bool isEditMode = true;
     bool IsButtonDisabled => string.IsNullOrEmpty(currentMatchToShow.SecondMatch) || string.IsNullOrEmpty(currentMatchToShow.FirstMatch);
 
     int characterLimit = 15;
@@ -606,6 +608,7 @@ else
                 newMatch = new MatchToUpdate();
                 myFileImage1 = "";
                 myFileImage2 = "";
+                isEditMode = true;
                 AreConditionsMet();
 
             }
@@ -867,6 +870,7 @@ else
     protected async Task EditMatchRow(int matchIdToEdit)
     {
         editAvailable = true;
+        isEditMode = false;
 
         var editMatchResponse = await Http.GetAsync("api/Matches/" + UserId + "/TempEdit" + "/" + matchIdToEdit);
         if (editMatchResponse.IsSuccessStatusCode)

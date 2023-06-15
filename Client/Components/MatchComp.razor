@@ -12,42 +12,40 @@
     <div class="container">
         <div class="rectangle rectangle-1">
             <div class="content">
-                @if (@matchText.Contains("uploadedFiles/"))
+                @if (matchText.Contains("uploadedFiles/"))
                 {
                     <img src="@matchText" width="75" />
                 }
                 else
                 {
                     <p>@matchText</p>
-
                 }
             </div>
-
         </div>
 
         <div class="rectangle rectangle-2">
             <div class="content">
-                @if (@matchText2.Contains("uploadedFiles/"))
+                @if (matchText2.Contains("uploadedFiles/"))
                 {
                     <img src="@matchText2" width="75" />
                 }
                 else
                 {
                     <p>@matchText2</p>
-
                 }
-
             </div>
+        </div>
 
-        </div>
         <div class="edit">
-            <img src="../edit_pencil.svg" alt="Edit" style="cursor: pointer" @onclick="editMatch" />
+            <img src="../edit_pencil.svg" alt="Edit" style="cursor: pointer" @onclick="editMatch" class="@(isImageClickable ? "" : "disabled")" />
         </div>
+
         <div class="delete">
             <img src="../trash3.svg" alt="Delete" @onclick="deleteMatch" />
         </div>
     </div>
 </div>
+
 
 <style>
     .container {
@@ -92,6 +90,11 @@
             background-color: #f1f1f1;
             cursor: pointer;
         }
+
+    .disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
 </style>
 
 
@@ -114,14 +117,12 @@
     [Parameter]
     public EventCallback<bool> DeleteCallBack { get; set; }
 
-    //[Parameter]
-    //public EventCallback<bool> ShowImageCallBack { get; set; }
-
-
     [Parameter]
     public EventCallback<bool> EditMatchCallBack { get; set; }
 
-    
+    [Parameter]
+    public bool isImageClickable { get; set; } = true;
+
 
     void deleteMatch()
     {
@@ -130,13 +131,8 @@
 
     void editMatch()
     {
-        
+        isImageClickable = false;
         EditMatchCallBack.InvokeAsync(true);
+        
     }
-
-    //void imageToShow()
-    //{
-    //    ShowImageCallBack.InvokeAsync(true);
-    //}
-
 }

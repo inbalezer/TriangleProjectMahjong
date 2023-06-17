@@ -36,8 +36,8 @@
             </div>
         </div>
 
-        <div class="edit">
-            <img src="../edit_pencil.svg" alt="Edit" style="cursor: pointer" @onclick="editMatch" class="@(isImageClickable ? "" : "disabled")" />
+        <div>
+            <img src="../edit_pencil.svg" alt="Edit" style="cursor: pointer" @onclick="editMatch" />
         </div>
 
         <div class="delete">
@@ -66,11 +66,11 @@
         justify-content: center;
     }
 
-        .rectangle p {
-            text-align: center;
-            margin: 0;
-            padding: 10px;
-        }
+    .rectangle p {
+        text-align: center;
+        margin: 0;
+        padding: 10px;
+    }
 
     .edit-button,
     .delete-button {
@@ -85,18 +85,17 @@
         justify-content: center;
     }
 
-        .edit-button:hover,
-        .delete-button:hover {
-            background-color: #f1f1f1;
-            cursor: pointer;
-        }
+    .edit-button:hover,
+    .delete-button:hover {
+        background-color: #f1f1f1;
+        cursor: pointer;
+    }
 
-    .disabled {
+    #disabled {
         pointer-events: none;
         opacity: 0.5;
     }
 </style>
-
 
 
 
@@ -131,7 +130,7 @@
 
     void editMatch()
     {
-        isImageClickable = false;
+        //isImageClickable = false;
         EditMatchCallBack.InvokeAsync(true);
         
     }

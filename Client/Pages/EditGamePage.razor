@@ -295,14 +295,19 @@ else
         @foreach (MatchToShow match in fullGame.MatchesList)
         {
 
-            <MatchComp matchText="@match.FirstMatch" matchText2="@match.SecondMatch" uploadedImg="" uploadedImg2="" DeleteCallBack="@deleteButtonClicked" EditMatchCallBack="@(async ()=> await EditMatchRow(match.ID))" isImageClickable=@isEditMode></MatchComp>
+            <MatchComp matchText="@match.FirstMatch" matchText2="@match.SecondMatch" uploadedImg="" uploadedImg2="" DeleteCallBack="(() => deleteButtonClicked(match))" EditMatchCallBack="@(async ()=> await EditMatchRow(match.ID))" isImageClickable=@isEditMode></MatchComp>
 
             if (isDeleteButtonClicked)
             {
-                <PopupComp Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" GameIdToDelete="@(async () => await DeleteMatchRow(match))" ShowMsg="closedReturnPopUp" actionButtonText="מחק זוג " cancelButtonText="בטל"></PopupComp>
+                <PopupComp ShowMsg="closedReturnPopUp" Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" GameIdToDelete="@(async () => await DeleteMatchRow(matchToDelete))" actionButtonText="מחק זוג " cancelButtonText="בטל"></PopupComp>
 
             }
         }
+
+        @*@if(!isEditMode)
+        {
+    @class='@(isEditMode ? "disabled" : "")'
+        }*@
 
         <input style="background-color:aquamarine" type="button" value="שמור וחזור למסך המשחקים" @onclick="@(async ()=> await returnToHome())" />
     }
@@ -388,24 +393,31 @@ else
         border-radius: 5px;
     }
 
-        .custom-input-file input[type="file"] {
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-        }
+    .custom-input-file input[type="file"] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+    }
 
-        .custom-input-file label {
-            display: inline-block;
-            padding: 10px;
-            background-color: blue;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+    .custom-input-file label {
+        display: inline-block;
+        padding: 10px;
+        background-color: blue;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+        
+    #disabled
+    {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+           
 
 </style>
 
@@ -486,6 +498,7 @@ else
     MatchToUpdate newMatch = new MatchToUpdate();
     MatchToUpdate currentMatchToShow = new MatchToUpdate();
     MatchToShow updatedMatchToShow = new MatchToShow();
+    MatchToShow matchToDelete;
     MatchToEdit editMatch = new MatchToEdit();
     gameInsrtuctionToInsert gameWithInstruction = new gameInsrtuctionToInsert();
     GameToShow fullGame = new GameToShow();
@@ -532,11 +545,13 @@ else
     void closedReturnPopUp()
     {
         isReturnClicked = false;
+        isDeleteButtonClicked = false;
     }
 
     void showMessage()
     {
         isReturnClicked = true;
+        isDeleteButtonClicked = true;
     }
 
     protected async Task publish()
@@ -831,18 +846,20 @@ else
         }
     }
 
-    void deleteButtonClicked()
+    void deleteButtonClicked(MatchToShow m)
     {
+        matchToDelete = m;
         isDeleteButtonClicked = true;
     }
 
-    protected async Task DeleteMatchRow(MatchToShow matchToDelete)
+    protected async Task DeleteMatchRow(MatchToShow matchRowToDelete)
     {
-
-        var deleteMatchResponse = await Http.DeleteAsync("api/Matches/" + UserId + "/DeleteMatch" + "/" + matchToDelete.ID);
+        matchRowToDelete = matchToDelete;
+        var deleteMatchResponse = await Http.DeleteAsync("api/Matches/" + UserId + "/DeleteMatch" + "/" + matchRowToDelete.ID);
         if (deleteMatchResponse.IsSuccessStatusCode)
         {
-            fullGame.MatchesList.Remove(matchToDelete);
+            fullGame.MatchesList.Remove(matchRowToDelete);
+            isDeleteButtonClicked = false;
             AreConditionsMet();
         }
 

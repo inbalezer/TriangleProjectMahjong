@@ -1,13 +1,13 @@
 ﻿@inherits LayoutComponentBase
-
+@using TriangleProject.Client.Components
 <div class="page">
 
     <main>
         <div class="mainnavbar px-3">
             <a href="https://localhost:7265/gameslist/false">לעורך</a>
             <a href="https://localhost:7265/game">למשחק</a>
-            <a href="https://localhost:7265/gameslist/false">איך משחקים?</a>
-            <a href="https://localhost:7265/gameslist/false">אודות</a>
+            <a @onclick="(() => OpenPopup(youtube))">איך משחקים? </a>
+            <a @onclick="(() => OpenPopup(aboutText))">אודות</a>
 
 
         </div>
@@ -17,5 +17,38 @@
         </article>
     </main>
 </div>
+
+
+@if (whichToOpen == "youtube")
+{
+    <GeneralPopUp imgSource="url('../how to play.png')" IsOpen="@isPopupOpen" YouTubeVideoId="diFDMkm2Ol0" />
+
+}
+else
+{
+    <GeneralPopUp imgSource="url('../odot.png')" IsOpen="@isPopupOpen" PopupText="אפיון ופיתוח: ענבל עזר, עדי פפיא ומלכה ברי אופיין ופותח במסגרת פרוייקט בקורסים: תכנות 2+תכנות אינטרקציה ואנימציה 2+ סביבות לימוד אינטרקטיבות 2" PopupLink="https://www.hit.ac.il/telem/overview" />
+
+}
+
+@code{
+
+    string whichToDisplay = "";
+    string youtube = "youtube";
+    string aboutText = "aboutText";
+    private bool isPopupOpen = false;
+    string whichToOpen = "";
+    private string videoId = "your-video-id";
+
+    private void OpenPopup(string popupToChoose)
+    {
+        whichToOpen = popupToChoose;
+        isPopupOpen = true;
+
+    }
+}
+
+
+
+}
 
 

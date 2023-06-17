@@ -1,0 +1,43 @@
+﻿
+
+@if (IsOpen)
+{
+
+    <div class="popup-overlay">
+        <div class="popup-content" style="background-image:@imgSource">
+            <button class="close-button" @onclick="ClosePopup">X</button>
+            @if (!string.IsNullOrEmpty(YouTubeVideoId))
+            {
+                <iframe class="youtube" width="100%" height="315" src="https://www.youtube.com/embed/@YouTubeVideoId" frameborder="0" allowfullscreen></iframe>
+            }
+            else
+            {
+                <p>@PopupText</p>
+                <a href="@PopupLink">הפקולטה לטכנולוגיות למידה</a>
+            }
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public bool IsOpen { get; set; }
+
+    [Parameter]
+    public string YouTubeVideoId { get; set; }
+
+    [Parameter]
+    public string PopupText { get; set; }
+    [Parameter]
+    public string imgSource { get; set; }
+
+
+    [Parameter]
+    public string PopupLink { get; set; }
+
+    private void ClosePopup()
+    {
+        IsOpen = false;
+    }
+}
+

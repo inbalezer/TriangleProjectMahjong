@@ -23,12 +23,12 @@
         <span class="custom-tooltip" title="פרסום המשחק הופך אותו לזמין">
             (i)
         </span>
-        
+
         <div>
-            
+
             @if (GamePublishStatus == "Not Eligible")
             {
-                <input class="custom-tooltip" title="משתנה" type="checkbox" disabled />
+                <input class="custom-tooltip" title=@dynamicConditionMsg type="checkbox" disabled />
                 @*<input type="button" value="Delete"  />*@
                 @*<span><img src="/trash3.svg" alt="Icon" @onclick="(() =>DeleteGame(game))" /> </span>*@
 
@@ -68,6 +68,8 @@
 
     [Parameter]
     public string GameFullName { get; set; }
+    [Parameter]
+    public bool GameInstructionToCheck { get; set; }
 
     [Parameter]
     public string GamePublishStatus { get; set; }
@@ -88,12 +90,26 @@
     [Parameter]
     public EventCallback<bool> showMsg { get; set; }
 
+    string dynamicConditionMsg = "";
+
     void changePublish()
     {
 
         isCheckboxClicked.InvokeAsync(true);
     }
 
+    protected override void OnInitialized()
+    {
+
+        if (GameInstructionToCheck == true)
+        {
+            dynamicConditionMsg = "אי אפשר לפרסם משחק ללא הנחייה ועם פחות מ-5 זוגות";
+        }
+        else
+        {
+            dynamicConditionMsg = "אי אפשר לפרסם משחק עם פחות מ-5 זוגות";
+        }
+    }
     void deleteGame()
     {
 
@@ -105,7 +121,7 @@
     void updateNavigate()
     {
         //    nav.NavigateTo("./EditGamePage/" + GameFullName + "/" + UserId);
-        
+
         nav.NavigateTo("./EditGamePage/" + GameFullName + "/" + gameId);
     }
 
@@ -121,7 +137,7 @@
         height: auto;
         border-radius: 10px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        background-color: white;        
+        background-color: white;
         margin: 20px;
     }
 

@@ -476,7 +476,7 @@ else
     bool isReturnPublishClicked = false;
     bool isPublishAndReturn = false;
     bool IsButtonDisabled => string.IsNullOrEmpty(currentMatchToShow.SecondMatch) || string.IsNullOrEmpty(currentMatchToShow.FirstMatch);
-
+    bool isInsExist = false;
     int characterLimit = 15;
     int characterGameNameLimit = 17;
     int characterGameInstructionLimit = 50;
@@ -561,6 +561,7 @@ else
 
     void Navigate()
     {
+
         Nav.NavigateTo("./", true);
     }
 
@@ -595,7 +596,11 @@ else
         }
         else
         {
-            nav.NavigateTo("./GamesList/");
+            if (string.IsNullOrEmpty(fullGame.GameInstruction))
+            {
+                isInsExist = true;
+            }
+            nav.NavigateTo("./GamesList/" + isInsExist);
         }
     }
 
@@ -1053,7 +1058,11 @@ else
         {
             //משתנה שיפעיל אנימציה של וי
             SettingMsg = "dfklmhdgjnfgsdlkf";
-            nav.NavigateTo("./GamesList/");
+            if (string.IsNullOrEmpty(fullGame.GameInstruction))
+            {
+                isInsExist = true;
+            }
+            nav.NavigateTo("./GamesList/" + isInsExist);
 
         }
 

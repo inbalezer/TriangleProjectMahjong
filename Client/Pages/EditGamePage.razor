@@ -70,7 +70,7 @@
 
 <p>הוספת זוגות</p>
 
-@if (isNameAndInstraction)
+@if (isNameAndInstructionExist)
 {
     @if (!isLimitMatches)
     {
@@ -133,7 +133,7 @@
                 {
                     <div class="custom-input-file">
                         <label for="FileInputID">העלה תמונה</label>
-                    </div> 
+                    </div>
                 }
 
                 @*<label for="FileInֵputID"> העלה תמונה</label>*@
@@ -179,10 +179,10 @@
                 {
                     <div class="custom-input-file">
                         <label for="FileInputID2">העלה תמונה</label>
-                    </div> 
+                    </div>
                 }
                 @*<label for="FileInֵputID"> העלה תמונה</label>
-                <InputFile id="FileInputID" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, false))"></InputFile>*@
+                    <InputFile id="FileInputID" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, false))"></InputFile>*@
                 <div class="custom-input-file">
                     <InputFile id="FileInputID2" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, false))"></InputFile>
 
@@ -305,9 +305,9 @@ else
         }
 
         @*@if(!isEditMode)
-        {
-    @class='@(isEditMode ? "disabled" : "")'
-        }*@
+                {
+            @class='@(isEditMode ? "disabled" : "")'
+                }*@
 
         <input style="background-color:aquamarine" type="button" value="שמור וחזור למסך המשחקים" @onclick="@(async ()=> await returnToHome())" />
     }
@@ -376,7 +376,7 @@ else
     }
 </div>
 
-<input type="button" style="background-color: peru" value="@publishBtnValue" disabled="@isPublish" @onclick="publish" />
+<input type="button" style="background-color: peru" value="@publishBtnValue" disabled="@isPublish" @onclick="@(async ()=> await publish("Published"))" />
 
 @if (publishBtnValue == "פורסם" && isReturnPublishClicked)
 {
@@ -395,32 +395,29 @@ else
         border-radius: 5px;
     }
 
-    .custom-input-file input[type="file"] {
-        position: absolute;
-        top: 0;
-        left: 0;
-        opacity: 0;
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
-    }
+        .custom-input-file input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
 
-    .custom-input-file label {
-        display: inline-block;
-        padding: 10px;
-        background-color: blue;
-        color: white;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-        
-    #disabled
-    {
+        .custom-input-file label {
+            display: inline-block;
+            padding: 10px;
+            background-color: blue;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+    #disabled {
         pointer-events: none;
         opacity: 0.5;
     }
-           
-
 </style>
 
 @code {
@@ -474,7 +471,7 @@ else
     bool isReturnButtonDisabled => string.IsNullOrEmpty(GameFullName);
     bool showWarningMessage = false;
     bool isDeleteButtonClicked = false;
-    bool isNameAndInstruction = false;
+    bool isNameAndInstructionExist = false;
     bool isEditMode = true;
     bool isReturnPublishClicked = false;
     bool isPublishAndReturn = false;
@@ -508,17 +505,25 @@ else
     GameToShow fullGame = new GameToShow();
     GameForEditor game1;
 
-    void AreConditionsMet()
+    protected async Task AreConditionsMet()
     {
 
         if (fullGame.MatchesList.Count >= 5)
         {
 
             isEnoughMathces = true;
+
+
         }
         else
         {
             isEnoughMathces = false;
+            isPublish = true;
+
+
+            await publish("Not Eligible");
+
+
         }
 
         if (!string.IsNullOrEmpty(GameInstruction) && !string.IsNullOrEmpty(GameFullName))
@@ -534,10 +539,23 @@ else
         if (isNameAndInstraction && isEnoughMathces)
         {
             isPublish = false;
+            if (fullGame.PublishStatus != "Eligible")
+            {
+                await publish("Eligible");
+
+            }
+
         }
         else
         {
             isPublish = true;
+
+            if (fullGame.PublishStatus != "Not Eligible")
+            {
+                await publish("Not Eligible");
+
+            }
+
         }
     }
 
@@ -588,11 +606,12 @@ else
         isDeleteButtonClicked = true;
     }
 
-    protected async Task publish()
+    protected async Task publish(string newStatus)
     {
         GamePublish gameToPublishInEdit = new GamePublish();
-        gameToPublishInEdit.PublishStatus = "Published";
         gameToPublishInEdit.ID = newGameID;
+        gameToPublishInEdit.PublishStatus = newStatus;
+
 
         var userRes = await Http.PostAsJsonAsync("api/Games/" + UserId + "/publishGame", gameToPublishInEdit);
 
@@ -600,8 +619,24 @@ else
         {
             GameForEditor GameoShow = userRes.Content.ReadFromJsonAsync<GameForEditor>().Result;
             gameCodeToShow = GameoShow.GameCode.ToString();
-            publishBtnValue = "פורסם";
-            isReturnPublishClicked = true;
+            if (gameToPublishInEdit.PublishStatus == "Published")
+            {
+                publishBtnValue = "פורסם";
+                isPublish = true;
+                isReturnPublishClicked = true;
+            }
+            else if (gameToPublishInEdit.PublishStatus == "Eligible")
+            {
+                publishBtnValue = "פרסם";
+                isPublish = false;
+
+            }
+            else
+            {
+                publishBtnValue = "פרסם";
+                isPublish = true;
+
+            }
 
         }
 
@@ -659,7 +694,7 @@ else
                 myFileImage1 = "";
                 myFileImage2 = "";
                 isEditMode = true;
-                AreConditionsMet();
+                await AreConditionsMet();
 
             }
             else
@@ -696,7 +731,7 @@ else
                 newMatch = new MatchToUpdate();
                 myFileImage1 = "";
                 myFileImage2 = "";
-                AreConditionsMet();
+                await AreConditionsMet();
             }
 
             else
@@ -725,7 +760,24 @@ else
         }
     }
 
-
+    void publishBtnDisplay(string status)
+    {
+        if (status == "Published")
+        {
+            publishBtnValue = "פורסם";
+            isPublish = true;
+        }
+        else if (status == "Eligible")
+        {
+            publishBtnValue = "פרסם";
+            isPublish = false;
+        }
+        else
+        {
+            publishBtnValue = "פרסם";
+            isPublish = true;
+        }
+    }
     protected override async Task OnInitializedAsync()
     {
         characterCountGameName = GameFullName.Length;
@@ -737,9 +789,16 @@ else
 
             fullGame = ShowGameRes.Content.ReadFromJsonAsync<GameToShow>().Result;
             GameInstruction = fullGame.GameInstruction;
-            characterCountInstruction = GameInstruction.Length;
+
             Console.WriteLine(fullGame.GameInstruction);
-            AreConditionsMet();
+            publishBtnDisplay(fullGame.PublishStatus);
+            if (!string.IsNullOrEmpty(fullGame.GameInstruction))
+            {
+                isNameAndInstructionExist = true;
+                characterCountInstruction = GameInstruction.Length;
+
+
+            }
         }
         else
         {
@@ -848,8 +907,8 @@ else
         {
             //משתנה שיפעיל אנימציה של וי
             SettingMsg = "קולולולו";
-            isNameAndInstruction = true;
-            AreConditionsMet();
+            isNameAndInstructionExist = true;
+            await AreConditionsMet();
         }
 
         else
@@ -895,7 +954,7 @@ else
         {
             fullGame.MatchesList.Remove(matchRowToDelete);
             isDeleteButtonClicked = false;
-            AreConditionsMet();
+            await AreConditionsMet();
         }
 
         else

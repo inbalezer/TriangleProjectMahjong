@@ -1,0 +1,247 @@
+﻿body {
+    background-color: #fffdf3;
+    font-family: "Assistant", sans-serif;
+}
+
+#Bg {
+    height: 100vh;
+    width: 100vw;
+}
+
+iframe {
+    border: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+#gameArea {
+    overflow: hidden;
+    position: relative;
+    height: 94vh;
+    width: 99vw;
+    margin: 0 auto;
+}
+
+#gameIframe {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.hide {
+    display: none;
+}
+
+header {
+    background-color: #f2e6c7;
+    width: 100%;
+    height: 70px;
+    position: relative;
+    direction: rtl;
+    display: block;
+    direction: rtl;
+    z-index: 3;
+}
+
+    /*כותרת משחק*/
+    header > a > p {
+        font-family: "Assistant", sans-serif;
+        font-size: 12pt;
+        font-weight: 600;
+        position: relative;
+        top: -10px;
+        color: black;
+        display: inline-block;
+        direction: rtl;
+    }
+
+/*לוגו*/
+#logo {
+    width: 140px;
+    height: 42px;
+    padding: 15px 15px;
+    direction: rtl;
+}
+
+nav {
+    margin-top: -80px;
+    margin-left: 10px;
+    direction: rtl;
+}
+
+    nav ul {
+        list-style: none;
+        direction: rtl;
+    }
+
+        nav ul li {
+            display: inline-block;
+            float: left;
+            direction: rtl;
+        }
+
+            nav ul li a {
+                display: block;
+                color: #1c7eb6;
+                text-align: center;
+                padding: 3px 20px;
+                font-weight: 630;
+                font-size: 20pt;
+                font-family: "Assistant", sans-serif;
+                direction: rtl;
+                text-decoration: underline;
+            }
+
+                nav ul li a:hover {
+                    font-weight: 650;
+                    cursor: pointer;
+                    font-family: "Assistant", sans-serif;
+                    direction: rtl;
+                    text-decoration: none;
+                }
+
+.popUp {
+    position: fixed;
+    z-index: 4;
+    text-align: center;
+    direction: rtl;
+}
+
+#aboutDiv {
+    text-align: center;
+    position: fixed;
+    top: 5%;
+    left: 15%;
+    zoom: 75%;
+    transform: translate(-50%, -50%);
+}
+
+#howToPlayDiv {
+    position: fixed;
+    top: 5%;
+    left: 15%;
+    zoom: 75%;
+    transform: translate(-50%, -50%);
+}
+
+.aboutText {
+    position: fixed;
+    top: 40%;
+    left: 48%;
+    transform: translate(-50%, -50%);
+    font-size: 24pt;
+    text-align: center;
+    color: #64aada;
+    font-weight: 500;
+}
+
+.aboutTextLink {
+    position: fixed;
+    top: 350%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24pt;
+    color: #1c7eb6;
+    font-weight: 500;
+}
+
+.closePop {
+    position: fixed;
+    transform: translate(-3.8em, 1.7em);
+    font-size: 40px;
+    font-weight: 700;
+    color: rgb(161, 18, 65);
+}
+
+    .closePop:hover {
+        cursor: pointer;
+    }
+
+#video {
+    position: fixed;
+    height: 440px;
+    width: 800px;
+    transform: translate(-50%, -170%);
+}
+
+.bounceInDown {
+    -webkit-animation-name: bounceInDown;
+    animation-name: bounceInDown;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+/*@-webkit-keyframes bounceInDown {
+    0%, 60%, 75%, 90%, 100% {
+        -webkit-transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -3000px, 0);
+        transform: translate3d(0, -3000px, 0);
+    }
+
+    60% {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 25px, 0);
+        transform: translate3d(0, 25px, 0);
+    }
+
+    75% {
+        -webkit-transform: translate3d(0, -10px, 0);
+        transform: translate3d(0, -10px, 0);
+    }
+
+    90% {
+        -webkit-transform: translate3d(0, 5px, 0);
+        transform: translate3d(0, 5px, 0);
+    }
+
+    100% {
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+@keyframes bounceInDown {
+    0%, 60%, 75%, 90%, 100% {
+        -webkit-transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -3000px, 0);
+        transform: translate3d(0, -3000px, 0);
+    }
+
+    60% {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 25px, 0);
+        transform: translate3d(0, 25px, 0);
+    }
+
+    75% {
+        -webkit-transform: translate3d(0, -10px, 0);
+        transform: translate3d(0, -10px, 0);
+    }
+
+    90% {
+        -webkit-transform: translate3d(0, 5px, 0);
+        transform: translate3d(0, 5px, 0);
+    }
+
+    100% {
+        -webkit-transform: none;
+        transform: none;
+    }
+}*/
+

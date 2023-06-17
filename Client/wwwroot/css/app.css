@@ -1,8 +1,23 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, Helvetica, Arial, sans-serif;
 }
+
+body {
+    background-image: url("../main background.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.mainnavbar {
+    background: linear-gradient(94deg, #62629a -1.43%, #2a2a3e 172.88%);
+    height: 5vh;
+    width: 100%;
+    color: white;
+    text-decoration: underline;
+}
+
 
 h1:focus {
     outline: none;
@@ -62,4 +77,3 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
-

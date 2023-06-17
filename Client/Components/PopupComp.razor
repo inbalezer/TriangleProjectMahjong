@@ -4,7 +4,7 @@
     <div class="popup-container">
         <div class="popup-content">
             <div class="popup-close">
-                <button class="popup-close-button" @onclick="IsDeleteButtonClicked">x</button>
+                <button class="popup-close-button" @onclick="() => IsDeleteButtonClicked(true)">x</button>
             </div>
             <h3>@Headline</h3>
             <p> @gameName :@Text1 </p>
@@ -12,7 +12,7 @@
 
             <div class="popup-buttons">
                 <button class="popup-button" style="background-color: red; color: white;" @onclick="()=> DeleteGameFromList(true)">@actionButtonText</button>
-                <button class="popup-button" style="background-color: white; color: red; border: 2px solid red;" @onclick="IsDeleteButtonClicked">@cancelButtonText</button>
+                <button class="popup-button" style="background-color: white; color: red; border: 2px solid red;" @onclick="() => IsDeleteButtonClicked(false)">@cancelButtonText</button>
             </div>
         </div>
     </div>
@@ -105,7 +105,13 @@
     public string Text2 { get; set; }
 
     [Parameter]
+    public bool isXclicked { get; set; } = false;
+
+    [Parameter]
     public EventCallback<bool> ShowMsg { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> xClicked { get; set; }
 
     [Parameter]
     public EventCallback<int> GameIdToDelete { get; set; }
@@ -120,10 +126,12 @@
         }
     }
 
-    private void IsDeleteButtonClicked()
+    private void IsDeleteButtonClicked(bool X)
     {
         notDeleted = true;
+        isXclicked = X;
         ShowMsg.InvokeAsync(notDeleted);
+        xClicked.InvokeAsync(isXclicked);
     }
 
 }

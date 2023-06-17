@@ -115,7 +115,7 @@
 
                     @if (!string.IsNullOrEmpty(currentMatchToShow.FirstMatch))
                     {
-                        <span class="character-count">Characters entered: @characterCountFirst / @characterLimit </span>
+                        <span class="character-count"> @characterCountFirst / @characterLimit </span>
                     }
                 </div>
             }
@@ -378,11 +378,13 @@ else
 
 <input type="button" style="background-color: peru" value="@publishBtnValue" disabled="@isPublish" @onclick="publish" />
 
-@if (publishBtnValue == "פורסם")
+@if (publishBtnValue == "פורסם" && isReturnPublishClicked)
 {
-    <PopupComp Headline="פורסם בהצלחה!" Text1="איזה כיף, המשחק מחכה לך במסך המשחקים שלך. קוד המשחק הוא:" Text2="@gameCodeToShow" actionButtonText="למשחק" ShowMsg="closedReturnPopUp" cancelButtonText="חזור למסך המשחקים"></PopupComp>
+    <PopupComp Headline="פורסם בהצלחה!" Text1="איזה כיף, המשחק מחכה לך במסך המשחקים שלך. קוד המשחק הוא:" Text2="@gameCodeToShow" GameIdToDelete="navigateToGameAfterPublish" actionButtonText="למשחק" ShowMsg="closedReturnPopUp" cancelButtonText="חזור למסך המשחקים" xClicked="(value) => navigateToGamesScreen(value)"></PopupComp>
 
 }
+
+
 
 
 <style>
@@ -474,6 +476,8 @@ else
     bool isDeleteButtonClicked = false;
     bool isNameAndInstruction = false;
     bool isEditMode = true;
+    bool isReturnPublishClicked = false;
+    bool isPublishAndReturn = false;
     bool IsButtonDisabled => string.IsNullOrEmpty(currentMatchToShow.SecondMatch) || string.IsNullOrEmpty(currentMatchToShow.FirstMatch);
 
     int characterLimit = 15;
@@ -542,15 +546,45 @@ else
         Nav.NavigateTo("./", true);
     }
 
+    void navigateToGameAfterPublish()
+    {
+        //nav.NavigateTo("./GamesList/");
+    }
+
     void closedReturnPopUp()
     {
         isReturnClicked = false;
         isDeleteButtonClicked = false;
+        isPublishAndReturn = true;
+
+    }
+
+    //void navigateToGamesScreen()
+    //{
+    //    if ()
+    //    {
+    //        nav.NavigateTo("./GamesList/");
+    //    }
+    //}
+
+    private void navigateToGamesScreen(bool value)
+    {
+        isPublishAndReturn = value;
+
+        if (isPublishAndReturn)
+        {
+            isReturnPublishClicked = false;
+        }
+        else
+        {
+            nav.NavigateTo("./GamesList/");
+        }
     }
 
     void showMessage()
     {
         isReturnClicked = true;
+        isReturnPublishClicked = false;
         isDeleteButtonClicked = true;
     }
 
@@ -567,6 +601,7 @@ else
             GameForEditor GameoShow = userRes.Content.ReadFromJsonAsync<GameForEditor>().Result;
             gameCodeToShow = GameoShow.GameCode.ToString();
             publishBtnValue = "פורסם";
+            isReturnPublishClicked = true;
 
         }
 

@@ -521,8 +521,7 @@ else
             isPublish = true;
 
 
-            await publish("Not Eligible");
-
+            @*await publish("Not Eligible");*@
 
         }
 
@@ -616,6 +615,7 @@ else
         GamePublish gameToPublishInEdit = new GamePublish();
         gameToPublishInEdit.ID = newGameID;
         gameToPublishInEdit.PublishStatus = newStatus;
+        fullGame.PublishStatus = newStatus;
 
 
         var userRes = await Http.PostAsJsonAsync("api/Games/" + UserId + "/publishGame", gameToPublishInEdit);

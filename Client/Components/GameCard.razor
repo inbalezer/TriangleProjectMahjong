@@ -9,7 +9,6 @@
 @inject NavigationManager nav
 @inject NavigationManager Nav
 
-
 <div class="game-card">
     <div class="title">@GameFullName</div>
     <div class="content">
@@ -17,6 +16,7 @@
             <input type="button" value="Update" @onclick="updateNavigate" />
 
         </div>
+
         <div class="custom-tooltip" title="את קוד המשחק יש להזין כדי להיכנס אליו">@gameCode</div>
 
         <span>סטטוס פרסום </span>
@@ -29,17 +29,54 @@
             @if (GamePublishStatus == "Not Eligible")
             {
                 <input class="custom-tooltip" title=@dynamicConditionMsg type="checkbox" disabled />
-                @*<input type="button" value="Delete"  />*@
-                @*<span><img src="/trash3.svg" alt="Icon" @onclick="(() =>DeleteGame(game))" /> </span>*@
+                <div id="Group_238">
+                    <div id="Group_234">
+                        <svg class="Rectangle_272">
+                            <rect id="Rectangle_272" rx="18" ry="18" x="0" y="0" width="181" height="36">
+                            </rect>
+                        </svg>
+                        <svg class="Ellipse_4">
+                            <ellipse id="Ellipse_4" rx="19" ry="19" cx="19" cy="19">
+                            </ellipse>
+                        </svg>
+                        <div id="n__">
+                            <span>לא עומד בתנאים</span>
+                        </div>
+                    </div>
+                </div>
 
             }
             else if (GamePublishStatus == "Eligible")
             {
-                <input type="checkbox" @onchange="changePublish" />
+                @*<input type="checkbox" @onchange="ToggleEllipse" />*@
+                <div id="Group_234">
+                    <svg class="Path_150_gi" viewBox="0 0 181 36">
+                        <path id="Path_150_gi" d="M 18 0 L 163 0 C 172.9411315917969 0 181 8.058874130249023 181 18 C 181 27.94112586975098 172.9411315917969 36 163 36 L 18 36 C 8.058874130249023 36 0 27.94112586975098 0 18 C 0 8.058874130249023 8.058874130249023 0 18 0 Z"></path>
+                    </svg>
+                    <svg class="Ellipse_4" @onclick="changePublish">
+                        <ellipse id="@ellipseClass" rx="19" ry="19" cx="19" cy="19"></ellipse>
+                    </svg>
+                    <div id="n__gk">
+                        <span>@publishStatusBtnText</span>
+                    </div>
+                </div>
+
             }
             else
             {
-                <input type="checkbox" checked @onchange="changePublish" />
+                <div id="Group_234">
+                    <svg class="Path_150_gi" viewBox="0 0 181 36">
+                        <path id="Path_150_gi" d="M 18 0 L 163 0 C 172.9411315917969 0 181 8.058874130249023 181 18 C 181 27.94112586975098 172.9411315917969 36 163 36 L 18 36 C 8.058874130249023 36 0 27.94112586975098 0 18 C 0 8.058874130249023 8.058874130249023 0 18 0 Z"></path>
+                    </svg>
+                    <svg class="Ellipse_4" @onclick="changePublish">
+                        <ellipse id="@ellipseClass" rx="19" ry="19" cx="19" cy="19"></ellipse>
+                    </svg>
+                    <div id="n__gk">
+                        <span>@publishStatusBtnText</span>
+                    </div>
+                </div>
+
+
             }
         </div>
         <div class="delete-button-container">
@@ -52,6 +89,10 @@
 
 @code {
 
+    bool isToggled = false; // Track the toggle state
+    string ellipseClass = "";
+    string publishStatusBtnText = "";// CSS class for the Ellipse_4 element
+
     [CascadingParameter]
     public int UserId { get; set; }
 
@@ -61,6 +102,10 @@
         public bool MsgStatus { get; set; }
         public string GameName { get; set; }
     }
+    @*void ToggleEllipse()
+        {
+
+        }*@
 
     @*showMsgInfo showMsg = new showMsgInfo();*@
 
@@ -95,6 +140,9 @@
 
     void changePublish()
     {
+        isToggled = !isToggled;
+        ellipseClass = isToggled ? "toggled" : "untoggled";
+        publishStatusBtnText = isToggled ? "מפורסם" : "ניתן לפרסום";
 
         isCheckboxClicked.InvokeAsync(true);
     }
@@ -110,6 +158,26 @@
         {
             dynamicConditionMsg = "אי אפשר לפרסם משחק עם פחות מ-5 זוגות";
         }
+        if (GamePublishStatus == "Not Eligible")
+        {
+            ellipseClass = "";
+
+        }
+        else if (GamePublishStatus == "Eligible")
+        {
+            ellipseClass = "untoggled";
+            publishStatusBtnText = "ניתן לפרסום";
+
+        }
+        else
+        {
+            ellipseClass = "toggled";
+            publishStatusBtnText = "מפורסם";
+            isToggled = true;
+
+
+        }
+
     }
     void deleteGame()
     {

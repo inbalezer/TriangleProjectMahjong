@@ -104,7 +104,6 @@
                         else
                         {
                             currentMatchToShow.FirstMatch = currentValue;
-                            Console.WriteLine("not empty");
 
 
                         }
@@ -797,15 +796,14 @@ else
     {
         characterCountGameName = GameFullName.Length;
 
+
         var ShowGameRes = await Http.GetAsync("api/Games/" + UserId + "/FullGameToEdit/" + newGameID);
 
         if (ShowGameRes.IsSuccessStatusCode)
         {
-
             fullGame = ShowGameRes.Content.ReadFromJsonAsync<GameToShow>().Result;
             GameInstruction = fullGame.GameInstruction;
 
-            Console.WriteLine(fullGame.GameInstruction);
             publishBtnDisplay(fullGame.PublishStatus);
             if (!string.IsNullOrEmpty(fullGame.GameInstruction))
             {
@@ -814,6 +812,9 @@ else
 
 
             }
+
+            await AreConditionsMet();
+
         }
         else
         {

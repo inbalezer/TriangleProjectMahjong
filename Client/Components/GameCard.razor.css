@@ -200,7 +200,7 @@
 #untoggled {
     fill: rgba(98,98,154,1);
     transform: translateX(0);
-    transition: transform 0.6s ease;
+    transition: transform 1s ease-in-out;
     filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.161));
     position: absolute;
     overflow: visible;
@@ -214,7 +214,7 @@
 #toggled {
     fill: rgba(162,232,165,1);
     transform: translateX(145px);
-    transition: transform 0.6s ease;
+    transition: transform 1s ease-in-out;
     filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.161));
     position: absolute;
     overflow: visible;

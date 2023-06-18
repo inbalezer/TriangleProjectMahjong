@@ -87,8 +87,9 @@
                     currentMatchToShow = newMatch;
                 }
                 currentMatchToShow.FirstIsText = true;
+                Console.WriteLine(currentMatchToShow.FirstMatch);
 
-                if (currentMatchToShow.FirstMatch == "")
+                if (currentMatchToShow.FirstMatch != "")
                 {
                     currentValue = currentMatchToShow.FirstMatch;
 
@@ -96,13 +97,15 @@
                     {
                         if (currentMatchToShow.FirstMatch.Contains("uploadedFiles/"))
                         {
-                            currentMatchToShow.FirstMatch = "";
-                            Console.WriteLine("empty");
+                            currentMatchToShow.FirstMatch = priviousValue;
+                            Console.WriteLine("priviousValue" + priviousValue);
 
                         }
                         else
                         {
                             currentMatchToShow.FirstMatch = currentValue;
+                            Console.WriteLine("not empty");
+
 
                         }
                     }
@@ -121,6 +124,8 @@
             }
             else
             {
+
+                priviousValue = currentMatchToShow.FirstMatch;
                 currentMatchToShow.FirstIsText = false;
                 if (myFileImage1 != "")
                 {
@@ -162,6 +167,8 @@
 
             @if (!text2Changed)
             {
+                priviousValue2 = currentMatchToShow.SecondMatch;
+
                 @if (editMatch.ID == 0)
                 {
                     currentMatchToShow = newMatch;
@@ -199,25 +206,26 @@
                     @*<input type="button" value="העבר למחיקה " @onclick="MakeDeleteList" />*@
                 }
 
+
             }
             else
             {
                 currentValue2 = newMatch.SecondMatch;
                 currentMatchToShow.SecondIsText = true;
 
-                if (currentMatchToShow.SecondMatch == "")
+
+                if (currentMatchToShow.SecondMatch != "")
                 {
                     if (currentValue2 != null)
                     {
                         if (!currentValue2.Contains("uploadedFiles/"))
                         {
                             newMatch.SecondMatch = currentValue2;
-                            Console.WriteLine(newMatch.SecondMatch + "im in the stupid else");
 
                         }
                         else
                         {
-                            newMatch.SecondMatch = "";
+                            newMatch.SecondMatch = priviousValue2;
                             Console.WriteLine("empty");
                         }
                     }
@@ -453,6 +461,8 @@ else
     string unacceptedImg = "";
     string previousValue = "";
     string gameCodeToShow = "";
+    string priviousValue = "";
+    string priviousValue2 = "";
 
     @*string msg = "";*@
     bool FirstIsText;

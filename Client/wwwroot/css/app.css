@@ -9,6 +9,7 @@ body {
     background-image: url("../main background.svg");
     background-repeat: no-repeat;
     background-size: cover;
+    font-family: Heebo;
 }
 
 .mainnavbar {
@@ -104,6 +105,6 @@ a, .btn-link {
     background-color: rgba(255, 255, 255, 0.4); /* Adjust the RGB color values and opacity (alpha channel) as needed */
 
     display: grid;
-    grid-template-columns: repeat(6, 1fr); /* Adjust the number based on the desired number of components per row */
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
     gap: 10px; /* Adjust the gap size between components */
 }

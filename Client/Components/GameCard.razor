@@ -17,13 +17,13 @@
         </div>
 
         <div class="custom-tooltip" title="את קוד המשחק יש להזין כדי להיכנס אליו">@gameCode</div>
-
+        <br/>
         <span>סטטוס פרסום </span>
         <span class="custom-tooltip" title="פרסום המשחק הופך אותו לזמין">
             <img src="../css/games list imgs/i.svg" />
         </span>
-
-        <div>
+        
+        <div style="align-items">
 
             @if (GamePublishStatus == "Not Eligible")
             {
@@ -197,13 +197,14 @@
 
 <style>
     .game-card {
-        width: 100%;
+        width: 70%;
         max-width: 254px;
         height: auto;
         border-radius: 10px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         background-color: white;
         margin: 20px;
+        align-items:center;
     }
 
     .title {
@@ -213,20 +214,18 @@
     #GameName{
         background-color: #87C3F0;
         text-align: center;
-        padding: 5px 0;
-        padding-bo
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         color: #62629A;
+        font-size: 15pt;
+        font-weight: bold;
     }
 
     .CardContent {
         margin-top: 10px;
         text-align: center;
         color: #62629A;
-        font-family:Assistant;
-        font-size:15pt;
-        font-weight:bold;
+        font-size:13pt;
     }
 
     .toggle-button {

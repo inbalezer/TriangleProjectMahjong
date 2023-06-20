@@ -327,25 +327,7 @@ else
     <input type="button" value="reload" @onclick=Navigate />
 }
 
-@if (myFileImage != "")
-{
-    <img src="@myFileImage" width="150" />
-    <input type="button" value="העבר למחיקה " @onclick="MakeDeleteList" />
-}
 
-
-@if (DeletedImages.Count > 0)
-{
-    <ul>
-        @foreach (string img in DeletedImages)
-        {
-
-            <li>@img     <img src="@img" width="50" /> </li>
-        }
-    </ul>
-
-    <input type="button" value="מחק תמונות נבחרות " @onclick="DeleteImage" />
-}
 
 @if (SettingMsg != "")
 {
@@ -486,6 +468,7 @@ else
     bool isPublishAndReturn = false;
     bool IsButtonDisabled => string.IsNullOrEmpty(currentMatchToShow.SecondMatch) || string.IsNullOrEmpty(currentMatchToShow.FirstMatch);
     bool isInsExist = false;
+    bool isFirstImage = false;
     int characterLimit = 15;
     int characterGameNameLimit = 17;
     int characterGameInstructionLimit = 50;
@@ -676,6 +659,7 @@ else
 
     protected async Task AddMatch(MatchToUpdate newMatchForIdentify)
     {
+
         if (editMatch.ID > 0) // EDIT MATCH
         {
             newMatchForIdentify.GameID = newGameID;
@@ -704,6 +688,17 @@ else
                 currentMatchToShow = new MatchToUpdate();
                 editMatch = new MatchToEdit();
                 newMatch = new MatchToUpdate();
+                //MakeDeleteList();
+                if (DeletedMatch1Images.Count > 0)
+                {
+                    DeletedMatch1Images.RemoveAt(DeletedMatch1Images.Count - 1);
+                    DeleteImage(DeletedMatch1Images);
+                }
+                if (DeletedMatch2Images.Count > 0)
+                {
+                    DeletedMatch2Images.RemoveAt(DeletedMatch2Images.Count - 1);
+                    DeleteImage(DeletedMatch2Images);
+                }
                 myFileImage1 = "";
                 myFileImage2 = "";
                 isEditMode = true;
@@ -742,6 +737,17 @@ else
                 fullGame.MatchesList.Add(match1);
                 currentMatchToShow = new MatchToUpdate();
                 newMatch = new MatchToUpdate();
+                //MakeDeleteList();
+                if (DeletedMatch1Images.Count > 0)
+                {
+                    DeletedMatch1Images.RemoveAt(DeletedMatch1Images.Count - 1);
+                    DeleteImage(DeletedMatch1Images);
+                }
+                if (DeletedMatch2Images.Count > 0)
+                {
+                    DeletedMatch2Images.RemoveAt(DeletedMatch2Images.Count - 1);
+                    DeleteImage(DeletedMatch2Images);
+                }
                 myFileImage1 = "";
                 myFileImage2 = "";
                 await AreConditionsMet();
@@ -839,6 +845,7 @@ else
 
     private async Task UploadFile(InputFileChangeEventArgs e, bool isFirstImg)
     {
+
         var imageFiles = e.GetMultipleFiles();
         var file1 = e.File;
 
@@ -864,20 +871,25 @@ else
                     if (isFirstImg)
                     {
                         myFileImage1 = "uploadedFiles/" + resizeUrl;
+                        isFirstImage = isFirstImg;
+                        MakeDeleteList();
                     }
                     else
                     {
                         myFileImage2 = "uploadedFiles/" + resizeUrl;
+                        isFirstImage = isFirstImg;
+                        MakeDeleteList();
 
-                    }
-                    @*myFileImage = "uploadedFiles/" + resizeUrl;*@
+                    }                                   
                 }
             }
             else
             {
                 msg = "לא ניתן להעלות את התמונה- היא גדולה מדיי";
-            }
+            }           
         }
+
+
     }
 
     private bool IsFileAccepted(IBrowserFile fileExepted)
@@ -886,22 +898,31 @@ else
         return fileExepted.ContentType == "image/png" || fileExepted.ContentType == "image/jpeg";
     }
 
-    List<string> DeletedImages = new List<string>();
+    List<string> DeletedMatch1Images = new List<string>();
+    List<string> DeletedMatch2Images = new List<string>();
 
     private void MakeDeleteList() // הוספת שם התמונה לרשימת התמונות הכוללת המועמדת למחיקה- לא מחיקה בפועל מהדאטה בייס
     {
-        DeletedImages.Add(myFileImage);
-        myFileImage = "";
+        if (!string.IsNullOrEmpty(myFileImage1) && isFirstImage)
+        {
+            DeletedMatch1Images.Add(myFileImage1);
+        }
+        if (!string.IsNullOrEmpty(myFileImage2) && !isFirstImage)
+        {
+            DeletedMatch2Images.Add(myFileImage2);
+        }            
     }
 
-    private async Task DeleteImage()
+    private async Task DeleteImage(List<string> DeletedMatchList)
     {
-        var saveResponse = await Http.PostAsJsonAsync("api/Media/deleteImages", DeletedImages);
 
-        if (saveResponse.IsSuccessStatusCode == true)
+        var saveResponse = await Http.PostAsJsonAsync("api/Media/deleteImages", DeletedMatchList);
+
+        if (saveResponse.IsSuccessStatusCode)
         {
             msg = "התמונות נמחקו בהצלחה";
-            DeletedImages.Clear();
+            //DeletedMatch1Images.Clear();
+            DeletedMatchList.Clear();
         }
         else
         {
@@ -964,11 +985,22 @@ else
     protected async Task DeleteMatchRow(MatchToShow matchRowToDelete)
     {
         matchRowToDelete = matchToDelete;
+        if (!string.IsNullOrEmpty(matchRowToDelete.FirstMatch) && matchRowToDelete.FirstMatch.Contains(".png") || matchRowToDelete.FirstMatch.Contains(".JPEG"));
+        {
+            DeletedMatch1Images.Add(matchRowToDelete.FirstMatch);
+        }
+        if (!string.IsNullOrEmpty(matchRowToDelete.SecondMatch) && matchRowToDelete.SecondMatch.Contains(".png") || matchRowToDelete.SecondMatch.Contains(".JPEG"))
+        {
+            DeletedMatch2Images.Add(matchRowToDelete.SecondMatch);
+        }
+
         var deleteMatchResponse = await Http.DeleteAsync("api/Matches/" + UserId + "/DeleteMatch" + "/" + matchRowToDelete.ID);
         if (deleteMatchResponse.IsSuccessStatusCode)
         {
             fullGame.MatchesList.Remove(matchRowToDelete);
             isDeleteButtonClicked = false;
+            DeleteImage(DeletedMatch1Images);
+            DeleteImage(DeletedMatch2Images);
             await AreConditionsMet();
         }
 
@@ -991,6 +1023,8 @@ else
                     break;
             }
         }
+
+
     }
 
     protected async Task EditMatchRow(int matchIdToEdit)
@@ -1010,7 +1044,9 @@ else
             if (!editMatch.FirstIsText)
             {
                 textChanged = true;
-                myFileImage1 = currentMatchToShow.FirstMatch;                
+                isFirstImage = true;
+                myFileImage1 = currentMatchToShow.FirstMatch;    
+                MakeDeleteList();
 
             }
             else
@@ -1018,12 +1054,15 @@ else
                 textChanged = false;
                 characterCountFirst = editMatch.FirstMatch.Length;
                 characterCountSecond = editMatch.SecondMatch.Length;
+
             }
 
             if (!editMatch.SecondIsText)
             {
                 text2Changed = false;
+                isFirstImage = false;
                 myFileImage2 = currentMatchToShow.SecondMatch;
+                MakeDeleteList();
 
             }
             else

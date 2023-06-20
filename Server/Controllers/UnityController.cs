@@ -73,7 +73,7 @@ namespace TriangleProject.Server.Controllers
                     ID = GameId
                 };
 
-                string queryEligibleToPublish = "SELECT count(*) FROM Games WHERE Games.ID = @ID AND LENGTH(Games.GameInstruction) > 0 AND LENGTH(Games.GameFullName) > 0 AND (SELECT COUNT(*) FROM Matches WHERE Matches.GameID = Games.ID) >= 5";
+                string queryEligibleToPublish = "SELECT PublishStatus FROM Games WHERE Games.ID = @ID AND LENGTH(Games.GameInstruction) > 0 AND LENGTH(Games.GameFullName) > 0 AND (SELECT COUNT(*) FROM Matches WHERE Matches.GameID = Games.ID) >= 5";
                 var recordEligible = await _db.GetRecordsAsync<string>(queryEligibleToPublish, param);
                 string PublishStatus = recordEligible.FirstOrDefault();
 

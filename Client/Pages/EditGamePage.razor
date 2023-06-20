@@ -845,7 +845,7 @@ else
 
     private async Task UploadFile(InputFileChangeEventArgs e, bool isFirstImg)
     {
-        
+
         var imageFiles = e.GetMultipleFiles();
         var file1 = e.File;
 
@@ -889,7 +889,7 @@ else
             }           
         }
 
-        
+
     }
 
     private bool IsFileAccepted(IBrowserFile fileExepted)
@@ -993,7 +993,7 @@ else
         {
             DeletedMatch2Images.Add(matchRowToDelete.SecondMatch);
         }
-        
+
         var deleteMatchResponse = await Http.DeleteAsync("api/Matches/" + UserId + "/DeleteMatch" + "/" + matchRowToDelete.ID);
         if (deleteMatchResponse.IsSuccessStatusCode)
         {
@@ -1024,7 +1024,7 @@ else
             }
         }
 
-        
+
     }
 
     protected async Task EditMatchRow(int matchIdToEdit)
@@ -1044,7 +1044,9 @@ else
             if (!editMatch.FirstIsText)
             {
                 textChanged = true;
-                myFileImage1 = currentMatchToShow.FirstMatch;                
+                isFirstImage = true;
+                myFileImage1 = currentMatchToShow.FirstMatch;    
+                MakeDeleteList();
 
             }
             else
@@ -1052,12 +1054,15 @@ else
                 textChanged = false;
                 characterCountFirst = editMatch.FirstMatch.Length;
                 characterCountSecond = editMatch.SecondMatch.Length;
+
             }
 
             if (!editMatch.SecondIsText)
             {
                 text2Changed = false;
+                isFirstImage = false;
                 myFileImage2 = currentMatchToShow.SecondMatch;
+                MakeDeleteList();
 
             }
             else

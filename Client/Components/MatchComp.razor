@@ -12,27 +12,36 @@
     <div class="container">
         <div class="rectangle rectangle-1">
             <div class="content">
-                @if (matchText.Contains("uploadedFiles/"))
+                @if (!string.IsNullOrEmpty(matchText))
                 {
-                    <img src="@matchText" width="75" />
+                    @if (matchText.Contains("uploadedFiles/"))
+                    {
+                        <img src="@matchText" width="75" />
+                    }
+                    else
+                    {
+                        <p>@matchText</p>
+                    }
                 }
-                else
-                {
-                    <p>@matchText</p>
-                }
+
+                
             </div>
         </div>
 
         <div class="rectangle rectangle-2">
             <div class="content">
-                @if (matchText2.Contains("uploadedFiles/"))
+                @if (!string.IsNullOrEmpty(matchText2))
                 {
-                    <img src="@matchText2" width="75" />
+                    @if (matchText2.Contains("uploadedFiles/"))
+                    {
+                        <img src="@matchText2" width="75" />
+                    }
+                    else
+                    {
+                        <p>@matchText2</p>
+                    }
                 }
-                else
-                {
-                    <p>@matchText2</p>
-                }
+               
             </div>
         </div>
 

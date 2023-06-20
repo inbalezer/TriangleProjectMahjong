@@ -10,10 +10,10 @@
 @inject NavigationManager Nav
 
 <div class="game-card">
-    <div class="title">@GameFullName</div>
-    <div class="content">
+    <div id="GameName">@GameFullName</div>
+    <div class="CardContent">
         <div class="custom-tooltip" title="מעבר לעמוד עריכת תוכן המשחק והגדרותו">
-            <input type="button" value="Update" @onclick="updateNavigate" />
+            <input type="button" id="update" @onclick="updateNavigate" />
 
         </div>
 
@@ -21,14 +21,14 @@
 
         <span>סטטוס פרסום </span>
         <span class="custom-tooltip" title="פרסום המשחק הופך אותו לזמין">
-            (i)
+            <img src="../css/games list imgs/i.svg" />
         </span>
 
         <div>
 
             @if (GamePublishStatus == "Not Eligible")
             {
-                <input class="custom-tooltip" title=@dynamicConditionMsg type="checkbox" disabled />
+             
                 <div id="Group_238">
                     <div id="Group_234">
                         <svg class="Rectangle_272">
@@ -211,15 +211,26 @@
     }
 
     .title {
-        background-color: #d0e6f5;
-        text-align: center;
-        padding: 5px 0;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
+       
     }
 
-    .content {
+    #GameName{
+        background-color: #87C3F0;
+        text-align: center;
+        padding: 5px 0;
+        padding-bo
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        color: #62629A;
+    }
+
+    .CardContent {
         margin-top: 10px;
+        text-align: center;
+        color: #62629A;
+        font-family:Assistant;
+        font-size:15pt;
+        font-weight:bold;
     }
 
     .toggle-button {
@@ -261,6 +272,26 @@
         .custom-tooltip:hover::after {
             opacity: 1;
             visibility: visible;
+        }
+
+        #update{
+       /* background-image: url('../css/games list imgs/group 1054.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        position:relative;*/
+
+        background-image: url('../css/games list imgs/group 1054.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        position: absolute;
+        bottom: 100%; /* adjust the top position according to your needs */
+        left: 90%; /* adjust the right position according to your needs */
         }
 </style>
 

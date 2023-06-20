@@ -27,8 +27,4 @@
     <Content Remove="wwwroot\css\images\" />
     <Content Remove="wwwroot\css\games list imgs\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="wwwroot\css\images\" />
-    <Folder Include="wwwroot\css\games list imgs\" />
-  </ItemGroup>
 </Project>

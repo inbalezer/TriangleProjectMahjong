@@ -9,14 +9,13 @@
 @inject NavigationManager Nav
 
 
-<h5>המשחקים שלי</h5>
+<h5 class="PageMainTitle">המשחקים שלי</h5>
 <input type="text" style="border:2px solid pink" value="@searchQuery" @oninput="UpdateSearchQuery" @onblur="FilterGames" placeholder="חפש משחק..." />
 
 
 @if (user != null)
 {
-    <p>יצירת משחק חדש</p>
-    <input type="button" value="+" @onclick="showCreateGameField">
+    <input type="button" id="addGame" @onclick="showCreateGameField">
     @if (isPlusButtonClicked)
     {
         <p>(1-17 תווים)</p>
@@ -32,13 +31,12 @@
     }
 
     <p>The Games:</p>
-
-
+    <div id="allGames">
     @foreach (GameForEditor game in user.UserGames.Where(g => string.IsNullOrEmpty(searchQuery) || g.GameFullName.ToLower().Contains(searchQuery.ToLower())))
     {
         @if (!isThereGames)
         {
-            <span>
+            <span id="anyGameCard">
                 <GameCard GameFullName="@game.GameFullName" gameCode="@game.GameCode" GamePublishStatus="@game.PublishStatus" isCheckboxClicked="@(async () => await changePublish(game))" showMsg="(() => showMessage(game.GameFullName, game))" gameId="@game.ID" GameInstructionToCheck="@insCheck" />
 
                 <span> </span>
@@ -60,9 +58,9 @@
                 המשחקים שלך יופיעו כאן :)
             </div>
         }
-
+        
     }
-
+    </div>
 }
 
 
@@ -323,3 +321,16 @@
         }
     }
 }
+
+
+<style>
+    #addGame{
+    background-image: url('../css/games list imgs/create new game.svg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        border: none;
+        width: 100px; 
+        height: 100px; 
+        cursor: pointer;
+    }
+</style>

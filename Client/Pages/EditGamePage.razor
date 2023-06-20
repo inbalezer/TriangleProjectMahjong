@@ -649,7 +649,6 @@ else
             {
                 publishBtnValue = "פרסם";
                 isPublish = true;
-
             }
 
         }
@@ -1011,12 +1010,14 @@ else
             if (!editMatch.FirstIsText)
             {
                 textChanged = true;
-                myFileImage1 = currentMatchToShow.FirstMatch;
+                myFileImage1 = currentMatchToShow.FirstMatch;                
 
             }
             else
             {
                 textChanged = false;
+                characterCountFirst = editMatch.FirstMatch.Length;
+                characterCountSecond = editMatch.SecondMatch.Length;
             }
 
             if (!editMatch.SecondIsText)

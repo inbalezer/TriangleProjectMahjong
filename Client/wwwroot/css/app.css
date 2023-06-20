@@ -77,3 +77,32 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+
+.PageMainTitle {
+    font-size: 35pt;
+    color: #62629A;
+    background: linear-gradient(180deg, #fdf1d0 0%, #fffdf3 100%);
+    border-radius: 25px;
+    height: 85px;
+    max-width: 700px;
+    padding: 15px;
+    margin: 0 auto; /* Centers the title horizontally */
+    text-align: center; /* Centers the title text horizontally */
+    display: flex;
+    align-items: center; /* Centers the title vertically */
+    justify-content: center; /* Centers the title horizontally */
+}
+
+#allGames {
+    background-color: white;
+    border: 1px solid;
+    border-color: #d5d5d5;
+    border-radius: 45px;
+    padding: 20px 20px 20px 20px;
+    background-color: rgba(255, 255, 255, 0.4); /* Adjust the RGB color values and opacity (alpha channel) as needed */
+
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* Adjust the number based on the desired number of components per row */
+    gap: 10px; /* Adjust the gap size between components */
+}

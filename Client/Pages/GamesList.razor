@@ -15,51 +15,76 @@
 
 @if (user != null)
 {
-    <input type="button" id="addGame" @onclick="showCreateGameField">
-    @if (isPlusButtonClicked)
-    {
-        <p>(1-17 תווים)</p>
-        <input maxlength="17" style="border:2px solid blue" type="text" @bind="gameName" placeholder="הקלד שם משחק..." @oninput='e => HandleInputGameName(e, "gameName")' />
-        @if (!string.IsNullOrEmpty(gameName))
+    @*<input type="button" id="addGame" @onclick="showCreateGameField">
+        @if (isPlusButtonClicked)
         {
-            <span class="character-count"> @characterCountGameName / @characterGameNameLimit </span>
-        }
-        <br />
+            <p>(1-17 תווים)</p>
+            <input maxlength="17" style="border:2px solid blue" type="text" @bind="gameName" placeholder="הקלד שם משחק..." @oninput='e => HandleInputGameName(e, "gameName")' />
+            @if (!string.IsNullOrEmpty(gameName))
+            {
+                <span class="character-count"> @characterCountGameName / @characterGameNameLimit </span>
+            }
+            <br />
 
-        <input type="button" value="צור משחק" @onclick=@(()=>AddNewGame(UserId, gameName)) disabled="@isCreateButtonDisabled">
-        <input type="button" value="בטל" @onclick="ClearNewGame">
-    }
+            <input type="button" value="צור משחק" @onclick=@(()=>AddNewGame(UserId, gameName)) disabled="@isCreateButtonDisabled">
+            <input type="button" value="בטל" @onclick="ClearNewGame">
+        }*@
+
+
+    <div class="container">
+
+
+        <button class="@AddGamebuttonClass" @onclick="showCreateGameField">
+            <span class=@plus>+</span>
+        </button>
+
+        @if (isPlusButtonClicked)
+        {
+            <p>(1-17 תווים)</p>
+
+            <input maxlength="17" class="@circularInput" type="text" @bind="gameName" placeholder="הקלד שם משחק..." @oninput='e => HandleInputGameName(e, "gameName")' />
+            @if (!string.IsNullOrEmpty(gameName))
+            {
+                <span class="character-count"> @characterCountGameName / @characterGameNameLimit </span>
+            }
+            <br />
+
+            <input type="button" value="צור משחק" @onclick=@(()=>AddNewGame(UserId, gameName)) disabled="@isCreateButtonDisabled">
+            <input type="button" value="בטל" @onclick="ClearNewGame">
+        }
+
+    </div>
 
     <p>The Games:</p>
     <div id="allGames">
-    @foreach (GameForEditor game in user.UserGames.Where(g => string.IsNullOrEmpty(searchQuery) || g.GameFullName.ToLower().Contains(searchQuery.ToLower())))
-    {
-        @if (!isThereGames)
+        @foreach (GameForEditor game in user.UserGames.Where(g => string.IsNullOrEmpty(searchQuery) || g.GameFullName.ToLower().Contains(searchQuery.ToLower())))
         {
-            <span id="anyGameCard">
-                <GameCard GameFullName="@game.GameFullName" gameCode="@game.GameCode" GamePublishStatus="@game.PublishStatus" isCheckboxClicked="@(async () => await changePublish(game))" showMsg="(() => showMessage(game.GameFullName, game))" gameId="@game.ID" GameInstructionToCheck="@insCheck" />
+            @if (!isThereGames)
+            {
+                <span id="anyGameCard">
+                    <GameCard GameFullName="@game.GameFullName" gameCode="@game.GameCode" GamePublishStatus="@game.PublishStatus" isCheckboxClicked="@(async () => await changePublish(game))" showMsg="(() => showMessage(game.GameFullName, game))" gameId="@game.ID" GameInstructionToCheck="@insCheck" />
 
-                <span> </span>
-                
-                @if (isClicked)
-                {
+                    <span> </span>
+
+                    @if (isClicked)
+                    {
                         <PopupComp Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" gameName="@gameNameToDelete" Text2="@deleteTextPopUp2" isDeleteCompClicked="@isClicked" GameIdToDelete="@(async () => await DeleteGame(game1))" ShowMsg="closedPopUp" actionButtonText="מחק משחק" cancelButtonText="בטל"></PopupComp>
-                }
-            </span>
-            Console.WriteLine(isInstructionExist);
+                    }
+                </span>
+                Console.WriteLine(isInstructionExist);
+
+            }
+
+            else
+            {
+                <div>
+                    היי, איזה כיף שבאת!
+                    צור משחק בלחיצה על הפלוס
+                    המשחקים שלך יופיעו כאן :)
+                </div>
+            }
 
         }
-
-        else
-        {
-            <div>
-                היי, איזה כיף שבאת!
-                צור משחק בלחיצה על הפלוס
-                המשחקים שלך יופיעו כאן :)
-            </div>
-        }
-        
-    }
     </div>
 }
 
@@ -88,6 +113,7 @@
     bool isPlusButtonClicked = false;
     bool isThereGames => user.UserGames == null || user.UserGames.Count == 0;
     bool isCreateButtonDisabled => string.IsNullOrEmpty(gameName);
+    bool isExpanded = false;
     bool insCheck;
     string msg = "";
     string gameName = "";
@@ -96,6 +122,9 @@
     string deleteTextPopUp2 = "?האם אתה בטוח";
     string gameNameToDelete = "";
     string searchQuery = "";
+    string circularInput => isExpanded ? "circularInput" : "circularInputDisplayNone";
+    private string AddGamebuttonClass => isExpanded ? "circle-expended" : "circle-button";
+    private string plus => isExpanded ? "plus-expended" : "plus";
     int characterGameNameLimit = 17;
     int characterCountGameName = 0;
     GameForEditor game1;
@@ -122,6 +151,7 @@
     void showCreateGameField()
     {
         isPlusButtonClicked = true;
+        isExpanded = !isExpanded;
     }
 
     void FilterGames()
@@ -324,13 +354,13 @@
 
 
 <style>
-    #addGame{
-    background-image: url('../css/games list imgs/create new game.svg');
+    #addGame {
+        background-image: url('../css/games list imgs/create new game.svg');
         background-size: cover;
         background-repeat: no-repeat;
         border: none;
-        width: 100px; 
-        height: 100px; 
+        width: 100px;
+        height: 100px;
         cursor: pointer;
     }
 </style>

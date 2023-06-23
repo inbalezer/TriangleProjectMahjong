@@ -1,1 +1,88 @@
 ﻿
+.plus {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 3.1vw;
+    transition: left 0.3s ease-in-out;
+    font-weight: bold;
+}
+
+.plus-expended {
+    position: absolute;
+    top: 45%;
+    left: 90%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 3.3vw;
+    font-weight: bold;
+    animation: halfCircleMotion 0.5s ease-in-out 0.35s forwards;
+    transform-origin: center;
+    animation-fill-mode: forwards;
+}
+
+@keyframes halfCircleMotion {
+
+    0% {
+        top: 45%;
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        top: 45%;
+        transform: translate(-50%, -50%) rotate(180deg);
+    }
+}
+
+.circle-button {
+    width: 8vh;
+    height: 8vh;
+    border-radius: 50%;
+    background: linear-gradient(94deg, #9191ba 0%, #2c2c69 100%);
+    position: relative;
+    overflow: hidden;
+    border: none;
+    cursor: pointer;
+    transition: width 0.5s ease;
+}
+
+.circle-expended {
+    width: 32vh;
+    height: 8vh;
+    border-radius: 10vw;
+    background: linear-gradient(94deg, #9191ba 0%, #2c2c69 100%);
+    position: relative;
+    overflow: hidden;
+    border: none;
+    cursor: pointer;
+    transition: width 0.3s ease;
+}
+
+.circularInput {
+    width: 24vh;
+    height: 6vh;
+    left: 20%;
+    border-radius: 10vw;
+    border-bottom: 0.3px solid #F0F0F0;
+    background: linear-gradient(94deg, #FFFFFF 0%, #F0F0F0 100%);
+    position: relative;
+    overflow: hidden;
+    border: none;
+    outline: none;
+    padding: 10px;
+    box-sizing: border-box;
+    transition: width 0.3s ease;
+}
+
+
+.circularInputDisplayNone {
+    display: none;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    /*    justify-content: center;*/
+}

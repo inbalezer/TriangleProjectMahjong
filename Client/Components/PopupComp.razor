@@ -10,10 +10,16 @@
             <p> @gameName :@Text1 </p>
             <p>@Text2 </p>
 
+            @if (isDeleteCompClicked)
+            {
+                callToActionPopUpColor = "red";
+            }
             <div class="popup-buttons">
-                <button class="popup-button" style="background-color: red; color: white;" @onclick="()=> DeleteGameFromList(true)">@actionButtonText</button>
-                <button class="popup-button" style="background-color: white; color: red; border: 2px solid red;" @onclick="() => IsDeleteButtonClicked(false)">@cancelButtonText</button>
+                <button class="popup-button" style="background-color:@secondPopUpColor ; color: @callToActionPopUpColor; border: 2px solid @callToActionPopUpColor;" @onclick="() => IsDeleteButtonClicked(false)">@cancelButtonText</button>
+                <button class="popup-button" style="background-color: @callToActionPopUpColor ; color: @secondPopUpColor;" @onclick="()=> DeleteGameFromList(true)">@actionButtonText</button>
+                
             </div>
+
         </div>
     </div>
 </div>
@@ -61,7 +67,6 @@
         border: none;
         font-size: 18px;
         font-weight: bold;
-        color: red;
         cursor: pointer;
     }
 
@@ -80,7 +85,8 @@
 
 @code {
 
-
+    string callToActionPopUpColor = "lightskyblue";    
+    string secondPopUpColor = "white";
 
     [Parameter]
     public bool notDeleted { get; set; }
@@ -108,10 +114,14 @@
     public bool isXclicked { get; set; } = false;
 
     [Parameter]
+    public bool isDeleteCompClicked { get; set; } = false;
+
+    [Parameter]
     public EventCallback<bool> ShowMsg { get; set; }
 
     [Parameter]
     public EventCallback<bool> xClicked { get; set; }
+  
 
     [Parameter]
     public EventCallback<int> GameIdToDelete { get; set; }

@@ -26,13 +26,14 @@
         <div class="character-count-input">
 
             :שם המשחק <input maxlength="17" style="border:2px solid blue" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
-            <p>(1-17 תווים)</p>
-
-
             @if (!string.IsNullOrEmpty(GameFullName))
             {
                 <span class="character-count"> @characterCountGameName / @characterGameNameLimit </span>
             }
+            <p>(1-17 תווים)</p>
+
+
+            
             @if (GameFullName == "")
             {
                 <span>לא ניתן לשמור משחק ללא שם.</span>
@@ -43,18 +44,18 @@
         <div class="character-count-input">
             :הנחיית משחק  לחצו והתאימו בין
             <input maxlength="50" style="border:2px solid blue" type="text" @bind="GameInstruction" @oninput='e => HandleInput(e, "gameInstruction")' /> ורוקנו את הלוח
-
-            <p>(1-50 תווים)</p>
-
-
-            @if (!string.IsNullOrEmpty(GameInstruction))
+             @if (!string.IsNullOrEmpty(GameInstruction))
             {
                 <span class="character-count"> @characterCountInstruction / @characterGameInstructionLimit </span>
             }
             @if (showWarningMessage)
             {
-                <span class="warning-message">You need to fill the text box</span>
+                <span class="warning-message">לא ניתן לשמור משחק ללא הנחייה</span>
             }
+            <p>(1-50 תווים)</p>
+
+
+           
         </div>
 
     </tr>
@@ -236,7 +237,7 @@
 
                     @if (!string.IsNullOrEmpty(currentMatchToShow.SecondMatch))
                     {
-                        <span class="character-count">Characters entered: @characterCountSecond / @characterLimit </span>
+                        <span class="character-count">@characterCountSecond / @characterLimit </span>
                     }
                 </div>
 
@@ -306,7 +307,7 @@ else
 
             if (isDeleteButtonClicked)
             {
-                <PopupComp ShowMsg="closedReturnPopUp" Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" GameIdToDelete="@(async () => await DeleteMatchRow(matchToDelete))" actionButtonText="מחק זוג " cancelButtonText="בטל"></PopupComp>
+                <PopupComp ShowMsg="closedReturnPopUp" Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" isDeleteCompClicked="@isDeleteButtonClicked" GameIdToDelete="@(async () => await DeleteMatchRow(matchToDelete))" actionButtonText="מחק זוג " cancelButtonText="בטל"></PopupComp>
 
             }
         }
@@ -328,12 +329,10 @@ else
 }
 
 
-
 @if (SettingMsg != "")
 {
     <p>@SettingMsg</p>
 }
-
 
 <p>@msg</p>
 
@@ -372,9 +371,6 @@ else
     <PopupComp Headline="פורסם בהצלחה!" Text1="איזה כיף, המשחק מחכה לך במסך המשחקים שלך. קוד המשחק הוא:" Text2="@gameCodeToShow" GameIdToDelete="navigateToGameAfterPublish" actionButtonText="למשחק" ShowMsg="closedReturnPopUp" cancelButtonText="חזור למסך המשחקים" xClicked="(value) => navigateToGamesScreen(value)"></PopupComp>
 
 }
-
-
-
 
 <style>
     .custom-input-file {
@@ -502,16 +498,12 @@ else
 
         if (fullGame.MatchesList.Count >= 5)
         {
-
             isEnoughMathces = true;
-
-
         }
         else
         {
             isEnoughMathces = false;
             isPublish = true;
-
 
             @*await publish("Not Eligible");*@
 
@@ -519,7 +511,6 @@ else
 
         if (!string.IsNullOrEmpty(GameInstruction) && !string.IsNullOrEmpty(GameFullName))
         {
-
             isNameAndInstraction = true;
         }
         else
@@ -599,7 +590,7 @@ else
     {
         isReturnClicked = true;
         isReturnPublishClicked = false;
-        isDeleteButtonClicked = true;
+        isDeleteButtonClicked = true;        
     }
 
     protected async Task publish(string newStatus)

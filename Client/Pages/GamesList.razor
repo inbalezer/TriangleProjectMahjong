@@ -43,7 +43,7 @@
                 
                 @if (isClicked)
                 {
-                    <PopupComp Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" gameName="@gameNameToDelete" Text2="@deleteTextPopUp2" GameIdToDelete="@(async () => await DeleteGame(game1))" ShowMsg="closedPopUp" actionButtonText="מחק משחק" cancelButtonText="בטל"></PopupComp>
+                        <PopupComp Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" gameName="@gameNameToDelete" Text2="@deleteTextPopUp2" isDeleteCompClicked="@isClicked" GameIdToDelete="@(async () => await DeleteGame(game1))" ShowMsg="closedPopUp" actionButtonText="מחק משחק" cancelButtonText="בטל"></PopupComp>
                 }
             </span>
             Console.WriteLine(isInstructionExist);

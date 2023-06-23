@@ -33,7 +33,7 @@
             <p>(1-17 תווים)</p>
 
 
-            
+
             @if (GameFullName == "")
             {
                 <span>לא ניתן לשמור משחק ללא שם.</span>
@@ -44,7 +44,7 @@
         <div class="character-count-input">
             :הנחיית משחק  לחצו והתאימו בין
             <input maxlength="50" style="border:2px solid blue" type="text" @bind="GameInstruction" @oninput='e => HandleInput(e, "gameInstruction")' /> ורוקנו את הלוח
-             @if (!string.IsNullOrEmpty(GameInstruction))
+            @if (!string.IsNullOrEmpty(GameInstruction))
             {
                 <span class="character-count"> @characterCountInstruction / @characterGameInstructionLimit </span>
             }
@@ -55,7 +55,7 @@
             <p>(1-50 תווים)</p>
 
 
-           
+
         </div>
 
     </tr>
@@ -366,7 +366,7 @@ else
 
 <input type="button" style="background-color: @publishBtnColor" value="@publishBtnValue" disabled="@isPublish" @onclick="@(async ()=> await publish("Published"))" />
 
-@if(publishBtnValue == "פורסם")
+@if (publishBtnValue == "פורסם")
 {
     publishBtnColor = "lightgreen";
 }
@@ -505,6 +505,7 @@ else
         if (fullGame.MatchesList.Count >= 5)
         {
             isEnoughMathces = true;
+
         }
         else
         {
@@ -526,12 +527,13 @@ else
 
         if (isNameAndInstraction && isEnoughMathces)
         {
-            isPublish = false;
-            if (fullGame.PublishStatus != "Eligible")
+            @*isPublish = false;*@
+            if (fullGame.PublishStatus == "Not Eligible")
             {
                 await publish("Eligible");
 
             }
+
 
         }
         else
@@ -596,7 +598,7 @@ else
     {
         isReturnClicked = true;
         isReturnPublishClicked = false;
-        isDeleteButtonClicked = true;        
+        isDeleteButtonClicked = true;
     }
 
     protected async Task publish(string newStatus)
@@ -787,6 +789,7 @@ else
         {
             publishBtnValue = "פרסם";
             isPublish = false;
+
         }
         else
         {
@@ -875,13 +878,13 @@ else
                         isFirstImage = isFirstImg;
                         MakeDeleteList();
 
-                    }                                   
+                    }
                 }
             }
             else
             {
                 msg = "לא ניתן להעלות את התמונה- היא גדולה מדיי";
-            }           
+            }
         }
 
 
@@ -905,7 +908,7 @@ else
         if (!string.IsNullOrEmpty(myFileImage2) && !isFirstImage)
         {
             DeletedMatch2Images.Add(myFileImage2);
-        }            
+        }
     }
 
     private async Task DeleteImage(List<string> DeletedMatchList)
@@ -980,7 +983,7 @@ else
     protected async Task DeleteMatchRow(MatchToShow matchRowToDelete)
     {
         matchRowToDelete = matchToDelete;
-        if (!string.IsNullOrEmpty(matchRowToDelete.FirstMatch) && matchRowToDelete.FirstMatch.Contains(".png") || matchRowToDelete.FirstMatch.Contains(".JPEG"));
+        if (!string.IsNullOrEmpty(matchRowToDelete.FirstMatch) && matchRowToDelete.FirstMatch.Contains(".png") || matchRowToDelete.FirstMatch.Contains(".JPEG")) ;
         {
             DeletedMatch1Images.Add(matchRowToDelete.FirstMatch);
         }
@@ -1040,7 +1043,7 @@ else
             {
                 textChanged = true;
                 isFirstImage = true;
-                myFileImage1 = currentMatchToShow.FirstMatch;    
+                myFileImage1 = currentMatchToShow.FirstMatch;
                 MakeDeleteList();
 
             }

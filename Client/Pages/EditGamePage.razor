@@ -364,7 +364,12 @@ else
     }
 </div>
 
-<input type="button" style="background-color: peru" value="@publishBtnValue" disabled="@isPublish" @onclick="@(async ()=> await publish("Published"))" />
+<input type="button" style="background-color: @publishBtnColor" value="@publishBtnValue" disabled="@isPublish" @onclick="@(async ()=> await publish("Published"))" />
+
+@if(publishBtnValue == "פורסם")
+{
+    publishBtnColor = "lightgreen";
+}
 
 @if (publishBtnValue == "פורסם" && isReturnPublishClicked)
 {
@@ -440,6 +445,7 @@ else
     string gameCodeToShow = "";
     string priviousValue = "";
     string priviousValue2 = "";
+    string publishBtnColor = "deepskyblue";
 
     @*string msg = "";*@
     bool FirstIsText;
@@ -799,14 +805,12 @@ else
         {
             fullGame = ShowGameRes.Content.ReadFromJsonAsync<GameToShow>().Result;
             GameInstruction = fullGame.GameInstruction;
-
             publishBtnDisplay(fullGame.PublishStatus);
+
             if (!string.IsNullOrEmpty(fullGame.GameInstruction))
             {
                 isNameAndInstructionExist = true;
                 characterCountInstruction = GameInstruction.Length;
-
-
             }
 
             await AreConditionsMet();

@@ -531,8 +531,18 @@ else
             if (fullGame.PublishStatus == "Not Eligible")
             {
                 await publish("Eligible");
+                isPublish = false;
+                publishBtnColor = "blue";
 
             }
+            if (fullGame.PublishStatus == "Eligible")
+            {
+                isPublish = false;
+                publishBtnColor = "blue";
+
+
+            }
+
 
 
         }
@@ -547,6 +557,9 @@ else
             }
 
         }
+
+        publishBtnDisplay(fullGame.PublishStatus);
+
     }
 
     void Navigate()
@@ -790,12 +803,15 @@ else
         {
             publishBtnValue = "פרסם";
             isPublish = false;
+            publishBtnColor = "aqua";
 
         }
         else
         {
             publishBtnValue = "פרסם";
             isPublish = true;
+            publishBtnColor = "aqua";
+
         }
     }
     protected override async Task OnInitializedAsync()
@@ -1001,6 +1017,7 @@ else
             DeleteImage(DeletedMatch1Images);
             DeleteImage(DeletedMatch2Images);
             await AreConditionsMet();
+
         }
 
         else

@@ -6,13 +6,15 @@
 @using System.ComponentModel.DataAnnotations;
 @using Microsoft.AspNetCore.Components.Forms;
 
+
 @inject HttpClient Http
 @inject NavigationManager Nav
 @inject NavigationManager nav
 
 
+
 <h3>עריכת משחק @GameFullName</h3>
-<div class="custom-tooltip" title="לא ניתן לחזור למסך המשחקים ללא שם משחק.">
+<div class="custom-tooltip" title="לא ניתן לחזור למסך המשחקים ללא שם משחק והנחיה.">
 
     <button style="background-color:pink" @onclick="showMessage" disabled="@isReturnButtonDisabled">חזור</button>
 </div>
@@ -59,7 +61,18 @@
 
 @*<input type="button" value="שמור" @onclick=Navigate />*@
 
-<MudButton value="שמור" @onclick="(() => updateNameAndInstruction(gameWithInstruction))" Color="Color.Primary" disabled="@isSaveButtonDisabled"> +שמור </MudButton>
+<Button value="שמור" @onclick="(() => updateNameAndInstruction(gameWithInstruction))" Color="Color.Primary" disabled="@isSaveButtonDisabled"> +שמור 
+    @if (isSaveBtnClicked)
+    {
+        <div> <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/> <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+</svg>
+</div>
+        isSaveBtnClicked = false;
+        @*<img src="../animations/check-circle.gif" /> *@       
+    }
+ </Button>
+
+
 
 
 
@@ -526,6 +539,7 @@ else
     bool FirstIsText;
     bool SecondIsText;
     bool isReturnClicked = false;
+    bool isSaveBtnClicked = false;
     bool isPublish = true;
     bool textChanged = false;
     bool text2Changed = false;
@@ -536,7 +550,7 @@ else
     bool isLimitMatches => fullGame.MatchesList != null && fullGame.MatchesList.Count == 20;
     bool isThereMatches => fullGame.MatchesList == null || fullGame.MatchesList.Count == 0;
     bool isSaveButtonDisabled => string.IsNullOrEmpty(GameInstruction) || string.IsNullOrEmpty(GameFullName);
-    bool isReturnButtonDisabled => string.IsNullOrEmpty(GameFullName);
+    bool isReturnButtonDisabled => string.IsNullOrEmpty(GameFullName) || string.IsNullOrEmpty(GameInstruction);
     bool showWarningMessage = false;
     bool isDeleteButtonClicked = false;
     bool isNameAndInstructionExist = false;
@@ -643,7 +657,7 @@ else
 
     void navigateToGameAfterPublish()
     {
-        //nav.NavigateTo("./GamesList/");
+        nav.NavigateTo("./game");        
     }
 
     void closedReturnPopUp()
@@ -1067,6 +1081,7 @@ else
         {
             //משתנה שיפעיל אנימציה של וי
             SettingMsg = "קולולולו";
+            isSaveBtnClicked = true;
             isNameAndInstructionExist = true;
             await AreConditionsMet();
         }

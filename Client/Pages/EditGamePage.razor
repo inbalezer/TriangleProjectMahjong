@@ -78,9 +78,10 @@
         <EditForm Model="currentMatchToShow" OnValidSubmit="(() =>AddMatch(currentMatchToShow))">
             <DataAnnotationsValidator />
 
-            <p>:התאמה ראשונה</p>
-            <InputCheckbox style="background-color:aquamarine" @bind-Value="textChanged" />
-
+            <p>:התאמה ראשונה</p>           
+            <div class="imgOrTextToggle">
+                <InputCheckbox @bind-Value="textChanged" />
+            </div>
             @if (!textChanged)
             {
                 @if (editMatch.ID == 0)
@@ -515,7 +516,7 @@ else
     bool showWarningMessage = false;
     bool isDeleteButtonClicked = false;
     bool isNameAndInstructionExist = false;
-    bool isEditMode = true;
+    bool isEditMode = false;
     bool isReturnPublishClicked = false;
     bool isPublishAndReturn = false;
     bool IsButtonDisabled => string.IsNullOrEmpty(currentMatchToShow.SecondMatch) || string.IsNullOrEmpty(currentMatchToShow.FirstMatch);
@@ -629,6 +630,11 @@ else
         isDeleteButtonClicked = false;
         isPublishAndReturn = true;
 
+    }
+
+    void changeEditStyle()
+    {
+        isEditMode = false;
     }
 
     //void navigateToGamesScreen()
@@ -764,6 +770,7 @@ else
                 myFileImage1 = "";
                 myFileImage2 = "";
                 isEditMode = true;
+
                 await AreConditionsMet();
 
             }
@@ -1114,8 +1121,7 @@ else
 
     protected async Task EditMatchRow(int matchIdToEdit)
     {
-        editAvailable = true;
-        isEditMode = false;
+        editAvailable = true;      
 
         var editMatchResponse = await Http.GetAsync("api/Matches/" + UserId + "/TempEdit" + "/" + matchIdToEdit);
         if (editMatchResponse.IsSuccessStatusCode)

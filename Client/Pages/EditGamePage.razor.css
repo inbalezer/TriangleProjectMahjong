@@ -1,0 +1,12 @@
+﻿body {
+}
+
+.imgOrTextToggle {
+    height: 5vh;
+    border-radius: 1.25vh;
+    width: 20%;
+    background-color: #FBFBFB;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+

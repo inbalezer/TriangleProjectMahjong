@@ -8,7 +8,7 @@
 @inject NavigationManager nav
 @inject NavigationManager Nav
 
-<div class="component">
+<div class="component @editMode">
     <div class="container">
         <div class="rectangle rectangle-1">
             <div class="content">
@@ -46,7 +46,7 @@
         </div>
 
         <div>
-            <img src="../edit_pencil.svg" alt="Edit" style="cursor: pointer" @onclick="editMatch" />
+            <img class="@editPencil" src="../edit_pencil.svg" alt="Edit" style="cursor: pointer" @onclick="editMatch" />
         </div>
 
         <div class="delete">
@@ -56,60 +56,15 @@
 </div>
 
 
-<style>
-    .container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .rectangle {
-        width: 200px;
-        height: 100px;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        margin: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .rectangle p {
-        text-align: center;
-        margin: 0;
-        padding: 10px;
-    }
-
-    .edit-button,
-    .delete-button {
-        width: 30px;
-        height: 30px;
-        background-color: #fff;
-        border-radius: 50%;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        margin: 5px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .edit-button:hover,
-    .delete-button:hover {
-        background-color: #f1f1f1;
-        cursor: pointer;
-    }
-
-    #disabled {
-        pointer-events: none;
-        opacity: 0.5;
-    }
-</style>
 
 
 
 @code
 {
+    public string editPencil = "";
+    public string editMode = "";
+
+
     [Parameter]
     public string matchText { get; set; }
 
@@ -129,7 +84,10 @@
     public EventCallback<bool> EditMatchCallBack { get; set; }
 
     [Parameter]
-    public bool isImageClickable { get; set; } = true;
+    public bool isImageClickable { get; set; }
+
+    //[Parameter]
+    //public EventCallback<bool> isImageClickableCallBack { get; set; }
 
 
     void deleteMatch()
@@ -139,8 +97,27 @@
 
     void editMatch()
     {
-        //isImageClickable = false;
-        EditMatchCallBack.InvokeAsync(true);
-        
+        editPencil = "editPencil";
+        editMode = "editMode";
+        EditMatchCallBack.InvokeAsync(true);        
+    }
+
+    protected override void OnParametersSet()
+    {
+        editStyle();
+    }
+
+    void editStyle()
+    {
+        if (isImageClickable)
+        {
+            editPencil = "";
+            editMode = "";
+        }
+
+        isImageClickable = false;
+        //isImageClickableCallBack.InvokeAsync(true);
     }
 }
+
+

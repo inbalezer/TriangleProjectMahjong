@@ -171,6 +171,8 @@
                 {
                     <span>@unacceptedImg</span>
                 }
+                
+
 
                 <br />
                 @if (myFileImage1 != "")
@@ -213,9 +215,9 @@
 
                 </div>
                 <p style="color:red"> קבצי Png ,Jpeg בלבד </p>
-                if (unacceptedImg != "")
+                if (unacceptedImg2 != "")
                 {
-                    <span>@unacceptedImg</span>
+                    <span>@unacceptedImg2</span>
                 }
                 <br />
                 @if (myFileImage2 != "")
@@ -487,7 +489,8 @@ else
     string currentValue2 = "";
     string publishBtnValue = "פרסם";
     string publishMsg = " איזה כיף, המשחק שלך מחכה לך במסך המשחקים";
-    string unacceptedImg = "";
+    string unacceptedImg = "";    
+    string unacceptedImg2 = "";    
     string previousValue = "";
     string gameCodeToShow = "";
     string priviousValue = "";
@@ -911,11 +914,7 @@ else
         var imageFiles = e.GetMultipleFiles();
         var file1 = e.File;
 
-        if (!IsFileAccepted(file1))
-        {
-            unacceptedImg = "התמונה שבחרת לא בפורמט נתמך. יש לבחור תמונה בפורמט PNG או JPEG";
-            return;
-        }
+
 
         foreach (var file in imageFiles)
         {
@@ -932,16 +931,40 @@ else
 
                     if (isFirstImg)
                     {
+
                         myFileImage1 = "uploadedFiles/" + resizeUrl;
                         isFirstImage = isFirstImg;
+                        unacceptedImg = "";
                         MakeDeleteList();
+
                     }
                     else
                     {
+
                         myFileImage2 = "uploadedFiles/" + resizeUrl;
                         isFirstImage = isFirstImg;
+                        unacceptedImg2 = "";
                         MakeDeleteList();
 
+                    }
+                }
+                else
+                {
+                    if (isFirstImg)
+                    {
+                        if (!IsFileAccepted(file1))
+                        {
+                            unacceptedImg = "התמונה שבחרת לא בפורמט נתמך. יש לבחור תמונה בפורמט PNG או JPEG";
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        if (!IsFileAccepted(file1))
+                        {
+                            unacceptedImg2 = "התמונה שבחרת לא בפורמט נתמך. יש לבחור תמונה בפורמט PNG או JPEG";
+                            return;
+                        }
                     }
                 }
             }
@@ -950,7 +973,6 @@ else
                 msg = "לא ניתן להעלות את התמונה- היא גדולה מדיי";
             }
         }
-
 
     }
 

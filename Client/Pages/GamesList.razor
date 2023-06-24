@@ -50,7 +50,7 @@
             <br />
 
             <input type="button" value="צור משחק" @onclick=@(()=>AddNewGame(UserId, gameName)) disabled="@isCreateButtonDisabled">
-            <input type="button" value="בטל" @onclick="ClearNewGame">
+            @*<input type="button" value="בטל" @onclick="ClearNewGame">*@
         }
 
     </div>
@@ -152,6 +152,11 @@
     {
         isPlusButtonClicked = true;
         isExpanded = !isExpanded;
+
+        if(!isExpanded)
+        {
+            gameName = "";
+        }
     }
 
     void FilterGames()
@@ -183,11 +188,11 @@
     {
         isClicked = false;
     }
-    void ClearNewGame()
-    {
-        gameName = "";
-        isPlusButtonClicked = false;
-    }
+    //void ClearNewGame()
+    //{
+    //    gameName = "";
+    //    isPlusButtonClicked = false;
+    //}
 
     void Navigate()
     {

@@ -1,7 +1,7 @@
 ﻿
 .plus {
     position: absolute;
-    top: 45%;
+    top: 41%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
@@ -32,7 +32,7 @@
 
     100% {
         top: 45%;
-        transform: translate(-50%, -50%) rotate(180deg);
+        transform: translate(-50%, -50%) rotate(404deg);
     }
 }
 
@@ -63,7 +63,7 @@
 .circularInput {
     width: 24vh;
     height: 6vh;
-    left: 20%;
+    left: 36vh;
     border-radius: 10vw;
     border-bottom: 0.3px solid #F0F0F0;
     background: linear-gradient(94deg, #FFFFFF 0%, #F0F0F0 100%);

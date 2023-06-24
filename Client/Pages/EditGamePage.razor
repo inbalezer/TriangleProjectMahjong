@@ -28,7 +28,7 @@
             :שם המשחק <input maxlength="17" style="border:2px solid blue" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
             @if (!string.IsNullOrEmpty(GameFullName))
             {
-                <span class="character-count"> @characterCountGameName / @characterGameNameLimit </span>
+                <span class="character-count">@characterGameNameLimit/ @characterCountGameName </span>
             }
             <p>(1-17 תווים)</p>
 
@@ -46,7 +46,7 @@
             <input maxlength="50" style="border:2px solid blue" type="text" @bind="GameInstruction" @oninput='e => HandleInput(e, "gameInstruction")' /> ורוקנו את הלוח
             @if (!string.IsNullOrEmpty(GameInstruction))
             {
-                <span class="character-count"> @characterCountInstruction / @characterGameInstructionLimit </span>
+                <span class="character-count"> @characterGameInstructionLimit / @characterCountInstruction  </span>
             }
             @if (showWarningMessage)
             {
@@ -98,15 +98,33 @@
                     {
                         if (currentMatchToShow.FirstMatch.Contains("uploadedFiles/"))
                         {
-                            currentMatchToShow.FirstMatch = priviousValue;
-                            Console.WriteLine("priviousValue" + priviousValue);
-
+                            if (!string.IsNullOrEmpty(currentMatchToShow.FirstMatch))
+                            {
+                                if(!string.IsNullOrEmpty(priviousValue))
+                                {
+                                    if (!priviousValue.Contains("uploadedFiles/"))
+                                    {
+                                        currentMatchToShow.FirstMatch = priviousValue;
+                                    }
+                                    else
+                                    {
+                                        currentMatchToShow.FirstMatch = "";
+                                    }
+                                }
+                                else
+                                {
+                                    currentMatchToShow.FirstMatch = "";
+                                }                               
+                            }
+                            else
+                            {
+                                 currentMatchToShow.FirstMatch = "";
+                            }
+                           
                         }
                         else
                         {
                             currentMatchToShow.FirstMatch = currentValue;
-
-
                         }
                     }
 
@@ -118,7 +136,7 @@
 
                     @if (!string.IsNullOrEmpty(currentMatchToShow.FirstMatch))
                     {
-                        <span class="character-count"> @characterCountFirst / @characterLimit </span>
+                        <span class="character-count"> @characterLimit / @characterCountFirst  </span>
                     }
                 </div>
             }
@@ -210,26 +228,55 @@
             }
             else
             {
-                currentValue2 = newMatch.SecondMatch;
-                currentMatchToShow.SecondIsText = true;
+                
+            @*currentValue2 = currentMatchToShow.SecondMatch;*@
+            currentMatchToShow.SecondIsText = true;
 
 
                 if (currentMatchToShow.SecondMatch != "")
                 {
-                    if (currentValue2 != null)
-                    {
-                        if (!currentValue2.Contains("uploadedFiles/"))
-                        {
-                            newMatch.SecondMatch = currentValue2;
+                    currentValue2 = currentMatchToShow.SecondMatch;
 
+                    if (currentMatchToShow.SecondMatch != null)
+                    {
+                        if (currentMatchToShow.SecondMatch.Contains("uploadedFiles/"))
+                        {
+                            @*currentMatchToShow.SecondMatch = currentValue2;*@
+
+                            if (!string.IsNullOrEmpty(currentMatchToShow.SecondMatch))
+                            {
+                                if(!string.IsNullOrEmpty(priviousValue2))
+                                {
+                                    if (!priviousValue2.Contains("uploadedFiles/"))
+                                    {
+                                        currentMatchToShow.SecondMatch = priviousValue2;
+                                    }
+                                    else
+                                    {
+                                        currentMatchToShow.SecondMatch = "";
+                                    }
+                                }
+                                else
+                                {
+                                    currentMatchToShow.SecondMatch = "";
+                                }
+
+                            }
+                            else
+                            {
+                                currentMatchToShow.SecondMatch = "";
+                            }
                         }
                         else
                         {
-                            newMatch.SecondMatch = priviousValue2;
+                            @*newMatch.SecondMatch = priviousValue2;*@
+                            currentMatchToShow.SecondMatch = currentValue2;
                             Console.WriteLine("empty");
                         }
                     }
                 }
+
+
                 <div class="character-count-input">
                     <input maxlength="15" style="border:2px solid blue" type="text" @bind="currentMatchToShow.SecondMatch"
                            @oninput='e => HandleInput(e, "second")' />
@@ -237,7 +284,7 @@
 
                     @if (!string.IsNullOrEmpty(currentMatchToShow.SecondMatch))
                     {
-                        <span class="character-count">@characterCountSecond / @characterLimit </span>
+                        <span class="character-count"> @characterLimit / @characterCountSecond  </span>
                     }
                 </div>
 
@@ -246,7 +293,7 @@
 
             @if (editAvailable)
             {
-                <input type="button" value="בטל עריכה" style="background-color: peru" @onclick="@(async ()=> await EditMatchRow(currentMatchToShow.ID))" />
+                <input type="button" value="בטל שינויים" style="background-color: peru" @onclick="@(async ()=> await EditMatchRow(currentMatchToShow.ID))" />
             }
             <br />
 

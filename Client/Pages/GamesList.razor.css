@@ -63,7 +63,7 @@
 .circularInput {
     width: 24vh;
     height: 6vh;
-    left: 36vh;
+    left: 20em;
     border-radius: 10vw;
     border-bottom: 0.3px solid #F0F0F0;
     background: linear-gradient(94deg, #FFFFFF 0%, #F0F0F0 100%);

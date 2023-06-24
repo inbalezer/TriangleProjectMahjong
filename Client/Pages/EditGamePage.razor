@@ -53,14 +53,8 @@
                 <span class="warning-message">לא ניתן לשמור משחק ללא הנחייה</span>
             }
             <p>(1-50 תווים)</p>
-
-
-
         </div>
-
     </tr>
-
-
 </table>
 
 @*<input type="button" value="שמור" @onclick=Navigate />*@
@@ -77,11 +71,19 @@
     {
         <EditForm Model="currentMatchToShow" OnValidSubmit="(() =>AddMatch(currentMatchToShow))">
             <DataAnnotationsValidator />
+        <div class="containerWithTwoDivs">
 
-            <p>:התאמה ראשונה</p>           
+
+            <div class="toggleSides" id="leftSide">
+                 <p>:התאמה ראשונה</p>           
             <div class="imgOrTextToggle">
-                <InputCheckbox @bind-Value="textChanged" />
+                <img id="photoImg" src="@toggleImgSrc" />
+                <div class="toggleStick">
+                    <input type="button" class="@class1MoveCircle" @onclick="(() =>makeToggle(true))" />
+                </div>                
+                <img id="textImg" src="@toggleTextSrc" /> 
             </div>
+            @*<InputCheckbox @bind-Value="textChanged" />*@
             @if (!textChanged)
             {
                 @if (editMatch.ID == 0)
@@ -182,9 +184,19 @@
                     @*<input type="button" value="העבר למחיקה " @onclick="MakeDeleteList" />*@
                 }
             }
-
+            </div>
+           <div class="toggleSides" id="rightSide">
+               
             <p>:התאמה שניה</p>
-            <InputCheckbox style="background-color:aquamarine" @bind-Value="text2Changed" />
+
+            <div class="imgOrTextToggle">
+                <img id="photoImg" src="@toggleImgSrc2" />
+                <div class="toggleStick">
+                    <input type="button" class="@class1MoveCircle2" @onclick="(() =>makeToggle(false))" />
+                </div>                
+                <img id="textImg" src="@toggleTextSrc2" /> 
+            </div>
+            @*<InputCheckbox @bind-Value="text2Changed" />*@
 
             @if (!text2Changed)
             {
@@ -301,7 +313,13 @@
             <br />
 
             <input type="submit" value="שמור זוג" disabled="@IsButtonDisabled" />
+            </div>
+        </div>
         </EditForm>
+           
+
+            
+
     }
     else
     {
@@ -497,6 +515,12 @@ else
     string priviousValue = "";
     string priviousValue2 = "";
     string publishBtnColor = "deepskyblue";
+    string toggleImgSrc => textChanged ? "../2material-photo.svg" : "../icon material-photo.svg";
+    string toggleTextSrc => textChanged ? "../2text-fields (2).svg" : "../icon material-text-fields.svg";
+    string class1MoveCircle => textChanged ? "toggleCircle2" : "toggleCircle1";
+    string toggleImgSrc2 => text2Changed ? "../icon material-photo.svg" : "../2material-photo.svg";
+    string toggleTextSrc2 => text2Changed ? "../icon material-text-fields.svg" : "../2text-fields (2).svg";
+    string class1MoveCircle2 => text2Changed ? "toggleCircle1" : "toggleCircle2";
 
     @*string msg = "";*@
     bool FirstIsText;
@@ -594,8 +618,6 @@ else
 
             }
 
-
-
         }
         else
         {
@@ -635,6 +657,18 @@ else
     void changeEditStyle()
     {
         isEditMode = false;
+    }
+
+    void makeToggle(bool isFirstCircleClicked)
+    {
+        if(isFirstCircleClicked)
+        {
+            textChanged = !textChanged;
+        }        
+        else
+        {
+            text2Changed = !text2Changed;
+        }
     }
 
     //void navigateToGamesScreen()
@@ -873,8 +907,7 @@ else
     }
     protected override async Task OnInitializedAsync()
     {
-        characterCountGameName = GameFullName.Length;
-
+        characterCountGameName = GameFullName.Length;       
 
         var ShowGameRes = await Http.GetAsync("api/Games/" + UserId + "/FullGameToEdit/" + newGameID);
 
@@ -1092,6 +1125,9 @@ else
             isDeleteButtonClicked = false;
             DeleteImage(DeletedMatch1Images);
             DeleteImage(DeletedMatch2Images);
+            currentMatchToShow.FirstMatch = "";
+            currentMatchToShow.SecondMatch = "";
+
             await AreConditionsMet();
 
         }

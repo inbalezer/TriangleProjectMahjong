@@ -1071,7 +1071,7 @@ else
 
     private bool IsFileAccepted(IBrowserFile fileExepted)
     {
-        // Perform client-side validation by checking the file type
+        // Perform client-side validation by checking the file type.
         return fileExepted.ContentType == "image/png" || fileExepted.ContentType == "image/jpeg";
     }
 

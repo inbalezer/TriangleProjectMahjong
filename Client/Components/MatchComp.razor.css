@@ -47,14 +47,14 @@
     }
 
 #disabled {
-    pointer-events: none;
+    
     opacity: 0.5;
 }
 
 .editPencil {
     opacity: 0.5;
     cursor: not-allowed;
-   
+    pointer-events: none;
 }
 
 .component.editMode {

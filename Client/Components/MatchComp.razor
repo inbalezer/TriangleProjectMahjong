@@ -8,7 +8,7 @@
 @inject NavigationManager nav
 @inject NavigationManager Nav
 
-<div class="component @editMode">
+<div class="component @editBgStyle">
     <div class="container">
         <div class="rectangle rectangle-1">
             <div class="content">
@@ -46,7 +46,7 @@
         </div>
 
         <div>
-            <img class="@editPencil" src="../edit_pencil.svg" alt="Edit" style="cursor: pointer" @onclick="editMatch" />
+            <img class="@editPenStyle" src="../edit_pencil.svg" alt="Edit" style="cursor: pointer" @onclick="editMatch" />
         </div>
 
         <div class="delete">
@@ -62,7 +62,8 @@
 @code
 {
     public string editPencil = "";
-    public string editMode = "";
+    string editPenStyle => iseditClassStyle ? "editPencil" : "";
+    string editBgStyle => iseditClassStyle ? "editMode" : "";
 
 
     [Parameter]
@@ -78,6 +79,9 @@
     public string matchText2 { get; set; }
 
     [Parameter]
+    public bool iseditClassStyle { get; set; }
+
+    [Parameter]
     public EventCallback<bool> DeleteCallBack { get; set; }
 
     [Parameter]
@@ -85,9 +89,6 @@
 
     [Parameter]
     public bool isImageClickable { get; set; }
-
-    //[Parameter]
-    //public EventCallback<bool> isImageClickableCallBack { get; set; }
 
 
     void deleteMatch()
@@ -98,7 +99,6 @@
     void editMatch()
     {
         editPencil = "editPencil";
-        editMode = "editMode";
         EditMatchCallBack.InvokeAsync(true);        
     }
 
@@ -112,7 +112,6 @@
         if (isImageClickable)
         {
             editPencil = "";
-            editMode = "";
         }
 
         isImageClickable = false;

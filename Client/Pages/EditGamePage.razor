@@ -381,17 +381,60 @@ else
             <span>סה"כ @fullGame.MatchesList.Count/@fullGame.MatchesList.Count זוגות</span>
         }
 
-        @foreach (MatchToShow match in fullGame.MatchesList)
+        if (currentMatchIndex == 0)
         {
 
-            <MatchComp matchText="@match.FirstMatch" matchText2="@match.SecondMatch" uploadedImg="" uploadedImg2="" DeleteCallBack="(() => deleteButtonClicked(match))" EditMatchCallBack="@(async ()=> await EditMatchRow(match.ID))" isImageClickable=@isEditMode></MatchComp>
-
-            if (isDeleteButtonClicked)
+            foreach (MatchToShow match in fullGame.MatchesList)
             {
-                <PopupComp ShowMsg="closedReturnPopUp" Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" isDeleteCompClicked="@isDeleteButtonClicked" GameIdToDelete="@(async () => await DeleteMatchRow(matchToDelete))" actionButtonText="מחק זוג " cancelButtonText="בטל"></PopupComp>
 
+                <MatchComp matchText="@match.FirstMatch" matchText2="@match.SecondMatch" uploadedImg="" uploadedImg2="" DeleteCallBack="(() => deleteButtonClicked(match))" EditMatchCallBack="@(async ()=> await EditMatchRow(match.ID))" isImageClickable=@isEditMode></MatchComp>
+    
+                if (isDeleteButtonClicked)
+                {
+                    <PopupComp ShowMsg="closedReturnPopUp" Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" isDeleteCompClicked="@isDeleteButtonClicked" GameIdToDelete="@(async () => await DeleteMatchRow(matchToDelete))" actionButtonText="מחק זוג " cancelButtonText="בטל"></PopupComp>
+
+                }
             }
         }
+
+        else
+        {
+
+            foreach (MatchToShow match in fullGame.MatchesList)
+            {
+                if (currentMatchIndex != match.ID)
+                {
+
+                    <MatchComp matchText="@match.FirstMatch" matchText2="@match.SecondMatch" uploadedImg="" uploadedImg2="" DeleteCallBack="(() => deleteButtonClicked(match))" EditMatchCallBack="@(async ()=> await EditMatchRow(match.ID))" isImageClickable=@isEditMode></MatchComp>
+
+                    if (isDeleteButtonClicked)
+                    {
+                        <PopupComp ShowMsg="closedReturnPopUp" Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" isDeleteCompClicked="@isDeleteButtonClicked" GameIdToDelete="@(async () => await DeleteMatchRow(matchToDelete))" actionButtonText="מחק זוג " cancelButtonText="בטל"></PopupComp>
+
+                    }
+
+                }
+
+                else
+                {
+   
+                        <MatchComp iseditClassStyle=@true matchText="@match.FirstMatch" matchText2="@match.SecondMatch" uploadedImg="" uploadedImg2="" DeleteCallBack="(() => deleteButtonClicked(match))" EditMatchCallBack="@(async ()=> await EditMatchRow(match.ID))" isImageClickable=@isEditMode></MatchComp>
+
+                    
+
+                    if (isDeleteButtonClicked)
+                    {
+                        <PopupComp ShowMsg="closedReturnPopUp" Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" isDeleteCompClicked="@isDeleteButtonClicked" GameIdToDelete="@(async () => await DeleteMatchRow(matchToDelete))" actionButtonText="מחק זוג " cancelButtonText="בטל"></PopupComp>
+
+                    }
+                }
+            }
+            
+        }
+    }
+
+
+        
 
         @*@if(!isEditMode)
                 {
@@ -567,6 +610,7 @@ else
     int characterCountSecond = 0;
     int characterCountGameName = 0;
     int characterCountInstruction = 0;
+    int currentMatchIndex = 0;
     long maxFileSize = 4194304;
 
 
@@ -818,6 +862,7 @@ else
                 myFileImage1 = "";
                 myFileImage2 = "";
                 isEditMode = true;
+                currentMatchIndex = 0;
 
                 await AreConditionsMet();
 
@@ -1172,7 +1217,8 @@ else
 
     protected async Task EditMatchRow(int matchIdToEdit)
     {
-        editAvailable = true;      
+        editAvailable = true;
+        currentMatchIndex = matchIdToEdit;
 
         var editMatchResponse = await Http.GetAsync("api/Matches/" + UserId + "/TempEdit" + "/" + matchIdToEdit);
         if (editMatchResponse.IsSuccessStatusCode)

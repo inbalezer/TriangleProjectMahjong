@@ -24,7 +24,7 @@
                     }
                 }
 
-                
+
             </div>
         </div>
 
@@ -41,7 +41,7 @@
                         <p>@matchText2</p>
                     }
                 }
-               
+
             </div>
         </div>
 
@@ -50,7 +50,7 @@
         </div>
 
         <div class="delete">
-            <img src="../trash3.svg" alt="Delete" @onclick="deleteMatch" />
+            <img class="trash" src="../trash3.svg" alt="Delete" @onclick="deleteMatch" />
         </div>
     </div>
 </div>
@@ -99,7 +99,7 @@
     void editMatch()
     {
         editPencil = "editPencil";
-        EditMatchCallBack.InvokeAsync(true);        
+        EditMatchCallBack.InvokeAsync(true);
     }
 
     protected override void OnParametersSet()

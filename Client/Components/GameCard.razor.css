@@ -1,5 +1,4 @@
 ﻿
-//כרטיסייה//
 .game-card {
     width: 100%;
     max-width: 254px;
@@ -41,27 +40,31 @@
     cursor: help;
 }
 
-    .custom-tooltip::after {
-        content: attr(title);
-        position: absolute;
-        bottom: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 4px 8px;
-        background-color: #333;
-        color: #fff;
-        font-size: 12px;
-        border-radius: 4px;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
-        white-space: nowrap;
-    }
+#update {
+    cursor: pointer;
+}
 
-    .custom-tooltip:hover::after {
-        opacity: 1;
-        visibility: visible;
-    }
+.custom-tooltip::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 8px;
+    background-color: #333;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 4px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+    white-space: nowrap;
+}
+
+.custom-tooltip:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
 
 
 טוגל לא עומד בתנאי הפרסום//
@@ -243,7 +246,7 @@
     align-items: center;
 }
 
-//טוגל פורסם//
+
 #Group_238_la {
     position: relative;
     width: 181px;

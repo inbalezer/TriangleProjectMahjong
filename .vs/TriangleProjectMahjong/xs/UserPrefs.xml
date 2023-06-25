@@ -1,32 +1,41 @@
 ﻿<Properties StartupConfiguration="{C99128EA-5019-4208-90EE-04739CFCEEAD}|Default">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workbench ActiveDocument="Client/Pages/EditGamePage.razor">
     <Files>
-      <File FileName="Client/Components/PopupComp.razor" Line="11" Column="25" />
-      <File FileName="Client/Pages/GamesList.razor" Line="197" Column="27" />
-      <File FileName="Client/Pages/EditGamePage.razor" Line="317" Column="7" />
-      <File FileName="Server/Controllers/MatchesController.cs" Line="188" Column="70" />
-      <File FileName="Server/Controllers/GamesController.cs" Line="152" Column="46" />
-      <File FileName="Shared/Models/Editor/GamePublish.cs" Line="9" Column="18" />
-      <File FileName="Shared/Models/Editor/GameForEditor.cs" Line="10" Column="18" />
+      <File FileName="Client/Components/PopupComp.razor" Line="8" Column="19" />
+      <File FileName="Client/Pages/GamesList.razor" Line="24" Column="1" />
+      <File FileName="Client/Pages/EditGamePage.razor" Line="1252" Column="1" />
+      <File FileName="Client/Components/MatchComp.razor" Line="94" Column="23" />
+      <File FileName="Client/Components/GameCard.razor.css" Line="41" Column="5" />
+      <File FileName="Client/Pages/EditGamePage.razor.css" Line="7" Column="13" />
+      <File FileName="Client/wwwroot/index.html" Line="13" Column="74" />
+      <File FileName="Client/Pages/GamesList.razor.css" Line="25" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="TriangleProjectMahjong" expanded="True">
             <Node name="TriangleProject.Client" expanded="True">
+              <Node name="Dependencies" expanded="True" />
               <Node name="Components" expanded="True" />
-              <Node name="Pages" expanded="True" />
+              <Node name="Pages" expanded="True">
+                <Node name="EditGamePage.razor" expanded="True" />
+                <Node name="GamesList.razor" expanded="True" />
+              </Node>
+              <Node name="PortelemFiles" expanded="True" />
+              <Node name="Properties" expanded="True" />
+              <Node name="Shared" expanded="True" />
+              <Node name="wwwroot" expanded="True">
+                <Node name="Animations" expanded="True" />
+              </Node>
             </Node>
             <Node name="TriangleProject.Server" expanded="True">
               <Node name="Controllers" expanded="True" />
+              <Node name="wwwroot" expanded="True">
+                <Node name="uploadedFiles" expanded="True" />
+              </Node>
             </Node>
             <Node name="TriangleProject.Shared" expanded="True">
-              <Node name="Models" expanded="True">
-                <Node name="Editor" expanded="True" />
-              </Node>
+              <Node name="Models" expanded="True" />
             </Node>
           </Node>
         </State>
@@ -36,8 +45,11 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.TriangleProject.Server PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>

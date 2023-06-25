@@ -16,13 +16,9 @@
 
 
 <div class="search__container">
-    
+
     <input class="search__input" type="text" value="@searchQuery" @oninput="UpdateSearchQuery" @onblur="FilterGames" placeholder="חפש משחק..." />
 </div>
-
-    
-
-
 
 @if (user != null)
 {
@@ -50,7 +46,7 @@
 
         @if (isPlusButtonClicked)
         {
-            
+
 
             <input maxlength="17" class="@circularInput" type="text" @bind="gameName" placeholder="הקלד שם משחק..." @oninput='e => HandleInputGameName(e, "gameName")' />
             @if (!string.IsNullOrEmpty(gameName))
@@ -65,7 +61,7 @@
 
     </div>
 
-    <p>The Games:</p>
+
     <div id="allGames">
         @foreach (GameForEditor game in user.UserGames.Where(g => string.IsNullOrEmpty(searchQuery) || g.GameFullName.ToLower().Contains(searchQuery.ToLower())))
         {
@@ -157,14 +153,14 @@
         }
     }
 
- 
+
 
     void showCreateGameField()
     {
         isPlusButtonClicked = !isPlusButtonClicked;
         isExpanded = !isExpanded;
 
-        if(!isExpanded)
+        if (!isExpanded)
         {
             gameName = "";
         }
@@ -387,7 +383,6 @@
         margin: 0 auto;
         position: relative;
         right: 74vh;
-        
     }
 
     .search__input {
@@ -399,11 +394,10 @@
         transition: transform 250ms ease-in-out;
         font-size: 0.84vw; /* 40% smaller than 1.4vw */
         line-height: 1.08vw; /* 40% smaller than 1.8vw */
-
         color: #54547C;
         background-image: url('icon ionic-ios-search.svg');
         background-repeat: no-repeat;
-        background-size: 2vw 2vw; /* 40% smaller than 3.6vw */        
+        background-size: 2vw 2vw; /* 40% smaller than 3.6vw */
         background-position: 10% center;
         border-radius: 30px; /* 40% smaller than 50px */
         border: 0.12vw solid #f3f3f3; /* 40% smaller than 0.2vw */
@@ -423,7 +417,7 @@
             padding: 0.8vw 0.5vw;
             outline: 0;
             border: 0.12vw solid transparent; /* 40% smaller than 0.2vw */
-            border-radius:20px;
+            border-radius: 20px;
             border-bottom: 0.08vw solid #f3f3f3;
             background-position: 2% center;
             width: 280px;

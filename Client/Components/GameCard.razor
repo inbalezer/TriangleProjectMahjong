@@ -13,16 +13,15 @@
     <div class="CardContent">
         <div class="custom-tooltip" title="מעבר לעמוד עריכת תוכן המשחק והגדרותו">
             <input type="button" id="update" @onclick="updateNavigate" />
-
         </div>
 
         <div class="custom-tooltip" title="את קוד המשחק יש להזין כדי להיכנס אליו">@gameCode</div>
-        <br/>
+        <br />
         <span>סטטוס פרסום </span>
         <span class="custom-tooltip" title="פרסום המשחק הופך אותו לזמין">
             <img src="../css/games list imgs/i.svg" />
         </span>
-        
+
         <div style="align-items">
 
             @if (GamePublishStatus == "Not Eligible")
@@ -47,7 +46,7 @@
             }
             else if (GamePublishStatus == "Eligible")
             {
-                
+
                 <div id="Group_234">
                     <svg class="Path_150_gi" viewBox="0 0 181 36">
                         <path id="Path_150_gi" d="M 18 0 L 163 0 C 172.9411315917969 0 181 8.058874130249023 181 18 C 181 27.94112586975098 172.9411315917969 36 163 36 L 18 36 C 8.058874130249023 36 0 27.94112586975098 0 18 C 0 8.058874130249023 8.058874130249023 0 18 0 Z"></path>
@@ -101,9 +100,9 @@
         public bool MsgStatus { get; set; }
         public string GameName { get; set; }
     }
-    
 
-   
+
+
 
     [Parameter]
     public GameForEditor gameToPublish { get; set; }
@@ -204,14 +203,13 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         background-color: white;
         margin: 20px;
-        align-items:center;
+        align-items: center;
     }
 
     .title {
-       
     }
 
-    #GameName{
+    #GameName {
         background-color: #87C3F0;
         text-align: center;
         border-top-left-radius: 10px;
@@ -225,7 +223,7 @@
         margin-top: 10px;
         text-align: center;
         color: #62629A;
-        font-size:13pt;
+        font-size: 13pt;
     }
 
     .toggle-button {
@@ -290,4 +288,4 @@
     }
 </style>
 
-       
+

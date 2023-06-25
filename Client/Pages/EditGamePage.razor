@@ -850,12 +850,20 @@ else
                 if (DeletedMatch1Images.Count > 0)
                 {
                     DeletedMatch1Images.RemoveAt(DeletedMatch1Images.Count - 1);
-                    DeleteImage(DeletedMatch1Images);
+                    if (DeletedMatch1Images.Count > 0)
+                    {
+                        DeleteImage(DeletedMatch1Images);
+                    }                    
                 }
                 if (DeletedMatch2Images.Count > 0)
                 {
                     DeletedMatch2Images.RemoveAt(DeletedMatch2Images.Count - 1);
-                    DeleteImage(DeletedMatch2Images);
+
+                    if (DeletedMatch2Images.Count > 0)
+                    {
+                        DeleteImage(DeletedMatch2Images);
+                    }
+                    
                 }
                 myFileImage1 = "";
                 myFileImage2 = "";
@@ -901,12 +909,20 @@ else
                 if (DeletedMatch1Images.Count > 0)
                 {
                     DeletedMatch1Images.RemoveAt(DeletedMatch1Images.Count - 1);
-                    DeleteImage(DeletedMatch1Images);
+                    if (DeletedMatch1Images.Count > 0)
+                    {
+                        DeleteImage(DeletedMatch1Images);
+                    }
+                   
                 }
                 if (DeletedMatch2Images.Count > 0)
                 {
                     DeletedMatch2Images.RemoveAt(DeletedMatch2Images.Count - 1);
-                    DeleteImage(DeletedMatch2Images);
+                    if (DeletedMatch2Images.Count > 0)
+                    {
+                        DeleteImage(DeletedMatch2Images);
+                    }
+                    
                 }
                 myFileImage1 = "";
                 myFileImage2 = "";
@@ -1229,6 +1245,10 @@ else
                 isFirstImage = true;
                 myFileImage1 = currentMatchToShow.FirstMatch;
                 MakeDeleteList();
+                
+                    
+                
+                
             }
             else
             {
@@ -1243,6 +1263,9 @@ else
                 isFirstImage = false;
                 myFileImage2 = currentMatchToShow.SecondMatch;
                 MakeDeleteList();
+
+                    
+                
             }
             else
             {

@@ -41,9 +41,8 @@
             <input type="button" value="בטל" @onclick="ClearNewGame">
         }*@
 
-
+    <p>(1-17 תווים)</p>
     <div class="container">
-
 
         <button class="@AddGamebuttonClass" @onclick="showCreateGameField">
             <span class=@plus>+</span>
@@ -51,7 +50,7 @@
 
         @if (isPlusButtonClicked)
         {
-            <p>(1-17 תווים)</p>
+            
 
             <input maxlength="17" class="@circularInput" type="text" @bind="gameName" placeholder="הקלד שם משחק..." @oninput='e => HandleInputGameName(e, "gameName")' />
             @if (!string.IsNullOrEmpty(gameName))
@@ -162,7 +161,7 @@
 
     void showCreateGameField()
     {
-        isPlusButtonClicked = true;
+        isPlusButtonClicked = !isPlusButtonClicked;
         isExpanded = !isExpanded;
 
         if(!isExpanded)

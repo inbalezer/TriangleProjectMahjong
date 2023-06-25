@@ -48,6 +48,10 @@
     transition: width 0.5s ease;
 }
 
+.circle-button:hover {
+    background: linear-gradient(94deg, #c6c6e1 0%, #55558f 100%);
+}
+
 .circle-expended {
     width: 32vh;
     height: 8vh;
@@ -63,7 +67,7 @@
 .circularInput {
     width: 24vh;
     height: 6vh;
-    left: 36vh;
+    left: 25vh;
     border-radius: 10vw;
     border-bottom: 0.3px solid #F0F0F0;
     background: linear-gradient(94deg, #FFFFFF 0%, #F0F0F0 100%);
@@ -75,6 +79,7 @@
     box-sizing: border-box;
     transition: width 0.3s ease;
 }
+    
 
 
 .circularInputDisplayNone {
@@ -85,4 +90,10 @@
     display: flex;
     align-items: center;
     /*    justify-content: center;*/
+}
+
+.createBtn{
+    position: relative;
+    right:37vh;
+
 }

@@ -24,9 +24,9 @@
 }
 else
 {
-    <div title="לא ניתן לחזור למסך המשחקים ללא שם משחק והנחיה">
+    <div class="custom-tooltip" title="לא ניתן לחזור למסך המשחקים ללא שם משחק והנחיה">
 
-        <button class="returnBtnClassDis" @onclick="showMessage" disabled="@isReturnButtonDisabled">@returnText</button>
+        <button class="returnBtnClassDis" @onclick="showMessage" disabled="@isReturnButtonDisabled">@returnTextDis</button>
     </div>
 }
 
@@ -481,9 +481,10 @@ else
 }
 @if (isReturnClicked)
 {
-    <PopupComp Headline="@returnHeadLinePopUp" Text1="@returnTextPopUp1" GameIdToDelete="@(async () => await returnToHome())" ShowMsg="closedReturnPopUp" actionButtonText="שמור וחזור ל״משחקים שלי״ " cancelButtonText="בטל"></PopupComp>
+    <PopupComp Headline="@returnHeadLinePopUp" Text1="@returnTextPopUp1" GameIdToDelete="@(async () => await returnToHome())" ShowMsg="closedReturnPopUp" actionButtonText="שמור וחזור ל״משחקים שלי״ " cancelButtonText="חזור ללא שמירה" xClicked="(value) => navigateToGamesScreen(value)"></PopupComp>
 
 }
+
 
 <div style="background-color: white; width: 30%; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); border-radius: 5px;">
 
@@ -593,6 +594,7 @@ else
     string toggleTextSrc2 => text2Changed ? "../icon material-text-fields.svg" : "../2text-fields (2).svg";
     string class1MoveCircle2 => text2Changed ? "toggleCircle1" : "toggleCircle2";
     string returnText => isMouseOver ? "שמור חזור" : "->";
+    string returnTextDis => isReturnButtonDisabled ? "לא ניתן לשמור משחק ללא שם והנחיה" : "->";
 
     @*string msg = "";*@
     bool FirstIsText;
@@ -749,6 +751,7 @@ else
 
     private void OnMouseOver(bool isOver)
     {
+
         isMouseOver = isOver;
     }
 

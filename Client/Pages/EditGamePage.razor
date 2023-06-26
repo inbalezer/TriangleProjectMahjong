@@ -329,7 +329,15 @@ else
 
                     @if (editAvailable)
                     {
-                        <input type="button" class="cancelChanges" value="בטל שינויים" style="background-color: peru" @onclick="@(async ()=> await EditMatchRow(currentMatchToShow.ID))" />
+                        if (currentFirstEdit != currentMatchToShow.FirstMatch || currentSecondEdit != currentMatchToShow.SecondMatch)
+                        {
+                            isChanging = false;
+                        }
+                        else
+                        {
+                            isChanging = true;
+                        }
+                        <input type="button" class="cancelChanges" value="בטל שינויים" style="background-color: peru" disabled=@isChanging @onclick="@(async ()=> await EditMatchRow(currentMatchToShow.ID))" />
                     }
                     <br />
 
@@ -589,6 +597,8 @@ else
     string class1MoveCircle2 => text2Changed ? "toggleCircle1" : "toggleCircle2";
     string returnText => isMouseOver ? "שמור חזור" : "->";
     string returnTextDis => isReturnButtonDisabled ? "לא ניתן לשמור משחק ללא שם והנחיה" : "->";
+    string currentFirstEdit = "";
+    string currentSecondEdit = "";
 
     @*string msg = "";*@
     bool FirstIsText;
@@ -616,6 +626,7 @@ else
     bool isInsExist = false;
     bool isFirstImage = false;
     bool isMouseOver = false;
+    bool isChanging = false;
     int characterLimit = 15;
     int characterGameNameLimit = 17;
     int characterGameInstructionLimit = 23;
@@ -1267,6 +1278,7 @@ else
                 textChanged = true;
                 isFirstImage = true;
                 myFileImage1 = currentMatchToShow.FirstMatch;
+                currentFirstEdit = myFileImage1;
                 MakeDeleteList();
 
             }
@@ -1274,7 +1286,7 @@ else
             {
                 textChanged = false;
                 characterCountFirst = editMatch.FirstMatch.Length;
-                characterCountSecond = editMatch.SecondMatch.Length;
+                currentFirstEdit = currentMatchToShow.FirstMatch;
             }
 
             if (!editMatch.SecondIsText)
@@ -1282,12 +1294,16 @@ else
                 text2Changed = false;
                 isFirstImage = false;
                 myFileImage2 = currentMatchToShow.SecondMatch;
+                currentSecondEdit = myFileImage2;
                 MakeDeleteList();
 
             }
             else
             {
                 text2Changed = true;
+                characterCountSecond = editMatch.SecondMatch.Length;
+                currentSecondEdit = currentMatchToShow.SecondMatch;
+
             }
             //textChanged = editMatch.FirstIsText;
             //text2Changed = !editMatch.SecondIsText;

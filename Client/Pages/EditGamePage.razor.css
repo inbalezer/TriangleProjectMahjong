@@ -166,3 +166,34 @@
         height: 3vh;
         transition: transform 0.5s ease;
     }
+
+
+.publishBtn {
+    width: 8vw;
+    padding-left: 3%;
+    height: 5vh;
+    background-image: linear-gradient(to bottom, #87c3f0, #2d96e3);
+    cursor: pointer;
+    border-radius:5px;
+    
+    align-content:center;
+}
+
+.publishIcon {
+    position: relative;
+    top: -2.3vw;
+    right: 6vw;
+    width:2vw;
+    height:2vh;
+}
+
+.afterPublish {
+    background-image: linear-gradient(to bottom, #87f0c3, #2de396);
+    width: 8vw;
+    padding-left: 3%;
+    height: 7vh;
+    border-radius: 5px;
+    color: white;
+    align-content: center;
+}
+

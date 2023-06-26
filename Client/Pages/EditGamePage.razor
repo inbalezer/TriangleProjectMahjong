@@ -326,7 +326,6 @@ else
                             }
                         </div>
 
-
                     }
 
                     @if (editAvailable)
@@ -508,11 +507,17 @@ else
     }
 </div>
 
-<input type="button" style="background-color: @publishBtnColor" value="@publishBtnValue" disabled="@isPublish" @onclick="@(async ()=> await publish("Published"))" />
+<div>
+    <input type="button" class="@publishClasStyle" value="@publishBtnValue" disabled="@isPublish" @onclick="@(async ()=> await publish("Published"))" />
+    <div class="publishIcon"> 
+        <img src="../icon feather-plus.svg" />
+    </div>
+</div>
+
 
 @if (publishBtnValue == "פורסם")
 {
-    publishBtnColor = "lightgreen";
+    publishClasStyle = "afterPublish";
 }
 
 @if (publishBtnValue == "פורסם" && isReturnPublishClicked)
@@ -552,6 +557,8 @@ else
         pointer-events: none;
         opacity: 0.5;
     }
+
+    
 </style>
 
 @code {
@@ -590,7 +597,7 @@ else
     string gameCodeToShow = "";
     string priviousValue = "";
     string priviousValue2 = "";
-    string publishBtnColor = "deepskyblue";
+    string publishClasStyle = "";
     string toggleImgSrc => textChanged ? "../2material-photo.svg" : "../icon material-photo.svg";
     string toggleTextSrc => textChanged ? "../2text-fields (2).svg" : "../icon material-text-fields.svg";
     string class1MoveCircle => textChanged ? "toggleCircle2" : "toggleCircle1";
@@ -671,7 +678,7 @@ else
             isEnoughMathces = false;
             isPublish = true;
 
-            @*await publish("Not Eligible");*@
+    @*await publish("Not Eligible");*@
 
         }
 
@@ -686,18 +693,18 @@ else
 
         if (isNameAndInstraction && isEnoughMathces)
         {
-            @*isPublish = false;*@
+    @*isPublish = false;*@
             if (fullGame.PublishStatus == "Not Eligible")
             {
                 await publish("Eligible");
                 isPublish = false;
-                publishBtnColor = "blue";
+                publishClasStyle = "publishBtn";
 
             }
             if (fullGame.PublishStatus == "Eligible")
             {
                 isPublish = false;
-                publishBtnColor = "blue";
+                publishClasStyle = "publishBtn";
 
 
             }
@@ -998,20 +1005,20 @@ else
         {
             publishBtnValue = "פורסם";
             isPublish = true;
-            publishBtnColor = "lightgreen";
+            publishClasStyle = "afterPublish";
         }
         else if (status == "Eligible")
         {
             publishBtnValue = "פרסם";
             isPublish = false;
-            publishBtnColor = "aqua";
+            publishClasStyle = "publishBtn";
 
         }
         else
         {
             publishBtnValue = "פרסם";
             isPublish = true;
-            publishBtnColor = "aqua";
+            publishClasStyle = "publishBtn";
 
         }
     }

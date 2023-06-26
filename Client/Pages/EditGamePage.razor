@@ -15,22 +15,16 @@
 
 <h3>עריכת משחק @GameFullName</h3>
 
-@if (isNameAndInstraction)
+@if (showWarningMessage || !isNameAndInstraction || GameFullName == "")
 {
-    <div>
+    <button class="returnBtnClassDis" @onclick="showMessage" title="לא ניתן לשמור משחק ללא שם או הנחייה" disabled="@isReturnButtonDisabled">@returnText</button>
 
-        <button class="returnBtnClass" @onclick="showMessage" @onmouseover="() => OnMouseOver(true)" @onmouseout="() => OnMouseOver(false)" disabled="@isReturnButtonDisabled">@returnText</button>
-    </div>
 }
 else
 {
-    <div class="custom-tooltip" title="לא ניתן לחזור למסך המשחקים ללא שם משחק והנחיה">
+    <button class="returnBtnClass" @onclick="showMessage" @onmouseover="() => OnMouseOver(true)" @onmouseout="() => OnMouseOver(false)" disabled="@isReturnButtonDisabled">@returnText</button>
 
-        <button class="returnBtnClassDis" @onclick="showMessage" disabled="@isReturnButtonDisabled">@returnTextDis</button>
-    </div>
 }
-
-
 
 <table style="border:double">
     <tr>

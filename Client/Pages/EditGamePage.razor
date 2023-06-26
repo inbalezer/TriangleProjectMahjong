@@ -85,9 +85,6 @@ else
 </Button>
 
 
-
-
-
 <p>הוספת זוגות</p>
 
 @if (isNameAndInstructionExist)
@@ -169,6 +166,7 @@ else
                             }
                         </div>
                     }
+
                     else
                     {
 
@@ -868,6 +866,7 @@ else
 
                 editMatch.FirstMatch = match1.FirstMatch;
                 editMatch.SecondMatch = match1.SecondMatch;
+                editAvailable = false;
 
                 foreach (MatchToShow updatedMatch1 in fullGame.MatchesList)
                 {
@@ -1153,6 +1152,7 @@ else
         {
             msg = "התמונות נמחקו בהצלחה";
             //DeletedMatch1Images.Clear();
+
             DeletedMatchList.Clear();
         }
         else

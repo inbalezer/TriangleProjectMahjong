@@ -36,7 +36,8 @@ else
             :שם המשחק <input maxlength="17" style="border:2px solid blue" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
             @if (!string.IsNullOrEmpty(GameFullName))
             {
-                <span class="character-count">@characterGameNameLimit/ @characterCountGameName </span>
+                <span class="character-count" style="@(characterGameNameLimit == characterCountGameName ? "color: red;" : "")">@characterGameNameLimit/ @characterCountGameName</span>
+
             }
             <p>(1-17 תווים)</p>
 
@@ -54,7 +55,8 @@ else
             <input maxlength="23" style="border:2px solid blue" type="text" @bind="GameInstruction" @oninput='e => HandleInput(e, "gameInstruction")' /> ורוקנו את הלוח
             @if (!string.IsNullOrEmpty(GameInstruction))
             {
-                <span class="character-count"> @characterGameInstructionLimit / @characterCountInstruction  </span>
+                
+                <span class="character-count" style="@(characterGameInstructionLimit == characterCountInstruction ? "color: red;" : "")">@characterGameInstructionLimit/ @characterCountInstruction</span>
             }
             @if (showWarningMessage)
             {
@@ -162,7 +164,8 @@ else
 
                             @if (!string.IsNullOrEmpty(currentMatchToShow.FirstMatch))
                             {
-                                <span class="character-count"> @characterLimit / @characterCountFirst  </span>
+                                
+                                <span class="character-count" style="@(characterLimit == characterCountFirst ? "color: red;" : "")">@characterLimit/ @characterCountFirst</span>
                             }
                         </div>
                     }
@@ -320,7 +323,8 @@ else
 
                             @if (!string.IsNullOrEmpty(currentMatchToShow.SecondMatch))
                             {
-                                <span class="character-count"> @characterLimit / @characterCountSecond  </span>
+                                
+                                <span class="character-count" style="@(characterLimit == characterCountSecond ? "color: red;" : "")">@characterLimit/ @characterCountSecond</span>
                             }
                         </div>
 

@@ -1224,14 +1224,42 @@ else
     protected async Task DeleteMatchRow(MatchToShow matchRowToDelete)
     {
         matchRowToDelete = matchToDelete;
-        if (!string.IsNullOrEmpty(matchRowToDelete.FirstMatch) && matchRowToDelete.FirstMatch.Contains(".png") || matchRowToDelete.FirstMatch.Contains(".JPEG")) ;
+
+        string extension = Path.GetExtension(matchRowToDelete.FirstMatch);
+        string extension2 = Path.GetExtension(matchRowToDelete.SecondMatch);
+
+        if (extension != null)
         {
-            DeletedMatch1Images.Add(matchRowToDelete.FirstMatch);
+            string fileExtension = extension.ToLower();
+
+            if (fileExtension == ".jpg" || fileExtension == ".jpeg" || fileExtension == ".png")
+            {
+                DeletedMatch1Images.Add(matchRowToDelete.FirstMatch);
+            }
         }
-        if (!string.IsNullOrEmpty(matchRowToDelete.SecondMatch) && matchRowToDelete.SecondMatch.Contains(".png") || matchRowToDelete.SecondMatch.Contains(".JPEG"))
+
+        if (extension2 != null)
         {
-            DeletedMatch2Images.Add(matchRowToDelete.SecondMatch);
+            string fileExtension2 = extension2.ToLower();
+
+            if (fileExtension2 == ".jpg" || fileExtension2 == ".jpeg" || fileExtension2 == ".png")
+            {
+                DeletedMatch1Images.Add(matchRowToDelete.SecondMatch);
+            }
         }
+
+        
+
+
+
+        //if (!string.IsNullOrEmpty(matchRowToDelete.FirstMatch) && matchRowToDelete.FirstMatch.Contains(".png") || matchRowToDelete.FirstMatch.Contains(".jpeg"))
+        //{
+        //    DeletedMatch1Images.Add(matchRowToDelete.FirstMatch);
+        //}
+        //if (!string.IsNullOrEmpty(matchRowToDelete.SecondMatch) && matchRowToDelete.SecondMatch.Contains(".png") || matchRowToDelete.SecondMatch.Contains(".jpeg"))
+        //{
+        //    DeletedMatch2Images.Add(matchRowToDelete.SecondMatch);
+        //}
 
         var deleteMatchResponse = await Http.DeleteAsync("api/Matches/" + UserId + "/DeleteMatch" + "/" + matchRowToDelete.ID);
         if (deleteMatchResponse.IsSuccessStatusCode)

@@ -12,7 +12,10 @@
     <div id="GameName">@GameFullName</div>
     <div class="CardContent">
         <div class="custom-tooltip" title="מעבר לעמוד עריכת תוכן המשחק והגדרותו">
-            <input type="button" id="update" @onclick="updateNavigate" />
+            <div class="update-button-container">
+                <input type="button" id="update" @onclick="updateNavigate" />
+
+            </div>
         </div>
 
         <div class="custom-tooltip" title="את קוד המשחק יש להזין כדי להיכנס אליו">@gameCode</div>
@@ -27,18 +30,16 @@
             @if (GamePublishStatus == "Not Eligible")
             {
 
-                <div id="Group_238" class="custom-tooltip" title="לא ניתן לפרסם משחק שאינו מכיל הנחייה ולפחות 5 זוגות">
-                    <div id="Group_234">
+                <div id="Group_238" style="margin-top:5%;">
+                    <div id="Group_234" style="position: relative; left: 20px;">
                         <svg class="Rectangle_272">
-                            <rect id="Rectangle_272" rx="18" ry="18" x="0" y="0" width="181" height="36">
-                            </rect>
+                            <rect id="Rectangle_272" rx="18" ry="18" x="0" y="0" width="155" height="35"></rect>
                         </svg>
-                        <svg class="Ellipse_4">
-                            <ellipse id="Ellipse_4" rx="19" ry="19" cx="19" cy="19">
-                            </ellipse>
+                        <svg class="Ellipse_4" style="position: absolute; top: 70%; left: 29%; transform: translate(-100%, -50%);">
+                            <ellipse id="Ellipse_4" rx="19" ry="19" cx="19" cy="19"></ellipse>
                         </svg>
-                        <div id="n__">
-                            <span>לא עומד בתנאים</span>
+                        <div id="n__" style="position: relative;">
+                            <span style="font-family: Heebo;font-style: normal;font-weight: normal;font-size: 16px;position: absolute; top: 40%; left: 25%; transform: translate(-100%, 8%);">לא עומד בתנאים</span>
                         </div>
                     </div>
                 </div>
@@ -47,14 +48,14 @@
             else if (GamePublishStatus == "Eligible")
             {
 
-                <div id="Group_234">
+                <div id="Group_234" style="margin-top:5%; position: relative; left: 20px;">
                     <svg class="Path_150_gi" viewBox="0 0 181 36">
-                        <path id="Path_150_gi" d="M 18 0 L 163 0 C 172.9411315917969 0 181 8.058874130249023 181 18 C 181 27.94112586975098 172.9411315917969 36 163 36 L 18 36 C 8.058874130249023 36 0 27.94112586975098 0 18 C 0 8.058874130249023 8.058874130249023 0 18 0 Z"></path>
+                        <rect class="eligibleBar1" rx="18" ry="18" x="0" y="0" width="155" height="35"></rect>
                     </svg>
                     <svg class="Ellipse_4" @onclick="changePublish">
                         <ellipse id="@ellipseClass" rx="19" ry="19" cx="19" cy="19"></ellipse>
                     </svg>
-                    <div id="n__gk">
+                    <div id="n__gk1">
                         <span>@publishStatusBtnText</span>
                     </div>
                 </div>
@@ -62,9 +63,9 @@
             }
             else
             {
-                <div id="Group_234">
+                <div id="Group_234" style="margin-top:5%; position: relative; left: 20px;">
                     <svg class="Path_150_gi" viewBox="0 0 181 36">
-                        <path id="Path_150_gi" d="M 18 0 L 163 0 C 172.9411315917969 0 181 8.058874130249023 181 18 C 181 27.94112586975098 172.9411315917969 36 163 36 L 18 36 C 8.058874130249023 36 0 27.94112586975098 0 18 C 0 8.058874130249023 8.058874130249023 0 18 0 Z"></path>
+                        <rect class="eligibleBar1" rx="18" ry="18" x="0" y="0" width="155" height="35"></rect>
                     </svg>
                     <svg class="Ellipse_4" @onclick="changePublish">
                         <ellipse id="@ellipseClass" rx="19" ry="19" cx="19" cy="19"></ellipse>
@@ -74,12 +75,11 @@
                     </div>
                 </div>
 
-
             }
         </div>
         <div class="delete-button-container">
 
-            <button class="delete-button" @onclick="deleteGame"><img style="height:50px; width:50px;" src="../css/games list imgs/trash1.svg" /></button>
+            <button class="delete-button" @onclick="deleteGame"><img style=" height:80%; width:80%;" src="../css/games list imgs/trash1.svg" /></button>
 
         </div>
     </div>
@@ -195,28 +195,19 @@
 
 
 <style>
-    .game-card {
-        width: 70%;
-        max-width: 254px;
-        height: auto;
-        border-radius: 10px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        background-color: white;
-        margin: 20px;
-        align-items: center;
-    }
+
 
     .title {
     }
 
     #GameName {
-        background-color: #87C3F0;
+        background-color: rgba(135, 195, 240, 0.32);
         text-align: center;
+        padding: 7%;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         color: #62629A;
         font-size: 15pt;
-        font-weight: bold;
     }
 
     .CardContent {
@@ -266,26 +257,6 @@
             opacity: 1;
             visibility: visible;
         }
-
-    #update {
-        /* background-image: url('../css/games list imgs/group 1054.png');
-            background-size: cover;
-            background-repeat: no-repeat;
-            width: 50px;
-            height: 50px;
-            border-radius: 25px;
-            position:relative;*/
-
-        background-image: url('../css/games list imgs/group 1054.png');
-        background-size: cover;
-        background-repeat: no-repeat;
-        width: 50px;
-        height: 50px;
-        border-radius: 25px;
-        position: absolute;
-        bottom: 100%; /* adjust the top position according to your needs */
-        left: 90%; /* adjust the right position according to your needs */
-    }
 </style>
 
 

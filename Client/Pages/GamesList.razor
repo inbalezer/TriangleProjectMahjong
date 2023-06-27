@@ -46,8 +46,6 @@
 
         @if (isPlusButtonClicked)
         {
-
-
             <input maxlength="17" class="@circularInput" type="text" @bind="gameName" placeholder="הקלד שם משחק..." @oninput='e => HandleInputGameName(e, "gameName")' />
             @if (!string.IsNullOrEmpty(gameName))
             {
@@ -152,8 +150,6 @@
             characterCountGameName = gameName.Length;
         }
     }
-
-
 
     void showCreateGameField()
     {
@@ -327,7 +323,6 @@
         }
     }
 
-
     protected async Task DeleteGame(GameForEditor gameToDelete)
     {
 
@@ -363,7 +358,6 @@
         }
     }
 }
-
 
 <style>
     #addGame {

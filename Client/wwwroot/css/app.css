@@ -82,12 +82,12 @@ a, .btn-link {
 
 
 .PageMainTitle {
-    font-size: 35pt;
+    font-size: 25pt;
     color: #62629A;
-    background: linear-gradient(180deg, #fdf1d0 0%, #fffdf3 100%);
+    background: linear-gradient(180deg, #fdf1d0 20%, #fffdf3 100%);
     border-radius: 25px;
-    height: 85px;
-    max-width: 700px;
+    height: 20%;
+    max-width: 400px;
     padding: 15px;
     margin: 0 auto; /* Centers the title horizontally */
     text-align: center; /* Centers the title text horizontally */

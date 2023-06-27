@@ -1,12 +1,16 @@
 ﻿
+
 .game-card {
-    width: 100%;
+    width: 70%;
     max-width: 254px;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     background-color: white;
-    margin: 20px;
+    margin: 38px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 .title {
@@ -28,7 +32,7 @@
 
 .delete-button-container {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .delete-button {
@@ -41,7 +45,19 @@
 }
 
 #update {
+    background-image: url('../css/games list imgs/group 1054.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
     cursor: pointer;
+}
+
+.update-button-container {
+    position: absolute;
+    top: -11%;
+    right: -15%;
 }
 
 .custom-tooltip::after {
@@ -138,7 +154,6 @@
     overflow: visible;
 }
 
-//טוגל ניתן לפרסום//
 
 #Group_234_gh {
     position: relative;
@@ -231,7 +246,7 @@
 #n__gk {
     top: 20%;
     position: relative;
-    right: 25%;
+    right: 35%;
     overflow: visible;
     width: 84px;
     white-space: nowrap;
@@ -246,6 +261,23 @@
     align-items: center;
 }
 
+#n__gk1 {
+    top: 20%;
+    position: relative;
+    right: 30%;
+    overflow: visible;
+    width: 84px;
+    white-space: nowrap;
+    text-align: right;
+    font-family: Heebo;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    color: rgba(98,98,154,1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 #Group_238_la {
     position: relative;
@@ -312,4 +344,9 @@
     font-weight: normal;
     font-size: 16px;
     color: rgba(98,98,154,1);
+}
+
+.eligibleBar1 {
+    opacity: 0.401;
+    fill: rgba(135, 195, 240, 1);
 }

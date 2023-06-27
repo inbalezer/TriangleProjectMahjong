@@ -107,7 +107,8 @@ namespace TriangleProject.Server.Controllers
                             }
                             else
                             {
-                                singleMatch.MatchImg = match;
+                                //singleMatch.MatchImg = match;
+                                singleMatch.MatchText = match;
 
                             }
 
@@ -134,7 +135,8 @@ namespace TriangleProject.Server.Controllers
                             }
                             else
                             {
-                                singleMatch.MatchImg = match;
+                                //singleMatch.MatchImg = match;
+                                singleMatch.MatchText = match;
 
 
                             }

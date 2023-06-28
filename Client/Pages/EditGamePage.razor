@@ -693,7 +693,7 @@ else
 
         if (isNameAndInstraction && isEnoughMathces)
         {
-    @*isPublish = false;*@
+            @*isPublish = false;*@
             if (fullGame.PublishStatus == "Not Eligible")
             {
                 await publish("Eligible");
@@ -864,6 +864,7 @@ else
         if (editMatch.ID > 0) // EDIT MATCH
         {
             newMatchForIdentify.GameID = newGameID;
+            
 
             var UpdatedMatch = await Http.PostAsJsonAsync("api/Matches/" + UserId + "/EditMatch", newMatchForIdentify);
 
@@ -894,7 +895,7 @@ else
                 if (DeletedMatch1Images.Count > 0)
                 {
                     DeletedMatch1Images.RemoveAt(DeletedMatch1Images.Count - 1);
-                    if (DeletedMatch1Images.Count > 1)
+                    if (DeletedMatch1Images.Count >= 1)
                     {
                         await DeleteImage(DeletedMatch1Images);
                     }
@@ -903,7 +904,7 @@ else
                 {
                     DeletedMatch2Images.RemoveAt(DeletedMatch2Images.Count - 1);
 
-                    if (DeletedMatch2Images.Count > 1)
+                    if (DeletedMatch2Images.Count >= 1)
                     {
                         await DeleteImage(DeletedMatch2Images);
                     }
@@ -1224,6 +1225,8 @@ else
     protected async Task DeleteMatchRow(MatchToShow matchRowToDelete)
     {
         matchRowToDelete = matchToDelete;
+        DeletedMatch1Images.Clear();
+        DeletedMatch2Images.Clear();
 
         string extension = Path.GetExtension(matchRowToDelete.FirstMatch);
         string extension2 = Path.GetExtension(matchRowToDelete.SecondMatch);
@@ -1248,7 +1251,7 @@ else
             }
         }
 
-        
+
 
 
 
@@ -1270,6 +1273,9 @@ else
             await DeleteImage(DeletedMatch2Images);
             currentMatchToShow.FirstMatch = "";
             currentMatchToShow.SecondMatch = "";
+            myFileImage1 = "";
+            myFileImage2 = "";
+            editAvailable = false;
 
             await AreConditionsMet();
 

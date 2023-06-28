@@ -338,7 +338,7 @@ else
                         {
                             isChanging = true;
                         }
-                        <input type="button" class="cancelChanges" value="בטל שינויים" style="background-color: peru" disabled=@isChanging @onclick="@(async ()=> await EditMatchRow(currentMatchToShow.ID))" />
+                        <input type="button" class="cancelChanges" value="בטל שינויים" style="background-color: peru" disabled=@isChanging @onclick="@(async ()=> await cancleChanges(currentMatchToShow.ID))" />
                     }
                     <br />
 
@@ -864,7 +864,7 @@ else
         if (editMatch.ID > 0) // EDIT MATCH
         {
             newMatchForIdentify.GameID = newGameID;
-            
+
 
             var UpdatedMatch = await Http.PostAsJsonAsync("api/Matches/" + UserId + "/EditMatch", newMatchForIdentify);
 
@@ -1142,12 +1142,18 @@ else
     private void MakeDeleteList() // הוספת שם התמונה לרשימת התמונות הכוללת המועמדת למחיקה- לא מחיקה בפועל מהדאטה בייס
     {
         if (!string.IsNullOrEmpty(myFileImage1) && isFirstImage)
-        {
-            DeletedMatch1Images.Add(myFileImage1);
+        {  
+            if (!DeletedMatch1Images.Contains(myFileImage1))
+            {
+                DeletedMatch1Images.Add(myFileImage1);
+            }
         }
         if (!string.IsNullOrEmpty(myFileImage2) && !isFirstImage)
         {
-            DeletedMatch2Images.Add(myFileImage2);
+            if (!DeletedMatch1Images.Contains(myFileImage2))
+            {
+                DeletedMatch2Images.Add(myFileImage2);
+            }
         }
     }
 
@@ -1419,6 +1425,29 @@ else
 
             }
         }
+    }
+
+    protected async Task cancleChanges(int matchToReload)
+    {
+        if (DeletedMatch1Images.Count != 1)
+        {
+            string firstImgInList = DeletedMatch1Images[0];
+            DeletedMatch1Images.Remove(DeletedMatch1Images[0]);
+
+            await DeleteImage(DeletedMatch1Images);            
+         
+        }
+
+        if (DeletedMatch2Images.Count != 1)
+        {
+            string firstImgInList2 = DeletedMatch2Images[0];
+            DeletedMatch2Images.Remove(DeletedMatch2Images[0]);
+
+            await DeleteImage(DeletedMatch2Images);
+            
+        }
+
+        await EditMatchRow(matchToReload);
     }
 
     void HandleInput(ChangeEventArgs e, string field)

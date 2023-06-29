@@ -33,7 +33,7 @@ else
     <tr>
         <div class="character-count-input">
 
-            שם המשחק: <input maxlength="17" class="@noGameName" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
+            שם המשחק: <input maxlength="17" style="@(characterCountGameName == 0 ? "border: 1px solid red;" : "")" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
             @if (!string.IsNullOrEmpty(GameFullName))
             {
                 <span class="character-count" style="@(characterGameNameLimit == characterCountGameName ? "color: red;" : "")">@characterGameNameLimit/ @characterCountGameName</span>
@@ -58,7 +58,7 @@ else
     <tr>
         <div class="character-count-input">
             הנחיית משחק  לחצו והתאימו בין:
-            <input maxlength="23" class="@noGameInstruction" type="text" @bind="GameInstruction" @oninput='e => HandleInput(e, "gameInstruction")' /> ורוקנו את הלוח
+            <input maxlength="23" style="@(characterCountInstruction == 0 ? "border: 1px solid red;" : "")" type="text" @bind="GameInstruction" @oninput='e => HandleInput(e, "gameInstruction")' /> ורוקנו את הלוח
             @if (!string.IsNullOrEmpty(GameInstruction))
             {
                 
@@ -97,7 +97,7 @@ else
 
 @if (isNameAndInstructionExist)
 {
-    @if (!isLimitMatches)
+    @if (!isLimitMatches || editAvailable)
     {
         <EditForm Model="currentMatchToShow" OnValidSubmit="(() =>AddMatch(currentMatchToShow))">
             <DataAnnotationsValidator />

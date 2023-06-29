@@ -13,7 +13,7 @@
 
 
 
-<h3>עריכת משחק @GameFullName</h3>
+<h3>:עריכת משחק @GameFullName</h3>
 
 @if (showWarningMessage || !isNameAndInstraction || GameFullName == "")
 {
@@ -33,7 +33,7 @@ else
     <tr>
         <div class="character-count-input">
 
-            :שם המשחק <input maxlength="17" class="@noGameName" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
+            שם המשחק: <input maxlength="17" class="@noGameName" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
             @if (!string.IsNullOrEmpty(GameFullName))
             {
                 <span class="character-count" style="@(characterGameNameLimit == characterCountGameName ? "color: red;" : "")">@characterGameNameLimit/ @characterCountGameName</span>
@@ -57,7 +57,7 @@ else
     </tr>
     <tr>
         <div class="character-count-input">
-            :הנחיית משחק  לחצו והתאימו בין
+            הנחיית משחק  לחצו והתאימו בין:
             <input maxlength="23" class="@noGameInstruction" type="text" @bind="GameInstruction" @oninput='e => HandleInput(e, "gameInstruction")' /> ורוקנו את הלוח
             @if (!string.IsNullOrEmpty(GameInstruction))
             {
@@ -224,7 +224,7 @@ else
                         <div class="toggleStick">
                             <input type="button" class="@class1MoveCircle2" @onclick="(() =>makeToggle(false))" />
                         </div>
-                        <img id="textImg" src="@toggleTextSrc2" />
+                        <img id="textImg" src="@toggleTextSrc2"/>
                     </div>
                     @*<InputCheckbox @bind-Value="text2Changed" />*@
 
@@ -492,13 +492,14 @@ else
 }
 @if (isReturnClicked)
 {
-    <PopupComp Headline="@returnHeadLinePopUp" Text1="@returnTextPopUp1" GameIdToDelete="@(async () => await returnToHome())" ShowMsg="closedReturnPopUp" actionButtonText="שמור וחזור ל״משחקים שלי״ " cancelButtonText="חזור ללא שמירה" xClicked="(value) => navigateToGamesScreen(value)"></PopupComp>
+    <PopupComp Headline="@returnHeadLinePopUp" Text1="@returnTextPopUp1" GameIdToDelete="@(async () => await returnToHome())" ShowMsg="closedReturnPopUp" actionButtonText="שמור וחזור למסך המשחקים " cancelButtonText="חזור ללא שמירה" xClicked="(value) => navigateToGamesScreen(value)"></PopupComp>
 
 }
 
 
 <div style="background-color: white; width: 30%; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); border-radius: 5px;">
 
+    <p>תנאים לפרסום</p>
     <p>
         שם והנחיית המשחק
     </p>
@@ -530,7 +531,7 @@ else
 
 @if (publishBtnValue == "פורסם" && isReturnPublishClicked)
 {
-    <PopupComp Headline="פורסם בהצלחה!" Text1="איזה כיף, המשחק מחכה לך במסך המשחקים שלך. קוד המשחק הוא:" Text2="@gameCodeToShow" GameIdToDelete="navigateToGameAfterPublish" actionButtonText="למשחק" ShowMsg="closedReturnPopUp" cancelButtonText="חזור למסך המשחקים" xClicked="(value) => navigateToGamesScreen(value)"></PopupComp>
+    <PopupComp Headline="פורסם בהצלחה!" Text1="@publishMsg" Text2="@gameCodeToShow" GameIdToDelete="navigateToGameAfterPublish" actionButtonText="למשחק" ShowMsg="closedReturnPopUp" cancelButtonText="חזור למסך המשחקים" xClicked="(value) => navigateToGamesScreen(value)"></PopupComp>
 
 }
 
@@ -587,7 +588,7 @@ else
     string SettingMsg = "";
     string fullGameMsg = "";
     string returnHeadLinePopUp = "חזור למסך ״המשחקים שלי?";
-    string returnTextPopUp1 = "אתה עומד לחזור למסך ״המשחקים שלי״ אם קיים זוג חדש שטרם שמרת, הוא לא ישמר. ";
+    string returnTextPopUp1 = "אתה עומד לחזור למסך ״המשחקים שלי״. אם קיים זוג חדש שטרם שמרת, הוא לא ישמר. ";
     string deleteHeadLinePopUp = "מחיקת זוג";
     string deleteTextPopUp1 = "אתה עומד למחוק את הזוג. האם אתה בטוח?";
     string gameNameToReturn = "";
@@ -598,7 +599,7 @@ else
     string currentValue = "";
     string currentValue2 = "";
     string publishBtnValue = "פרסם";
-    string publishMsg = " איזה כיף, המשחק שלך מחכה לך במסך המשחקים";
+    string publishMsg = " איזה כיף, המשחק שלך מחכה לך במסך המשחקים. קוד המשחק שלך הוא:";
     string unacceptedImg = "";
     string unacceptedImg2 = "";
     string previousValue = "";
@@ -1269,19 +1270,6 @@ else
             }
         }
 
-
-
-
-
-        //if (!string.IsNullOrEmpty(matchRowToDelete.FirstMatch) && matchRowToDelete.FirstMatch.Contains(".png") || matchRowToDelete.FirstMatch.Contains(".jpeg"))
-        //{
-        //    DeletedMatch1Images.Add(matchRowToDelete.FirstMatch);
-        //}
-        //if (!string.IsNullOrEmpty(matchRowToDelete.SecondMatch) && matchRowToDelete.SecondMatch.Contains(".png") || matchRowToDelete.SecondMatch.Contains(".jpeg"))
-        //{
-        //    DeletedMatch2Images.Add(matchRowToDelete.SecondMatch);
-        //}
-
         var deleteMatchResponse = await Http.DeleteAsync("api/Matches/" + UserId + "/DeleteMatch" + "/" + matchRowToDelete.ID);
         if (deleteMatchResponse.IsSuccessStatusCode)
         {
@@ -1289,11 +1277,15 @@ else
             isDeleteButtonClicked = false;
             await DeleteImage(DeletedMatch1Images);
             await DeleteImage(DeletedMatch2Images);
-            currentMatchToShow.FirstMatch = "";
-            currentMatchToShow.SecondMatch = "";
-            myFileImage1 = "";
-            myFileImage2 = "";
-            editAvailable = false;
+            if (currentMatchToShow.FirstMatch == matchRowToDelete.FirstMatch && currentMatchToShow.SecondMatch == matchRowToDelete.SecondMatch)
+            {
+                currentMatchToShow.FirstMatch = "";
+                currentMatchToShow.SecondMatch = "";
+                myFileImage1 = "";
+                myFileImage2 = "";
+                editAvailable = false;
+            }
+
 
             await AreConditionsMet();
 

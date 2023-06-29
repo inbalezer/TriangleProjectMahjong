@@ -197,3 +197,6 @@
     align-content: center;
 }
 
+.emptyGameName {
+    border: 1px solid red;
+}

@@ -33,10 +33,14 @@ else
     <tr>
         <div class="character-count-input">
 
-            :שם המשחק <input maxlength="17" style="border:2px solid blue" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
+            :שם המשחק <input maxlength="17" class="@noGameName" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
             @if (!string.IsNullOrEmpty(GameFullName))
             {
                 <span class="character-count" style="@(characterGameNameLimit == characterCountGameName ? "color: red;" : "")">@characterGameNameLimit/ @characterCountGameName</span>
+
+            }
+            else
+            {
 
             }
             <p>(1-17 תווים)</p>
@@ -45,14 +49,16 @@ else
 
             @if (GameFullName == "")
             {
-                <span>לא ניתן לשמור משחק ללא שם.</span>
+                @*isNoGameName = true;*@
+                <span style="color:red">לא ניתן לשמור משחק ללא שם.</span>
+               
             }
         </div>
     </tr>
     <tr>
         <div class="character-count-input">
             :הנחיית משחק  לחצו והתאימו בין
-            <input maxlength="23" style="border:2px solid blue" type="text" @bind="GameInstruction" @oninput='e => HandleInput(e, "gameInstruction")' /> ורוקנו את הלוח
+            <input maxlength="23" class="@noGameInstruction" type="text" @bind="GameInstruction" @oninput='e => HandleInput(e, "gameInstruction")' /> ורוקנו את הלוח
             @if (!string.IsNullOrEmpty(GameInstruction))
             {
                 
@@ -60,7 +66,9 @@ else
             }
             @if (showWarningMessage)
             {
-                <span class="warning-message">לא ניתן לשמור משחק ללא הנחייה</span>
+                @*isNoGameIntruction = true;*@
+                <span style="color:red">לא ניתן לשמור משחק ללא הנחייה</span>
+                
             }
             <p>(1-23 תווים)</p>
         </div>
@@ -606,6 +614,8 @@ else
     string class1MoveCircle2 => text2Changed ? "toggleCircle1" : "toggleCircle2";
     string returnText => isMouseOver ? "שמור חזור" : "->";
     string returnTextDis => isReturnButtonDisabled ? "לא ניתן לשמור משחק ללא שם והנחיה" : "->";
+    string noGameName => isNoGameName ? "emptyGameName" : "";
+    string noGameInstruction => isNoGameIntruction ? "emptyGameName" : "";
     string currentFirstEdit = "";
     string currentSecondEdit = "";
 
@@ -631,6 +641,8 @@ else
     bool isEditMode = false;
     bool isReturnPublishClicked = false;
     bool isPublishAndReturn = false;
+    bool isNoGameName = false;
+    bool isNoGameIntruction = false;
     bool IsButtonDisabled => string.IsNullOrEmpty(currentMatchToShow.SecondMatch) || string.IsNullOrEmpty(currentMatchToShow.FirstMatch);
     bool isInsExist = false;
     bool isFirstImage = false;
@@ -1435,7 +1447,7 @@ else
             DeletedMatch1Images.Remove(DeletedMatch1Images[0]);
 
             await DeleteImage(DeletedMatch1Images);            
-         
+
         }
 
         if (DeletedMatch2Images.Count != 1)
@@ -1444,7 +1456,7 @@ else
             DeletedMatch2Images.Remove(DeletedMatch2Images[0]);
 
             await DeleteImage(DeletedMatch2Images);
-            
+
         }
 
         await EditMatchRow(matchToReload);
@@ -1470,6 +1482,11 @@ else
         {
             GameFullName = inputText;
             characterCountGameName = GameFullName.Length;
+            if(characterCountGameName == 0)
+            {
+                isNoGameName = true;
+            }
+
         }
         else if (field == "gameInstruction")
         {
@@ -1482,6 +1499,7 @@ else
             else
             {
                 showWarningMessage = false;
+                isNoGameIntruction = true;
             }
             previousValue = inputText;
         }

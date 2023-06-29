@@ -32,18 +32,8 @@ else
     </tr>
     <tr>
         <div class="character-count-input">
-            @if (!isNoGameName && !string.IsNullOrEmpty(GameFullName))
-            {
 
-                <span>שם המשחק:</span> <input maxlength="17" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
-            }
-            else
-            {
-                <span>שם המשחק:</span> <input maxlength="17" style="border: 1px solid red" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
-                <span style="color:red">לא ניתן לשמור משחק ללא שם.</span>
-
-            }
-
+            שם המשחק: <input maxlength="17" style="@(characterCountGameName == 0 ? "border: 1px solid red;" : "")" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
             @if (!string.IsNullOrEmpty(GameFullName))
             {
                 <span class="character-count" style="@(characterGameNameLimit == characterCountGameName ? "color: red;" : "")">@characterGameNameLimit/ @characterCountGameName</span>
@@ -57,31 +47,29 @@ else
 
 
 
+            @if (GameFullName == "")
+            {
+                @*isNoGameName = true;*@
+                <span style="color:red">לא ניתן לשמור משחק ללא שם.</span>
+               
+            }
         </div>
     </tr>
     <tr>
         <div class="character-count-input">
-
-
             הנחיית משחק  לחצו והתאימו בין:
-            @if (isNoGameIntruction && GameInstruction == "")
-            {
-                @*isNoGameIntruction = true;*@
-                <input maxlength="23" style="border: 1px solid red" type="text" @bind="GameInstruction" @oninput='e => HandleInput(e, "gameInstruction")' /><span>ורוקנו את הלוח</span>
-                <span style="color:red">לא ניתן לשמור משחק ללא הנחייה.</span>
-
-            }
-            else
-            {
-                <input maxlength="23" type="text" @bind="GameInstruction" @oninput='e => HandleInput(e, "gameInstruction")' /><span>ורוקנו את הלוח</span>
-
-            }
+            <input maxlength="23" style="@(characterCountInstruction == 0 ? "border: 1px solid red;" : "")" type="text" @bind="GameInstruction" @oninput='e => HandleInput(e, "gameInstruction")' /> ורוקנו את הלוח
             @if (!string.IsNullOrEmpty(GameInstruction))
             {
-
+                
                 <span class="character-count" style="@(characterGameInstructionLimit == characterCountInstruction ? "color: red;" : "")">@characterGameInstructionLimit/ @characterCountInstruction</span>
             }
-
+            @if (showWarningMessage)
+            {
+                @*isNoGameIntruction = true;*@
+                <span style="color:red">לא ניתן לשמור משחק ללא הנחייה</span>
+                
+            }
             <p>(1-23 תווים)</p>
         </div>
     </tr>
@@ -181,7 +169,7 @@ else
 
                             @if (!string.IsNullOrEmpty(currentMatchToShow.FirstMatch))
                             {
-
+                                
                                 <span class="character-count" style="@(characterLimit == characterCountFirst ? "color: red;" : "")">@characterLimit/ @characterCountFirst</span>
                             }
                         </div>
@@ -236,7 +224,7 @@ else
                         <div class="toggleStick">
                             <input type="button" class="@class1MoveCircle2" @onclick="(() =>makeToggle(false))" />
                         </div>
-                        <img id="textImg" src="@toggleTextSrc2" />
+                        <img id="textImg" src="@toggleTextSrc2"/>
                     </div>
                     @*<InputCheckbox @bind-Value="text2Changed" />*@
 
@@ -341,7 +329,7 @@ else
 
                             @if (!string.IsNullOrEmpty(currentMatchToShow.SecondMatch))
                             {
-
+                                
                                 <span class="character-count" style="@(characterLimit == characterCountSecond ? "color: red;" : "")">@characterLimit/ @characterCountSecond</span>
                             }
                         </div>
@@ -415,8 +403,7 @@ else
         }
         else
         {
-            <span>סה"כ @fullGame.MatchesList.Count/20 זוגות</span>
-            Console.WriteLine(fullGame.MatchesList);
+            <span>סה"כ @fullGame.MatchesList.Count/@fullGame.MatchesList.Count זוגות</span>
         }
 
         if (currentMatchIndex == 0)
@@ -531,7 +518,7 @@ else
 
 <div>
     <input type="button" class="@publishClasStyle" value="@publishBtnValue" disabled="@isPublish" @onclick="@(async ()=> await publish("Published"))" />
-    <div class="publishIcon">
+    <div class="publishIcon"> 
         <img src="../icon feather-plus.svg" />
     </div>
 </div>
@@ -579,6 +566,8 @@ else
         pointer-events: none;
         opacity: 0.5;
     }
+
+    
 </style>
 
 @code {
@@ -702,7 +691,7 @@ else
             isEnoughMathces = false;
             isPublish = true;
 
-            @*await publish("Not Eligible");*@
+    @*await publish("Not Eligible");*@
 
         }
 
@@ -860,7 +849,7 @@ else
             switch (error)
             {
                 case "No Session":
-                    msg = " עבר זמן רב ללא שימוש באתר, אנא רענן את העמוד";
+                    msg = "Session error, please reload page";
                     break;
 
                 case "User Not Logged In":
@@ -941,7 +930,7 @@ else
                 switch (error)
                 {
                     case "No Session":
-                        msg = " עבר זמן רב ללא שימוש באתר, אנא רענן את העמוד";
+                        msg = "Session error, please reload page";
                         break;
 
                     case "User Not Logged In":
@@ -997,7 +986,7 @@ else
                 switch (error)
                 {
                     case "No Session":
-                        msg = " עבר זמן רב ללא שימוש באתר, אנא רענן את העמוד";
+                        msg = "Session error, please reload page";
                         break;
 
                     case "User Not Logged In":
@@ -1011,10 +1000,10 @@ else
                     case "Match not created":
                         msg = "ניסיון שמירת ההתאמה נכשל, נסה שוב";
                         break;
-
+                        
                     case "Match not found":
-                        msg = "התאמה לא נמצאה, נסה שוב";
-                        break;
+                    msg = "התאמה לא נמצאה, נסה שוב";
+                    break;
 
 
                 }
@@ -1073,7 +1062,7 @@ else
             switch (error)
             {
                 case "No Session":
-                    msg = " עבר זמן רב ללא שימוש באתר, אנא רענן את העמוד";
+                    msg = "Session error, please reload page";
                     break;
 
                 case "User Not Logged In":
@@ -1164,7 +1153,7 @@ else
     private void MakeDeleteList() // הוספת שם התמונה לרשימת התמונות הכוללת המועמדת למחיקה- לא מחיקה בפועל מהדאטה בייס
     {
         if (!string.IsNullOrEmpty(myFileImage1) && isFirstImage)
-        {
+        {  
             if (!DeletedMatch1Images.Contains(myFileImage1))
             {
                 DeletedMatch1Images.Add(myFileImage1);
@@ -1222,7 +1211,7 @@ else
             switch (error)
             {
                 case "No Session":
-                    SettingMsg = " עבר זמן רב ללא שימוש באתר, אנא רענן את העמוד";
+                    SettingMsg = "Session error, please reload page";
                     break;
 
                 case "User Not Logged In":
@@ -1307,7 +1296,7 @@ else
             switch (error)
             {
                 case "No Session":
-                    msg = " עבר זמן רב ללא שימוש באתר, אנא רענן את העמוד";
+                    msg = "Session error, please reload page";
                     break;
 
                 case "User Not Logged In":
@@ -1380,7 +1369,7 @@ else
             switch (error)
             {
                 case "No Session":
-                    msg = " עבר זמן רב ללא שימוש באתר, אנא רענן את העמוד";
+                    msg = "Session error, please reload page";
                     break;
 
                 case "User Not Logged In":
@@ -1424,7 +1413,7 @@ else
             switch (error)
             {
                 case "No Session":
-                    SettingMsg = " עבר זמן רב ללא שימוש באתר, אנא רענן את העמוד";
+                    SettingMsg = "Session error, please reload page";
                     break;
 
                 case "User Not Logged In":
@@ -1447,7 +1436,7 @@ else
             string firstImgInList = DeletedMatch1Images[0];
             DeletedMatch1Images.Remove(DeletedMatch1Images[0]);
 
-            await DeleteImage(DeletedMatch1Images);
+            await DeleteImage(DeletedMatch1Images);            
 
         }
 
@@ -1483,13 +1472,9 @@ else
         {
             GameFullName = inputText;
             characterCountGameName = GameFullName.Length;
-            if (characterCountGameName == 0)
+            if(characterCountGameName == 0)
             {
                 isNoGameName = true;
-            }
-            else
-            {
-                isNoGameName = false;
             }
 
         }

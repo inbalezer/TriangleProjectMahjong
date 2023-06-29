@@ -783,14 +783,6 @@ else
     }
 
 
-    //void navigateToGamesScreen()
-    //{
-    //    if ()
-    //    {
-    //        nav.NavigateTo("./GamesList/");
-    //    }
-    //}
-
     private void navigateToGamesScreen(bool value)
     {
         isPublishAndReturn = value;
@@ -861,11 +853,11 @@ else
                     break;
 
                 case "User Not Logged In":
-                    msg = "You are not logged in, please reload page to try again";
+                    msg = "אינך מחובר למערכת, התחבר וטען את העמוד מחדש";
                     break;
 
                 case "It's Not Your Game":
-                    msg = "You tried to update a game that is not associated with your user ";
+                    msg = "המשחק אותו אתה מנסה לעדכן אינו משוייך למשתמש שלך. ";
                     break;
             }
         }
@@ -942,11 +934,11 @@ else
                         break;
 
                     case "User Not Logged In":
-                        msg = "You are not logged in, please reload page to try again";
+                        msg = "אינך מחובר למערכת, התחבר וטען את העמוד מחדש";
                         break;
 
                     case "update match faild":
-                        msg = "update match faild";
+                        msg = "עדכון התאמה נכשל";
                         break;
                 }
             }
@@ -998,16 +990,22 @@ else
                         break;
 
                     case "User Not Logged In":
-                        msg = "You are not logged in, please reload page to try again";
+                        msg = "אינך מחובר למערכת, התחבר וטען את העמוד מחדש";
                         break;
 
                     case "User Not Found":
-                        msg = "You tried to update a game that is not associated with your user ";
+                        msg = "פרטי המשתמש לא נמצאו, טען את העמוד מחדש ונסה שוב ";
                         break;
 
-                    case "Game not created":
-                        msg = "The game you have tried to create, faild.";
+                    case "Match not created":
+                        msg = "ניסיון שמירת ההתאמה נכשל, נסה שוב";
                         break;
+                        
+                    case "Match not found":
+                    msg = "התאמה לא נמצאה, נסה שוב";
+                    break;
+
+
                 }
             }
         }
@@ -1068,11 +1066,11 @@ else
                     break;
 
                 case "User Not Logged In":
-                    msg = "You are not logged in, please reload page to try again";
+                    msg = "אינך מחובר למערכת, התחבר וטען את העמוד מחדש";
                     break;
 
                 case "Game not found":
-                    msg = "Game not found ";
+                    msg = "משחק לא נמצא ";
                     break;
             }
         }
@@ -1217,19 +1215,19 @@ else
                     break;
 
                 case "User Not Logged In":
-                    SettingMsg = "You are not logged in, please reload page to try again";
+                    SettingMsg = "אינך מחובר למערכת, התחבר וטען את העמוד מחדש";
                     break;
 
                 case "It's Not Your Game":
-                    SettingMsg = "You tried to update a game that is not associated with your user ";
+                    SettingMsg = "המשחק אותו אתה מנסה לעדכן אינו משוייך למשתמש שלך. ";
                     break;
 
                 case "update Game Instruction failed":
-                    SettingMsg = " update Game Instruction failed";
+                    SettingMsg = "עדכון הנחיית המשחק נכשל, נסה שוב";
                     break;
 
                 case "update game name failed":
-                    SettingMsg = " update game name failed";
+                    SettingMsg = "עדכון שם המשחק נכשל, נסה שוב";
                     break;
             }
         }
@@ -1302,11 +1300,11 @@ else
                     break;
 
                 case "User Not Logged In":
-                    msg = "You are not logged in, please reload page to try again";
+                    msg = "אינך מחובר למערכת, התחבר וטען את העמוד מחדש";
                     break;
 
                 case "Failed to delete match":
-                    msg = "Failed to delete match";
+                    msg = "מחיקת התאמה נכשלה, נסה שוב";
                     break;
             }
         }
@@ -1375,11 +1373,11 @@ else
                     break;
 
                 case "User Not Logged In":
-                    msg = "You are not logged in, please reload page to try again";
+                    msg = "אינך מחובר למערכת, התחבר וטען את העמוד מחדש";
                     break;
 
                 case "Pulling match Failed":
-                    msg = "Failed to pull match";
+                    msg = "משיכת ההתאמה ממאגר הנתונים נכשלה, נסה שוב";
                     break;
             }
         }
@@ -1419,11 +1417,11 @@ else
                     break;
 
                 case "User Not Logged In":
-                    SettingMsg = "You are not logged in, please reload page to try again";
+                    SettingMsg = "אינך מחובר למערכת, התחבר וטען את העמוד מחדש";
                     break;
 
                 case "update game faild":
-                    SettingMsg = "You tried to update a game that is not associated with your user ";
+                    SettingMsg = "ניסיון החזרה למסך המשחקים נכשל, נסה שוב ";
                     break;
 
 

@@ -1,14 +1,10 @@
 ﻿<Properties StartupConfiguration="{C99128EA-5019-4208-90EE-04739CFCEEAD}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Client/Components/GameCard.razor">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Client/Pages/EditGamePage.razor">
     <Files>
       <File FileName="Client/Pages/EditGamePage.razor.css" Line="7" Column="13" />
-      <File FileName="Client/wwwroot/index.html" Line="13" Column="74" />
-      <File FileName="Client/Pages/GamesList.razor.css" Line="108" Column="59" />
-      <File FileName="Client/Pages/GamesList.razor" Line="409" Column="30" />
-      <File FileName="Client/Components/GameCard.razor" Line="23" Column="16" />
-      <File FileName="Client/Components/GameCard.razor.css" Line="264" Column="2" />
-      <File FileName="Client/App.razor" Line="1" Column="1" />
-      <File FileName="Client/wwwroot/css/app.css" Line="96" Column="66" />
+      <File FileName="Client/Pages/GamesList.razor.css" Line="107" Column="58" />
+      <File FileName="Client/Pages/GamesList.razor" Line="389" Column="29" />
+      <File FileName="Client/Pages/EditGamePage.razor" Line="410" Column="54" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -16,9 +12,6 @@
           <Node name="TriangleProjectMahjong" expanded="True">
             <Node name="TriangleProject.Client" expanded="True">
               <Node name="Dependencies" expanded="True" />
-              <Node name="Components" expanded="True">
-                <Node name="GameCard.razor" expanded="True" />
-              </Node>
               <Node name="Pages" expanded="True">
                 <Node name="EditGamePage.razor" expanded="True" />
                 <Node name="GamesList.razor" expanded="True" />
@@ -26,16 +19,10 @@
               <Node name="PortelemFiles" expanded="True" />
               <Node name="Properties" expanded="True" />
               <Node name="Shared" expanded="True" />
-              <Node name="wwwroot" expanded="True">
-                <Node name="Animations" expanded="True" />
-                <Node name="css" expanded="True" />
-              </Node>
+              <Node name="wwwroot" expanded="True" />
             </Node>
             <Node name="TriangleProject.Server" expanded="True">
               <Node name="Controllers" expanded="True" />
-              <Node name="wwwroot" expanded="True">
-                <Node name="uploadedFiles" expanded="True" />
-              </Node>
             </Node>
             <Node name="TriangleProject.Shared" expanded="True">
               <Node name="Models" expanded="True" />
@@ -51,7 +38,9 @@
   <MonoDevelop.Ide.ItemProperties.TriangleProject.Server PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/malkaberry/Desktop/TriangleProjectMahjong/Client/Pages/EditGamePage.razor" relfile="Client/Pages/EditGamePage.razor" line="408" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

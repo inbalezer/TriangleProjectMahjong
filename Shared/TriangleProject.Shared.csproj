@@ -1,20 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-<!--    <Nullable>enable</Nullable>-->
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <SupportedPlatform Include="browser" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Models\" />
-    <None Remove="Models\Users\" />
-    <None Remove="MudBlazor" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="MudBlazor" Version="6.2.2" />
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<!--    <Nullable>enable</Nullable>-->
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Remove="Models\" />
+		<None Remove="Models\Users\" />
+		<None Remove="MudBlazor" />
+	</ItemGroup>
+	<ItemGroup>
+	</ItemGroup>
 </Project>

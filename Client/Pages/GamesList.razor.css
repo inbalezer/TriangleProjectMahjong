@@ -37,8 +37,8 @@
 }
 
 .circle-button {
-    width: 8vh;
-    height: 8vh;
+    width: 6vh;
+    height: 6vh;
     border-radius: 50%;
     background: linear-gradient(94deg, #9191ba 0%, #2c2c69 100%);
     position: relative;
@@ -46,6 +46,7 @@
     border: none;
     cursor: pointer;
     transition: width 0.5s ease;
+    margin-bottom:1%;
 }
 
     .circle-button:hover {
@@ -54,7 +55,7 @@
 
 .circle-expended {
     width: 32vh;
-    height: 8vh;
+    height: 6vh;
     border-radius: 10vw;
     background: linear-gradient(94deg, #9191ba 0%, #2c2c69 100%);
     position: relative;
@@ -62,11 +63,12 @@
     border: none;
     cursor: pointer;
     transition: width 0.3s ease;
+    margin-bottom: 1%;
 }
 
 .circularInput {
     width: 24vh;
-    height: 6vh;
+    height: 4vh;
     left: 25vh;
     border-radius: 10vw;
     border-bottom: 0.3px solid #F0F0F0;
@@ -78,6 +80,7 @@
     padding: 10px;
     box-sizing: border-box;
     transition: width 0.3s ease;
+    margin-bottom: 1%;
 }
 
 

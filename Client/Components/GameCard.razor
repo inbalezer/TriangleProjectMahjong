@@ -9,13 +9,13 @@
 @inject NavigationManager Nav
 
 <div class="game-card">
+    <div class="update-button-container">
+        <input type="button" id="update" @onclick="updateNavigate" />
+    </div>
     <div id="GameName">@GameFullName</div>
     <div class="CardContent">
         <div class="custom-tooltip" title="מעבר לעמוד עריכת תוכן המשחק והגדרותו">
-            <div class="update-button-container">
-                <input type="button" id="update" @onclick="updateNavigate" />
-
-            </div>
+           
         </div>
 
         <div class="custom-tooltip" title="את קוד המשחק יש להזין כדי להיכנס אליו">@gameCode</div>
@@ -30,16 +30,16 @@
             @if (GamePublishStatus == "Not Eligible")
             {
 
-                <div id="Group_238" style="margin-top:5%;">
-                    <div id="Group_234" style="position: relative; left: 20px;">
+                <div id="Group_238" style="margin-top:7%;">
+                    <div id="Group_234" style="position: relative; left: 0%;">
                         <svg class="Rectangle_272">
-                            <rect id="Rectangle_272" rx="18" ry="18" x="0" y="0" width="155" height="35"></rect>
+                            <rect id="Rectangle_272" rx="18" ry="18" x="0" y="0" width="165" height="35"></rect>
                         </svg>
                         <svg class="Ellipse_4" style="position: absolute; top: 70%; left: 29%; transform: translate(-100%, -50%);">
                             <ellipse id="Ellipse_4" rx="19" ry="19" cx="19" cy="19"></ellipse>
                         </svg>
                         <div id="n__" style="position: relative;">
-                            <span style="font-family: Heebo;font-style: normal;font-weight: normal;font-size: 16px;position: absolute; top: 40%; left: 25%; transform: translate(-100%, 8%);">לא עומד בתנאים</span>
+                            <span style="font-family: Heebo; font-style: normal;font-weight: normal;font-size: 16px;position: absolute; top: 40%; left:30%; transform: translate(-100%, 15%);">לא עומד בתנאים</span>
                         </div>
                     </div>
                 </div>
@@ -48,9 +48,9 @@
             else if (GamePublishStatus == "Eligible")
             {
 
-                <div id="Group_234" style="margin-top:5%; position: relative; left: 20px;">
+                <div id="Group_234" style="margin-top:7%; position: relative; left: 0%;">
                     <svg class="Path_150_gi" viewBox="0 0 181 36">
-                        <rect class="eligibleBar1" rx="18" ry="18" x="0" y="0" width="155" height="35"></rect>
+                        <rect class="eligibleBar1" rx="18" ry="18" x="0" y="0" width="165" height="35"></rect>
                     </svg>
                     <svg class="Ellipse_4" @onclick="changePublish">
                         <ellipse id="@ellipseClass" rx="19" ry="19" cx="19" cy="19"></ellipse>
@@ -63,9 +63,9 @@
             }
             else
             {
-                <div id="Group_234" style="margin-top:5%; position: relative; left: 20px;">
+                <div id="Group_234" style="margin-top:7%; position: relative; left: 0%;">
                     <svg class="Path_150_gi" viewBox="0 0 181 36">
-                        <rect class="eligibleBar1" rx="18" ry="18" x="0" y="0" width="155" height="35"></rect>
+                        <rect class="eligibleBar1" rx="18" ry="18" x="0" y="0" width="165" height="35"></rect>
                     </svg>
                     <svg class="Ellipse_4" @onclick="changePublish">
                         <ellipse id="@ellipseClass" rx="19" ry="19" cx="19" cy="19"></ellipse>
@@ -193,70 +193,5 @@
 
 
 
-
-<style>
-
-
-    .title {
-    }
-
-    #GameName {
-        background-color: rgba(135, 195, 240, 0.32);
-        text-align: center;
-        padding: 7%;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        color: #62629A;
-        font-size: 15pt;
-    }
-
-    .CardContent {
-        margin-top: 10px;
-        text-align: center;
-        color: #62629A;
-        font-size: 13pt;
-    }
-
-    .toggle-button {
-        margin-top: 10px;
-        width: 100%;
-    }
-
-    .delete-button-container {
-        text-align: center;
-        margin-top: 10px;
-    }
-
-    .delete-button {
-        /* Add your styling for the delete button here */
-    }
-
-    .custom-tooltip {
-        position: relative;
-        cursor: help;
-    }
-
-        .custom-tooltip::after {
-            content: attr(title);
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 4px 8px;
-            background-color: #333;
-            color: #fff;
-            font-size: 12px;
-            border-radius: 4px;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
-            white-space: nowrap;
-        }
-
-        .custom-tooltip:hover::after {
-            opacity: 1;
-            visibility: visible;
-        }
-</style>
 
 

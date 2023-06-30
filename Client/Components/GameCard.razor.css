@@ -1,7 +1,22 @@
-﻿
+﻿#GameName {
+    background-color: rgba(135, 195, 240, 0.32);
+    text-align: center;
+    padding: 7%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: #62629A;
+    font-size: 14pt;
+}
+
+.CardContent {
+    margin-top: 10px;
+    text-align: center;
+    color: #62629A;
+    font-size: 13pt;
+}
 
 .game-card {
-    width: 70%;
+    width: 80%;
     max-width: 254px;
     height: auto;
     border-radius: 10px;
@@ -231,7 +246,7 @@
 
 #toggled {
     fill: rgba(162,232,165,1);
-    transform: translateX(145px);
+    transform: translateX(225%);
     transition: transform 1s ease-in-out;
     filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.161));
     position: absolute;
@@ -264,7 +279,7 @@
 #n__gk1 {
     top: 20%;
     position: relative;
-    right: 30%;
+    right: 27%;
     overflow: visible;
     width: 84px;
     white-space: nowrap;

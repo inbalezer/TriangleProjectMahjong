@@ -16,13 +16,13 @@
 }
 
 .game-card {
-    width: 80%;
-    max-width: 254px;
+    width: 8vw;
+    max-width:10vw;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     background-color: white;
-    margin: 38px;
+    margin: 2vw;
     align-items: center;
     justify-content: center;
     position: relative;

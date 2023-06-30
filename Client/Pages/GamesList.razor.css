@@ -100,26 +100,42 @@
     right: 37vh;
 }
 
+
 #allGames {
     background-color: white;
     border: 1px solid;
     border-color: #d5d5d5;
     border-radius: 45px;
-    background-color: rgba(255, 255, 255, 0.4); /* Adjust the RGB color values and opacity (alpha channel) as needed */
+    background-color: rgba(255, 255, 255, 0.4);
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(239px, 1fr));
-    gap: 1px; /* Adjust the gap size between components */
+    gap: 1px;
+    overflow-y: auto; /* Use 'auto' to hide scrollbar when content fits within container */
+    max-height: 74vh; /* Adjust the desired maximum height */
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
 }
 
     #allGames::-webkit-scrollbar {
-        width: 8px; /* Width of the scrollbar */
+        width: 0.5vw;
+        background-color: transparent;
     }
 
     #allGames::-webkit-scrollbar-thumb {
-        background-color: #888; /* Color of the scrollbar thumb */
-        border-radius: 4px; /* Rounded corners for the thumb */
+        background-color: #535381;
+        border-radius: 4px;
     }
 
     #allGames:hover::-webkit-scrollbar-thumb {
-        background-color: #555; /* Color of the scrollbar thumb on hover */
+        background-color: #7d779b;
+    }
+
+    #allGames:only-child {
+        scrollbar-width: none;
+    }
+
+    /* Hide scrollbar when height is smaller than 54vh */
+    #allGames:only-child,
+    #allGames::-webkit-scrollbar {
+        display: none;
     }

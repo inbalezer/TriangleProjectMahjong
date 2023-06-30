@@ -246,7 +246,7 @@
 
 #toggled {
     fill: rgba(162,232,165,1);
-    transform: translateX(225%);
+    transform: translateX(5.3vw);
     transition: transform 1s ease-in-out;
     filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.161));
     position: absolute;

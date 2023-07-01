@@ -41,7 +41,6 @@ a, .btn-link {
 }
 button{
     border:none;
-    border-block-end:
 }
 
 .valid.modified:not([type=checkbox]) {

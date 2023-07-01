@@ -16,14 +16,14 @@
 }
 
 .game-card {
-    width: 80%;
+    width: 75%;
     max-width: 100%;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     background-color: white;
     margin-top: 20%;
-    margin-right: 20%;
+    margin-right:12%;
     align-items: center;
     justify-content: center;
     position: relative;
@@ -72,8 +72,8 @@
 
     .update-button-container {
         position: absolute;
-        top: -11%;
-        right: -15%;
+        top: -9%;
+        right: -10%;
     }
 
     .custom-tooltip::after {
@@ -247,7 +247,7 @@
 
     #toggled {
         fill: rgba(162,232,165,1);
-        transform: translateX(5.3vw);
+        transform: translateX(70%);
         transition: transform 1s ease-in-out;
         filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.161));
         position: absolute;

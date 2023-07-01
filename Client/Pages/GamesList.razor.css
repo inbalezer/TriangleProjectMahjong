@@ -109,7 +109,7 @@
     background-color: rgba(255, 255, 255, 0.4);
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(239px, 1fr));
-    gap: 1px;
+    grid-gap: 0px;
     overflow-y: auto; /* Use 'auto' to hide scrollbar when content fits within container */
     max-height: 74vh; /* Adjust the desired maximum height */
     scrollbar-width: thin;

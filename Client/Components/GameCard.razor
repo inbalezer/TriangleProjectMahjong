@@ -31,9 +31,9 @@
             {
 
                 <div id="Group_238" style="margin-top:7%;">
-                    <div id="Group_234" style="position: relative; left: 0%;">
+                    <div id="Group_234" style="position: relative; left: 5%;">
                         <svg class="Rectangle_272">
-                            <rect id="Rectangle_272" rx="18" ry="18" x="0" y="0" width="95%" height="100%"></rect>
+                            <rect id="Rectangle_272" rx="18" ry="18" x="0" y="0" width="88%" height="100%"></rect>
                         </svg>
                         <svg class="Ellipse_4" style="position: absolute; top: 70%; left: 29%; transform: translate(-100%, -50%);">
                             <ellipse id="Ellipse_4" rx="19" ry="19" cx="19" cy="19"></ellipse>
@@ -48,9 +48,9 @@
             else if (GamePublishStatus == "Eligible")
             {
 
-                <div id="Group_234" style="margin-top:7%; position: relative; left: 0%;">
+                <div id="Group_234" style="margin-top:7%; position: relative; left: 5%;">
                     <svg class="Path_150_gi" >
-                        <rect class="eligibleBar1" rx="18" ry="18" x="0" y="0" width="95%" height="100%"></rect>
+                        <rect class="eligibleBar1" rx="18" ry="18" x="0" y="0" width="88%" height="100%"></rect>
                     </svg>
                     <svg class="Ellipse_4" @onclick="changePublish">
                         <ellipse id="@ellipseClass" rx="19" ry="19" cx="19" cy="19"></ellipse>
@@ -63,13 +63,14 @@
             }
             else
             {
-                <div id="Group_234" style="margin-top:7%; position: relative; left: 0%;">
+                <div id="Group_234" style="margin-top:7%; position: relative; left: 5%;">
                     <svg class="Path_150_gi" >
-                        <rect class="eligibleBar1" rx="18" ry="18" x="0" y="0" width="95%" height="100%"></rect>
+                        <rect class="eligibleBar1" rx="18" ry="18" x="0" y="0" width="88%" height="100%"></rect>
+                        <svg class="Ellipse_4" @onclick="changePublish">
+                            <ellipse id="@ellipseClass" rx="19" ry="19" cx="19" cy="19"></ellipse>
+                        </svg>
                     </svg>
-                    <svg class="Ellipse_4" @onclick="changePublish">
-                        <ellipse id="@ellipseClass" rx="19" ry="19" cx="19" cy="19"></ellipse>
-                    </svg>
+                    
                     <div id="n__gk">
                         <span>@publishStatusBtnText</span>
                     </div>

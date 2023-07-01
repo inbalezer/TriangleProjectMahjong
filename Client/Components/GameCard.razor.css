@@ -46,16 +46,18 @@
         width: 100%;
     }
 
-    .delete-button-container {
-        text-align: center;
-        margin-top: 5px;
-    }
 
 .delete-button {
-    border-radius: 100%;
-    height: 50px;
-    width:50px;
+    background-image: url('css/games list imgs/trash.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    border-radius: 25px;
+    margin-top:5%;
 }
+
+
 
     .custom-tooltip {
         position: relative;
@@ -70,6 +72,7 @@
         height: 50px;
         border-radius: 25px;
         cursor: pointer;
+        border: none;
     }
 
     .update-button-container {

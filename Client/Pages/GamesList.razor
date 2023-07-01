@@ -14,15 +14,38 @@
 <h5 class="PageMainTitle">המשחקים שלי</h5>
 
 
+<div class="row-container">
 
-<div class="search__container">
+<div id="plusContainer" class="container">
 
-    <input class="search__input" type="text" value="@searchQuery" @oninput="UpdateSearchQuery" @onblur="FilterGames" placeholder="חפש משחק..." />
+    <button id="wholePlusButton" class="@AddGamebuttonClass" @onclick="showCreateGameField">
+        <span class=@plus>+</span>
+    </button>
+</div>
+    @if (isPlusButtonClicked)
+    {
+        <input maxlength="17" class="@circularInput" type="text" @bind="gameName" placeholder="הקלד שם משחק..." @oninput='e => HandleInputGameName(e, "gameName")' />
+        @if (!string.IsNullOrEmpty(gameName))
+        {
+            <span class="character-count"> @characterCountGameName / @characterGameNameLimit </span>
+        }
+        <br />
+
+        <input type="button" value="צור משחק" @onclick=@(()=>AddNewGame(UserId, gameName)) disabled="@isCreateButtonDisabled">
+        @*<input type="button" value="בטל" @onclick="ClearNewGame">*@
+    }
+
+    <div class="search__container">
+
+        <input class="search__input" type="text" value="@searchQuery" @oninput="UpdateSearchQuery" @onblur="FilterGames" placeholder="חפש משחק..." />
+    </div>
+
+
 </div>
 
 @if (user != null)
 {
-    @*<input type="button" id="addGame" @onclick="showCreateGameField">
+@*    <input type="button" id="addGame" @onclick="showCreateGameField">
         @if (isPlusButtonClicked)
         {
             <p>(1-17 תווים)</p>
@@ -35,29 +58,8 @@
 
             <input type="button" value="צור משחק" @onclick=@(()=>AddNewGame(UserId, gameName)) disabled="@isCreateButtonDisabled">
             <input type="button" value="בטל" @onclick="ClearNewGame">
-        }*@
-
-    <p>(1-17 תווים)</p>
-    <div class="container">
-
-        <button class="@AddGamebuttonClass" @onclick="showCreateGameField">
-            <span class=@plus>+</span>
-        </button>
-
-        @if (isPlusButtonClicked)
-        {
-            <input maxlength="17" class="@circularInput" type="text" @bind="gameName" placeholder="הקלד שם משחק..." @oninput='e => HandleInputGameName(e, "gameName")' />
-            @if (!string.IsNullOrEmpty(gameName))
-            {
-                <span class="character-count"> @characterCountGameName / @characterGameNameLimit </span>
-            }
-            <br />
-
-            <input type="button" value="צור משחק" @onclick=@(()=>AddNewGame(UserId, gameName)) disabled="@isCreateButtonDisabled">
-            @*<input type="button" value="בטל" @onclick="ClearNewGame">*@
         }
-
-    </div>
+*@
 
 
     <div id="allGames">
@@ -372,7 +374,7 @@
     .search__container {
         padding-top: 1vw;
         width: 100%;
-        max-width: 258px;
+        max-width: 10vw;
         margin: 0 auto;
         position: relative;
         right: 74vh;
@@ -380,9 +382,8 @@
 
     .search__input {
         box-shadow: 0 2px rgba(0, 0, 0, 0.1);
-        width: 100%;
+        width:10vw;
         padding: 0.8vw 2.4vw; /* 40% smaller than 2vw and 4vw */
-
         background-image: linear-gradient(to bottom, #fff, #f8f7f7);
         transition: transform 250ms ease-in-out;
         font-size: 0.84vw; /* 40% smaller than 1.4vw */
@@ -413,6 +414,7 @@
             border-radius: 20px;
             border-bottom: 0.08vw solid #f3f3f3;
             background-position: 2% center;
-            width: 280px;
+            width: 15vw;
+            padding-left: 0.8vw;
         }
 </style>

@@ -7,7 +7,9 @@
     color: white;
     font-size: 3.1vw;
     transition: left 0.3s ease-in-out;
-    font-weight: bold;
+    /*    font-weight: bold;
+*/ align-items: center;
+    padding-top: 20%;
 }
 
 .plus-expended {
@@ -17,10 +19,22 @@
     transform: translate(-50%, -50%);
     color: white;
     font-size: 3.3vw;
-    font-weight: bold;
-    animation: halfCircleMotion 0.5s ease-in-out 0.35s forwards;
+    /*    font-weight: bold;
+*/ animation: halfCircleMotion 0.5s ease-in-out 0.35s forwards;
     transform-origin: center;
     animation-fill-mode: forwards;
+}
+
+.search__container {
+    margin-right: 40%;
+    margin-bottom:1%;
+}
+
+
+.row-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 @keyframes halfCircleMotion {

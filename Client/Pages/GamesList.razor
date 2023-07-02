@@ -64,10 +64,12 @@
 
 
     <div id="allGames">
-        @foreach (GameForEditor game in user.UserGames.Where(g => string.IsNullOrEmpty(searchQuery) || g.GameFullName.ToLower().Contains(searchQuery.ToLower())))
+        @if (!isThereGames)
         {
-            @if (!isThereGames)
+            @foreach (GameForEditor game in user.UserGames.Where(g => string.IsNullOrEmpty(searchQuery) || g.GameFullName.ToLower().Contains(searchQuery.ToLower())))
             {
+
+
                 <span id="anyGameCard">
                     <GameCard GameFullName="@game.GameFullName" gameCode="@game.GameCode" GamePublishStatus="@game.PublishStatus" isCheckboxClicked="@(async () => await changePublish(game))" showMsg="(() => showMessage(game.GameFullName, game))" gameId="@game.ID" GameInstructionToCheck="@insCheck" />
 
@@ -79,18 +81,20 @@
                     }
                 </span>
                 Console.WriteLine(isInstructionExist);
-
             }
 
-            else
-            {
-                <div>
-                    היי, איזה כיף שבאת!
-                    צור משחק בלחיצה על הפלוס
-                    המשחקים שלך יופיעו כאן :)
-                </div>
-            }
+        }
 
+        else
+        {
+            <div id="NoGamesFound">
+                היי, איזה כיף שבאת!
+                <br/>
+                צור משחק בלחיצה על הפלוס
+                <br />
+                 המשחקים שלך יופיעו כאן :)
+            </div>
+            
         }
     </div>
 }

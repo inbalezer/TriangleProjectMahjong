@@ -2,6 +2,17 @@
 body {
     background-color: rgba(0, 0, 0, 0.5);
     direction: rtl;
+    z-index:1;
+}
+
+#content-div {
+    font-size: 120%;
+    font-family: Heebo;
+    font-weight: 200;
+    padding-top: 2%;
+}
+hr {
+    background-color: #707070;
 }
 
 .popup-overlay {
@@ -17,7 +28,9 @@ body {
 
 .popup-container {
     background-color: #fff;
-    border-radius: 10px;
+    width: 25vw;
+    height: 20vh;
+    border-radius: 20px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     padding: 20px;
     position: relative;
@@ -31,6 +44,8 @@ body {
     width: 40vw;
     height: 40vh;
     text-align: center;
+    padding-top:20vh;
+
 }
 
 .popup-close {
@@ -50,10 +65,14 @@ body {
 .popup-buttons {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 2vh;
 }
 
 .popup-button {
     padding: 8px 16px;
     margin: 0 8px;
+    cursor: pointer;
+    font-size: 110%;
+    border-radius: 10px;
+    font-family:Heebo;
 }

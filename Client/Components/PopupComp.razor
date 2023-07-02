@@ -7,6 +7,8 @@
                 <button class="popup-close-button" @onclick="() => IsDeleteButtonClicked(true)">x</button>
             </div>
             <h3>@Headline</h3>
+            <hr />
+            <div id="content-div">
             <p>@Text1 
                 @if (!string.IsNullOrEmpty(gameName))
                 {
@@ -14,10 +16,11 @@
                 }                
             </p>
             <p>@Text2 </p>
+            </div>
 
             @if (isDeleteCompClicked)
             {
-                callToActionPopUpColor = "red";
+                callToActionPopUpColor = "rgba(201, 81, 81, 1)";
             }
             <div class="popup-buttons">
                 <button class="popup-button" style="background-color:@secondPopUpColor ; color: @callToActionPopUpColor; border: 2px solid @callToActionPopUpColor;" @onclick="() => IsDeleteButtonClicked(false)">@cancelButtonText</button>

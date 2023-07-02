@@ -28,38 +28,10 @@
 char_text {
 }
 
-.search__container {
-    position:absolute;
-    margin-right: 39vw;
-    bottom:75vh;
+#plusContainer{
+    border:none;
+    padding-bottom:1vh;
 }
-
-.searchInputOpen {
-    margin-right: -180%;
-    box-shadow: 0 2px rgba(0, 0, 0, 0.1);
-    width: 10vw;
-    padding: 0.8vw 2.4vw; /* 40% smaller than 2vw and 4vw */
-    background-image: linear-gradient(to bottom, #fff, #f8f7f7);
-    transition: transform 250ms ease-in-out;
-    font-size: 0.84vw; /* 40% smaller than 1.4vw */
-    line-height: 1.08vw; /* 40% smaller than 1.8vw */
-    color: #54547C;
-    background-image: url('icon ionic-ios-search.svg');
-    background-repeat: no-repeat;
-    background-size: 2vw 2vw; /* 40% smaller than 3.6vw */
-    background-position: 10% center;
-    border-radius: 30px; /* 40% smaller than 50px */
-    border: 0.12vw solid #f3f3f3; /* 40% smaller than 0.2vw */
-    transition: all 250ms ease-in-out;
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
-}
-
-.row-container {
-    display: flex;
-/*    justify-content: space-between;
-    align-items: center;
-*/}
 
 .disabledNewGameButton {
     background: linear-gradient(rgba(220, 220, 220) -24%, rgb(230, 230, 230) 70.96%);
@@ -73,11 +45,12 @@ char_text {
     cursor: pointer;
     font-family: Heebo;
     margin-right: -12%;
+   margin-top:1vh;
 }
 
 .activeNewGameButton {
     background: linear-gradient(rgba(135,195,240,0.74) -24%, rgba(58,160,234,0.74) 70.96%);
-    width: 6vw;
+    width: 5%;
     height: 4vh;
     border: none;
     font-size: 120%;
@@ -87,14 +60,21 @@ char_text {
     cursor: pointer;
     font-family: Heebo;
     margin-right: -12%;
+    margin-top: 1vh;
+    
 }
 
 .character-count {
-    padding-bottom: 9vh;
-    padding-right: 14vw;
+ bottom: 76.7vh;
+   right: 14.6vw;
     position: absolute;
-    z-index: -1;
-}
+    color:#707070;
+    font-weight:400;
+    font-family:Heebo;
+    direction:ltr;
+    font-size:70%;
+/*    z-index: -1;
+*/}
 
 @keyframes halfCircleMotion {
     0% {
@@ -154,6 +134,7 @@ char_text {
     border: none;
     outline: none;
     padding: 10px;
+    margin-top:1vh;
     box-sizing: border-box;
     transition: width 0.3s ease;
     /*    margin-bottom: 1%;
@@ -176,6 +157,42 @@ char_text {
     position: relative;
     right: 37vh;
 }
+
+
+.search__container {
+    position: absolute;
+    margin-right: 43vw;
+    bottom: 75.4vh;
+}
+
+.searchInputOpen {
+    margin-right: -180%;
+    box-shadow: 0 2px rgba(0, 0, 0, 0.1);
+    width: 10vw;
+    padding: 0.8vw 2.4vw; /* 40% smaller than 2vw and 4vw */
+    background-image: linear-gradient(to bottom, #fff, #f8f7f7);
+    transition: transform 250ms ease-in-out;
+    font-size: 0.84vw; /* 40% smaller than 1.4vw */
+    line-height: 1.08vw; /* 40% smaller than 1.8vw */
+    color: #54547C;
+    background-image: url('icon ionic-ios-search.svg');
+    background-repeat: no-repeat;
+    background-size: 2vw 2vw; /* 40% smaller than 3.6vw */
+    background-position: 10% center;
+    border-radius: 30px; /* 40% smaller than 50px */
+    border: 0.12vw solid #f3f3f3; /* 40% smaller than 0.2vw */
+    transition: all 250ms ease-in-out;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    margin-right:0.01vw;
+}
+
+.row-container {
+    display: flex;
+/*    justify-content: space-between;
+    align-items: center;
+*/}
+
 
 
 #allGames {

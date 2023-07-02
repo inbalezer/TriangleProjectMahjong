@@ -13,25 +13,25 @@
 
 <h5 class="PageMainTitle">המשחקים שלי</h5>
 
-
+<p class="">(1-17 תווים)</p>
 <div class="row-container">
 
-<div id="plusContainer" class="container">
+    <div id="plusContainer" class="container">
 
-    <button id="wholePlusButton" class="@AddGamebuttonClass" @onclick="showCreateGameField">
-        <span class=@plus>+</span>
-    </button>
-</div>
+        <button id="wholePlusButton" class="@AddGamebuttonClass" @onclick="showCreateGameField">
+            <span class=@plus>+</span>
+        </button>
+    </div>
     @if (isPlusButtonClicked)
     {
-        <input  maxlength="17" class="@circularInput" type="text" @bind="gameName" placeholder="הקלד שם משחק..." @oninput='e => HandleInputGameName(e, "gameName")' />
+        <input maxlength="17" class="@circularInput" type="text" @bind="gameName" placeholder="הקלד שם משחק..." @oninput='e => HandleInputGameName(e, "gameName")' />
         @if (!string.IsNullOrEmpty(gameName))
         {
             <span class="character-count"> @characterCountGameName / @characterGameNameLimit </span>
         }
 
 
-        <input  type="button" value="צור משחק" @onclick=@(()=>AddNewGame(UserId, gameName)) class="@createButtonStyle" disabled="@isCreateButtonDisabled">
+        <input type="button" value="צור משחק" @onclick=@(()=>AddNewGame(UserId, gameName)) class="@createButtonStyle" disabled="@isCreateButtonDisabled">
         @*<input type="button" value="בטל" @onclick="ClearNewGame">*@
     }
 
@@ -45,7 +45,7 @@
 
 @if (user != null)
 {
-@*    <input type="button" id="addGame" @onclick="showCreateGameField">
+    @*    <input type="button" id="addGame" @onclick="showCreateGameField">
         @if (isPlusButtonClicked)
         {
             <p>(1-17 תווים)</p>
@@ -59,7 +59,7 @@
             <input type="button" value="צור משחק" @onclick=@(()=>AddNewGame(UserId, gameName)) disabled="@isCreateButtonDisabled">
             <input type="button" value="בטל" @onclick="ClearNewGame">
         }
-*@
+    *@
 
 
     <div id="allGames">
@@ -384,7 +384,7 @@
 
     .search__input {
         box-shadow: 0 2px rgba(0, 0, 0, 0.1);
-        width:10vw;
+        width: 10vw;
         padding: 0.8vw 2.4vw; /* 40% smaller than 2vw and 4vw */
         background-image: linear-gradient(to bottom, #fff, #f8f7f7);
         transition: transform 250ms ease-in-out;

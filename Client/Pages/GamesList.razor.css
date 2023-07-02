@@ -25,9 +25,12 @@
     animation-fill-mode: forwards;
 }
 
+char_text {
+}
+
 .search__container {
     margin-right: 40%;
-    margin-bottom:1%;
+    margin-bottom: 1%;
 }
 
 .searchInputOpen {
@@ -73,11 +76,11 @@
 
 .activeNewGameButton {
     background: linear-gradient(rgba(135,195,240,0.74) -24%, rgba(58,160,234,0.74) 70.96%);
-    width: 5%;
+    width: 6vw;
     height: 4vh;
     border: none;
     font-size: 120%;
-    font-weight:200;
+    font-weight: 200;
     color: white;
     border-radius: 10px;
     cursor: pointer;
@@ -86,10 +89,10 @@
 }
 
 .character-count {
-   padding-bottom:9vh;
-   padding-right:14vw;
-   position:absolute;
-   z-index:-1;
+    padding-bottom: 9vh;
+    padding-right: 14vw;
+    position: absolute;
+    z-index: -1;
 }
 
 @keyframes halfCircleMotion {
@@ -114,16 +117,16 @@
     border: none;
     cursor: pointer;
     transition: width 0.5s ease;
-    margin-bottom:1%;
+    margin-bottom: 1%;
 }
 
     .circle-button:hover {
         background: linear-gradient(94deg, #c6c6e1 0%, #55558f 100%);
     }
 
-    .circle-button:hover::after {
-        padding-left:-20%;
-    }
+        .circle-button:hover::after {
+            padding-left: -20%;
+        }
 
 .circle-expended {
     width: 32vh;
@@ -152,8 +155,9 @@
     padding: 10px;
     box-sizing: border-box;
     transition: width 0.3s ease;
-/*    margin-bottom: 1%;
-*/}
+    /*    margin-bottom: 1%;
+*/
+}
 
 
 

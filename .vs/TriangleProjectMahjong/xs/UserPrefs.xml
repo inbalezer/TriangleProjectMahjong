@@ -1,10 +1,16 @@
 ﻿<Properties StartupConfiguration="{C99128EA-5019-4208-90EE-04739CFCEEAD}|Default">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.TriangleProject.Server PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Client/Pages/EditGamePage.razor">
     <Files>
-      <File FileName="Client/Pages/EditGamePage.razor.css" Line="7" Column="13" />
-      <File FileName="Client/Pages/GamesList.razor.css" Line="107" Column="58" />
-      <File FileName="Client/Pages/GamesList.razor" Line="389" Column="29" />
-      <File FileName="Client/Pages/EditGamePage.razor" Line="410" Column="54" />
+      <File FileName="Client/Pages/EditGamePage.razor.css" Line="182" Column="15" />
+      <File FileName="Client/Pages/GamesList.razor.css" Line="143" Column="13" />
+      <File FileName="Client/Pages/GamesList.razor" Line="27" Column="67" />
+      <File FileName="Client/Pages/EditGamePage.razor" Line="1497" Column="10" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -35,13 +41,5 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.TriangleProject.Server PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/malkaberry/Desktop/TriangleProjectMahjong/Client/Pages/EditGamePage.razor" relfile="Client/Pages/EditGamePage.razor" line="408" column="1" />
-    </BreakpointStore>
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>

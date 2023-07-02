@@ -13,8 +13,13 @@
 
 <h5 class="PageMainTitle">המשחקים שלי</h5>
 
+
 <p class="">(1-17 תווים)</p>
 <div class="row-container">
+    <div class="search__container">
+
+        <input class="@search__input" type="text" value="@searchQuery" @oninput="UpdateSearchQuery" @onblur="FilterGames" placeholder="חפש משחק..." />
+    </div>
 
     <div id="plusContainer" class="container">
 
@@ -35,10 +40,6 @@
         @*<input type="button" value="בטל" @onclick="ClearNewGame">*@
     }
 
-    <div class="search__container">
-
-        <input class="@search__input" type="text" value="@searchQuery" @oninput="UpdateSearchQuery" @onblur="FilterGames" placeholder="חפש משחק..." />
-    </div>
 
 
 </div>

@@ -29,8 +29,9 @@ char_text {
 }
 
 .search__container {
+    position:absolute;
     margin-right: 39vw;
-    margin-bottom: 1%;
+    bottom:75vh;
 }
 
 .searchInputOpen {
@@ -56,9 +57,9 @@ char_text {
 
 .row-container {
     display: flex;
-    justify-content: space-between;
+/*    justify-content: space-between;
     align-items: center;
-}
+*/}
 
 .disabledNewGameButton {
     background: linear-gradient(rgba(220, 220, 220) -24%, rgb(230, 230, 230) 70.96%);

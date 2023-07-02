@@ -13,11 +13,11 @@
 
 
 
-<h3>:עריכת משחק @GameFullName</h3>
+<h3 id="PageMainTitle">עריכת משחק:@GameFullName</h3>
 
 @if (showWarningMessage || !isNameAndInstraction || GameFullName == "")
 {
-    <button class="returnBtnClassDis" @onclick="showMessage" title="לא ניתן לשמור משחק ללא שם או הנחייה" disabled="@isReturnButtonDisabled">@returnText</button>
+    <button class="@disabledArrow" @onclick="showMessage" title="לא ניתן לשמור משחק ללא שם או הנחייה" disabled="@isReturnButtonDisabled ">@returnText</button>
 
 }
 else
@@ -624,12 +624,13 @@ else
     string toggleImgSrc2 => text2Changed ? "../icon material-photo.svg" : "../2material-photo.svg";
     string toggleTextSrc2 => text2Changed ? "../icon material-text-fields.svg" : "../2text-fields (2).svg";
     string class1MoveCircle2 => text2Changed ? "toggleCircle1" : "toggleCircle2";
-    string returnText => isMouseOver ? "שמור חזור" : "->";
+    string returnText => isMouseOver ? "שמור חזור" : "";
     string returnTextDis => isReturnButtonDisabled ? "לא ניתן לשמור משחק ללא שם והנחיה" : "->";
     string noGameName => isNoGameName ? "emptyGameName" : "";
     string noGameInstruction => isNoGameIntruction ? "emptyGameName" : "";
     string currentFirstEdit = "";
     string currentSecondEdit = "";
+    string disabledArrow => isMouseOver ? "abledHoverArrow" : "returnBtnClassDis";
 
     @*string msg = "";*@
     bool FirstIsText;

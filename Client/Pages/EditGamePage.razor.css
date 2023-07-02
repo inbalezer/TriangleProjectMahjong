@@ -1,6 +1,22 @@
 ﻿body {
 }
 
+#PageMainTitle {
+    font-size: 25pt;
+    color: #62629A;
+    background: linear-gradient(180deg, #fdf1d0 20%, #fffdf3 100%);
+    border-radius: 25px;
+    height: 20%;
+    max-width: 400px;
+    padding: 15px;
+    margin: 0 auto; /* Centers the title horizontally */
+    text-align: center; /* Centers the title text horizontally */
+    display: flex;
+    align-items: center; /* Centers the title vertically */
+    justify-content: center; /* Centers the title horizontally */
+    direction: rtl;
+}
+
 .imgOrTextToggle {
     position: relative;
     display: flex;
@@ -142,6 +158,9 @@
 }
 
 .returnBtnClassDis {
+    background-image: url('../css/edit game page/arrow.svg');
+    background-repeat:no-repeat;
+    background-color: rgb(137, 137, 165);
     width: 8vw;
     height: 3vh;
     border-radius: 8px;
@@ -152,6 +171,8 @@
 }
 
 .returnBtnClass {
+    background-image: url('../css/edit game page/arrow.svg');
+    background-repeat: no-repeat;
     width: 8vw;
     height: 3vh;
     border-radius: 8px;
@@ -162,6 +183,8 @@
 }
 
     .returnBtnClass:hover {
+        background-image: url('../css/edit game page/arrow.svg');
+        background-repeat: no-repeat;
         width: 13vw;
         height: 3vh;
         transition: transform 0.5s ease;

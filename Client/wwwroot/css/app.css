@@ -98,4 +98,6 @@ button{
     display: flex;
     align-items: center; /* Centers the title vertically */
     justify-content: center; /* Centers the title horizontally */
+    direction: rtl;
+
 }

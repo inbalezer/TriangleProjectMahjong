@@ -65,8 +65,8 @@ char_text {
 }
 
 .character-count {
- bottom: 76.7vh;
-   right: 14.6vw;
+ margin-top:2.8vh;
+   margin-right: 13vw;
     position: absolute;
     color:#707070;
     font-weight:400;

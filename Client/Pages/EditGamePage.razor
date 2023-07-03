@@ -14,7 +14,7 @@
 
 
 <h3 id="PageMainTitle">עריכת משחק:@GameFullName</h3>
-<div>
+
 
 @if (showWarningMessage || !isNameAndInstraction || GameFullName == "")
 {
@@ -398,8 +398,9 @@ else
 
 <div id="all-matches">
     <h4 id="all-matches-title">מאגר הזוגות</h4>
-        <hr id="underline3" />
-
+    <hr id="underline3" />
+    <div id="all-matches-scroll">
+        
     @if (isThereMatches)
     {
         <span>
@@ -407,8 +408,10 @@ else
             לאחר השמירה, הזוגות יופיעו כאן :)
         </span>
     }
+    
     else if (fullGame.MatchesList != null)
     {
+        
         if (fullGame.MatchesList.Count <= 11 && fullGame.MatchesList.Count <= 18)
         {
             <span>סה"כ @fullGame.MatchesList.Count זוגות</span>
@@ -425,8 +428,8 @@ else
             <span>סה"כ @fullGame.MatchesList.Count/20 זוגות</span>
             Console.WriteLine(fullGame.MatchesList);
         }
-
-        if (currentMatchIndex == 0)
+        
+        @if (currentMatchIndex == 0)
         {
 
             foreach (MatchToShow match in fullGame.MatchesList)
@@ -442,7 +445,7 @@ else
             }
         }
 
-        else
+       else
         {
 
             foreach (MatchToShow match in fullGame.MatchesList)
@@ -472,12 +475,13 @@ else
                         <PopupComp ShowMsg="closedReturnPopUp" Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" isDeleteCompClicked="@isDeleteButtonClicked" GameIdToDelete="@(async () => await DeleteMatchRow(matchToDelete))" actionButtonText="מחק זוג " cancelButtonText="בטל"></PopupComp>
 
                     }
+                                 
                 }
             }
-
         }
-        <input style="background-color:aquamarine" class="saveAndReturn" type="button" value="שמור וחזור למסך המשחקים" @onclick="@(async ()=> await returnToHome())" />
-
+            
+      
+        
     
 
 
@@ -489,6 +493,9 @@ else
             }*@
 
     }
+    </div>
+    <input style="background-color:aquamarine" class="saveAndReturn" type="button" value="שמור וחזור למסך המשחקים" @onclick="@(async ()=> await returnToHome())" />
+
 </div>
 
 
@@ -585,7 +592,7 @@ else
 
 }
 
-</div>
+
 
 
 

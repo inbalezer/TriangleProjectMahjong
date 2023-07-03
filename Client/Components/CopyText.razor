@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Components
+@using Microsoft.JSInterop
+@using Microsoft.AspNetCore.Components.Web
+<span>
+    <button class="copyBtn" @onclick="CopyToClipboard"></button>
+</span>
+
+@if (showSuccessMessage)
+{
+    <div class="success-message fade-in">הקוד הועתק בהצלחה!</div>
+}
+
+
+@code {
+    [Inject]
+    protected IJSRuntime JSRuntime { get; set; }
+
+    [Parameter]
+    public string myText { get; set; }
+
+    private bool showSuccessMessage = false;
+
+    protected async Task CopyToClipboard()
+    {
+        await JSRuntime.InvokeVoidAsync("navigator.clipboard.writeText", myText);
+        showSuccessMessage = true;
+        StateHasChanged();
+
+        await Task.Delay(2000); // Delay for 2 seconds
+        showSuccessMessage = false;
+        StateHasChanged();
+
+        await Task.Delay(1000); // Delay for 1 second for fade-out effect
+
+    }
+}

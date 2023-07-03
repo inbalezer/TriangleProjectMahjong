@@ -2,9 +2,9 @@
 @using TriangleProject.Shared.Models.Editor
 @using TriangleProject.Shared.Models.Matches
 @using TriangleProject.Shared.Models.Portelem
-@using TriangleProject.Client.Components
 @using System.ComponentModel.DataAnnotations;
 @using Microsoft.AspNetCore.Components.Forms;
+@using TriangleProject.Client.Components;
 
 
 @inject HttpClient Http
@@ -544,9 +544,25 @@ else
 
 @if (publishBtnValue == "פורסם" && isReturnPublishClicked)
 {
-    <PopupComp Headline="פורסם בהצלחה!" Text1="@publishMsg" Text2="@gameCodeToShow" GameIdToDelete="navigateToGameAfterPublish" actionButtonText="למשחק" ShowMsg="closedReturnPopUp" cancelButtonText="חזור למסך המשחקים" xClicked="(value) => navigateToGamesScreen(value)"></PopupComp>
+    <PopupComp Headline="פורסם בהצלחה!" Text1="@publishMsg" Text2="@gameCodeToShow" GameIdToDelete="navigateToGameAfterPublish" actionButtonText="למשחק" ShowMsg="closedReturnPopUp" cancelButtonText="חזור למסך המשחקים" xClicked="(value) => navigateToGamesScreen(value)">
+        @if (!string.IsNullOrEmpty(gameCodeToShow))
+        {
+
+            <CopyText myText="@gameCodeToShow"></CopyText>
+
+        }
+    </PopupComp>
+
+
 
 }
+
+}
+
+
+
+
+
 
 <style>
     .custom-input-file {

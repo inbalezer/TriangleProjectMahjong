@@ -15,7 +15,7 @@
     <div id="GameName">@GameFullName</div>
     <div class="CardContent">
         <div class="custom-tooltip" title="מעבר לעמוד עריכת תוכן המשחק והגדרותו">
-           
+
         </div>
 
         <div class="custom-tooltip" title="את קוד המשחק יש להזין כדי להיכנס אליו"> קוד משחק: @gameCode</div>
@@ -45,11 +45,12 @@
                 </div>
 
             }
+
             else if (GamePublishStatus == "Eligible")
             {
 
                 <div id="Group_234" style="margin-top:7%; position: relative; left: 5%;">
-                    <svg class="Path_150_gi" >
+                    <svg class="Path_150_gi">
                         <rect class="eligibleBar1" rx="18" ry="18" x="0" y="0" width="88%" height="100%"></rect>
                     </svg>
                     <svg class="Ellipse_4" @onclick="changePublish">
@@ -64,13 +65,13 @@
             else
             {
                 <div id="Group_234" style="margin-top:7%; position: relative; left: 5%;">
-                    <svg class="Path_150_gi" >
+                    <svg class="Path_150_gi">
                         <rect class="eligibleBar1" rx="18" ry="18" x="0" y="0" width="88%" height="100%"></rect>
                         <svg class="Ellipse_4" @onclick="changePublish">
                             <ellipse id="@ellipseClass" rx="19" ry="19" cx="19" cy="19"></ellipse>
                         </svg>
                     </svg>
-                    
+
                     <div id="n__gk">
                         <span>@publishStatusBtnText</span>
                     </div>
@@ -81,7 +82,6 @@
         <div class="delete-button-container">
 
             <button class="delete-button" @onclick="deleteGame">
-                
             </button>
 
         </div>

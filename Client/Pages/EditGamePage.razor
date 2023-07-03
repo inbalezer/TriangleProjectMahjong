@@ -563,6 +563,11 @@ else
 
     <div>
         <input type="button" class="@publishClasStyle" value="@publishBtnValue" disabled="@isPublish" @onclick="@(async ()=> await publish("Published"))" />
+        @if (isReturnPublishClicked || fullGame.PublishStatus == "Published")
+        {
+            <input type="button" class="@cancelPublish" value="בטל פרסום" @onclick="@(async ()=> await publish("Eligible"))" />
+
+        }
         <div class="publishIcon">
             <img src="../icon feather-plus.svg" />
         </div>
@@ -682,8 +687,10 @@ else
     string currentFirstEdit = "";
     string currentSecondEdit = "";
     string disabledArrow => isMouseOver ? "abledHoverArrow" : "returnBtnClassDis";
+    string cancelPublish => isCancelPublishClicked ? "cancelInvisable" : "cancleVisable";
 
     @*string msg = "";*@
+    bool isCancelPublishClicked = false;
     bool FirstIsText;
     bool SecondIsText;
     bool isReturnClicked = false;
@@ -880,6 +887,8 @@ else
 
     protected async Task publish(string newStatus)
     {
+        isCancelPublishClicked = false;
+
         GamePublish gameToPublishInEdit = new GamePublish();
         gameToPublishInEdit.ID = newGameID;
         gameToPublishInEdit.PublishStatus = newStatus;
@@ -908,6 +917,13 @@ else
             {
                 publishBtnValue = "פרסם";
                 isPublish = true;
+            }
+
+
+            if (!isCancelPublishClicked)
+            {
+                publishClasStyle = "publishBtn";
+
             }
 
         }

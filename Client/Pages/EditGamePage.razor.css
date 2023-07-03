@@ -458,3 +458,10 @@
     padding-top: 2vh;
     padding-left: 0.5vw;
 }
+
+.cancleVisable {
+}
+
+.cancelInvisable {
+    display: none;
+}

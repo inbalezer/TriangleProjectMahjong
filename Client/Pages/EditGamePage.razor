@@ -25,22 +25,23 @@ else
     <button class="returnBtnClass" @onclick="showMessage" @onmouseover="() => OnMouseOver(true)" @onmouseout="() => OnMouseOver(false)" disabled="@isReturnButtonDisabled">@returnText</button>
 
 }
+<div id ="general-settings">
 
-<table style="border:double">
-    <tr>
-        <th>"הגדרות כלליות"</th>
-    </tr>
-    <tr>
-        <div class="character-count-input">
+    
+        <h4 id="general-settings-title">"הגדרות כלליות"</h4>
+    <hr id="underline" />
+
+    
+        <div id="character-count-input1">
             @if (!isNoGameName && !string.IsNullOrEmpty(GameFullName))
             {
 
-                <span>שם המשחק:</span> <input maxlength="17" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
+            <span>שם המשחק:</span> <input class="input1" maxlength="17" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
             }
             else
             {
-                <span>שם המשחק:</span> <input maxlength="17" style="border: 1px solid red" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
-                <span style="color:red">לא ניתן לשמור משחק ללא שם.</span>
+            <span>שם המשחק:</span> <input class="input1" maxlength="17" style="border: 1px solid #C95151" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
+            <span style="color:#C95151; font-size:70%; font-weight:300;">לא ניתן לשמור משחק ללא שם.</span>
 
             }
 
@@ -53,27 +54,28 @@ else
             {
 
             }
-            <p>(1-17 תווים)</p>
-
-
-
+            <p id="instraction1">(1-17 תווים)</p>
         </div>
-    </tr>
-    <tr>
-        <div class="character-count-input">
+  
+    
+        <div id="character-count-input2">
 
-
-            הנחיית משחק  לחצו והתאימו בין:
+            <span>הנחיית המשחק:</span>
+            <span class="text-inst">לחצו והתאימו בין</span>
             @if (isNoGameIntruction && GameInstruction == "")
             {
                 @*isNoGameIntruction = true;*@
-                <input maxlength="23" style="border: 1px solid red" type="text" @bind="GameInstruction" @oninput='e => HandleInput(e, "gameInstruction")' /><span>ורוקנו את הלוח</span>
-                <span style="color:red">לא ניתן לשמור משחק ללא הנחייה.</span>
+            <input class="input2" maxlength="23" style="border: 1px solid #C95151" type="text" @bind="GameInstruction" @oninput='e => HandleInput(e, "gameInstruction")' />
+
+            <span class="text-inst">ורוקנו את הלוח.</span>
+            <span style="color:#C95151; font-size:70%; font-weight:300;">לא ניתן לשמור משחק ללא הנחייה.</span>
 
             }
             else
             {
-                <input maxlength="23" type="text" @bind="GameInstruction" @oninput='e => HandleInput(e, "gameInstruction")' /><span>ורוקנו את הלוח</span>
+            <input class="input2" maxlength="23" type="text" @bind="GameInstruction" @oninput='e => HandleInput(e, "gameInstruction")' />
+
+            <span class="text-inst">ורוקנו את הלוח.</span>
 
             }
             @if (!string.IsNullOrEmpty(GameInstruction))
@@ -82,29 +84,31 @@ else
                 <span class="character-count" style="@(characterGameInstructionLimit == characterCountInstruction ? "color: red;" : "")">@characterGameInstructionLimit/ @characterCountInstruction</span>
             }
 
-            <p>(1-23 תווים)</p>
+        <p id="instraction2">(1-23 תווים)</p>
+
+            <Button value="שמור" @onclick="(() => updateNameAndInstruction(gameWithInstruction))" Color="Color.Primary" disabled="@isSaveButtonDisabled">
+                +שמור
+                @if (isSaveBtnClicked)
+                {
+                    <div>
+                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                        </svg>
+                    </div>
+                    isSaveBtnClicked = false;
+                    @*<img src="../animations/check-circle.gif" /> *@
+                }
+            </Button>
+
         </div>
-    </tr>
-</table>
+
+</div>
 
 @*<input type="button" value="שמור" @onclick=Navigate />*@
 
-<Button value="שמור" @onclick="(() => updateNameAndInstruction(gameWithInstruction))" Color="Color.Primary" disabled="@isSaveButtonDisabled">
-    +שמור
-    @if (isSaveBtnClicked)
-    {
-        <div>
-            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
-                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
-            </svg>
-        </div>
-        isSaveBtnClicked = false;
-        @*<img src="../animations/check-circle.gif" /> *@
-    }
-</Button>
 
-
+<div id="add-match">
 <p>הוספת זוגות</p>
 
 @if (isNameAndInstructionExist)
@@ -389,9 +393,9 @@ else
     </div>
 }
 
+</div>
 
-
-<div>
+<div id="all-matches">
     <p>מאגר הזוגות</p>
     @if (isThereMatches)
     {
@@ -471,7 +475,7 @@ else
         }
         <input style="background-color:aquamarine" class="saveAndReturn" type="button" value="שמור וחזור למסך המשחקים" @onclick="@(async ()=> await returnToHome())" />
 
-    }
+    
 
 
 
@@ -510,7 +514,7 @@ else
 }
 
 
-<div style="background-color: white; width: 30%; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); border-radius: 5px;">
+<div id="publish-conditions" style="background-color: white; width: 30%; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); border-radius: 5px;">
 
     <p>תנאים לפרסום</p>
     <p>
@@ -527,14 +531,16 @@ else
     {
         <p>---יש 5 זוגות ומעלה---</p>
     }
+
+    <div>
+        <input type="button" class="@publishClasStyle" value="@publishBtnValue" disabled="@isPublish" @onclick="@(async ()=> await publish("Published"))" />
+        <div class="publishIcon">
+            <img src="../icon feather-plus.svg" />
+        </div>
+    </div>
+
 </div>
 
-<div>
-    <input type="button" class="@publishClasStyle" value="@publishBtnValue" disabled="@isPublish" @onclick="@(async ()=> await publish("Published"))" />
-    <div class="publishIcon">
-        <img src="../icon feather-plus.svg" />
-    </div>
-</div>
 
 
 @if (publishBtnValue == "פורסם")
@@ -557,7 +563,7 @@ else
 
 }
 
-}
+
 
 
 

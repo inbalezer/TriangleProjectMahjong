@@ -115,50 +115,44 @@ else
 {
     @if (!isLimitMatches || editAvailable)
     {
-        <EditForm Model="currentMatchToShow" OnValidSubmit="(() =>AddMatch(currentMatchToShow))">
-            <DataAnnotationsValidator />
-            <div class="containerWithTwoDivs">
+
+        <div class="containerWithTwoDivs">
 
 
-                <div class="toggleSides" id="leftSide">
-                    <p>:התאמה ראשונה</p>
-                    <div class="imgOrTextToggle">
-                        <img id="photoImg" src="@toggleImgSrc" />
-                        <div class="toggleStick">
-                            <input type="button" class="@class1MoveCircle" @onclick="(() =>makeToggle(true))" />
-                        </div>
-                        <img id="textImg" src="@toggleTextSrc" />
+            <div class="toggleSides" id="leftSide">
+                <p>:התאמה ראשונה</p>
+                <div class="imgOrTextToggle">
+                    <img id="photoImg" src="@toggleImgSrc" />
+                    <div class="toggleStick">
+                        <input type="button" class="@class1MoveCircle" @onclick="(() =>makeToggle(true))" />
                     </div>
-                    @*<InputCheckbox @bind-Value="textChanged" />*@
-                    @if (!textChanged)
+                    <img id="textImg" src="@toggleTextSrc" />
+                </div>
+                @*<InputCheckbox @bind-Value="textChanged" />*@
+                @if (!textChanged)
+                {
+                    @if (editMatch.ID == 0)
                     {
-                        @if (editMatch.ID == 0)
-                        {
-                            currentMatchToShow = newMatch;
-                        }
-                        currentMatchToShow.FirstIsText = true;
-                        Console.WriteLine(currentMatchToShow.FirstMatch);
+                        currentMatchToShow = newMatch;
+                    }
+                    currentMatchToShow.FirstIsText = true;
+                    Console.WriteLine(currentMatchToShow.FirstMatch);
 
-                        if (currentMatchToShow.FirstMatch != "")
-                        {
-                            currentValue = currentMatchToShow.FirstMatch;
+                    if (currentMatchToShow.FirstMatch != "")
+                    {
+                        currentValue = currentMatchToShow.FirstMatch;
 
-                            if (currentMatchToShow.FirstMatch != null)
+                        if (currentMatchToShow.FirstMatch != null)
+                        {
+                            if (currentMatchToShow.FirstMatch.Contains("uploadedFiles/"))
                             {
-                                if (currentMatchToShow.FirstMatch.Contains("uploadedFiles/"))
+                                if (!string.IsNullOrEmpty(currentMatchToShow.FirstMatch))
                                 {
-                                    if (!string.IsNullOrEmpty(currentMatchToShow.FirstMatch))
+                                    if (!string.IsNullOrEmpty(priviousValue))
                                     {
-                                        if (!string.IsNullOrEmpty(priviousValue))
+                                        if (!priviousValue.Contains("uploadedFiles/"))
                                         {
-                                            if (!priviousValue.Contains("uploadedFiles/"))
-                                            {
-                                                currentMatchToShow.FirstMatch = priviousValue;
-                                            }
-                                            else
-                                            {
-                                                currentMatchToShow.FirstMatch = "";
-                                            }
+                                            currentMatchToShow.FirstMatch = priviousValue;
                                         }
                                         else
                                         {
@@ -169,207 +163,212 @@ else
                                     {
                                         currentMatchToShow.FirstMatch = "";
                                     }
-
                                 }
                                 else
                                 {
-                                    currentMatchToShow.FirstMatch = currentValue;
+                                    currentMatchToShow.FirstMatch = "";
                                 }
+
                             }
-
-                        }
-                        <div class="character-count-input">
-                            <input maxlength="15" style="border:2px solid blue" type="text" @bind="currentMatchToShow.FirstMatch" @oninput='e => HandleInput(e, "first")' />
-
-                            <p style="color:red"> ניתן להכניס בין 1-15 תווים </p>
-
-                            @if (!string.IsNullOrEmpty(currentMatchToShow.FirstMatch))
+                            else
                             {
-
-                                <span class="character-count" style="@(characterLimit == characterCountFirst ? "color: red;" : "")">@characterLimit/ @characterCountFirst</span>
+                                currentMatchToShow.FirstMatch = currentValue;
                             }
-                        </div>
+                        }
+
                     }
+                    <div class="character-count-input">
+                        <input maxlength="15" style="border:2px solid blue" type="text" @bind="currentMatchToShow.FirstMatch" @oninput='e => HandleInput(e, "first")' />
 
-                    else
-                    {
+                        <p style="color:red"> ניתן להכניס בין 1-15 תווים </p>
 
-                        priviousValue = currentMatchToShow.FirstMatch;
-                        currentMatchToShow.FirstIsText = false;
-                        if (myFileImage1 != "")
+                        @if (!string.IsNullOrEmpty(currentMatchToShow.FirstMatch))
                         {
-                            currentMatchToShow.FirstMatch = myFileImage1;
-                            <div class="custom-input-file">
-                                <label for="FileInputID">שנה תמונה</label>
-                            </div>
+
+                            <span class="character-count" style="@(characterLimit == characterCountFirst ? "color: red;" : "")">@characterLimit/ @characterCountFirst</span>
                         }
-                        else
-                        {
-                            <div class="custom-input-file">
-                                <label for="FileInputID">העלה תמונה</label>
-                            </div>
-                        }
-
-                        @*<label for="FileInֵputID"> העלה תמונה</label>*@
-                        @*<InputFile id="FileInputID" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, true))" class="custom-input-file"></InputFile>*@
-                        <div class="custom-input-file">
-                            <InputFile id="FileInputID" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, true))"></InputFile>
-
-                        </div>
-                        <p style="color:red"> קבצי Png ,Jpeg בלבד </p>
-
-                        if (unacceptedImg != "")
-                        {
-                            <span>@unacceptedImg</span>
-                        }
-
-                        <br />
-                        @if (myFileImage1 != "")
-                        {
-                            <img src="@myFileImage1" width="150" />
-                            @*<input type="button" value="העבר למחיקה " @onclick="MakeDeleteList" />*@
-                        }
-                    }
-                </div>
-                <div class="toggleSides" id="rightSide">
-
-                    <p>:התאמה שניה</p>
-
-                    <div class="imgOrTextToggle">
-                        <img id="photoImg" src="@toggleImgSrc2" />
-                        <div class="toggleStick">
-                            <input type="button" class="@class1MoveCircle2" @onclick="(() =>makeToggle(false))" />
-                        </div>
-                        <img id="textImg" src="@toggleTextSrc2" />
                     </div>
-                    @*<InputCheckbox @bind-Value="text2Changed" />*@
+                }
 
-                    @if (!text2Changed)
+                else
+                {
+
+                    priviousValue = currentMatchToShow.FirstMatch;
+                    currentMatchToShow.FirstIsText = false;
+                    if (myFileImage1 != "")
                     {
-                        priviousValue2 = currentMatchToShow.SecondMatch;
-
-                        @if (editMatch.ID == 0)
-                        {
-                            currentMatchToShow = newMatch;
-                        }
-
-                        currentMatchToShow.SecondIsText = false;
-                        if (myFileImage2 != "")
-                        {
-                            currentMatchToShow.SecondMatch = myFileImage2;
-                            <div class="custom-input-file">
-                                <label for="FileInputID2">שנה תמונה</label>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="custom-input-file">
-                                <label for="FileInputID2">העלה תמונה</label>
-                            </div>
-                        }
-                        @*<label for="FileInֵputID"> העלה תמונה</label>
-                            <InputFile id="FileInputID" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, false))"></InputFile>*@
+                        currentMatchToShow.FirstMatch = myFileImage1;
                         <div class="custom-input-file">
-                            <InputFile id="FileInputID2" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, false))"></InputFile>
-
+                            <label for="FileInputID">שנה תמונה</label>
                         </div>
-                        <p style="color:red"> קבצי Png ,Jpeg בלבד </p>
-                        if (unacceptedImg2 != "")
-                        {
-                            <span>@unacceptedImg2</span>
-                        }
-                        <br />
-                        @if (myFileImage2 != "")
-                        {
-                            <img src="@myFileImage2" width="150" />
-                            @*<input type="button" value="העבר למחיקה " @onclick="MakeDeleteList" />*@
-                        }
-
-
                     }
                     else
                     {
+                        <div class="custom-input-file">
+                            <label for="FileInputID">העלה תמונה</label>
+                        </div>
+                    }
 
-                        @*currentValue2 = currentMatchToShow.SecondMatch;*@
-                        currentMatchToShow.SecondIsText = true;
+                    @*<label for="FileInֵputID"> העלה תמונה</label>*@
+                    @*<InputFile id="FileInputID" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, true))" class="custom-input-file"></InputFile>*@
+                    <div class="custom-input-file">
+                        <InputFile id="FileInputID" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, true))"></InputFile>
+
+                    </div>
+                    <p style="color:red"> קבצי Png ,Jpeg בלבד </p>
+
+                    if (unacceptedImg != "")
+                    {
+                        <span>@unacceptedImg</span>
+                    }
+
+                    <br />
+                    @if (myFileImage1 != "")
+                    {
+                        <img src="@myFileImage1" width="150" />
+                        @*<input type="button" value="העבר למחיקה " @onclick="MakeDeleteList" />*@
+                    }
+                }
+            </div>
+            <div class="toggleSides" id="rightSide">
+
+                <p>:התאמה שניה</p>
+
+                <div class="imgOrTextToggle">
+                    <img id="photoImg" src="@toggleImgSrc2" />
+                    <div class="toggleStick">
+                        <input type="button" class="@class1MoveCircle2" @onclick="(() =>makeToggle(false))" />
+                    </div>
+                    <img id="textImg" src="@toggleTextSrc2" />
+                </div>
+                @*<InputCheckbox @bind-Value="text2Changed" />*@
+
+                @if (!text2Changed)
+                {
+                    priviousValue2 = currentMatchToShow.SecondMatch;
+
+                    @if (editMatch.ID == 0)
+                    {
+                        currentMatchToShow = newMatch;
+                    }
+
+                    currentMatchToShow.SecondIsText = false;
+                    if (myFileImage2 != "")
+                    {
+                        currentMatchToShow.SecondMatch = myFileImage2;
+                        <div class="custom-input-file">
+                            <label for="FileInputID2">שנה תמונה</label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="custom-input-file">
+                            <label for="FileInputID2">העלה תמונה</label>
+                        </div>
+                    }
+                    @*<label for="FileInֵputID"> העלה תמונה</label>
+                        <InputFile id="FileInputID" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, false))"></InputFile>*@
+                    <div class="custom-input-file">
+                        <InputFile id="FileInputID2" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, false))"></InputFile>
+
+                    </div>
+                    <p style="color:red"> קבצי Png ,Jpeg בלבד </p>
+                    if (unacceptedImg2 != "")
+                    {
+                        <span>@unacceptedImg2</span>
+                    }
+                    <br />
+                    @if (myFileImage2 != "")
+                    {
+                        <img src="@myFileImage2" width="150" />
+                        @*<input type="button" value="העבר למחיקה " @onclick="MakeDeleteList" />*@
+                    }
 
 
-                        if (currentMatchToShow.SecondMatch != "")
+                }
+                else
+                {
+
+                    @*currentValue2 = currentMatchToShow.SecondMatch;*@
+                    currentMatchToShow.SecondIsText = true;
+
+
+                    if (currentMatchToShow.SecondMatch != "")
+                    {
+                        currentValue2 = currentMatchToShow.SecondMatch;
+
+                        if (currentMatchToShow.SecondMatch != null)
                         {
-                            currentValue2 = currentMatchToShow.SecondMatch;
-
-                            if (currentMatchToShow.SecondMatch != null)
+                            if (currentMatchToShow.SecondMatch.Contains("uploadedFiles/"))
                             {
-                                if (currentMatchToShow.SecondMatch.Contains("uploadedFiles/"))
-                                {
-                                    @*currentMatchToShow.SecondMatch = currentValue2;*@
+                                @*currentMatchToShow.SecondMatch = currentValue2;*@
 
-                                    if (!string.IsNullOrEmpty(currentMatchToShow.SecondMatch))
+                                if (!string.IsNullOrEmpty(currentMatchToShow.SecondMatch))
+                                {
+                                    if (!string.IsNullOrEmpty(priviousValue2))
                                     {
-                                        if (!string.IsNullOrEmpty(priviousValue2))
+                                        if (!priviousValue2.Contains("uploadedFiles/"))
                                         {
-                                            if (!priviousValue2.Contains("uploadedFiles/"))
-                                            {
-                                                currentMatchToShow.SecondMatch = priviousValue2;
-                                            }
-                                            else
-                                            {
-                                                currentMatchToShow.SecondMatch = "";
-                                            }
+                                            currentMatchToShow.SecondMatch = priviousValue2;
                                         }
                                         else
                                         {
                                             currentMatchToShow.SecondMatch = "";
                                         }
-
                                     }
                                     else
                                     {
                                         currentMatchToShow.SecondMatch = "";
                                     }
+
                                 }
                                 else
                                 {
-                                    @*newMatch.SecondMatch = priviousValue2;*@
-                                    currentMatchToShow.SecondMatch = currentValue2;
-                                    Console.WriteLine("empty");
+                                    currentMatchToShow.SecondMatch = "";
                                 }
                             }
-                        }
-
-
-                        <div class="character-count-input">
-                            <input maxlength="15" style="border:2px solid blue" type="text" @bind="currentMatchToShow.SecondMatch"
-                                   @oninput='e => HandleInput(e, "second")' />
-                            <p style="color:red"> ניתן להכניס בין 1-15 תווים </p>
-
-                            @if (!string.IsNullOrEmpty(currentMatchToShow.SecondMatch))
+                            else
                             {
-
-                                <span class="character-count" style="@(characterLimit == characterCountSecond ? "color: red;" : "")">@characterLimit/ @characterCountSecond</span>
+                                @*newMatch.SecondMatch = priviousValue2;*@
+                                currentMatchToShow.SecondMatch = currentValue2;
+                                Console.WriteLine("empty");
                             }
-                        </div>
-
+                        }
                     }
 
-                    @if (editAvailable)
+
+                    <div class="character-count-input">
+                        <input maxlength="15" style="border:2px solid blue" type="text" @bind="currentMatchToShow.SecondMatch"
+                                @oninput='e => HandleInput(e, "second")' />
+                        <p style="color:red"> ניתן להכניס בין 1-15 תווים </p>
+
+                        @if (!string.IsNullOrEmpty(currentMatchToShow.SecondMatch))
+                        {
+
+                            <span class="character-count" style="@(characterLimit == characterCountSecond ? "color: red;" : "")">@characterLimit/ @characterCountSecond</span>
+                        }
+                    </div>
+
+                }
+
+                @if (editAvailable)
+                {
+                    if (currentFirstEdit != currentMatchToShow.FirstMatch || currentSecondEdit != currentMatchToShow.SecondMatch)
                     {
-                        if (currentFirstEdit != currentMatchToShow.FirstMatch || currentSecondEdit != currentMatchToShow.SecondMatch)
-                        {
-                            isChanging = false;
-                        }
-                        else
-                        {
-                            isChanging = true;
-                        }
-                        <input type="button" class="cancelChanges" value="בטל שינויים" style="background-color: peru" disabled=@isChanging @onclick="@(async ()=> await cancleChanges(currentMatchToShow.ID))" />
+                        isChanging = false;
                     }
-                    <br />
+                    else
+                    {
+                        isChanging = true;
+                    }
+                    <input type="button" class="cancelChanges" value="בטל שינויים" style="background-color: peru" disabled=@isChanging @onclick="@(async ()=> await cancleChanges(currentMatchToShow.ID))" />
+                }
+                <br />
 
-                    <input class="saveMatch" type="submit" value="שמור זוג" disabled="@IsButtonDisabled" />
-                </div>
+                    <input class="saveMatch" type="submit" value="שמור זוג" @onclick="(() =>AddMatch(currentMatchToShow))" disabled="@IsButtonDisabled" />
             </div>
-        </EditForm>
+        </div>
+        
 
 
 

@@ -30,7 +30,7 @@ else
 
     
         <h4 id="general-settings-title">"הגדרות כלליות"</h4>
-    <hr id="underline" />
+    <hr id="underline1" />
 
     
         <div id="character-count-input1">
@@ -110,7 +110,8 @@ else
 
 
 <div id="add-match">
-<p>הוספת זוגות</p>
+<h4 id="add-match-title">הוספת זוגות</h4>
+        <hr id="underline2" />
 
 @if (isNameAndInstructionExist)
 {
@@ -396,7 +397,9 @@ else
 </div>
 
 <div id="all-matches">
-    <p>מאגר הזוגות</p>
+    <h4 id="all-matches-title">מאגר הזוגות</h4>
+        <hr id="underline3" />
+
     @if (isThereMatches)
     {
         <span>
@@ -516,21 +519,40 @@ else
 
 <div id="publish-conditions" >
 
-    <p>תנאים לפרסום</p>
-    <p>
+    <h4 id="publish-conditions-title">תנאים לפרסום</h4>
+        <hr id="underline4" />
+
+        <span class="conditionsStyle">
+            @if (isNameAndInstraction)
+            {
+                <img class="NameAndInstraction" src="../css/edit game page/icon awesome-check-circle.svg" />
+            }
+            else
+            {
+                <span><img class="NameAndInstraction" src="../css/edit game page/icon awesome-minus-circle.svg" /></span>
+            }
+
         שם והנחיית המשחק
-    </p>
-    @if (isNameAndInstraction)
-    {
-        <p>--יש שם והוראה--</p>
-    }
-    <p>
-        מינימום 5 זוגות
-    </p>
+   
+        </span>
+
+        
+        <br/>
+
+        <span class="conditionsStyle">
+        
     @if (isEnoughMathces)
     {
-        <p>---יש 5 זוגות ומעלה---</p>
-    }
+            <span><img class="enoughMatches" src="../css/edit game page/icon awesome-check-circle.svg" /></span>
+        }
+        else
+        {
+            <span><img class="enoughMatches" src="../css/edit game page/icon awesome-minus-circle.svg" /></span>
+        }
+
+            מינימום 5 זוגות
+
+        </span>
 
     <div>
         <input type="button" class="@publishClasStyle" value="@publishBtnValue" disabled="@isPublish" @onclick="@(async ()=> await publish("Published"))" />

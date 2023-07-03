@@ -17,12 +17,12 @@
 
 @if (showWarningMessage || !isNameAndInstraction || GameFullName == "")
 {
-    <button class="@disabledArrow" @onclick="showMessage" title="לא ניתן לשמור משחק ללא שם או הנחייה" disabled="@isReturnButtonDisabled ">@returnText</button>
+    <button class="@disabledArrow" @onclick="showMessageReturn" title="לא ניתן לשמור משחק ללא שם או הנחייה" disabled="@isReturnButtonDisabled ">@returnText</button>
 
 }
 else
 {
-    <button class="returnBtnClass" @onclick="showMessage" @onmouseover="() => OnMouseOver(true)" @onmouseout="() => OnMouseOver(false)" disabled="@isReturnButtonDisabled">@returnText</button>
+    <button class="returnBtnClass" @onclick="showMessageReturn" @onmouseover="() => OnMouseOver(true)" @onmouseout="() => OnMouseOver(false)" disabled="@isReturnButtonDisabled">@returnText</button>
 
 }
 <div id ="general-settings">
@@ -835,12 +835,19 @@ else
         }
     }
 
-    void showMessage()
+    void showMessageReturn()
     {
         isReturnClicked = true;
         isReturnPublishClicked = false;
-        isDeleteButtonClicked = true;
+        
     }
+
+    //void showMessageDelete()
+    //{
+        
+    //    isReturnPublishClicked = false;
+    //    isDeleteButtonClicked = true;
+    //}
 
     protected async Task publish(string newStatus)
     {

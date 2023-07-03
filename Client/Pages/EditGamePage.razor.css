@@ -310,3 +310,35 @@
 .text-inst {
     font-weight: 400;
 }
+
+#add-match {
+    margin-top:3vh;
+    width: 54vw;
+    height: 50vh;
+    background-color: white;
+    border-radius: 27px;
+    box-shadow: 0px 6px 10px #00000029;
+    margin-right: 3vw;
+}
+
+#all-matches {
+    position: absolute;
+  bottom: 0.1vh;
+    width: 30vw;
+    height: 50vh;
+    background-color: white;
+    border-radius: 27px;
+    box-shadow: 0px 6px 10px #00000029;
+    margin-right: 60vw;
+}
+
+#publish-conditions {
+    position: absolute;
+    bottom: 53vh;
+    width: 30vw;
+    height: 25vh;
+    background-color: white;
+    border-radius: 27px;
+    box-shadow: 0px 6px 10px #00000029;
+    margin-right: 60vw;
+}

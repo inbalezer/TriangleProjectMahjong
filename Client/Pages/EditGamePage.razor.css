@@ -358,11 +358,11 @@
 
     }
 
-#all-matches-scroll {
+ #all-matches-scroll {
     width: 33vw;
-    height: 5vh;
+    height:40vh;
     overflow-y: auto; /* Use 'auto' to hide scrollbar when content fits within container */
-    min-height: 70vh;
+    min-height: 10vh;
     max-height: 74vh; /* Adjust the desired maximum height */
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;

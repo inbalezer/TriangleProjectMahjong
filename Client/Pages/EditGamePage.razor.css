@@ -2,18 +2,18 @@
 }
 
 #PageMainTitle {
-    font-size: 25pt;
+    font-size: 20pt;
     color: #62629A;
     background: linear-gradient(180deg, #fdf1d0 20%, #fffdf3 100%);
     border-radius: 25px;
-    height: 20%;
-    max-width: 400px;
-    padding: 15px;
-    margin: 0 auto; /* Centers the title horizontally */
-    text-align: center; /* Centers the title text horizontally */
+    height: 4vh;
+    max-width: 32vw;
+    padding: 2vh;
+    margin: 0 auto;
+    text-align: center;
     display: flex;
-    align-items: center; /* Centers the title vertically */
-    justify-content: center; /* Centers the title horizontally */
+    align-items: center;
+    justify-content: center;
     direction: rtl;
 }
 

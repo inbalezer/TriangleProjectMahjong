@@ -13,7 +13,7 @@
 
 
 
-<h3 id="PageMainTitle">עריכת משחק:@GameFullName</h3>
+<h3 id="PageMainTitle">עריכת משחק: @GameFullName</h3>
 
 
 @if (showWarningMessage || !isNameAndInstraction || GameFullName == "")
@@ -29,30 +29,22 @@ else
 <div id ="general-settings">
 
     
-        <h4 id="general-settings-title">"הגדרות כלליות"</h4>
+        <h4 id="general-settings-title">הגדרות כלליות</h4>
     <hr id="underline1" />
 
     
         <div id="character-count-input1">
-            @if (!isNoGameName && !string.IsNullOrEmpty(GameFullName))
+                             <span>שם המשחק:</span> <input class="input1" maxlength="17" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
+            @if (isNoGameName && string.IsNullOrEmpty(GameFullName))
             {
-
-            <span>שם המשחק:</span> <input class="input1" maxlength="17" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
-            }
-            else
-            {
-            <span>שם המשחק:</span> <input class="input1" maxlength="17" style="border: 1px solid #C95151" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
             <span style="color:#C95151; font-size:70%; font-weight:300;">לא ניתן לשמור משחק ללא שם.</span>
 
+           
             }
 
             @if (!string.IsNullOrEmpty(GameFullName))
             {
                 <span class="character-count" style="@(characterGameNameLimit == characterCountGameName ? "color: red;" : "")">@characterGameNameLimit/ @characterCountGameName</span>
-
-            }
-            else
-            {
 
             }
             <p id="instraction1">(1-17 תווים)</p>
@@ -63,22 +55,15 @@ else
 
             <span>הנחיית המשחק:</span>
             <span class="text-inst">לחצו והתאימו בין</span>
-            @if (isNoGameIntruction && GameInstruction == "")
-            {
-                @*isNoGameIntruction = true;*@
-            <input class="input2" maxlength="23" style="border: 1px solid #C95151" type="text" @bind="GameInstruction" @oninput='e => HandleInput(e, "gameInstruction")' />
-
-            <span class="text-inst">ורוקנו את הלוח.</span>
-            <span style="color:#C95151; font-size:70%; font-weight:300;">לא ניתן לשמור משחק ללא הנחייה.</span>
-
-            }
-            else
-            {
             <input class="input2" maxlength="23" type="text" @bind="GameInstruction" @oninput='e => HandleInput(e, "gameInstruction")' />
 
             <span class="text-inst">ורוקנו את הלוח.</span>
+            @if (isNoGameIntruction && GameInstruction == "")
+            {
+                <span style="color:#C95151; font-size:70%; font-weight:300;">לא ניתן לשמור משחק ללא הנחייה.</span>
 
             }
+
             @if (!string.IsNullOrEmpty(GameInstruction))
             {
 
@@ -502,7 +487,7 @@ else
 @if (msg != "")
 {
     <p>@msg</p>
-    <input type="button" value="reload" @onclick=Navigate />
+    <input type="button" class="regularUIBtn" value="reload" @onclick=Navigate />
 }
 
 

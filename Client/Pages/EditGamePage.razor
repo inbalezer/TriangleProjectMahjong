@@ -74,9 +74,6 @@ else
 
         @*<input type="button" value="שמור" @onclick="(() => updateNameAndInstruction(gameWithInstruction))" class="SaveNameAndInstrucBtn" disabled="@isSaveButtonDisabled">*@
 
-
-
-
         <button value="שמור" @onclick="(() => updateNameAndInstruction(gameWithInstruction))" class="SaveNameAndInstrucBtn" disabled="@isSaveButtonDisabled">
             <span style="display: inline-flex; align-items: center;">
                 <span style="width: 80px; display: inline-block;">שמור</span>
@@ -230,7 +227,10 @@ else
                         {
                             <span>@unacceptedImg</span>
                         }
-
+                        if (firstImgTooBig != "")
+                        {
+                            <span>@firstImgTooBig</span>
+                        }
                         <br />
                         @if (myFileImage1 != "")
                         {
@@ -285,6 +285,10 @@ else
                         if (unacceptedImg2 != "")
                         {
                             <span>@unacceptedImg2</span>
+                        }
+                        if (secondImgTooBig != "")
+                        {
+                            <span>@secondImgTooBig</span>
                         }
                         <br />
                         @if (myFileImage2 != "")
@@ -692,6 +696,8 @@ z-index:-1;
     string priviousValue = "";
     string priviousValue2 = "";
     string publishClasStyle = "";
+    string firstImgTooBig = "";
+    string secondImgTooBig = "";
     string toggleImgSrc => textChanged ? "../2material-photo.svg" : "../icon material-photo.svg";
     string toggleTextSrc => textChanged ? "../2text-fields (2).svg" : "../icon material-text-fields.svg";
     string class1MoveCircle => textChanged ? "toggleCircle2" : "toggleCircle1";
@@ -1207,6 +1213,7 @@ z-index:-1;
                         myFileImage1 = "uploadedFiles/" + resizeUrl;
                         isFirstImage = isFirstImg;
                         unacceptedImg = "";
+                        firstImgTooBig = "";
                         MakeDeleteList();
                     }
                     else
@@ -1214,6 +1221,7 @@ z-index:-1;
                         myFileImage2 = "uploadedFiles/" + resizeUrl;
                         isFirstImage = isFirstImg;
                         unacceptedImg2 = "";
+                        secondImgTooBig = "";
                         MakeDeleteList();
                     }
                 }
@@ -1239,7 +1247,17 @@ z-index:-1;
             }
             else
             {
-                msg = "לא ניתן להעלות את התמונה- היא גדולה מדיי";
+                if (isFirstImg)
+                {
+                    firstImgTooBig = "לא ניתן להעלות את התמונה- היא גדולה מדיי";
+
+                }
+                else
+                {
+                    secondImgTooBig = "לא ניתן להעלות את התמונה- היא גדולה מדיי";
+
+                }
+
             }
         }
 

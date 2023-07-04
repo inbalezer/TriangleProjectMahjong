@@ -569,7 +569,16 @@ else
 
 @if (publishBtnValue == "פורסם" && isReturnPublishClicked)
 {
+    
     <PopupComp Headline="פורסם בהצלחה!" Text1="@publishMsg" Text2="@gameCodeToShow" GameIdToDelete="navigateToGameAfterPublish" actionButtonText="למשחק" ShowMsg="closedReturnPopUp" cancelButtonText="חזור למסך המשחקים" xClicked="(value) => navigateToGamesScreen(value)">
+        <lottie-player src="https://lottie.host/0cd64648-5a27-4896-96dc-b0847ac3b133/g5yILsQ8yu.json" background="transparent" speed="1" style=" width: 60vw;
+    height: 60vh;
+    position: absolute;
+        bottom: 3vh;
+    right: -16vw;
+z-index:-1;
+}" autoplay></lottie-player>
+       
         @if (!string.IsNullOrEmpty(gameCodeToShow))
         {
 
@@ -621,6 +630,8 @@ else
         opacity: 0.5;
     }
 </style>
+
+
 
 @code {
 
@@ -746,7 +757,7 @@ else
             isEnoughMathces = false;
             isPublish = true;
 
-            @*await publish("Not Eligible");*@
+    @*await publish("Not Eligible");*@
 
         }
 
@@ -761,7 +772,7 @@ else
 
         if (isNameAndInstraction && isEnoughMathces)
         {
-            @*isPublish = false;*@
+    @*isPublish = false;*@
             if (fullGame.PublishStatus == "Not Eligible")
             {
                 await publish("Eligible");

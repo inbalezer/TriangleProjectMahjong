@@ -74,9 +74,12 @@ else
 
         @*<input type="button" value="שמור" @onclick="(() => updateNameAndInstruction(gameWithInstruction))" class="SaveNameAndInstrucBtn" disabled="@isSaveButtonDisabled">*@
 
-        <button value="שמור" @onclick="(() => updateNameAndInstruction(gameWithInstruction))" class="SaveNameAndInstrucBtn" disabled="@isSaveButtonDisabled">
+
+
+
+        <button value="+שמור" @onclick="(() => updateNameAndInstruction(gameWithInstruction))" class="SaveNameAndInstrucBtn" disabled="@isSaveButtonDisabled">
             <span style="display: inline-flex; align-items: center;">
-                <span style="width: 80px; display: inline-block;">שמור</span>
+                <span style="width: 80px; display: inline-block;">שמור +</span>
                 @if (isSaveBtnClicked)
                 {
                     <span style="margin-left: 5px;">

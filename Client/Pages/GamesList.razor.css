@@ -173,7 +173,7 @@ char_text {
 
 .search__container {
     position: absolute;
-    margin-right: 43vw;
+    margin-right: 41vw;
     margin-top: -2vh;
 }
 
@@ -231,6 +231,7 @@ char_text {
     border: 1px solid;
     border-color: #d5d5d5;
     border-radius: 45px;
+    padding-bottom:3vh;
     background-color: rgba(255, 255, 255, 0.4);
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(239px, 1fr));
@@ -265,3 +266,24 @@ char_text {
     #allGames::-webkit-scrollbar {
         display: none;
     }
+
+.PageMainTitle {
+    font-size: 20pt;
+    color: #62629A;
+    background: linear-gradient(180deg, #fdf1d0 20%, #fffdf3 100%);
+    border-radius: 25px;
+    height: 4vh;
+    max-width: 305px;
+    padding: 15px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    direction: rtl;
+}
+
+.allContent {
+    bottom: 32vh;
+    position: relative;
+}

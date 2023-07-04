@@ -10,20 +10,17 @@
 
 <div class="game-card">
     <div class="update-button-container">
-        <input type="button" id="update" @onclick="updateNavigate" />
+        <input type="button" id="update" class="custom-tooltip" title="מעבר לעמוד עריכת תוכן המשחק והגדרותו" @onclick="updateNavigate" />
     </div>
     <div id="GameName">@GameFullName</div>
     <div class="CardContent">
-        <div class="custom-tooltip" title="מעבר לעמוד עריכת תוכן המשחק והגדרותו">
 
-        </div>
-
-        <div class="custom-tooltip" title="את קוד המשחק יש להזין כדי להיכנס אליו"> קוד משחק: @gameCode</div>
-        <br />
+        <div style="margin:1vh" class="custom-tooltip" title="את קוד המשחק יש להזין כדי להיכנס אליו"> קוד משחק: @gameCode</div>
+        
         <span>סטטוס פרסום </span>
         <span class="custom-tooltip" title="פרסום המשחק הופך אותו לזמין">
-            @*<img src="../css/games list imgs/i.svg" />*@
-            <lottie-player src="https://maxst.icons8.com/vue-static/landings/animated-icons/icons/info-shake/info-shake.json" background="transparent" speed="1" style="width: 16.5vw; height: 16.5vh;" loop autoplay></lottie-player>
+            <img src="../css/games list imgs/i.svg" />
+           @* <lottie-player src="https://maxst.icons8.com/vue-static/landings/animated-icons/icons/info-shake/info-shake.json" background="transparent" speed="1" style="width: 16.5vw; height: 16.5vh;" loop autoplay></lottie-player>*@
 
         </span>
 
@@ -32,8 +29,8 @@
             @if (GamePublishStatus == "Not Eligible")
             {
 
-                <div id="Group_238" style="margin-top:7%;">
-                    <div id="Group_234" style="position: relative; left: 5%;">
+                <div id="Group_238" style="margin-top:7%;" class="custom-tooltip" title="לא ניתן לפרסם משחק אשר כולל פחות מ-5 זוגות או ללא הנחייה">
+                    <div id="Group_234" style="position: relative; left: 5%; ">
                         <svg class="Rectangle_272">
                             <rect id="Rectangle_272" rx="18" ry="18" x="0" y="0" width="88%" height="100%"></rect>
                         </svg>
@@ -53,7 +50,7 @@
 
                 <div id="Group_234" style="margin-top:7%; position: relative; left: 5%;">
                     <svg class="Path_150_gi">
-                        <rect class="eligibleBar1" rx="18" ry="18" x="0" y="0" width="88%" height="100%"></rect>
+                        <rect class="eligibleBar1" rx="18" ry="18" x="0" y="0" width="88%" height="100%"  ></rect>
                     </svg>
                     <svg class="Ellipse_4" @onclick="changePublish">
                         <ellipse id="@ellipseClass" rx="19" ry="19" cx="19" cy="19"></ellipse>
@@ -105,9 +102,6 @@
         public bool MsgStatus { get; set; }
         public string GameName { get; set; }
     }
-
-
-
 
     [Parameter]
     public GameForEditor gameToPublish { get; set; }

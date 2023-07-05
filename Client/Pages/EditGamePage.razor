@@ -519,7 +519,10 @@ else
 @if (msg != "")
 {
     <p>@msg</p>
-    <input type="button" class="regularUIBtn" value="reload" @onclick=Navigate />
+    <PopupComp ShowMsg="closedReturnPopUp" Headline="שגיאה" Text1="נראה כי עבר זמן רב מאז שהתחברת, הגיע הזמן לרענן את העמוד :)"  GameIdToDelete="Navigate" actionButtonText="רענן"></PopupComp>
+
+    @*<input type="button" class="regularUIBtn" value="reload" @onclick=Navigate />*@
+
 }
 
 
@@ -1299,14 +1302,14 @@ z-index:-1;
 
         if (saveResponse.IsSuccessStatusCode)
         {
-            msg = "התמונות נמחקו בהצלחה";
-            //DeletedMatch1Images.Clear();
+            Console.WriteLine("התמונות נמחקו בהצלחה");            
 
             DeletedMatchList.Clear();
         }
         else
         {
-            msg = "בעיה במחיקה ";
+            msg = "בעיה במחיקה, נסה שוב ";
+
         }
     }
 
@@ -1576,7 +1579,7 @@ z-index:-1;
         await EditMatchRow(matchToReload);
     }
 
-    void HandleInput(ChangeEventArgs e, string field)
+    async Task HandleInput(ChangeEventArgs e, string field)
     {
         var inputText = (string)e.Value;
 
@@ -1592,6 +1595,7 @@ z-index:-1;
             currentMatchToShow.SecondMatch = inputText;
             characterCountSecond = currentMatchToShow.SecondMatch.Length;
         }
+
         else if (field == "gameName")
         {
             GameFullName = inputText;
@@ -1621,5 +1625,7 @@ z-index:-1;
             }
             previousValue = inputText;
         }
+
+        await AreConditionsMet();
     }
 }

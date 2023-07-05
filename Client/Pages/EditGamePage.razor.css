@@ -499,4 +499,5 @@
 .disabledSaveBtn {
     background-color: grey;
     pointer-events: none;
+    cursor:not-allowed;
 }

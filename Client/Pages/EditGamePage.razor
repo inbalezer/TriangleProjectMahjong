@@ -508,7 +508,10 @@ else
 
         }
     </div>
-    <input style="background-color:aquamarine" class="saveAndReturn" type="button" value="שמור וחזור למסך המשחקים" @onclick="@(async ()=> await returnToHome())" />
+    @if (!isThereMatches)
+    {
+        <input style="width:10vw" class="@saveGameBtn" type="button" value="שמור וחזור למסך המשחקים" @onclick="@(async ()=> await returnToHome())" />
+    }
 
 </div>
 
@@ -622,11 +625,6 @@ z-index:-1;
 
 
 
-
-
-
-
-
 <style>
     .custom-input-file {
         position: relative;
@@ -715,6 +713,7 @@ z-index:-1;
     string currentSecondEdit = "";
     string disabledArrow => isMouseOver ? "abledHoverArrow" : "returnBtnClassDis";
     string cancelPublish => isCancelPublishClicked ? "cancelInvisable" : "cancleVisable";
+    string saveGameBtn => isReturnButtonDisabled ? "disabledSaveBtn" : "regularUIBtn";
 
     @*string msg = "";*@
     bool isCancelPublishClicked = false;
@@ -808,13 +807,13 @@ z-index:-1;
             {
                 await publish("Eligible");
                 isPublish = false;
-                publishClasStyle = "publishBtn";
+                publishClasStyle = "regularUIBtn";
 
             }
             if (fullGame.PublishStatus == "Eligible")
             {
                 isPublish = false;
-                publishClasStyle = "publishBtn";
+                publishClasStyle = "regularUIBtn";
 
 
             }

@@ -29,7 +29,7 @@
             @if (GamePublishStatus == "Not Eligible")
             {
 
-                <div id="Group_238" style="margin-top:7%;" class="custom-tooltip" title="לא ניתן לפרסם משחק אשר כולל פחות מ-5 זוגות או ללא הנחייה">
+                <div id="Group_238" style="margin-top:7%;" class="custom-tooltip" title="@dynamicConditionMsg">
                     <div id="Group_234" style="position: relative; left: 5%; ">
                         <svg class="Rectangle_272">
                             <rect id="Rectangle_272" rx="18" ry="18" x="0" y="0" width="88%" height="100%"></rect>
@@ -92,6 +92,8 @@
     bool isToggled = false;
     string ellipseClass = "";
     string publishStatusBtnText = "";
+    string dynamicConditionMsg = "נותרו עוד 5 זוגות כדי לפרסם את המשחק";
+    string msg = "";
 
     [CascadingParameter]
     public int UserId { get; set; }
@@ -130,28 +132,28 @@
     [Parameter]
     public EventCallback<bool> showMsg { get; set; }
 
-    string dynamicConditionMsg = "";
 
     void changePublish()
     {
         isToggled = !isToggled;
         ellipseClass = isToggled ? "toggled" : "untoggled";
         publishStatusBtnText = isToggled ? "מפורסם" : "ניתן לפרסום";
-
         isCheckboxClicked.InvokeAsync(true);
     }
 
     protected override void OnInitialized()
     {
 
-        if (GameInstructionToCheck == true)
-        {
-            dynamicConditionMsg = "אי אפשר לפרסם משחק ללא הנחייה ועם פחות מ-5 זוגות";
-        }
-        else
-        {
-            dynamicConditionMsg = "אי אפשר לפרסם משחק עם פחות מ-5 זוגות";
-        }
+        //if (GameInstructionToCheck == true)
+        //{
+        //    dynamicConditionMsg = "אי אפשר לפרסם משחק ללא הנחייה ועם פחות מ-5 זוגות";
+        //}
+        //else
+        //{
+        //    dynamicConditionMsg = "אי אפשר לפרסם משחק עם פחות מ-5 זוגות";
+        //}
+
+
         if (GamePublishStatus == "Not Eligible")
         {
             ellipseClass = "";
@@ -187,6 +189,54 @@
 
         nav.NavigateTo("./EditGamePage/" + GameFullName + "/" + gameId);
     }
+
+    protected override async Task OnInitializedAsync()
+    {
+        int id = gameId;
+        int user = UserId;
+
+        var StatusResopnse = await Http.GetAsync("api/Games/" + user + "/getStatus/" + id);
+
+        if (StatusResopnse.IsSuccessStatusCode)
+        {
+
+            GameStatus newStatus = StatusResopnse.Content.ReadFromJsonAsync<GameStatus>
+                ().Result;
+
+
+            if (newStatus.match_count < 5)
+            {
+                dynamicConditionMsg = "נותדו עוד " + (5 - newStatus.match_count).ToString() + " זוגות כדי לפרסם את המשחק";
+            }
+            else
+            {
+                dynamicConditionMsg = 5.ToString();
+
+            }
+        }
+        else
+        {
+            string error = StatusResopnse.Content.ReadAsStringAsync().Result;
+
+            switch (error)
+            {
+                case "No Session":
+                    msg = " עבר זמן רב ללא שימוש באתר, אנא רענן את העמוד";
+                    break;
+
+                case "User Not Logged In":
+                    msg = "אינך מחובר למערכת, התחבר וטען את העמוד מחדש";
+                    break;
+                case "Status not retrived":
+                    msg = "לא ניתן להציג תנאי פרסום ";
+                    break;
+
+
+            }
+        }
+
+    }
+
 
 }
 

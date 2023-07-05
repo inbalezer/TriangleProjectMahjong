@@ -353,6 +353,41 @@ namespace TriangleProject.Server.Controllers
             }
             return BadRequest("No Session");
         }
+
+
+        [HttpGet("getStatus/{gameId}")]
+        public async Task<IActionResult> getStatus(int userId, int gameId)
+        {
+            int? sessionId = HttpContext.Session.GetInt32("userId");
+            if (sessionId != null)
+            {
+                if (userId == sessionId)
+                {
+                    object param = new
+                    {
+                        UserId = userId,
+                        gameId = gameId
+                    };
+
+                    string statusQuery = "SELECT COUNT(*) AS match_count, games.GameInstruction FROM Matches JOIN Games ON Matches.GameID = Games.ID WHERE Games.id=@gameId GROUP BY games.GameInstruction";
+                    var statusRecords = await _db.GetRecordsAsync<GameStatus>(statusQuery, param);
+                    GameStatus status = statusRecords.FirstOrDefault();
+                    if (status == null)
+                    {
+                        status.GameInstruction = "";
+                        status.match_count = 0;
+                        return Ok(status);
+                    }
+                    return Ok(status);
+
+                }
+                return BadRequest("User Not Logged In");
+
+            }
+            return BadRequest("No Session");
+
+        }
+
     }
 }
 

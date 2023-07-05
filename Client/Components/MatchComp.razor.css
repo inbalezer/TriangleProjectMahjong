@@ -16,8 +16,8 @@
     margin-right:4vw;
 }
 
-#text{
-    padding-top:-10vh;
+.text{
+  bottom:10vh;
 }
 .rectangle p {
     text-align: center;

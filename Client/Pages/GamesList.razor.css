@@ -1,4 +1,6 @@
-﻿
+﻿body {
+    height: 20vh;
+}
 #NoGamesFound{
     text-align:center;
     color: rgba(98,98,154,1);

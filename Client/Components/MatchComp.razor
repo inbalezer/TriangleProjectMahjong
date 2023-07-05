@@ -11,17 +11,27 @@
 <div class="component @editBgStyle">
     <div class="container">
         <div class="rectangle ">
-            <img src="../css/edit game page/mini brik.svg" />
             <div class="content">
                 @if (!string.IsNullOrEmpty(matchText))
                 {
                     @if (matchText.Contains("uploadedFiles/"))
                     {
-                        <img class ="image" src="@matchText" width="75" height="75" />
+                        <div calss="each-match-div">
+                            <img class="brik" src="../css/edit game page/mini brik.svg" />
+                            <img class="image" src="@matchText" width="75" height="75" />
+
+                        </div>
+                       
+
                     }
                     else
                     {
-                        <p class="text">@matchText</p>
+                        <div calss="each-match-div">
+                            <img class="brik" src="../css/edit game page/mini brik.svg" />
+
+                            <span class="text">@matchText</span>
+                        </div>
+                        
                     }
                 }
 
@@ -30,18 +40,27 @@
         </div>
 
         <div class="rectangle rectangle-2">
-            <img src="../css/edit game page/mini brik.svg" />
 
             <div class="content">
                 @if (!string.IsNullOrEmpty(matchText2))
                 {
                     @if (matchText2.Contains("uploadedFiles/"))
                     {
-                        <img class="image" src="@matchText2" width="75" height="75" />
+                        <div calss="each-match-div">
+                            <img class="brik" src="../css/edit game page/mini brik.svg" />
+
+                            <img class="image" src="@matchText2" width="75" height="75" />
+                        </div>
+                        
                     }
                     else
                     {
-                        <p class="text">@matchText2</p>
+                        <div calss="each-match-div">
+                            <img class="brik" src="../css/edit game page/mini brik.svg" />
+
+                            <span class="text">@matchText2</span>
+                        </div>
+                        
                     }
                 }
 

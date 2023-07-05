@@ -418,7 +418,6 @@
 }
 
 #table-underline {
-    margin-bottom: 2vh;
     width: 27vw;
     margin-right: 2.5vw;
     border: 0.5px solid rgba(213, 211, 211, 0.5);
@@ -426,7 +425,6 @@
 }
 
 #all-matches-scroll {
-    margin-top: 1.5vh;
     width: 33vw;
     height: 34vh;
     overflow-y: auto; /* Use 'auto' to hide scrollbar when content fits within container */

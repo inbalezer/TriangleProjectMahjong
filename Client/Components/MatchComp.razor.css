@@ -5,24 +5,34 @@
     display: flex;
 }
 
-    .rectangle > img {
+    .content {
         margin-right: 2vw;
         width:6vw;
-        margin-bottom: -2vh;
+        margin-bottom: -4vh;
     }
 
-.content{
-    position:absolute;
-    margin-right:4vw;
+.each-match-div{
+    position:relative;
 }
 
-.text{
-  bottom:10vh;
+.text {
+    position: relative;
+    bottom: 9vh;
+    right: 2vw;
+    color: #62629A;
+    font-size:120%;
+    font-weight:500;
+
 }
+
+.brik{
+    width:7.5vw;
+    margin-bottom:-2.5vh;
+}
+
 .rectangle p {
     text-align: center;
     margin: 0;
-    padding: 10px;
 }
 
 .edit-button,

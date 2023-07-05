@@ -226,6 +226,14 @@ else
                         </div>
                         <p style="color:red"> קבצי Png ,Jpeg בלבד </p>
 
+                       
+                        
+                        @if (myFileImage1 != "")
+                        {
+                            <img src="@myFileImage1" width="150" />
+                            @*<input type="button" value="העבר למחיקה " @onclick="MakeDeleteList" />*@
+                        }
+                        <br />
                         if (unacceptedImg != "")
                         {
                             <span>@unacceptedImg</span>
@@ -233,12 +241,6 @@ else
                         if (firstImgTooBig != "")
                         {
                             <span>@firstImgTooBig</span>
-                        }
-                        <br />
-                        @if (myFileImage1 != "")
-                        {
-                            <img src="@myFileImage1" width="150" />
-                            @*<input type="button" value="העבר למחיקה " @onclick="MakeDeleteList" />*@
                         }
                     }
                 </div>
@@ -285,6 +287,15 @@ else
 
                         </div>
                         <p style="color:red"> קבצי Png ,Jpeg בלבד </p>
+                       
+                        
+                        @if (myFileImage2 != "")
+                        {
+                            <img src="@myFileImage2" width="150" />
+                            @*<input type="button" value="העבר למחיקה " @onclick="MakeDeleteList" />*@
+                        }
+                        <br />
+
                         if (unacceptedImg2 != "")
                         {
                             <span>@unacceptedImg2</span>
@@ -292,12 +303,6 @@ else
                         if (secondImgTooBig != "")
                         {
                             <span>@secondImgTooBig</span>
-                        }
-                        <br />
-                        @if (myFileImage2 != "")
-                        {
-                            <img src="@myFileImage2" width="150" />
-                            @*<input type="button" value="העבר למחיקה " @onclick="MakeDeleteList" />*@
                         }
 
 
@@ -510,15 +515,20 @@ else
     </div>
     @if (!isThereMatches)
     {
+        if(errorDeleteImgmsg != "")
+        {
+            <p>@errorDeleteImgmsg</p>
+        }
+        
         <input style="width:10vw" class="@saveGameBtn" type="button" value="שמור וחזור למסך המשחקים" @onclick="@(async ()=> await returnToHome())" />
+
     }
 
 </div>
 
 
 @if (msg != "")
-{
-    <p>@msg</p>
+{   
     <PopupComp ShowMsg="closedReturnPopUp" Headline="שגיאה" Text1="נראה כי עבר זמן רב מאז שהתחברת, הגיע הזמן לרענן את העמוד :)"  GameIdToDelete="Navigate" actionButtonText="רענן"></PopupComp>
 
     @*<input type="button" class="regularUIBtn" value="reload" @onclick=Navigate />*@
@@ -678,6 +688,7 @@ z-index:-1;
     public bool updateMode { get; set; }
 
     string msg = "";
+    string errorDeleteImgmsg = "";
     string SettingMsg = "";
     string fullGameMsg = "";
     string returnHeadLinePopUp = "חזור למסך ״המשחקים שלי?";
@@ -1254,12 +1265,12 @@ z-index:-1;
             {
                 if (isFirstImg)
                 {
-                    firstImgTooBig = "לא ניתן להעלות את התמונה- היא גדולה מדיי";
+                    firstImgTooBig = "התמונה שניסית להעלות כבדה מדיי, בחר תמונה אחרת";
 
                 }
                 else
                 {
-                    secondImgTooBig = "לא ניתן להעלות את התמונה- היא גדולה מדיי";
+                    secondImgTooBig = "התמונה שניסית להעלות כבדה מדיי, בחר תמונה אחרת";
 
                 }
 
@@ -1308,7 +1319,7 @@ z-index:-1;
         }
         else
         {
-            msg = "בעיה במחיקה, נסה שוב ";
+            errorDeleteImgmsg = "בעיה במחיקה, נסה שוב ";
 
         }
     }

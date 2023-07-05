@@ -116,8 +116,8 @@
 
 @if (msg != "")
 {
-    <p>@msg</p>
-    <input type="button" value="reload" @onclick=Navigate />
+
+        <PopupComp ShowMsg="closedPopUp" Headline="שגיאה" Text1="נראה כי עבר זמן רב מאז שהתחברת, הגיע הזמן לרענן את העמוד :)" GameIdToDelete="Navigate" actionButtonText="רענן"></PopupComp>
 }
 </div>
 

@@ -3,31 +3,27 @@
 
 .container {
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-.trash {
-    cursor: pointer;
-}
-
-.rectangle {
-    width: 200px;
-    height: 100px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    margin: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-    .rectangle p {
-        text-align: center;
-        margin: 0;
-        padding: 10px;
+    .rectangle > img {
+        margin-right: 2vw;
+        width:6vw;
+        margin-bottom: -2vh;
     }
+
+.content{
+    position:absolute;
+    margin-right:4vw;
+}
+
+#text{
+    padding-top:-10vh;
+}
+.rectangle p {
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+}
 
 .edit-button,
 .delete-button {
@@ -53,10 +49,25 @@
 }
 
 .editPencil {
+    padding-right: 6vw;
     opacity: 0.5;
     cursor: not-allowed;
     pointer-events: none;
+    margin-top: 5.5vh;
 }
+
+.k {
+    padding-right: 5vw;
+    margin-top: 5.5vh;
+}
+
+.trash {
+    margin-top:5.5vh;
+    cursor: pointer;
+    margin-right:4vw;
+}
+
+
 
 .component.editMode {
     background-color: #e5f5fe;

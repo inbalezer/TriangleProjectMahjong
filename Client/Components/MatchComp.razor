@@ -10,17 +10,18 @@
 
 <div class="component @editBgStyle">
     <div class="container">
-        <div class="rectangle rectangle-1">
+        <div class="rectangle ">
+            <img src="../css/edit game page/mini brik.svg" />
             <div class="content">
                 @if (!string.IsNullOrEmpty(matchText))
                 {
                     @if (matchText.Contains("uploadedFiles/"))
                     {
-                        <img src="@matchText" width="75" height="75" />
+                        <img class ="image" src="@matchText" width="75" height="75" />
                     }
                     else
                     {
-                        <p>@matchText</p>
+                        <p class="text">@matchText</p>
                     }
                 }
 
@@ -29,16 +30,18 @@
         </div>
 
         <div class="rectangle rectangle-2">
+            <img src="../css/edit game page/mini brik.svg" />
+
             <div class="content">
                 @if (!string.IsNullOrEmpty(matchText2))
                 {
                     @if (matchText2.Contains("uploadedFiles/"))
                     {
-                        <img src="@matchText2" width="75" height="75" />
+                        <img id="image" src="@matchText2" width="75" height="75" />
                     }
                     else
                     {
-                        <p>@matchText2</p>
+                        <p id="text">@matchText2</p>
                     }
                 }
 
@@ -53,6 +56,8 @@
             <img class="trash" src="../trash3.svg" alt="Delete" @onclick="deleteMatch" />
         </div>
     </div>
+    
+
 </div>
 
 
@@ -62,7 +67,7 @@
 @code
 {
     public string editPencil = "";
-    string editPenStyle => iseditClassStyle ? "editPencil" : "";
+    string editPenStyle => iseditClassStyle ? "editPencil" : "k";
     string editBgStyle => iseditClassStyle ? "editMode" : "";
 
 

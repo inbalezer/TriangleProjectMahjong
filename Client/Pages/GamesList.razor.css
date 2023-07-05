@@ -237,7 +237,7 @@ char_text {
     grid-template-columns: repeat(auto-fill, minmax(239px, 1fr));
     grid-gap: 0px;
     overflow-y: auto; /* Use 'auto' to hide scrollbar when content fits within container */
-    min-height:70vh;
+    min-height:67vh;
     max-height: 74vh; /* Adjust the desired maximum height */
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;

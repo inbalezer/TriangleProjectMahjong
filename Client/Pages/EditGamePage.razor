@@ -79,11 +79,11 @@ else
 
         <button value="+שמור" @onclick="(() => updateNameAndInstruction(gameWithInstruction))" class="SaveNameAndInstrucBtn" disabled="@isSaveButtonDisabled">
             <span style="display: inline-flex; align-items: center;">
-                <span style="width: 80px; display: inline-block;">שמור +</span>
+                <span >שמור +</span>
                 @if (isSaveBtnClicked)
                 {
                     <span style="margin-left: 5px;">
-                        <lottie-player src="https://lottie.host/cbb86737-1d0c-4970-8b43-8ad5dfc74631/FwJpUmo6j9.json" speed="0.7" style="width: 8vw; height: 8vh;" autoplay></lottie-player>
+                        <lottie-player src="https://lottie.host/cbb86737-1d0c-4970-8b43-8ad5dfc74631/FwJpUmo6j9.json" speed="0.7" style="width: 8vw; height: 8vh; margin-right:-2.3vw; margin-top:-4vh; position:absolute;" autoplay></lottie-player>
                     </span>
                     isSaveBtnClicked = false;
                 }
@@ -418,6 +418,10 @@ else
 <div id="all-matches">
     <h4 id="all-matches-title">מאגר הזוגות</h4>
     <hr id="underline3" />
+    <span id="couples-span">זוגות</span>
+    <span id="edin-span">עריכה</span>
+    <span id="delet-span">מחיקה</span>
+    <hr id="table-underline"/>
     <div id="all-matches-scroll">
 
         @if (isThereMatches)
@@ -433,18 +437,18 @@ else
 
             if (fullGame.MatchesList.Count <= 11 && fullGame.MatchesList.Count <= 18)
             {
-                <span>סה"כ @fullGame.MatchesList.Count זוגות</span>
+                <span class="matches-counter">סה"כ @fullGame.MatchesList.Count זוגות</span>
 
             }
             else if (fullGame.MatchesList.Count == 19)
             {
-                <span>סה"כ @fullGame.MatchesList.Count זוגות</span>
-                <span>שים לב, ניתן להוסיף רק עוד זוג אחד למאגר</span>
+                <span class="matches-counter">סה"כ @fullGame.MatchesList.Count זוגות</span>
+                <span class="matches-counter">שים לב, ניתן להוסיף רק עוד זוג אחד למאגר</span>
 
             }
             else
             {
-                <span>סה"כ @fullGame.MatchesList.Count/20 זוגות</span>
+                <span class="matches-counter">סה"כ @fullGame.MatchesList.Count/20 זוגות</span>
                 Console.WriteLine(fullGame.MatchesList);
             }
 

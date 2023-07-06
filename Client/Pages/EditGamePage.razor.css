@@ -475,7 +475,7 @@
     }
 
 .regularUIBtn {
-    background: linear-gradient(rgba(135,195,240) -24%, rgba(58,160,234) 70.96%)
+    background: linear-gradient(rgba(135,195,240) -24%, rgba(58,160,234) 70.96%);
     width: 15vw;
     height: 4vh;
     border: none;

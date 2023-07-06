@@ -426,10 +426,12 @@ else
 
         @if (isThereMatches)
         {
-            <span>
+            <span id="isThereMatches1">
                 מאגר הזוגות עדיין ריק
-                לאחר השמירה, הזוגות יופיעו כאן :)
+                
             </span>
+            <br/>
+            <span id="isThereMatches2">לאחר השמירה, הזוגות יופיעו כאן :)</span>
         }
 
         else if (fullGame.MatchesList != null)
@@ -524,7 +526,7 @@ else
             <p>@errorDeleteImgmsg</p>
         }
 
-        <input style="width:10vw" class="@saveGameBtn" type="button" value="שמור וחזור למסך המשחקים" @onclick="@(async ()=> await returnToHome())" />
+        <input  class="@saveGameBtn" type="button" value="שמור וחזור למסך המשחקים" @onclick="@(async ()=> await returnToHome())" />
 
     }
 

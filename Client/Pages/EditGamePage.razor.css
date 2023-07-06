@@ -424,6 +424,22 @@
     height: none;
 }
 
+#isThereMatches1{
+    position:relative;
+    top:15vh;
+    margin-right:13vw;
+    font-size:120%;
+}
+
+#isThereMatches2 {
+    position: relative;
+    top: 15vh;
+    margin-right: 11.2vw;
+    font-size: 120%;
+    font-weight:500;
+}
+
+
 #all-matches-scroll {
     width: 33vw;
     height: 34vh;
@@ -457,6 +473,29 @@
     #all-matches-scroll::-webkit-scrollbar {
         display: none;
     }
+
+.regularUIBtn {
+    background: linear-gradient(rgba(135,195,240,0.74) -24%, rgba(58,160,234,0.74) 70.96%);
+    width: 15vw;
+    height: 4vh;
+    border: none;
+    font-size: 120%;
+    font-weight: 200;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: Heebo;
+    margin-right: 8.5vw;
+    margin-top: 2vh;
+
+}
+
+
+.disabledSaveBtn {
+    background-color: grey;
+    pointer-events: none;
+    cursor: not-allowed;
+}
 
 
 
@@ -515,24 +554,3 @@
     display: none;
 }
 
-.regularUIBtn {
-    background: linear-gradient(rgba(135,195,240,0.74) -24%, rgba(58,160,234,0.74) 70.96%);
-    width: 5%;
-    height: 4vh;
-    border: none;
-    font-size: 120%;
-    font-weight: 200;
-    color: white;
-    border-radius: 10px;
-    cursor: pointer;
-    font-family: Heebo;
-    margin-right: -12%;
-    margin-top: 1vh;
-}
-
-
-.disabledSaveBtn {
-    background-color: grey;
-    pointer-events: none;
-    cursor:not-allowed;
-}

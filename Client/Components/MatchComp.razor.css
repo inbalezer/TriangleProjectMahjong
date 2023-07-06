@@ -17,7 +17,7 @@
 
 .text {
     position: relative;
-    bottom: 9vh;
+    bottom: 4.5vh;
     right: 2vw;
     color: #62629A;
     font-size:120%;
@@ -25,9 +25,15 @@
 
 }
 
-.brik{
-    width:7.5vw;
-    margin-bottom:-2.5vh;
+.image {
+    position: relative;
+    bottom: 6vh;
+    right: 2.5vw;
+}
+
+.brik {
+    width: 7.5vw;
+    margin-bottom: -7.5vh;
 }
 
 .rectangle p {
@@ -59,20 +65,19 @@
 }
 
 .editPencil {
-    padding-right: 6vw;
     opacity: 0.5;
     cursor: not-allowed;
     pointer-events: none;
-    margin-top: 5.5vh;
+    margin-top: 8vh;
 }
 
 .k {
-    padding-right: 5vw;
-    margin-top: 5.5vh;
+    margin-right: 5vw;
+    margin-top: 8vh;
 }
 
 .trash {
-    margin-top:5.5vh;
+    margin-top:8vh;
     cursor: pointer;
     margin-right:4vw;
 }

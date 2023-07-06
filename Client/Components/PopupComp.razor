@@ -4,7 +4,10 @@
     <div class="popup-container">
         <div class="popup-content">
             <div class="popup-close">
-                <button class="popup-close-button" @onclick="() => IsDeleteButtonClicked(true)">x</button>
+                @if (!isReload)
+                {
+                    <button class="popup-close-button" @onclick="() => IsDeleteButtonClicked(true)">x</button>
+                }
             </div>
             <h3>@Headline</h3>
             <hr />
@@ -29,10 +32,12 @@
             }
             <div class="popup-buttons">
                 <button class="popup-button" style="background-color:@secondPopUpColor ; color: @callToActionPopUpColor; border: 2px solid @callToActionPopUpColor;" @onclick="() => IsDeleteButtonClicked(false)">@cancelButtonText</button>
-                <button class="popup-button" style="background-color: @callToActionPopUpColor ; color: @secondPopUpColor;" @onclick="()=> DeleteGameFromList(true)">@actionButtonText</button>
-
+                @if (!isReload)
+                {
+                    <button class="popup-button" style="background-color: @callToActionPopUpColor ; color: @secondPopUpColor;" @onclick="()=> DeleteGameFromList(true)">@actionButtonText</button>
+                }
+              
             </div>
-
         </div>
     </div>
 </div>
@@ -73,6 +78,9 @@
 
     [Parameter]
     public bool isDeleteCompClicked { get; set; } = false;
+
+    [Parameter]
+    public bool isReload { get; set; } = false;
 
     [Parameter]
     public EventCallback<bool> ShowMsg { get; set; }

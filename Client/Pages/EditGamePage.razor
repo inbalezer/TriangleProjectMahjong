@@ -77,13 +77,13 @@ else
 
 
 
-        <button value="+שמור" @onclick="(() => updateNameAndInstruction(gameWithInstruction))" class="SaveNameAndInstrucBtn" disabled="@isSaveButtonDisabled">
+        <button value="שמור" @onclick="(() => updateNameAndInstruction(gameWithInstruction))" class="SaveNameAndInstrucBtn" disabled="@isSaveButtonDisabled">
             <span style="display: inline-flex; align-items: center;">
-                <span >שמור +</span>
+                <span >שמור</span>
                 @if (isSaveBtnClicked)
                 {
-                    <span style="margin-left: 5px;">
-                        <lottie-player src="https://lottie.host/cbb86737-1d0c-4970-8b43-8ad5dfc74631/FwJpUmo6j9.json" speed="0.7" style="width: 8vw; height: 8vh; margin-right:-2.3vw; margin-top:-4vh; position:absolute;" autoplay></lottie-player>
+                    <span style="position: absolute; margin: 2.28vw; top: 39.51vh;">
+                        <lottie-player src="https://lottie.host/cbb86737-1d0c-4970-8b43-8ad5dfc74631/FwJpUmo6j9.json" speed="0.7" style="width: 9vw; height: 9vh; margin-right:-2.3vw; margin-top:-4vh; position:absolute;" autoplay></lottie-player>
                     </span>
                     isSaveBtnClicked = false;
                 }
@@ -418,10 +418,7 @@ else
 <div id="all-matches">
     <h4 id="all-matches-title">מאגר הזוגות</h4>
     <hr id="underline3" />
-    <span id="couples-span">זוגות</span>
-    <span id="edin-span">עריכה</span>
-    <span id="delet-span">מחיקה</span>
-    <hr id="table-underline"/>
+    
     <div id="all-matches-scroll">
 
         @if (isThereMatches)
@@ -436,6 +433,10 @@ else
 
         else if (fullGame.MatchesList != null)
         {
+            <span id="couples-span">זוגות</span>
+            <span id="edin-span">עריכה</span>
+            <span id="delet-span">מחיקה</span>
+            <hr id="table-underline"/>
 
             if (fullGame.MatchesList.Count <= 11 && fullGame.MatchesList.Count <= 18)
             {
@@ -535,7 +536,7 @@ else
 
 @if (msg != "")
 {
-    <PopupComp ShowMsg="closedReturnPopUp" Headline="שגיאה" Text1="נראה כי עבר זמן רב מאז שהתחברת, הגיע הזמן לרענן את העמוד :)" GameIdToDelete="Navigate" actionButtonText="רענן"></PopupComp>
+    <PopupComp ShowMsg="closedReturnPopUp" Headline="שגיאה" Text1="נראה כי עבר זמן רב מאז שהתחברת, הגיע הזמן לרענן את העמוד :)" GameIdToDelete="Navigate" actionButtonText="רענן" isReload="true"></PopupComp>
 
     @*<input type="button" class="regularUIBtn" value="reload" @onclick=Navigate />*@
 

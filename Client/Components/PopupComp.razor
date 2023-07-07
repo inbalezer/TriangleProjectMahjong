@@ -31,11 +31,19 @@
                 callToActionPopUpColor = "rgba(201, 81, 81, 1)";
             }
             <div class="popup-buttons">
-                <button class="popup-button" style="background-color:@secondPopUpColor ; color: @callToActionPopUpColor; border: 2px solid @callToActionPopUpColor;" @onclick="() => IsDeleteButtonClicked(false)">@cancelButtonText</button>
-                @if (!isReload)
+                
+                @if (isReload)
                 {
                     <button class="popup-button" style="background-color: @callToActionPopUpColor ; color: @secondPopUpColor;" @onclick="()=> DeleteGameFromList(true)">@actionButtonText</button>
+
                 }
+                else
+                {
+                    
+                    <button class="popup-button" style="background-color:@secondPopUpColor ; color: @callToActionPopUpColor; border: 2px solid @callToActionPopUpColor;" @onclick="() => IsDeleteButtonClicked(false)">@cancelButtonText</button>
+                    <button class="popup-button" style="background-color: @callToActionPopUpColor ; color: @secondPopUpColor;" @onclick="()=> DeleteGameFromList(true)">@actionButtonText</button>
+                }
+               
               
             </div>
         </div>

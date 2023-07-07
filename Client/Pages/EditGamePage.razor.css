@@ -157,22 +157,28 @@
     }
 }
 
+
 .returnBtnClassDis {
-    background-image: url('../css/edit game page/arrow.svg');
-    background-repeat: no-repeat;
+    background-position: center, center;
     background-color: rgb(137, 137, 165);
-    width: 8vw;
-    height: 3vh;
+    width: 4vw;
+    height: 5vh;
     border-radius: 8px;
     background-color: lightgray;
     cursor: not-allowed;
     color: white;
     font-weight: 500;
+    margin-right: 89vw;
+    margin-bottom: 0.8vh;
 }
 
+#arrow1 {
+}
+
+
 .returnBtnClass {
-    width: 8vw;
-    height: 3vh;
+    width: 4vw;
+    height: 5vh;
     border-radius: 8px;
     cursor: pointer;
     color: white;
@@ -181,10 +187,12 @@
     background-position: center, center;
     background-repeat: no-repeat, no-repeat;
     background-color: rgb(137, 137, 165);
+    margin-right: 89vw;
+    margin-bottom:0.8vh;
 }
 
+
     .returnBtnClass::before {
-        content: url('../css/edit game page/arrow.svg');
     }
 
     .returnBtnClass:hover {
@@ -192,9 +200,16 @@
         background-color: rgb(137, 137, 165);
         background-repeat: no-repeat;*/
         width: 13vw;
-        height: 3vh;
-        transition: transform 0.5s ease;
+        height: 5vh;
+        transform: translateX(9vw);
+        direction: ltr;
+        font-size:130%;
+        font-family:Heebo;
+        margin-left:2vw;
     }
+
+#arrow2{
+}
 
 
 .publishBtn {
@@ -317,7 +332,7 @@
 .SaveNameAndInstrucBtn {
     background: linear-gradient(rgba(135,195,240,0.74) -24%, rgba(58,160,234) 70.96%);
     width: 10vw;
-    height: 4vh;
+    height: 5vh;
     border: none;
     font-size: 120%;
     font-weight: 200;

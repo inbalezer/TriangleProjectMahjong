@@ -18,12 +18,11 @@
 
 @if (showWarningMessage || !isNameAndInstraction || GameFullName == "")
 {
-    <button class="@disabledArrow" @onclick="showMessageReturn" title="לא ניתן לשמור משחק ללא שם או הנחייה" disabled="@isReturnButtonDisabled ">@returnText</button>
-
+    <button class="@disabledArrow" @onclick="showMessageReturn" title="לא ניתן לשמור משחק ללא שם או הנחייה" disabled="@isReturnButtonDisabled "><img id="arrow1" src="../css/edit game page/arrow.svg" /> @returnText </button>
 }
 else
 {
-    <button class="returnBtnClass" @onclick="showMessageReturn" @onmouseover="() => OnMouseOver(true)" @onmouseout="() => OnMouseOver(false)" disabled="@isReturnButtonDisabled">@returnText</button>
+    <button style="" class="returnBtnClass" @onclick="showMessageReturn" @onmouseover="() => OnMouseOver(true)" @onmouseout="() => OnMouseOver(false)" disabled="@isReturnButtonDisabled"><img id="arrow2" src="../css/edit game page/arrow.svg" /> @returnText </button>
 
 }
 <div id="general-settings">
@@ -79,11 +78,11 @@ else
 
         <button value="שמור" @onclick="(() => updateNameAndInstruction(gameWithInstruction))" class="SaveNameAndInstrucBtn" disabled="@isSaveButtonDisabled">
             <span style="display: inline-flex; align-items: center;">
-                <span >שמור</span>
+                <span style="padding-bottom:1vh;">שמור <img style= " padding-right:0.5vw; padding-top:1.3vh;" src="../css/edit game page/plus.svg" /></span>
                 @if (isSaveBtnClicked)
                 {
-                    <span style="position: absolute; margin: 2.28vw; top: 39.51vh;">
-                        <lottie-player src="https://lottie.host/cbb86737-1d0c-4970-8b43-8ad5dfc74631/FwJpUmo6j9.json" speed="0.7" style="width: 9vw; height: 9vh; margin-right:-2vw; margin-top:-9vh; position:absolute;" autoplay></lottie-player>
+                    <span >
+                        <img style="margin-top:-2vh; margin-right:-1.5vw; position: absolute;" src="../css/edit game page/blue vi.svg" />
                     </span>
                     isSaveBtnClicked = false;
                 }

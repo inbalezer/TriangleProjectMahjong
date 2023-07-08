@@ -191,7 +191,7 @@
 .publishIcon {
     position: relative;
     top: -2.3vw;
-    right: 6vw;
+    right: 18vw;
     width: 2vw;
     height: 2vh;
 }
@@ -635,6 +635,18 @@
 }
 
 .cancleVisable {
+    background-color: white;
+    color: #62629A;
+    border: 2px solid green;
+    width: 12vw;
+    height: 6vh;
+    font-size: 120%;
+    font-weight: 200;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: Heebo;
+    margin-right: 8.5vw;
+    margin-top: 2vh;
 }
 
 .cancelInvisable {
@@ -643,8 +655,8 @@
 
 .abled-publish-button {
     background: linear-gradient(rgba(135,195,240) -24%, rgba(58,160,234) 70.96%);
-    width: 15vw;
-    height: 4vh;
+    width: 12vw;
+    height: 6vh;
     border: none;
     font-size: 120%;
     font-weight: 200;
@@ -658,14 +670,14 @@
 
 .disabled-publish-button {
     background: linear-gradient(rgba(220, 220, 220) -24%, rgb(230, 230, 230) 70.96%);
-    width: 15vw;
-    height: 4vh;
+    width: 12vw;
+    height: 6vh;
     border: none;
     font-size: 120%;
     font-weight: 200;
     color: white;
     border-radius: 10px;
-    cursor: pointer;
+    cursor: not-allowed;
     font-family: Heebo;
     margin-right: 8.5vw;
     margin-top: 2vh;
@@ -673,15 +685,21 @@
 
 .afterPublish {
     background-image: linear-gradient(to bottom, #87f0c3, #2de396);
-    width: 15vw;
-    height: 4vh;
+    width: 12vw;
+    height: 6vh;
     border: none;
     font-size: 120%;
     font-weight: 200;
-    color: white;
     border-radius: 10px;
-    cursor: pointer;
+    cursor: not-allowed;
     font-family: Heebo;
     margin-right: 8.5vw;
     margin-top: 2vh;
+}
+
+
+.allPublishBtns {
+    position: relative;
+    top: -14vh;
+    left: -10vw;
 }

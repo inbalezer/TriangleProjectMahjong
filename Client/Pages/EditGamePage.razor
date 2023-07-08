@@ -1580,7 +1580,7 @@ z-index:-1;
 
     protected async Task cancleChanges(int matchToReload)
     {
-        if (DeletedMatch1Images.Count != 1)
+        if (DeletedMatch1Images.Count > 1)
         {
             string firstImgInList = DeletedMatch1Images[0];
             DeletedMatch1Images.Remove(DeletedMatch1Images[0]);
@@ -1589,7 +1589,7 @@ z-index:-1;
 
         }
 
-        if (DeletedMatch2Images.Count != 1)
+        if (DeletedMatch2Images.Count > 1)
         {
             string firstImgInList2 = DeletedMatch2Images[0];
             DeletedMatch2Images.Remove(DeletedMatch2Images[0]);

@@ -139,6 +139,9 @@
 }
 
 #arrow1 {
+    position: fixed;
+    top: 17vh;
+    right: 91.5vw;
 }
 
 
@@ -169,12 +172,15 @@
         height: 5vh;
         transform: translateX(9vw);
         direction: ltr;
-        font-size:130%;
-        font-family:Heebo;
-        margin-left:2vw;
+        font-size: 130%;
+        font-family: Heebo;
+        margin-left: -30vw;
     }
 
-#arrow2{
+#arrow2 {
+    position: fixed;
+    top: 17vh;
+    right: 91.5vw;
 }
 
 

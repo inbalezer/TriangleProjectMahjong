@@ -43,7 +43,7 @@ else
 
         @if (!string.IsNullOrEmpty(GameFullName))
         {
-            <span class="character-count" style="@(characterGameNameLimit == characterCountGameName ? "color: red;" : "")">@characterGameNameLimit/ @characterCountGameName</span>
+            <span id="character-count1" class="character-count" style="@(characterGameNameLimit == characterCountGameName ? "color: red;" : "")">@characterGameNameLimit/ @characterCountGameName</span>
 
         }
         <p id="instraction1">(1-17 תווים)</p>
@@ -66,7 +66,7 @@ else
         @if (!string.IsNullOrEmpty(GameInstruction))
         {
 
-            <span class="character-count" style="@(characterGameInstructionLimit == characterCountInstruction ? "color: red;" : "")">@characterGameInstructionLimit/ @characterCountInstruction</span>
+            <span id="character-count2" class="character-count" style="@(characterGameInstructionLimit == characterCountInstruction ? "color: red;" : "")">@characterGameInstructionLimit/ @characterCountInstruction</span>
         }
 
         <p id="instraction2">(1-23 תווים)</p>
@@ -128,7 +128,6 @@ else
 
 
                 <div class="toggleSides" id="leftSide">
-                    <p>:התאמה ראשונה</p>
                     <div class="imgOrTextToggle">
                         <img id="photoImg" src="@toggleImgSrc" />
                         <div class="toggleStick">
@@ -137,6 +136,10 @@ else
                         <img id="textImg" src="@toggleTextSrc" />
                     </div>
                     @*<InputCheckbox @bind-Value="textChanged" />*@
+
+                    <img class="big-brik" src="../css/edit game page/big brik.svg" />
+
+
                     @if (!textChanged)
                     {
                         @if (editMatch.ID == 0)
@@ -185,10 +188,11 @@ else
                             }
 
                         }
-                        <div class="character-count-input">
-                            <input maxlength="15" style="border:2px solid blue" type="text" @bind="currentMatchToShow.FirstMatch" @oninput='e => HandleInput(e, "first")' />
 
-                            <p style="color:red"> ניתן להכניס בין 1-15 תווים </p>
+                        <div class="character-count-input">
+                            <input maxlength="15" class="text-input-match1" type="text" @bind="currentMatchToShow.FirstMatch" @oninput='e => HandleInput(e, "first")' />
+
+                            <p class="condition-text"> ניתן להכניס בין 1-15 תווים </p>
 
                             @if (!string.IsNullOrEmpty(currentMatchToShow.FirstMatch))
                             {
@@ -223,7 +227,7 @@ else
                             <InputFile id="FileInputID" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, true))"></InputFile>
 
                         </div>
-                        <p style="color:red"> קבצי Png ,Jpeg בלבד </p>
+                        <p class="condition-text"> קבצי Png ,Jpeg בלבד </p>
 
 
 
@@ -242,10 +246,13 @@ else
                             <span>@firstImgTooBig</span>
                         }
                     }
+
                 </div>
+
+                <hr id="deviding-line-addMatch"/>
+                
                 <div class="toggleSides" id="rightSide">
 
-                    <p>:התאמה שניה</p>
 
                     <div class="imgOrTextToggle">
                         <img id="photoImg" src="@toggleImgSrc2" />
@@ -255,6 +262,10 @@ else
                         <img id="textImg" src="@toggleTextSrc2" />
                     </div>
                     @*<InputCheckbox @bind-Value="text2Changed" />*@
+
+
+                    <img class="big-brik" src="../css/edit game page/big brik.svg" />
+
 
                     @if (!text2Changed)
                     {
@@ -285,7 +296,7 @@ else
                             <InputFile id="FileInputID2" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, false))"></InputFile>
 
                         </div>
-                        <p style="color:red"> קבצי Png ,Jpeg בלבד </p>
+                        <p class="condition-text"> קבצי Png ,Jpeg בלבד </p>
 
 
                         @if (myFileImage2 != "")
@@ -358,9 +369,9 @@ else
 
 
                         <div class="character-count-input">
-                            <input maxlength="15" style="border:2px solid blue" type="text" @bind="currentMatchToShow.SecondMatch"
+                            <input maxlength="15" class="text-input-match1" type="text" @bind="currentMatchToShow.SecondMatch"
                                    @oninput='e => HandleInput(e, "second")' />
-                            <p style="color:red"> ניתן להכניס בין 1-15 תווים </p>
+                            <p class="condition-text"> ניתן להכניס בין 1-15 תווים </p>
 
                             @if (!string.IsNullOrEmpty(currentMatchToShow.SecondMatch))
                             {
@@ -370,6 +381,8 @@ else
                         </div>
 
                     }
+
+
 
                     @if (editAvailable)
                     {
@@ -662,14 +675,6 @@ z-index:-1;
             cursor: pointer;
         }
 
-        .custom-input-file label {
-            display: inline-block;
-            padding: 10px;
-            background-color: blue;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
 
     #disabled {
         pointer-events: none;
@@ -827,13 +832,13 @@ z-index:-1;
             {
                 await publish("Eligible");
                 isPublish = false;
-                publishClasStyle = "regularUIBtn";
+                publishClasStyle = "disabled-publish-button";
 
             }
             if (fullGame.PublishStatus == "Eligible")
             {
                 isPublish = false;
-                publishClasStyle = "regularUIBtn";
+                publishClasStyle = "abled-publish-button";
 
 
             }
@@ -968,7 +973,7 @@ z-index:-1;
 
             if (!isCancelPublishClicked)
             {
-                publishClasStyle = "publishBtn";
+                publishClasStyle = "abled-publish-button";
 
             }
 
@@ -1155,14 +1160,14 @@ z-index:-1;
         {
             publishBtnValue = "פרסם";
             isPublish = false;
-            publishClasStyle = "publishBtn";
+            publishClasStyle = "abled-publish-button";
 
         }
         else
         {
             publishBtnValue = "פרסם";
             isPublish = true;
-            publishClasStyle = "publishBtn";
+            publishClasStyle = "abled-publish-button";
 
         }
     }

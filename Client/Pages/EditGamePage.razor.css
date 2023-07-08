@@ -17,17 +17,6 @@
     direction: rtl;
 }
 
-.imgOrTextToggle {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 6.8vh;
-    border-radius: 1.25vh;
-    width: 28%;
-    background-color: #FBFBFB;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-}
 
 .toggleStick {
     position: relative;
@@ -53,29 +42,6 @@
 }
 
 
-.toggleCircle1 {
-    position: relative;
-    height: 1.5vh;
-    width: 1.5vh;
-    border-radius: 50%;
-    background-color: #6565AA;
-    right: 45%;
-    transform: translateX(0);
-    transition: transform 0.5s ease;
-    cursor: pointer;
-}
-
-.toggleCircle2 {
-    position: relative;
-    height: 1.5vh;
-    width: 1.5vh;
-    border-radius: 50%;
-    background-color: #6565AA;
-    left: 40%;
-    transform: translateX(1vh);
-    transition: transform 0.5s ease;
-    cursor: pointer;
-}
 
 #textImg {
     /*margin-right: 5px;*/
@@ -213,13 +179,6 @@
 
 
 .publishBtn {
-    width: 8vw;
-    padding-left: 3%;
-    height: 5vh;
-    background-image: linear-gradient(to bottom, #87c3f0, #2d96e3);
-    cursor: pointer;
-    border-radius: 5px;
-    align-content: center;
 }
 
 .publishIcon {
@@ -230,15 +189,6 @@
     height: 2vh;
 }
 
-.afterPublish {
-    background-image: linear-gradient(to bottom, #87f0c3, #2de396);
-    width: 8vw;
-    padding-left: 3%;
-    height: 7vh;
-    border-radius: 5px;
-    color: white;
-    align-content: center;
-}
 
 .emptyGameName {
     border: 1px solid red;
@@ -263,7 +213,7 @@
     color: #54547C;
     font-size: 150%;
     font-weight: 900;
-    padding-right: 22vw;
+    padding-right: 24vw;
     padding-top: 1vh;
 }
 
@@ -344,12 +294,24 @@
     margin-right: 19vw;
 }
 
+.character-count {
+    font-size: 70%;
+    color: #707070;
+    font-weight: 300;
+    position: absolute;
+    margin-top: 0.5vh;
+}
 
+#character-count1 {
+    margin-right: -3vw;
+}
 
+#character-count2 {
+    margin-right: -9.8vw;
+}
 
 /*--------------------------------------------------------------------------------------------------------------------
 */
-
 #add-match {
     margin-top: 3vh;
     width: 54vw;
@@ -364,7 +326,7 @@
     color: #54547C;
     font-size: 150%;
     font-weight: 900;
-    padding-right: 23vw;
+    padding-right: 24.5vw;
     padding-top: 1vh;
 }
 
@@ -375,6 +337,110 @@
     border: 0.5px solid rgba(213, 211, 211, 0.5);
     height: none;
 }
+
+.imgOrTextToggle {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 5vh;
+    border-radius: 1.25vh;
+    width: 10vw;
+    background-color: #FBFBFB;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    margin-right:8vw;
+
+}
+
+.toggleCircle1 {
+    position: relative;
+    height: 1.5vh;
+    width: 1.5vh;
+    border-radius: 50%;
+    background-color: #6565AA;
+    right: 45%;
+    transform: translateX(0);
+    transition: transform 0.5s ease;
+    cursor: pointer;
+    border: none;
+}
+
+.toggleCircle2 {
+    position: relative;
+    height: 1.5vh;
+    width: 1.5vh;
+    border-radius: 50%;
+    background-color: #6565AA;
+    left: 40%;
+    transform: translateX(1vh);
+    transition: transform 0.5s ease;
+    cursor: pointer;
+    border: none;
+}
+
+
+#deviding-line-addMatch {
+    height: 40vh;
+    margin-top: 1.5vh;
+    border: 0.5px solid rgba(213, 211, 211, 0.5);
+}
+
+.big-brik{
+    width:15vw;
+    margin-top:-2vh;
+    margin-right:4.5vw;
+}
+
+.text-input-match1 {
+    position: absolute;
+    margin-top:-32vh;
+    margin-right: 9.3vw;
+    width: 7vw;
+    height: 22vh;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size:120%;
+    text-align:center;
+}
+
+.text-input-match1::after {
+    position: absolute;
+    margin-top: -32vh;
+    margin-right: 9.3vw;
+    width: 7vw;
+    height: 22vh;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+.condition-text {
+    position:absolute;
+    color: #C95151;
+    margin-top:-6vh;
+    margin-right:8.5vw;
+}
+
+.custom-input-file label {
+    display: inline-block;
+    padding: 10px;
+    background: linear-gradient(rgba(135,195,240,0.74) -24%, rgba(58,160,234) 70.96%);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+
+.custom-input-file {
+    position: absolute;
+    margin-top:21vh;
+   right:41.4vw;
+}
+
+
+
 
 /*-------------------------------------------------------------------------------------------------------------------
 */
@@ -568,3 +634,19 @@
     display: none;
 }
 
+.abled-publish-button{
+
+}
+
+.disabled-publish-button {
+}
+
+.afterPublish {
+    background-image: linear-gradient(to bottom, #87f0c3, #2de396);
+    width: 8vw;
+    padding-left: 3%;
+    height: 7vh;
+    border-radius: 5px;
+    color: white;
+    align-content: center;
+}

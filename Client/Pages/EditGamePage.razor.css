@@ -139,9 +139,9 @@
 }
 
 #arrow1 {
-    position: fixed;
-    top: 17vh;
-    right: 91.5vw;
+    position: absolute;
+    top: 16vh;
+    right: 91.1vw;
 }
 
 

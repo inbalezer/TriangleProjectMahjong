@@ -188,13 +188,6 @@
 .publishBtn {
 }
 
-.publishIcon {
-    position: relative;
-    top: -2.3vw;
-    right: 18vw;
-    width: 2vw;
-    height: 2vh;
-}
 
 
 .emptyGameName {
@@ -625,28 +618,29 @@
 }
 
 .enoughMatches {
-    padding-top: 2vh;
+    padding-top: 3vh;
     padding-left: 0.5vw;
 }
 
 .NameAndInstraction {
-    padding-top: 2vh;
+    padding-top: 3vh;
     padding-left: 0.5vw;
 }
 
 .cancleVisable {
+    position:absolute;
     background-color: white;
     color: #62629A;
     border: 2px solid green;
-    width: 12vw;
-    height: 6vh;
+    width: 8vw;
+    height: 5vh;
     font-size: 120%;
     font-weight: 200;
     border-radius: 10px;
     cursor: pointer;
     font-family: Heebo;
-    margin-right: 8.5vw;
-    margin-top: 2vh;
+    margin-top: 6vh;
+    margin-right: -8vw;
 }
 
 .cancelInvisable {
@@ -655,8 +649,8 @@
 
 .abled-publish-button {
     background: linear-gradient(rgba(135,195,240) -24%, rgba(58,160,234) 70.96%);
-    width: 12vw;
-    height: 6vh;
+    width: 8vw;
+    height: 5vh;
     border: none;
     font-size: 120%;
     font-weight: 200;
@@ -665,13 +659,12 @@
     cursor: pointer;
     font-family: Heebo;
     margin-right: 8.5vw;
-    margin-top: 2vh;
 }
 
 .disabled-publish-button {
     background: linear-gradient(rgba(220, 220, 220) -24%, rgb(230, 230, 230) 70.96%);
-    width: 12vw;
-    height: 6vh;
+    width: 8vw;
+    height: 5vh;
     border: none;
     font-size: 120%;
     font-weight: 200;
@@ -680,13 +673,12 @@
     cursor: not-allowed;
     font-family: Heebo;
     margin-right: 8.5vw;
-    margin-top: 2vh;
 }
 
 .afterPublish {
     background-image: linear-gradient(to bottom, #87f0c3, #2de396);
-    width: 12vw;
-    height: 6vh;
+    width: 8vw;
+    height: 5vh;
     border: none;
     font-size: 120%;
     font-weight: 200;
@@ -694,12 +686,24 @@
     cursor: not-allowed;
     font-family: Heebo;
     margin-right: 8.5vw;
-    margin-top: 2vh;
 }
 
 
 .allPublishBtns {
     position: relative;
-    top: -14vh;
-    left: -10vw;
+    top: -7vh;
+    left: -9vw;
+}
+
+.publishIcon {
+    position: relative;
+    top: -1.9vw;
+    right: 14.2vw;
+    width: 2vw;
+    height: 2vh;
+}
+
+
+#published-icon{
+    background-color:aqua;
 }

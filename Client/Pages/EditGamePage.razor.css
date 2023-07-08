@@ -175,6 +175,7 @@
         font-size: 130%;
         font-family: Heebo;
         margin-left: -30vw;
+        
     }
 
 #arrow2 {
@@ -640,8 +641,19 @@
     display: none;
 }
 
-.abled-publish-button{
-
+.abled-publish-button {
+    background: linear-gradient(rgba(135,195,240) -24%, rgba(58,160,234) 70.96%);
+    width: 15vw;
+    height: 4vh;
+    border: none;
+    font-size: 120%;
+    font-weight: 200;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: Heebo;
+    margin-right: 8.5vw;
+    margin-top: 2vh;
 }
 
 .disabled-publish-button {

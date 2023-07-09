@@ -78,13 +78,13 @@ else
 
         <button value="שמור" @onclick="(() => updateNameAndInstruction(gameWithInstruction))" id="SaveNameAndInstrucBtn" class="@saveNameAndIntruc" disabled="@isSaveButtonDisabled">
             <span style="display: contents;">
-                <span style="    align-items: center; display: inline-flex">שמור <img style= "padding-right: 0.7vw;
+                <span style="align-items: center; display: inline-flex">שמור <img style= "padding-right: 0.7vw;
     /* padding-top: 1.3vh; */
     height: 2vh;" src="../css/edit game page/plus.svg" /></span>
                 @if (isSaveBtnClicked)
                 {
                     <span >
-                        <img style="margin-top:-2vh; margin-right:-1.5vw; position: absolute;" src="../css/edit game page/blue vi.svg" />
+                        <lottie-player src="https://lottie.host/cbb86737-1d0c-4970-8b43-8ad5dfc74631/FwJpUmo6j9.json" speed="0.7" style="    width: 8vw; position: fixed; height: 8vh; top: 41vh; left: 62.7vw;" autoplay></lottie-player>
                     </span>
                     isSaveBtnClicked = false;
                 }
@@ -129,7 +129,7 @@ else
             <div class="containerWithTwoDivs">
 
 
-                <div class="toggleSides" id="leftSide">
+                <div class="toggleSides" >
                     <div class="imgOrTextToggle">
                         <img id="photoImg" src="@toggleImgSrc" />
                         <div class="toggleStick">
@@ -199,7 +199,7 @@ else
                             @if (!string.IsNullOrEmpty(currentMatchToShow.FirstMatch))
                             {
 
-                                <span class="character-count" style="@(characterLimit == characterCountFirst ? "color: red;" : "")">@characterLimit/ @characterCountFirst</span>
+                                <span id="firstMatchChars" class="character-count" style="@(characterLimit == characterCountFirst ? "color: red;" : "")">@characterLimit/ @characterCountFirst</span>
                             }
                         </div>
                     }
@@ -378,7 +378,7 @@ else
                             @if (!string.IsNullOrEmpty(currentMatchToShow.SecondMatch))
                             {
 
-                                <span class="character-count" style="@(characterLimit == characterCountSecond ? "color: red;" : "")">@characterLimit/ @characterCountSecond</span>
+                                <span id="secondMatchChars" class="character-count" style="@(characterLimit == characterCountSecond ? "color: red;" : "")">@characterLimit/ @characterCountSecond</span>
                             }
                         </div>
 
@@ -400,10 +400,10 @@ else
                     }
                     <br />
 
-                    <input id="saveMatchId" class="@saveMatch" type="submit" value="שמור זוג" @onclick="(() =>AddMatch(currentMatchToShow))" disabled="@IsButtonDisabled" />
+                    
                 </div>
             </div>
-
+            <input id="saveMatchId" class="@saveMatch" type="submit" value="שמור זוג" @onclick="(() =>AddMatch(currentMatchToShow))" disabled="@IsButtonDisabled" />
 
 
 
@@ -541,7 +541,7 @@ else
             <p>@errorDeleteImgmsg</p>
         }
 
-        <input  class="@saveGameBtn" type="button" value="שמור וחזור למסך המשחקים" @onclick="@(async ()=> await returnToHome())" />
+        <input id="saveGameBtnId" class="@saveGameBtn" type="button" value="שמור וחזור למסך המשחקים" @onclick="@(async ()=> await returnToHome())" />
 
     }
 
@@ -747,9 +747,9 @@ z-index:-1;
     string currentSecondEdit = "";
     string disabledArrow => isMouseOver ? "abledHoverArrow" : "returnBtnClassDis";
     string cancelPublish => isCancelPublishClicked ? "cancelInvisable" : "cancleVisable";
-    string saveGameBtn => isReturnButtonDisabled ? "disabledSaveBtn" : "regularUIBtn";
-    string saveMatch => IsButtonDisabled ? "disabledSaveBtn" : "regularUIBtn";
-    string saveNameAndIntruc => isSaveButtonDisabled ? "disabledSaveBtn" : "regularUIBtn";
+    string saveGameBtn => isReturnButtonDisabled ? "disabledSaveGameBtn" : "regularUIBtn";
+    string saveMatch => IsButtonDisabled ? "disabledSaveMatchBtn" : "regularUIBtn";
+    string saveNameAndIntruc => isSaveButtonDisabled ? "disabledSaveNameInstBtn" : "regularUIBtn";
 
     @*string msg = "";*@
     bool isCancelPublishClicked = false;

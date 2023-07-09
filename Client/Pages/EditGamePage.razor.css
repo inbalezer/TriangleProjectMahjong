@@ -241,6 +241,24 @@
     color: #54547C;
 }
 
+.character-count-input
+{
+    height:1vh;
+}
+
+#firstMatchChars {
+    position: relative;
+    top: -13vh;
+    right: 14vw;
+}
+
+#secondMatchChars {
+    position: relative;
+    top: -13vh;
+    right: 14vw;
+}
+
+
 .input1 {
     width: 13vw;
     height: 2.8vh;
@@ -280,11 +298,12 @@
 }
 
 #SaveNameAndInstrucBtn {
-
     margin-right: 19vw;
     position: relative;
     width: 8vw;
     top: -2vh;
+    width: 8vw;
+    height: 5vh;
 }
 
 .character-count {
@@ -550,8 +569,6 @@
 
 .regularUIBtn {
     background: linear-gradient(rgba(135,195,240) -24%, rgba(58,160,234) 70.96%);
-    width: 15vw;
-    height: 4vh;
     border: none;
     font-size: 120%;
     font-weight: 200;
@@ -559,29 +576,67 @@
     border-radius: 10px;
     cursor: pointer;
     font-family: Heebo;
-    margin-right: 8.5vw;
-    margin-top: 2vh;
+
 }
 
 
-.disabledSaveBtn {
-    background-color: grey;
-    pointer-events: none;
-    cursor: not-allowed;
-    width: 15vw;
-    height: 4vh;
+.disabledSaveGameBtn {
+    background: linear-gradient(rgba(220, 220, 220) -24%, rgb(230, 230, 230) 70.96%);
     border: none;
     font-size: 120%;
     font-weight: 200;
     color: white;
     border-radius: 10px;
+    cursor: not-allowed;
     font-family: Heebo;
+    width: 17vw;
+    height: 5vh;
+}
+
+.disabledSaveMatchBtn {
+    background: linear-gradient(rgba(220, 220, 220) -24%, rgb(230, 230, 230) 70.96%);
+    border: none;
+    font-size: 120%;
+    font-weight: 200;
+    color: white;
+    border-radius: 10px;
+    cursor: not-allowed;
+    font-family: Heebo;
+    width: 8vw;
+    height: 5vh;
+}
+
+.disabledSaveNameInstBtn {
+    background: linear-gradient(rgba(220, 220, 220) -24%, rgb(230, 230, 230) 70.96%);
+    border: none;
+    font-size: 120%;
+    font-weight: 200;
+    color: white;
+    border-radius: 10px;
+    cursor: not-allowed;
+    font-family: Heebo;
+    margin-right: 8.5vw;
+    position: relative;
+    width: 8vw;
+    top: -2vh;
+    width: 8vw;
+    height: 5vh;
 }
 
 #saveMatchId {
-    position: relative;
-    top:2vh;
-    right:4vw;
+    position: absolute;
+    top: 92vh;
+    width: 8vw;
+    height: 5vh;
+    right: 28vw;
+}
+
+#saveGameBtnId {
+position: relative;
+top: 1vh;
+right: 6vw;
+width: 17vw;
+height: 5vh;
 }
 /*-------------------------------------------------------------------------------------------------------------------------------------
 */

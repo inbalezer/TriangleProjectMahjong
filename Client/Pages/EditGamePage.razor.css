@@ -691,19 +691,32 @@
 
 .allPublishBtns {
     position: relative;
-    top: -7vh;
-    left: -9vw;
+    top: -14vh;
+    left: -14vw;
 }
 
 .publishIcon {
     position: relative;
     top: -1.9vw;
+    right: 14.7vw;
+    height: 2.4vh;
+    cursor: pointer;
+}
+
+.cancelPublishBtn {
+    position: relative;
+    width: 2vw;
+    height: 2vh;
+    top: 6vh;
+    right: -2vw;
+    cursor: pointer;
+}
+
+.afterPublishIcon {
+    position: relative;
+    top: -1.9vw;
     right: 14.2vw;
     width: 2vw;
     height: 2vh;
-}
-
-
-#published-icon{
-    background-color:aqua;
+    cursor: not-allowed;
 }

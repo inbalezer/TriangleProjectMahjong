@@ -615,10 +615,17 @@ else
         @if (isReturnPublishClicked || fullGame.PublishStatus == "Published")
         {
             <input type="button" class="@cancelPublish" value="בטל פרסום" @onclick="@(async ()=> await publish("Eligible"))" />
-
+            <img class="cancelPublishBtn" src="../wwwroot/css/Edit Game Page/cancel publish icon.svg" />
         }
-        <div class="publishIcon">
-            <img src="../icon feather-plus.svg" />
+        <div>
+            @if(publishBtnValue == "פרסם")
+            {
+                <img class="publishIcon" src="../icon feather-plus.svg" />
+            }
+            else
+            {
+                <img class="afterPublishIcon" src="../wwwroot/css/Edit Game Page/published icon.svg" />
+            }
         </div>
     </div>
 
@@ -634,7 +641,7 @@ else
 
 @if (publishBtnValue == "פורסם" && isReturnPublishClicked)
 {
-
+    
     <PopupComp Headline="פורסם בהצלחה!" Text1="@publishMsg" Text2="@gameCodeToShow" GameIdToDelete="navigateToGameAfterPublish" actionButtonText="למשחק" ShowMsg="closedReturnPopUp" cancelButtonText="חזור למסך המשחקים" xClicked="(value) => navigateToGamesScreen(value)">
         <lottie-player src="https://lottie.host/0cd64648-5a27-4896-96dc-b0847ac3b133/g5yILsQ8yu.json" background="transparent" speed="1" style=" width: 60vw;
     height: 60vh;
@@ -649,10 +656,9 @@ z-index:-1;
 
             <CopyText myText="@gameCodeToShow"></CopyText>
 
-        }
+        }   
     </PopupComp>
-
-
+    publishClasStyle = "afterPublish";
 
 }
 
@@ -813,7 +819,7 @@ z-index:-1;
             isEnoughMathces = false;
             isPublish = true;
 
-            @*await publish("Not Eligible");*@
+    @*await publish("Not Eligible");*@
 
         }
 
@@ -828,7 +834,7 @@ z-index:-1;
 
         if (isNameAndInstraction && isEnoughMathces)
         {
-            @*isPublish = false;*@
+    @*isPublish = false;*@
             if (fullGame.PublishStatus == "Not Eligible")
             {
                 await publish("Eligible");

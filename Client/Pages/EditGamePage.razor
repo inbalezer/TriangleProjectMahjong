@@ -212,13 +212,13 @@ else
                         if (myFileImage1 != "")
                         {
                             currentMatchToShow.FirstMatch = myFileImage1;
-                            <div class="custom-input-file">
+                            <div class="custom-input-file1">
                                 <label for="FileInputID">שנה תמונה</label>
                             </div>
                         }
                         else
                         {
-                            <div class="custom-input-file">
+                            <div class="custom-input-file1">
                                 <label for="FileInputID">העלה תמונה</label>
                             </div>
                         }
@@ -235,17 +235,17 @@ else
 
                         @if (myFileImage1 != "")
                         {
-                            <img src="@myFileImage1" width="150" />
+                            <img class="chosen-img"  src="@myFileImage1" width="150" />
                             @*<input type="button" value="העבר למחיקה " @onclick="MakeDeleteList" />*@
                         }
                         <br />
                         if (unacceptedImg != "")
                         {
-                            <span>@unacceptedImg</span>
+                            <span class="img-not-good1">@unacceptedImg</span>
                         }
                         if (firstImgTooBig != "")
                         {
-                            <span>@firstImgTooBig</span>
+                            <span class ="img-not-good1">@firstImgTooBig</span>
                         }
                     }
 
@@ -268,7 +268,6 @@ else
 
                     <img class="big-brik" src="../css/edit game page/big brik.svg" />
 
-
                     @if (!text2Changed)
                     {
                         priviousValue2 = currentMatchToShow.SecondMatch;
@@ -282,13 +281,13 @@ else
                         if (myFileImage2 != "")
                         {
                             currentMatchToShow.SecondMatch = myFileImage2;
-                            <div class="custom-input-file">
+                            <div  class="custom-input-file2">
                                 <label for="FileInputID2">שנה תמונה</label>
                             </div>
                         }
                         else
                         {
-                            <div class="custom-input-file">
+                            <div class="custom-input-file2">
                                 <label for="FileInputID2">העלה תמונה</label>
                             </div>
                         }
@@ -303,18 +302,18 @@ else
 
                         @if (myFileImage2 != "")
                         {
-                            <img src="@myFileImage2" width="150" />
+                            <img class="chosen-img"src="@myFileImage2" width="150" />
                             @*<input type="button" value="העבר למחיקה " @onclick="MakeDeleteList" />*@
                         }
                         <br />
 
                         if (unacceptedImg2 != "")
                         {
-                            <span>@unacceptedImg2</span>
+                            <span class="img-not-good2" >@unacceptedImg2</span>
                         }
                         if (secondImgTooBig != "")
                         {
-                            <span>@secondImgTooBig</span>
+                            <span class="img-not-good2">@secondImgTooBig</span>
                         }
 
 

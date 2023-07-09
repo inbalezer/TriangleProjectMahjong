@@ -8,7 +8,6 @@
     .content {
         margin-right: 2vw;
         width:6vw;
-        margin-bottom: -4vh;
     }
 
 .each-match-div{
@@ -27,24 +26,24 @@
 
 .image {
     position: relative;
-    bottom: 6vh;
+    bottom: 7vh;
     right: 2.5vw;
+    
 }
 
 .brik {
     width: 7.5vw;
-    margin-bottom: -7.5vh;
+    margin-bottom: -7vh;
 }
 
-.rectangle p {
-    text-align: center;
-    margin: 0;
+.ach-match-div {
 }
+
 
 .edit-button,
 .delete-button {
-    width: 30px;
-    height: 30px;
+    width: 5vw;
+    height: 5vh;
     background-color: #fff;
     border-radius: 50%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -62,6 +61,7 @@
 
 #disabled {
     opacity: 0.5;
+
 }
 
 .editPencil {
@@ -69,6 +69,7 @@
     cursor: not-allowed;
     pointer-events: none;
     margin-top: 8vh;
+    margin-right: 5vw;
 }
 
 .k {

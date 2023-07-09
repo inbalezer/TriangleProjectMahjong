@@ -400,17 +400,18 @@
     margin-right:4.5vw;
 }
 
+
 .text-input-match1 {
     position: absolute;
-    margin-top:-32vh;
+    margin-top: -32vh;
     margin-right: 9.3vw;
     width: 7vw;
     height: 22vh;
     border-radius: 10px;
     border: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    font-size:120%;
-    text-align:center;
+    font-size: 120%;
+    text-align: center;
 }
 
 .text-input-match1::after {
@@ -432,9 +433,15 @@
     margin-right:8.5vw;
 }
 
-.custom-input-file label {
+
+.chosen-img{
+    position:relative;
+    top: -16vh;
+    right: -10vw;
+}
+.custom-input-file1 label {
     display: inline-block;
-    padding: 10px;
+    padding: 1vh;
     background: linear-gradient(rgba(135,195,240,0.74) -24%, rgba(58,160,234) 70.96%);
     color: white;
     border-radius: 5px;
@@ -442,10 +449,39 @@
 
 }
 
-.custom-input-file {
+.custom-input-file1 {
     position: absolute;
-    margin-top:21vh;
-   right:41.4vw;
+    margin-top:-14vh;
+   right:14.4vw;
+}
+
+    .custom-input-file2 label {
+        display: inline-block;
+        padding: 1vh;
+        background: linear-gradient(rgba(135,195,240,0.74) -24%, rgba(58,160,234) 70.96%);
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+.custom-input-file2 {
+    position: absolute;
+    margin-top: -14vh;
+    right: 41.6vw;
+}
+
+.img-not-good1 {
+    position: absolute;
+    color: #C95151;
+    margin-top: -4vh;
+    margin-right: 8.5vw;
+}
+
+.img-not-good2 {
+    position: absolute;
+    color: #C95151;
+    margin-top: -4vh;
+    margin-right: 8.5vw;
 }
 
 
@@ -512,11 +548,12 @@
     height: none;
 }
 
-#isThereMatches1{
-    position:relative;
-    top:15vh;
-    margin-right:13vw;
-    font-size:120%;
+#isThereMatches1 {
+    position: relative;
+    top: 15vh;
+    margin-right: 13vw;
+    font-size: 120%;
+    font-weight: 500;
 }
 
 #isThereMatches2 {
@@ -559,7 +596,7 @@
     /* Hide scrollbar when height is smaller than 54vh */
     #all-matches-scroll:only-child,
     #all-matches-scroll::-webkit-scrollbar {
-        display: none;
+        display:list-item;
     }
 
 .regularUIBtn {
@@ -620,7 +657,7 @@
 
 #saveMatchId {
     position: absolute;
-    top: 91vh;
+    top: 88vh;
     width: 8vw;
     height: 4vh;
     right: 27vw;
@@ -638,6 +675,9 @@
     border-radius: 10px;
     cursor: pointer;
     font-family: Heebo;
+    position:relative;
+    right: -4vw;
+    top:-1vh;
 }
 
 

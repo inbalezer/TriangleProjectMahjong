@@ -396,7 +396,7 @@ else
                         {
                             isChanging = true;
                         }
-                        <input type="button" class="cancelChanges" value="בטל שינויים" style="background-color: peru" disabled=@isChanging @onclick="@(async ()=> await cancleChanges(currentMatchToShow.ID))" />
+                        <input type="button" class="cancelChanges" value="בטל שינויים"  disabled=@isChanging @onclick="@(async ()=> await cancleChanges(currentMatchToShow.ID))" />
                     }
                     <br />
 
@@ -432,7 +432,11 @@ else
 <div id="all-matches">
     <h4 id="all-matches-title">מאגר הזוגות</h4>
     <hr id="underline3" />
-    
+
+    <span id="couples-span">זוגות</span>
+    <span id="edin-span">עריכה</span>
+    <span id="delet-span">מחיקה</span>
+    <hr id="table-underline" />
     <div id="all-matches-scroll">
 
         @if (isThereMatches)
@@ -447,10 +451,7 @@ else
 
         else if (fullGame.MatchesList != null)
         {
-            <span id="couples-span">זוגות</span>
-            <span id="edin-span">עריכה</span>
-            <span id="delet-span">מחיקה</span>
-            <hr id="table-underline"/>
+            
 
             if (fullGame.MatchesList.Count <= 11 && fullGame.MatchesList.Count <= 18)
             {
@@ -612,12 +613,16 @@ else
 
     </span>
 
+    <hr id="deviding-line-PublishConditions" />
+
+
     <div class="allPublishBtns">
         <input type="button" class="@publishClasStyle" value="@publishBtnValue" disabled="@isPublish" @onclick="@(async ()=> await publish("Published"))" />
         @if (isReturnPublishClicked || fullGame.PublishStatus == "Published")
         {
             <input type="button" class="@cancelPublish" value="בטל פרסום" @onclick="@(async ()=> await publish("Eligible"))" />
-            <img class="cancelPublishBtn" src="../wwwroot/css/Edit Game Page/cancel publish icon.svg" />
+            <img class="cancelPublishIcon" src="../css/edit game page/cancel publish icon.svg" />
+            
         }
         <div>
             @if(publishBtnValue == "פרסם")
@@ -626,7 +631,8 @@ else
             }
             else
             {
-                <img class="afterPublishIcon" src="../wwwroot/css/Edit Game Page/published icon.svg" />
+                <img class="afterPublishIcon" src="../css/edit game page/published icon.svg" />
+               
             }
         </div>
     </div>

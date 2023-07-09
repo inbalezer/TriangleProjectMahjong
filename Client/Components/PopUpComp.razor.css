@@ -25,8 +25,8 @@ hr {
     align-items: center;
     justify-content: center;
     background-color: black;
-    opacity: 20%;
     z-index: 1;
+    background-color: rgba(0,0,0,0.3) 
 }
 
 .popup-container {

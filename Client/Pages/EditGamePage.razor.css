@@ -33,9 +33,6 @@
     cursor: pointer;
 }
 
-.cancelChanges {
-    cursor: pointer;
-}
 
 .saveAndReturn {
     cursor: pointer;
@@ -392,7 +389,7 @@
 
 
 #deviding-line-addMatch {
-    height: 40vh;
+    height: 35vh;
     margin-top: 1.5vh;
     border: 0.5px solid rgba(213, 211, 211, 0.5);
 }
@@ -450,8 +447,6 @@
     margin-top:21vh;
    right:41.4vw;
 }
-
-
 
 
 /*-------------------------------------------------------------------------------------------------------------------
@@ -625,11 +620,26 @@
 
 #saveMatchId {
     position: absolute;
-    top: 92vh;
+    top: 91vh;
     width: 8vw;
-    height: 5vh;
-    right: 28vw;
+    height: 4vh;
+    right: 27vw;
 }
+
+.cancelChanges {
+    cursor: pointer;
+    width: 8vw;
+    height: 4vh;
+    background-color: white;
+    border-color: #42ABF3;
+    font-size: 120%;
+    font-weight: 200;
+    color: #62629A;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: Heebo;
+}
+
 
 #saveGameBtnId {
 position: relative;
@@ -638,6 +648,7 @@ right: 6vw;
 width: 17vw;
 height: 5vh;
 }
+
 /*-------------------------------------------------------------------------------------------------------------------------------------
 */
 #publish-conditions {
@@ -649,7 +660,6 @@ height: 5vh;
     border-radius: 27px;
     box-shadow: 0px 6px 10px #00000029;
     margin-right: 60vw;
-    z-index:-1;
 }
 
 #publish-conditions-title {
@@ -685,24 +695,23 @@ height: 5vh;
     padding-left: 0.5vw;
 }
 
-.cancleVisable {
+#deviding-line-PublishConditions {
     position:absolute;
-    background-color: white;
-    color: #62629A;
-    border: 2px solid green;
-    width: 8vw;
-    height: 5vh;
-    font-size: 120%;
-    font-weight: 200;
-    border-radius: 10px;
-    cursor: pointer;
-    font-family: Heebo;
-    margin-top: 6vh;
-    margin-right: -8vw;
+    margin-right:16vw;
+    margin-top: -11vh;
+    width: 0vh;
+    height: 15vh;
+    border: 0.5px solid rgba(213, 211, 211, 0.5);
 }
 
 .cancelInvisable {
     display: none;
+}
+
+.allPublishBtns {
+    position: relative;
+    top: -10vh;
+    right: 20vw;
 }
 
 .abled-publish-button {
@@ -716,7 +725,7 @@ height: 5vh;
     border-radius: 10px;
     cursor: pointer;
     font-family: Heebo;
-    margin-right: 8.5vw;
+    margin-top: 3vh;
 }
 
 .disabled-publish-button {
@@ -743,38 +752,39 @@ height: 5vh;
     border-radius: 10px;
     cursor: not-allowed;
     font-family: Heebo;
-    margin-right: 8.5vw;
 }
 
 
-.allPublishBtns {
+.afterPublishIcon {
     position: relative;
-    top: -14vh;
-    left: -14vw;
-}
-
-.publishIcon {
-    position: relative;
-    top: -1.9vw;
-    right: 14.7vw;
+    top: -2vw;
+    right: 6vw;
     height: 2.4vh;
     cursor: pointer;
 }
 
-.cancelPublishBtn {
+.cancelPublishIcon {
     position: relative;
     width: 2vw;
     height: 2vh;
-    top: 6vh;
-    right: -2vw;
+    top: 6.5vh;
+    right: -2.4vw;
     cursor: pointer;
 }
 
-.afterPublishIcon {
-    position: relative;
-    top: -1.9vw;
-    right: 14.2vw;
-    width: 2vw;
-    height: 2vh;
-    cursor: not-allowed;
+
+.cancleVisable {
+    position: absolute;
+    background-color: white;
+    color: #62629A;
+    border: 2px solid #62629A;
+    width: 8vw;
+    height: 5vh;
+    font-size: 120%;
+    font-weight: 200;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: Heebo;
+    margin-top: 6vh;
+    margin-right: -8vw;
 }

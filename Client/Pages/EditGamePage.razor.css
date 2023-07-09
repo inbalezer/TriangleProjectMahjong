@@ -279,19 +279,12 @@
     font-weight: 400;
 }
 
-.SaveNameAndInstrucBtn {
-    background: linear-gradient(rgba(135,195,240,0.74) -24%, rgba(58,160,234) 70.96%);
-    width: 10vw;
-    height: 5vh;
-    border: none;
-    font-size: 120%;
-    font-weight: 200;
-    color: white;
-    border-radius: 10px;
-    cursor: pointer;
-    font-family: Heebo;
-    margin-right: -12%;
+#SaveNameAndInstrucBtn {
+
     margin-right: 19vw;
+    position: relative;
+    width: 8vw;
+    top: -2vh;
 }
 
 .character-count {
@@ -575,12 +568,21 @@
     background-color: grey;
     pointer-events: none;
     cursor: not-allowed;
+    width: 15vw;
+    height: 4vh;
+    border: none;
+    font-size: 120%;
+    font-weight: 200;
+    color: white;
+    border-radius: 10px;
+    font-family: Heebo;
 }
 
-
-
-
-
+#saveMatchId {
+    position: relative;
+    top:2vh;
+    right:4vw;
+}
 /*-------------------------------------------------------------------------------------------------------------------------------------
 */
 #publish-conditions {

@@ -76,9 +76,11 @@ else
 
 
 
-        <button value="שמור" @onclick="(() => updateNameAndInstruction(gameWithInstruction))" class="SaveNameAndInstrucBtn" disabled="@isSaveButtonDisabled">
-            <span style="display: inline-flex; align-items: center;">
-                <span style="padding-bottom:1vh;">שמור <img style= " padding-right:0.5vw; padding-top:1.3vh;" src="../css/edit game page/plus.svg" /></span>
+        <button value="שמור" @onclick="(() => updateNameAndInstruction(gameWithInstruction))" id="SaveNameAndInstrucBtn" class="@saveNameAndIntruc" disabled="@isSaveButtonDisabled">
+            <span style="display: contents;">
+                <span style="    align-items: center; display: inline-flex">שמור <img style= "padding-right: 0.7vw;
+    /* padding-top: 1.3vh; */
+    height: 2vh;" src="../css/edit game page/plus.svg" /></span>
                 @if (isSaveBtnClicked)
                 {
                     <span >
@@ -398,7 +400,7 @@ else
                     }
                     <br />
 
-                    <input class="saveMatch" type="submit" value="שמור זוג" @onclick="(() =>AddMatch(currentMatchToShow))" disabled="@IsButtonDisabled" />
+                    <input id="saveMatchId" class="@saveMatch" type="submit" value="שמור זוג" @onclick="(() =>AddMatch(currentMatchToShow))" disabled="@IsButtonDisabled" />
                 </div>
             </div>
 
@@ -746,6 +748,8 @@ z-index:-1;
     string disabledArrow => isMouseOver ? "abledHoverArrow" : "returnBtnClassDis";
     string cancelPublish => isCancelPublishClicked ? "cancelInvisable" : "cancleVisable";
     string saveGameBtn => isReturnButtonDisabled ? "disabledSaveBtn" : "regularUIBtn";
+    string saveMatch => IsButtonDisabled ? "disabledSaveBtn" : "regularUIBtn";
+    string saveNameAndIntruc => isSaveButtonDisabled ? "disabledSaveBtn" : "regularUIBtn";
 
     @*string msg = "";*@
     bool isCancelPublishClicked = false;

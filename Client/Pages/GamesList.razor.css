@@ -1,5 +1,4 @@
 ﻿body {
-    height: 20vh;
 }
 
 #NoGamesFound {
@@ -231,6 +230,7 @@ char_text {
 
 
 #allGames {
+    width:100%;
     background-color: white;
     border: 1px solid;
     border-color: #d5d5d5;
@@ -239,10 +239,10 @@ char_text {
     background-color: rgba(255, 255, 255, 0.4);
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(239px, 1fr));
-    grid-gap: 0px;
+    grid-gap: 0vw;
     overflow-y: auto; /* Use 'auto' to hide scrollbar when content fits within container */
     min-height: 67vh;
-    max-height: 74vh; /* Adjust the desired maximum height */
+    max-height: 70vh; /* Adjust the desired maximum height */
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;
 }
@@ -250,6 +250,7 @@ char_text {
     #allGames::-webkit-scrollbar {
         width: 0.5vw;
         background-color: transparent;
+        right: 0;
     }
 
     #allGames::-webkit-scrollbar-thumb {
@@ -268,7 +269,7 @@ char_text {
     /* Hide scrollbar when height is smaller than 54vh */
     #allGames:only-child,
     #allGames::-webkit-scrollbar {
-        display: flex;
+        display:flex;
     }
 
 .PageMainTitle {

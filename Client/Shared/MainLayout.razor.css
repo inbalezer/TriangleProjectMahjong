@@ -10,6 +10,16 @@
     text-align: right;
 }
 
+.mainnavbar {
+    text-align: left;
+}
+
+.main-nav-text {
+    color: white;
+    margin-left: 1vw;
+   padding-top: 2vh;
+}
+
 main {
     flex: 1;
 }

@@ -636,6 +636,7 @@
     font-family: Heebo;
     width: 8vw;
     height: 5vh;
+    right:-20vw;
 }
 
 .disabledSaveNameInstBtn {

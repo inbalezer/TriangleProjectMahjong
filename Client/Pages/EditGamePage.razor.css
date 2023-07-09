@@ -298,9 +298,9 @@
     margin-right: 19vw;
     position: relative;
     width: 8vw;
-    top: -2vh;
+    top: 1vh;
     width: 8vw;
-    height: 5vh;
+    height: 4vh;
 }
 
 .character-count {
@@ -475,6 +475,7 @@
     color: #C95151;
     margin-top: -4vh;
     margin-right: 8.5vw;
+    width: 10vw;
 }
 
 .img-not-good2 {
@@ -482,6 +483,7 @@
     color: #C95151;
     margin-top: -4vh;
     margin-right: 8.5vw;
+    width: 10vw;
 }
 
 
@@ -676,9 +678,9 @@
     border-radius: 10px;
     cursor: pointer;
     font-family: Heebo;
-    position:relative;
-    right: -4vw;
-    top:-1vh;
+    position:absolute;
+    right:27vw;
+    top:92.5vh;
 }
 
 
@@ -780,7 +782,7 @@ height: 5vh;
     border-radius: 10px;
     cursor: not-allowed;
     font-family: Heebo;
-    margin-right: 8.5vw;
+    margin-top: 3vh;
 }
 
 .afterPublish {
@@ -795,6 +797,11 @@ height: 5vh;
     font-family: Heebo;
 }
 
+.publishIcon {
+    position: relative;
+    top: -2vw;
+    right: 6vw;
+}
 
 .afterPublishIcon {
     position: relative;
@@ -802,6 +809,7 @@ height: 5vh;
     right: 6vw;
     height: 2.4vh;
     cursor: pointer;
+    cursor: not-allowed;
 }
 
 .cancelPublishIcon {

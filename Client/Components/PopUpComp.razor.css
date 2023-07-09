@@ -24,6 +24,9 @@ hr {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: black;
+    opacity: 20%;
+    z-index: 1;
 }
 
 .popup-container {
@@ -37,6 +40,7 @@ hr {
     display: flex; /* Add display property */
     align-items: center; /* Center vertically */
     justify-content: center; /* Center horizontally */
+    z-index: 2;
 }
 
 

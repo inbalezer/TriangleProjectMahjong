@@ -1,16 +1,16 @@
 ﻿body {
     height: 20vh;
 }
-#NoGamesFound{
-    text-align:center;
+
+#NoGamesFound {
+    text-align: center;
     color: rgba(98,98,154,1);
-    align-content:center;
-    align-items:center;
-    font-size:150%;
-    padding-top:30vh;
-    padding-right:38vw;
-    width:20vw;
-    
+    align-content: center;
+    align-items: center;
+    font-size: 150%;
+    padding-top: 30vh;
+    padding-right: 38vw;
+    width: 20vw;
 }
 
 .plus {
@@ -28,13 +28,14 @@
 
 .plus-expended {
     position: absolute;
-    top: 45%;
-    left: 90%;
+    top: -103vh;
+    left: 14vw;
+    bottom: -3.1vh;
     transform: translate(-50%, -50%);
     color: white;
     font-size: 3.3vw;
-    /*    font-weight: bold;
-*/ animation: halfCircleMotion 0.5s ease-in-out 0.35s forwards;
+    /* font-weight: bold; */
+    animation: halfCircleMotion-b-2fxcrjqmhk 0.5s ease-in-out 0.35s forwards;
     transform-origin: center;
     animation-fill-mode: forwards;
 }
@@ -42,29 +43,14 @@
 char_text {
 }
 
-#plusContainer{
-    border:none;
-    padding-bottom:1vh;
+#plusContainer {
+    border: none;
+    padding-bottom: 1vh;
 }
 
 .disabledNewGameButton {
     background: linear-gradient(rgba(220, 220, 220) -24%, rgb(230, 230, 230) 70.96%);
-    width: 5%;
-    height: 4vh;
-    border: none;
-    font-size: 120%;
-    font-weight: 200;
-    color: white;
-    border-radius: 10px;
-    cursor: pointer;
-    font-family: Heebo;
-    margin-right: -12%;
-   margin-top:1vh;
-}
-
-.activeNewGameButton {
-    background: linear-gradient(rgba(135,195,240,0.74) -24%, rgba(58,160,234,0.74) 70.96%);
-    width: 5%;
+    width: 6vw;
     height: 4vh;
     border: none;
     font-size: 120%;
@@ -75,20 +61,35 @@ char_text {
     font-family: Heebo;
     margin-right: -12%;
     margin-top: 1vh;
-    
+}
+
+.activeNewGameButton {
+    background: linear-gradient(rgba(135,195,240,0.74) -24%, rgba(58,160,234,0.74) 70.96%);
+    width: 6vw;
+    height: 4vh;
+    border: none;
+    font-size: 120%;
+    font-weight: 200;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: Heebo;
+    margin-right: -12%;
+    margin-top: 1vh;
 }
 
 .character-count {
- margin-top:2.8vh;
-   margin-right: 13vw;
+    margin-top: 2.8vh;
+    margin-right: 13vw;
     position: absolute;
-    color:#707070;
-    font-weight:400;
-    font-family:Heebo;
-    direction:ltr;
-    font-size:70%;
-/*    z-index: -1;
-*/}
+    color: #707070;
+    font-weight: 400;
+    font-family: Heebo;
+    direction: ltr;
+    font-size: 70%;
+    /*    z-index: -1;
+*/
+}
 
 @keyframes halfCircleMotion {
     0% {
@@ -148,7 +149,7 @@ char_text {
     border: none;
     outline: none;
     padding: 10px;
-    margin-top:1vh;
+    margin-top: 1vh;
     box-sizing: border-box;
     transition: width 0.3s ease;
     /*    margin-bottom: 1%;
@@ -203,9 +204,10 @@ char_text {
 
 .row-container {
     display: flex;
-/*    justify-content: space-between;
+    /*    justify-content: space-between;
     align-items: center;
-*/}
+*/
+}
 
 
 .searchInputOpen::placeholder {
@@ -233,13 +235,13 @@ char_text {
     border: 1px solid;
     border-color: #d5d5d5;
     border-radius: 45px;
-    padding-bottom:3vh;
+    padding-bottom: 3vh;
     background-color: rgba(255, 255, 255, 0.4);
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(239px, 1fr));
     grid-gap: 0px;
     overflow-y: auto; /* Use 'auto' to hide scrollbar when content fits within container */
-    min-height:67vh;
+    min-height: 67vh;
     max-height: 74vh; /* Adjust the desired maximum height */
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;
@@ -266,7 +268,7 @@ char_text {
     /* Hide scrollbar when height is smaller than 54vh */
     #allGames:only-child,
     #allGames::-webkit-scrollbar {
-        display: none;
+        display: flex;
     }
 
 .PageMainTitle {

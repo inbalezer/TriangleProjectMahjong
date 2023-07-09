@@ -16,15 +16,15 @@
     <div class="CardContent">
 
         <div style="margin:1vh" class="custom-tooltip" title="את קוד המשחק יש להזין כדי להיכנס אליו"> קוד משחק: @gameCode</div>
-        
+
         <span>סטטוס פרסום </span>
         <span class="custom-tooltip" title="פרסום המשחק הופך אותו לזמין">
             <img src="../css/games list imgs/i.svg" />
-           @* <lottie-player src="https://maxst.icons8.com/vue-static/landings/animated-icons/icons/info-shake/info-shake.json" background="transparent" speed="1" style="width: 16.5vw; height: 16.5vh;" loop autoplay></lottie-player>*@
+            @* <lottie-player src="https://maxst.icons8.com/vue-static/landings/animated-icons/icons/info-shake/info-shake.json" background="transparent" speed="1" style="width: 16.5vw; height: 16.5vh;" loop autoplay></lottie-player>*@
 
         </span>
 
-        <div style="align-items">
+        <div class="align-items">
 
             @if (GamePublishStatus == "Not Eligible")
             {
@@ -38,7 +38,7 @@
                             <ellipse id="Ellipse_4" rx="19" ry="19" cx="19" cy="19"></ellipse>
                         </svg>
                         <div id="n__" style="position: relative;">
-                            <span style="font-family: Heebo; font-style: normal;font-weight: normal;font-size: 16px;position: absolute; top: 40%; left:30%; transform: translate(-100%, 15%);">לא עומד בתנאים</span>
+                            <span style="font-family: Heebo; font-style: normal;font-weight: normal;font-size: 16px;position: absolute; top: -0.3vh; left:30%; transform: translate(-100%, 15%);">לא עומד בתנאים</span>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
 
                 <div id="Group_234" style="margin-top:7%; position: relative; left: 5%;">
                     <svg class="Path_150_gi">
-                        <rect class="eligibleBar1" rx="18" ry="18" x="0" y="0" width="88%" height="100%"  ></rect>
+                        <rect class="eligibleBar1" rx="18" ry="18" x="0" y="0" width="88%" height="100%"></rect>
                     </svg>
                     <svg class="Ellipse_4" @onclick="changePublish">
                         <ellipse id="@ellipseClass" rx="19" ry="19" cx="19" cy="19"></ellipse>
@@ -239,8 +239,3 @@
 
 
 }
-
-
-
-
-

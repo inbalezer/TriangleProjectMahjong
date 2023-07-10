@@ -616,7 +616,9 @@ else
 
 
     <div class="allPublishBtns">
-        <input type="button" class="@publishClasStyle" value="@publishBtnValue" disabled="@isPublish" @onclick="@(async ()=> await publish("Published"))" />
+        <input type="button" class="@publishClasStyle custom-tooltip" title="@publishDuringEdit" value="@publishBtnValue" disabled="@isPublish" @onclick="@(async ()=> await publish("Published"))" />
+              
+
         @if (isReturnPublishClicked || fullGame.PublishStatus == "Published")
         {
             <input type="button" class="@cancelPublish" value="בטל פרסום" @onclick="@(async ()=> await publish("Eligible"))" />
@@ -716,6 +718,7 @@ z-index:-1;
     string errorDeleteImgmsg = "";
     string SettingMsg = "";
     string fullGameMsg = "";
+    string publishDuringEdit = "";
     string returnHeadLinePopUp = "חזור למסך ״המשחקים שלי";
     string returnTextPopUp1 = "אתה עומד לחזור למסך ״המשחקים שלי״. אם קיים זוג חדש שטרם שמרת, הוא לא ישמר. ";
     string deleteHeadLinePopUp = "מחיקת זוג";
@@ -992,7 +995,7 @@ z-index:-1;
                 publishClasStyle = "abled-publish-button";
 
             }
-            
+
         }
 
         else
@@ -1033,6 +1036,7 @@ z-index:-1;
                 editMatch.FirstMatch = match1.FirstMatch;
                 editMatch.SecondMatch = match1.SecondMatch;
                 editAvailable = false;
+                publishDuringEdit = "";
 
                 foreach (MatchToShow updatedMatch1 in fullGame.MatchesList)
                 {
@@ -1072,7 +1076,8 @@ z-index:-1;
                 myFileImage2 = "";
                 isEditMode = true;
                 currentMatchIndex = 0;
-
+                
+                
                 await AreConditionsMet();
 
                 unacceptedImg = "";
@@ -1496,6 +1501,8 @@ z-index:-1;
     {
         editAvailable = true;
         currentMatchIndex = matchIdToEdit;
+        publishClasStyle = "disabled-publish-button";
+        publishDuringEdit = "לא ניתן לפרסם משחק בעת עריכת זוג";
 
         var editMatchResponse = await Http.GetAsync("api/Matches/" + UserId + "/TempEdit" + "/" + matchIdToEdit);
         if (editMatchResponse.IsSuccessStatusCode)

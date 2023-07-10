@@ -125,10 +125,7 @@ else
     {
         @if (!isLimitMatches || editAvailable)
         {
-
             <div class="containerWithTwoDivs">
-
-
                 <div class="toggleSides" >
                     <div class="imgOrTextToggle">
                         <img id="photoImg" src="@toggleImgSrc" />
@@ -541,7 +538,11 @@ else
             <p>@errorDeleteImgmsg</p>
         }
 
-        <input id="saveGameBtnId" class="@saveGameBtn" type="button" value="שמור וחזור למסך המשחקים" @onclick="@(async ()=> await returnToHome())" />
+       @* <input id="saveGameBtnId" class="@saveGameBtn" type="button" value="שמור וחזור למסך המשחקים" @onclick="@(async ()=> await returnToHome())" />*@
+
+        <input id="saveGameBtnId" class="@saveGameBtn" type="button" value="שמור וחזור למסך המשחקים" @onclick="@(async () => await checkIfEditOrAdd(currentMatchToShow))" />
+
+        
 
     }
 
@@ -568,9 +569,11 @@ else
 {
     <p>@fullGameMsg</p>
 }
-@if (isReturnClicked)
+@if (isReturnClicked || issavingDuringAddOrEdit)
 {
-    <PopupComp Headline="@returnHeadLinePopUp" Text1="@returnTextPopUp1" GameIdToDelete="@(async () => await returnToHome())" ShowMsg="closedReturnPopUp" actionButtonText="שמור וחזור למסך המשחקים " cancelButtonText="חזור ללא שמירה" xClicked="(value) => navigateToGamesScreen(value)"></PopupComp>
+    @*<PopupComp Headline="@returnHeadLinePopUp" Text1="@returnTextPopUp1" GameIdToDelete="@(async () => await returnToHome())" ShowMsg="closedReturnPopUp" actionButtonText="שמור וחזור למסך המשחקים " cancelButtonText="חזור ללא שמירה" xClicked="(value) => navigateToGamesScreen(value)"></PopupComp>*@
+
+    <PopupComp Headline="@returnHeadLinePopUp" Text1="@returnTextPopUp1" GameIdToDelete="@(async () => await checkIfEditOrAdd(currentMatchToShow))" ShowMsg="closedReturnPopUp" actionButtonText="שמור וחזור למסך המשחקים " cancelButtonText="חזור ללא שמירה" xClicked="(value) => navigateToGamesScreen(value)"></PopupComp>
 
 }
 
@@ -719,7 +722,7 @@ z-index:-1;
     string SettingMsg = "";
     string fullGameMsg = "";
     string publishDuringEdit = "";
-    string returnHeadLinePopUp = "חזור למסך ״המשחקים שלי";
+    string returnHeadLinePopUp = "חזור למסך ״המשחקים שלי״";
     string returnTextPopUp1 = "אתה עומד לחזור למסך ״המשחקים שלי״. אם קיים זוג חדש שטרם שמרת, הוא לא ישמר. ";
     string deleteHeadLinePopUp = "מחיקת זוג";
     string deleteTextPopUp1 = "אתה עומד למחוק את הזוג. האם אתה בטוח?";
@@ -763,6 +766,7 @@ z-index:-1;
     bool isCancelPublishClicked = false;
     bool FirstIsText;
     bool SecondIsText;
+    bool issavingDuringAddOrEdit = false;
     bool isReturnClicked = false;
     bool isSaveBtnClicked = false;
     bool isPublish = true;
@@ -857,7 +861,17 @@ z-index:-1;
             if (fullGame.PublishStatus == "Eligible")
             {
                 isPublish = false;
-                publishClasStyle = "abled-publish-button";
+                if(editAvailable)
+                {
+                     publishClasStyle = "disabled-publish-button";
+                     publishDuringEdit = "לא ניתן לפרסם משחק בעת עריכת זוג";
+
+                }
+                else
+                {
+                    publishClasStyle = "abled-publish-button";
+
+                }
 
 
             }
@@ -892,7 +906,7 @@ z-index:-1;
 
     void closedReturnPopUp()
     {
-        isReturnClicked = false;
+        //isReturnClicked = false;
         isDeleteButtonClicked = false;
         isPublishAndReturn = true;
 
@@ -922,6 +936,23 @@ z-index:-1;
         isMouseOver = isOver;
     }
 
+
+    protected async Task checkIfEditOrAdd(MatchToUpdate matchToSave)
+    {
+        if (string.IsNullOrEmpty(currentMatchToShow.FirstMatch) || string.IsNullOrEmpty(currentMatchToShow.SecondMatch))
+        {
+            await returnToHome();
+        }
+        else
+        {
+            issavingDuringAddOrEdit = true;           
+            await AddMatch(matchToSave);
+        }
+        //else
+        //{
+        //    await returnToHome();
+        //}
+    }
 
     private void navigateToGamesScreen(bool value)
     {
@@ -992,7 +1023,18 @@ z-index:-1;
 
             if (!isCancelPublishClicked)
             {
-                publishClasStyle = "abled-publish-button";
+                if (editAvailable)
+                {
+                    publishClasStyle = "disabled-publish-button";
+                    publishDuringEdit = "לא ניתן לפרסם משחק בעת עריכת זוג";
+
+                }
+                else
+                {
+                    publishClasStyle = "abled-publish-button";
+
+                }
+
 
             }
 
@@ -1021,7 +1063,7 @@ z-index:-1;
 
     protected async Task AddMatch(MatchToUpdate newMatchForIdentify)
     {
-
+       
         if (editMatch.ID > 0) // EDIT MATCH
         {
             newMatchForIdentify.GameID = newGameID;
@@ -1035,8 +1077,6 @@ z-index:-1;
 
                 editMatch.FirstMatch = match1.FirstMatch;
                 editMatch.SecondMatch = match1.SecondMatch;
-                editAvailable = false;
-                publishDuringEdit = "";
 
                 foreach (MatchToShow updatedMatch1 in fullGame.MatchesList)
                 {
@@ -1074,17 +1114,28 @@ z-index:-1;
                 }
                 myFileImage1 = "";
                 myFileImage2 = "";
+                publishClasStyle = "abled-publish-button";
+                publishDuringEdit = "";
                 isEditMode = true;
                 currentMatchIndex = 0;
-                
-                
+
                 await AreConditionsMet();
 
+                editAvailable = false;
+
+                
                 unacceptedImg = "";
                 firstImgTooBig = "";
                 secondImgTooBig = "";
                 unacceptedImg2 = "";
 
+
+                if (isReturnClicked)
+                {
+                    await returnToHome();
+                }
+
+                
             }
             else
             {
@@ -1105,6 +1156,7 @@ z-index:-1;
                         break;
                 }
             }
+
         }
         else // NEW MATCH
         {
@@ -1144,6 +1196,11 @@ z-index:-1;
                 firstImgTooBig = "";
                 secondImgTooBig = "";
                 unacceptedImg2 = "";
+
+                if (isReturnClicked)
+                {
+                    await returnToHome();
+                }
             }
 
             else
@@ -1190,6 +1247,11 @@ z-index:-1;
         {
             publishBtnValue = "פרסם";
             isPublish = false;
+            if(editAvailable)
+            {
+                publishClasStyle = "disabled-publish-button";
+            }
+
             publishClasStyle = "abled-publish-button";
 
         }
@@ -1242,7 +1304,7 @@ z-index:-1;
             }
         }
 
-        
+
     }
 
 
@@ -1578,7 +1640,6 @@ z-index:-1;
         gameToReturn1.PublishStatus = fullGame.PublishStatus;
         gameToReturn1.GameInstruction = GameInstruction;
 
-
         var userResRETURN = await Http.PostAsJsonAsync("api/Games/" + UserId + "/EditGame", gameToReturn1);
 
         if (userResRETURN.IsSuccessStatusCode)
@@ -1590,7 +1651,8 @@ z-index:-1;
                 isInsExist = true;
             }
             nav.NavigateTo("./GamesList/" + isInsExist);
-
+            isReturnClicked = false;
+            issavingDuringAddOrEdit = false;
         }
 
         else

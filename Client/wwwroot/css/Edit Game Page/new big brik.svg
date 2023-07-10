@@ -3,7 +3,7 @@
     <clipPath id="clip-path">
       <rect id="Rectangle_17" data-name="Rectangle 17" width="361" height="447" fill="none"/>
     </clipPath>
-    <filter id="Rectangle_256" x="54" y="51" width="214" height="302" filterUnits="userSpaceOnUse">
+    <filter id="Rectangle_865" x="51" y="51" width="214" height="302" filterUnits="userSpaceOnUse">
       <feOffset dy="1" input="SourceAlpha"/>
       <feGaussianBlur stdDeviation="1.5" result="blur"/>
       <feFlood flood-opacity="0.161" result="color"/>
@@ -12,12 +12,12 @@
       <feComposite operator="in" in2="SourceGraphic"/>
     </filter>
   </defs>
-  <g id="Group_1060" data-name="Group 1060" transform="translate(-807 -538)">
-    <g id="Group_10" data-name="Group 10" transform="translate(807 538)">
+  <g id="Group_1062" data-name="Group 1062" transform="translate(-2556 9127)">
+    <g id="Group_1060" data-name="Group 1060" transform="translate(2556 -9127)">
       <g id="Group_9" data-name="Group 9" clip-path="url(#clip-path)">
         <g id="Group_8" data-name="Group 8">
           <g id="Group_7" data-name="Group 7" clip-path="url(#clip-path)">
-            <g id="Group_6" data-name="Group 6" opacity="0.05" style="mix-blend-mode: multiply;isolation: isolate">
+            <g id="Group_6" data-name="Group 6" opacity="0.051" style="mix-blend-mode: multiply;isolation: isolate">
               <g id="Group_5" data-name="Group 5">
                 <g id="Group_4" data-name="Group 4" clip-path="url(#clip-path)">
                   <g id="Group_3" data-name="Group 3">
@@ -34,11 +34,18 @@
         </g>
       </g>
     </g>
-    <g data-type="innerShadowGroup">
-      <g transform="matrix(1, 0, 0, 1, 807, 538)" filter="url(#Rectangle_256)">
-        <rect id="Rectangle_256-2" data-name="Rectangle 256" width="214" height="302" rx="33" transform="translate(54 51)" fill="#fff"/>
+    <g id="Group_1061" data-name="Group 1061" transform="translate(1260.822 -9779.25)">
+      <g id="Icon_feather-upload" data-name="Icon feather-upload" transform="translate(1415 785.25)">
+        <path id="Path_136" data-name="Path 136" d="M86.856,22.5V40.8a9.151,9.151,0,0,1-9.151,9.151H13.651A9.151,9.151,0,0,1,4.5,40.8V22.5" transform="translate(-4.5 32.404)" fill="none" stroke="#f2e6c7" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+        <path id="Path_137" data-name="Path 137" d="M56.253,27.377,33.377,4.5,10.5,27.377" transform="translate(7.801 -4.5)" fill="none" stroke="#f2e6c7" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+        <path id="Path_138" data-name="Path 138" d="M18,4.5V59.4" transform="translate(23.178 -4.5)" fill="none" stroke="#f2e6c7" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
       </g>
-      <g id="Rectangle_256-3" data-name="Rectangle 256" transform="translate(861 589)" fill="none" stroke="#f2e6c7" stroke-width="2">
+    </g>
+    <g data-type="innerShadowGroup">
+      <g transform="matrix(1, 0, 0, 1, 2556, -9127)" filter="url(#Rectangle_865)">
+        <rect id="Rectangle_865-2" data-name="Rectangle 865" width="214" height="302" rx="33" transform="translate(51 51)" fill="#fff"/>
+      </g>
+      <g id="Rectangle_865-3" data-name="Rectangle 865" transform="translate(2607 -9076)" fill="none" stroke="#f2e6c7" stroke-width="2">
         <rect width="214" height="302" rx="33" stroke="none"/>
         <rect x="1" y="1" width="212" height="300" rx="32" fill="none"/>
       </g>

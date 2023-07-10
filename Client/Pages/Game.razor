@@ -8,19 +8,26 @@
 @using TriangleProject.Client.Components
 
 <div id="container">
+    <div id="gameArea" class="">
+        <!--src = הקישור של דף המשחק שלכם -->
+        <iframe id="gameIframe"
+                src="https://i.simmer.io/@@malkaberry/mah-jong"
+                style="width: 1280px; height: 720px"></iframe>
+
+    </div>
+
 
     <!--קישור לדף עצמו כדי להתחיל את המשחק מחדש בלחיצה על הלוגו-->
-    <a href="./index.html">
+@*    <a href="./index.html">
         <img id="logo" src="../css/images/Asset 8-8.png" />
-        <!--הלוגו של המשחק שלכם-->
     </a>
-    <!--------------- ABOUT POP UP (START) --------------->
-    <div id="aboutDiv" class="popUp bounceInDown hide">
+*@    <!--------------- ABOUT POP UP (START) --------------->
+@*    <div id="aboutDiv" class="popUp bounceInDown hide">
         <p class="closePop">
             <a class="closeAbout">X</a>
         </p>
         <p class="aboutText">
-            אפיון ופיתוח : עדי פפיא, ענבל עזר ומלכה ברי
+            vאפיון ופיתוח : עדי פפיא, ענבל עזר ומלכה ברי
             <br />
             אופיין ופותח במסגרת פרוייקט בקורסים:
             <br />
@@ -47,16 +54,9 @@
             </iframe>
         </div>
     </div>
-
-    <div id="gameArea" class="">
-        <!--src = הקישור של דף המשחק שלכם -->
-        <iframe id="gameIframe"
-                src="https://i.simmer.io/@@malkaberry/mah-jong"
-                style="width: 1280px; height: 720px"></iframe>
-
-    </div>
+*@
 </div>
 
 
-}
+
 

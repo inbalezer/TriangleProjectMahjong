@@ -406,18 +406,22 @@ else
         }
         else
         {
-            <div>
+            <div class="oops-div">
                 אופס...
-                נראה שהגעת לכמות הזוגות המקסימאלית.
+                <br/>
+                <span class="bold-span">  נראה שהגעת לכמות הזוגות המקסימאלית.</span>
+                <br />
                 ניתן לשמור את המשחק ולחזור למסך המשחקים :)
             </div>
         }
     }
     else
     {
-        <div>
+        <div class="oops-div">
             רגע לפני שמתחילים...
-            מלאו את הנחיית המשחק למעלה
+            <br />
+            <span class="bold-span">מלאו את הנחיית המשחק למעלה</span>
+            <br />
             וקדימה- להוספת הזוגות :)
         </div>
     }
@@ -456,7 +460,7 @@ else
             else if (fullGame.MatchesList.Count == 19)
             {
                 <span class="matches-counter">סה"כ @fullGame.MatchesList.Count זוגות</span>
-                <span class="matches-counter">שים לב, ניתן להוסיף רק עוד זוג אחד למאגר</span>
+                <span class="matches-counter2">שים לב, ניתן להוסיף רק עוד זוג אחד למאגר</span>
 
             }
             else

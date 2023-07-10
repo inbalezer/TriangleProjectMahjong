@@ -347,6 +347,20 @@
     height: none;
 }
 
+.oops-div {
+    position: relative;
+    top: 16.5vh;
+    margin-right: 0vw;
+    font-size: 120%;
+    font-weight: 500;
+    text-align: center;
+    color: #62629A;
+}
+
+.bold-span {
+    font-weight: 600;
+}
+
 .imgOrTextToggle {
     position: relative;
     display: flex;
@@ -357,8 +371,7 @@
     width: 10vw;
     background-color: #FBFBFB;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    margin-right:8vw;
-
+    margin-right: 8vw;
 }
 
 .toggleCircle1 {
@@ -557,7 +570,8 @@
     top: 15vh;
     margin-right: 13vw;
     font-size: 120%;
-    font-weight: 500;
+    font-weight: 600;
+    color: #62629A;
 }
 
 #isThereMatches2 {
@@ -565,7 +579,8 @@
     top: 15vh;
     margin-right: 11.2vw;
     font-size: 120%;
-    font-weight:500;
+    font-weight: 500;
+    color: #62629A;
 }
 
 
@@ -699,6 +714,19 @@ width: 17vw;
 height: 5vh;
 }
 
+
+.matches-counter2 {
+    position: absolute;
+    margin-bottom: 1vh;
+    background-color: #E2E5F0;
+    color: #62629A;
+    text-align: center;
+    border-radius: 5px;
+    padding: 0.3vw;
+    left: 0;
+    top: -1vh;
+/*    border: 2px solid rgba(208, 106, 106, 1);
+*/}
 /*-------------------------------------------------------------------------------------------------------------------------------------
 */
 #publish-conditions {

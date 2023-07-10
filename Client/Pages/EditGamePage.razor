@@ -767,6 +767,7 @@ z-index:-1;
     bool isCancelPublishClicked = false;
     bool FirstIsText;
     bool SecondIsText;
+    bool isEditAndCantPublish = false;
     bool issavingDuringAddOrEdit = false;
     bool isReturnClicked = false;
     bool isSaveBtnClicked = false;
@@ -862,19 +863,17 @@ z-index:-1;
             if (fullGame.PublishStatus == "Eligible")
             {
                 isPublish = false;
-                if(editAvailable)
+                isPublish = false;
+                if (isEditAndCantPublish)
                 {
-                     publishClasStyle = "disabled-publish-button";
-                     publishDuringEdit = "לא ניתן לפרסם משחק בעת עריכת זוג";
+                    publishClasStyle = "disabled-publish-button";
+                    publishDuringEdit = "לא ניתן לפרסם משחק בעת עריכת זוג";
 
                 }
                 else
                 {
                     publishClasStyle = "abled-publish-button";
-
-                }
-
-
+                }               
             }
 
         }
@@ -1024,7 +1023,7 @@ z-index:-1;
 
             if (!isCancelPublishClicked)
             {
-                if (editAvailable)
+                if (isEditAndCantPublish)
                 {
                     publishClasStyle = "disabled-publish-button";
                     publishDuringEdit = "לא ניתן לפרסם משחק בעת עריכת זוג";
@@ -1033,7 +1032,6 @@ z-index:-1;
                 else
                 {
                     publishClasStyle = "abled-publish-button";
-
                 }
 
 
@@ -1119,6 +1117,7 @@ z-index:-1;
                 publishDuringEdit = "";
                 isEditMode = true;
                 currentMatchIndex = 0;
+                isEditAndCantPublish = false;
 
                 await AreConditionsMet();
 
@@ -1248,12 +1247,17 @@ z-index:-1;
         {
             publishBtnValue = "פרסם";
             isPublish = false;
-            if(editAvailable)
+            isPublish = false;
+            if (isEditAndCantPublish)
             {
                 publishClasStyle = "disabled-publish-button";
-            }
+                publishDuringEdit = "לא ניתן לפרסם משחק בעת עריכת זוג";
 
-            publishClasStyle = "abled-publish-button";
+            }
+            else
+            {
+                publishClasStyle = "abled-publish-button";
+            }
 
         }
         else
@@ -1563,6 +1567,7 @@ z-index:-1;
     protected async Task EditMatchRow(int matchIdToEdit)
     {
         editAvailable = true;
+        isEditAndCantPublish = true;
         currentMatchIndex = matchIdToEdit;
         publishClasStyle = "disabled-publish-button";
         publishDuringEdit = "לא ניתן לפרסם משחק בעת עריכת זוג";

@@ -87,7 +87,7 @@
                 <span id="anyGameCard">
                     <GameCard GameFullName="@game.GameFullName" gameCode="@game.GameCode" GamePublishStatus="@game.PublishStatus" isCheckboxClicked="@(async () => await changePublish(game))" showMsg="(() => showMessage(game.GameFullName, game))" gameId="@game.ID" GameInstructionToCheck="@insCheck" />
 
-                    <span> </span>
+                    
 
                     @if (isClicked)
                     {

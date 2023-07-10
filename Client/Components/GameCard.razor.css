@@ -61,10 +61,11 @@
 
 
 
-    .custom-tooltip {
-        position: relative;
-        cursor: help;
-    }
+.custom-tooltip {
+    position: relative;
+    cursor: help;
+}
+
 
     #update {
         background-image: url('../css/games list imgs/group 1054.png');
@@ -83,22 +84,25 @@
         right: -10%;
     }
 
-    .custom-tooltip::after {
-        content: attr(title);
-        position: absolute;
-        bottom: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 4px 8px;
-        background-color: #333;
-        color: #fff;
-        font-size: 12px;
-        border-radius: 4px;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
-        white-space: nowrap;
-    }
+.custom-tooltip::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 8px;
+    background-color: #333;
+    color: #62629A;
+    font-size: 12px;
+    border-radius: 4px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+    white-space: nowrap;
+    background-color: #E2E5F0;
+    content: attr(title);
+    
+}
 
     .custom-tooltip:hover::after {
         opacity: 1;

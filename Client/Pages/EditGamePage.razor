@@ -843,7 +843,7 @@ z-index:-1;
 
         if (isNameAndInstraction && isEnoughMathces)
         {
-    @*isPublish = false;*@
+            @*isPublish = false;*@
             if (fullGame.PublishStatus == "Not Eligible")
             {
                 await publish("Eligible");
@@ -992,7 +992,7 @@ z-index:-1;
                 publishClasStyle = "abled-publish-button";
 
             }
-
+            
         }
 
         else
@@ -1075,6 +1075,11 @@ z-index:-1;
 
                 await AreConditionsMet();
 
+                unacceptedImg = "";
+                firstImgTooBig = "";
+                secondImgTooBig = "";
+                unacceptedImg2 = "";
+
             }
             else
             {
@@ -1130,6 +1135,10 @@ z-index:-1;
                 myFileImage1 = "";
                 myFileImage2 = "";
                 await AreConditionsMet();
+                unacceptedImg = "";
+                firstImgTooBig = "";
+                secondImgTooBig = "";
+                unacceptedImg2 = "";
             }
 
             else
@@ -1227,6 +1236,8 @@ z-index:-1;
                     break;
             }
         }
+
+        
     }
 
 
@@ -1274,6 +1285,7 @@ z-index:-1;
                     {
                         if (!IsFileAccepted(file1))
                         {
+                            firstImgTooBig = "";
                             unacceptedImg = "התמונה שבחרת לא בפורמט נתמך. יש לבחור תמונה בפורמט PNG או JPEG";
                             return;
                         }
@@ -1282,6 +1294,7 @@ z-index:-1;
                     {
                         if (!IsFileAccepted(file1))
                         {
+                            secondImgTooBig = "";
                             unacceptedImg2 = "התמונה שבחרת לא בפורמט נתמך. יש לבחור תמונה בפורמט PNG או JPEG";
                             return;
                         }
@@ -1292,11 +1305,13 @@ z-index:-1;
             {
                 if (isFirstImg)
                 {
+                    unacceptedImg = "";
                     firstImgTooBig = "התמונה שניסית להעלות כבדה מדיי, בחר תמונה אחרת";
 
                 }
                 else
                 {
+                    unacceptedImg2 = "";
                     secondImgTooBig = "התמונה שניסית להעלות כבדה מדיי, בחר תמונה אחרת";
 
                 }

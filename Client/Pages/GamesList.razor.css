@@ -1,5 +1,6 @@
 ﻿body {
-    height:20vh;
+    position:static;
+    height:1vh;
 }
 
 #NoGamesFound {
@@ -176,7 +177,7 @@ char_text {
 
 .search__container {
     position: absolute;
-    margin-right: 41vw;
+    margin-right: 44vw;
     margin-top: -2vh;
 }
 
@@ -301,6 +302,5 @@ char_text {
 }
 
 .allContent {
-    bottom: 32vh;
-    position: relative;
+    margin-top:3vh;
 }

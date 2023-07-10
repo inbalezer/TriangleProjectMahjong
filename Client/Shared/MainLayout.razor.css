@@ -12,12 +12,24 @@
 
 .mainnavbar {
     text-align: left;
+    text-decoration:none;
+}
+
+#logo {
+    height: 3vh;
+    width: 7vw;
+    position: absolute;
+    top: 1vh;
+    right:0vw;
 }
 
 .main-nav-text {
     color: white;
     margin-left: 1vw;
-   padding-top: 2vh;
+    position: relative;
+    top: 2vh;
+    text-decoration:underline;
+    cursor:pointer;
 }
 
 main {

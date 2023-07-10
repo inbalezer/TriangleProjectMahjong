@@ -75,8 +75,9 @@
         }
     *@
 
-
+    <div id="background-div">
     <div id="allGames">
+        <div id="without-scroll">
         @if (!isThereGames)
         {
             @foreach (GameForEditor game in user.UserGames.Where(g => string.IsNullOrEmpty(searchQuery) || g.GameFullName.ToLower().Contains(searchQuery.ToLower())))
@@ -110,6 +111,8 @@
 
         }
     </div>
+        </div>
+        </div>
 }
 
 

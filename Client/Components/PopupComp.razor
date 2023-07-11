@@ -9,17 +9,17 @@
                     <button class="popup-close-button" @onclick="() => IsDeleteButtonClicked(true)">x</button>
                 }
             </div>
-            <h3>@Headline</h3>
+            <h3 class="popupTitle">@Headline</h3>
             <hr />
             <div id="content-div">
-                <p>
+                <p id="popupText1">
                     @Text1
                     @if (!string.IsNullOrEmpty(gameName))
                     {
                         <spn>"@gameName" </spn>
                     }
                 </p>
-                <p>@Text2 </p>
+                <p id="popupText2">@Text2 </p>
             </div>
             <div>
                 @ChildContent

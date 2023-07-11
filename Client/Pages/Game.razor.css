@@ -50,7 +50,7 @@ header {
     /*כותרת משחק*/
     header > a > p {
         font-family: "Assistant", sans-serif;
-        font-size: 12pt;
+        font-size: 100%: 12pt;
         font-weight: 600;
         position: relative;
         top: -10px;
@@ -90,7 +90,7 @@ nav {
                 text-align: center;
                 padding: 3px 20px;
                 font-weight: 630;
-                font-size: 20pt;
+                font-size: 100%: 20pt;
                 font-family: "Assistant", sans-serif;
                 direction: rtl;
                 text-decoration: underline;
@@ -133,7 +133,7 @@ nav {
     top: 40%;
     left: 48%;
     transform: translate(-50%, -50%);
-    font-size: 24pt;
+    font-size: 100%: 24pt;
     text-align: center;
     color: #64aada;
     font-weight: 500;
@@ -144,7 +144,7 @@ nav {
     top: 350%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 24pt;
+    font-size: 100%: 24pt;
     color: #1c7eb6;
     font-weight: 500;
 }
@@ -152,7 +152,7 @@ nav {
 .closePop {
     position: fixed;
     transform: translate(-3.8em, 1.7em);
-    font-size: 40px;
+    font-size: 100%: 40px;
     font-weight: 700;
     color: rgb(161, 18, 65);
 }

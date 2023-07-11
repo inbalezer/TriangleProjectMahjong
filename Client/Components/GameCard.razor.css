@@ -5,14 +5,14 @@
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     color: #62629A;
-    font-size: 14pt;
+    font-size: 100%: 14pt;
 }
 
 .CardContent {
     margin-top: 10px;
     text-align: center;
     color: #62629A;
-    font-size: 13pt;
+    font-size: 100%: 13pt;
 }
 
 .game-card {
@@ -76,6 +76,7 @@
     border-radius: 25px;
     cursor: pointer;
     border: none;
+    top: -1vh;
     background-color: transparent;
 }
 
@@ -94,7 +95,7 @@
     padding: 4px 8px;
     background-color: #333;
     color: #62629A;
-    font-size: 12px;
+    font-size: 100%: 12px;
     border-radius: 4px;
     opacity: 0;
     visibility: hidden;
@@ -169,7 +170,7 @@
         font-family: Heebo;
         font-style: normal;
         font-weight: normal;
-        font-size: 16px;
+        font-size: 100%: 16px;
         color: rgba(255,255,255,1);
     }
 
@@ -282,7 +283,7 @@
         font-family: Heebo;
         font-style: normal;
         font-weight: normal;
-        font-size: 16px;
+        font-size: 100%: 16px;
         color: rgba(98,98,154,1);
         display: flex;
         justify-content: center;
@@ -300,7 +301,7 @@
         font-family: Heebo;
         font-style: normal;
         font-weight: normal;
-        font-size: 16px;
+        font-size: 100%: 16px;
         color: rgba(98,98,154,1);
         display: flex;
         justify-content: center;
@@ -370,7 +371,7 @@
         font-family: Heebo;
         font-style: normal;
         font-weight: normal;
-        font-size: 16px;
+        font-size: 100%: 16px;
         color: rgba(98,98,154,1);
     }
 

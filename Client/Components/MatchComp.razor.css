@@ -24,7 +24,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     color: #62629A;
-    font-size: 120%;
+    /*font-size: 100%: 120%;*/
     font-weight: 500;
     word-wrap: anywhere;
     /*    overflow-wrap: break-word;*/

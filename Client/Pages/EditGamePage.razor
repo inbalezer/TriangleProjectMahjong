@@ -36,7 +36,7 @@ else
         <span>שם המשחק:</span> <input class="input1" maxlength="17" type="text" @bind="GameFullName" @oninput='e => HandleInput(e, "gameName")' />
         @if (isNoGameName && string.IsNullOrEmpty(GameFullName))
         {
-            <span style="color:#C95151; font-size:70%; font-weight:300;">לא ניתן לשמור משחק ללא שם.</span>
+            <span style="color:#C95151; font-size: 100%:70%; font-weight:300;">לא ניתן לשמור משחק ללא שם.</span>
 
 
         }
@@ -59,7 +59,7 @@ else
         <span class="text-inst">ורוקנו את הלוח.</span>
         @if (isNoGameIntruction && GameInstruction == "")
         {
-            <span style="color:#C95151; font-size:70%; font-weight:300;">לא ניתן לשמור משחק ללא הנחייה.</span>
+            <span style="color:#C95151; font-size: 100%:70%; font-weight:300;">לא ניתן לשמור משחק ללא הנחייה.</span>
 
         }
 

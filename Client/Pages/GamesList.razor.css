@@ -8,7 +8,7 @@
     color: rgba(98,98,154,1);
     align-content: center;
     align-items: center;
-    font-size: 150%;
+    font-size: 100%: 150%;
     padding-top: 30vh;
     padding-right: 38vw;
     width: 20vw;
@@ -34,7 +34,7 @@
     bottom: -3.1vh;
     transform: translate(-50%, -50%);
     color: white;
-    font-size: 3.3vw;
+    font-size:3.3vw;
     /* font-weight: bold; */
     animation: halfCircleMotion-b-2fxcrjqmhk 0.5s ease-in-out 0.35s forwards;
     transform-origin: center;
@@ -55,7 +55,7 @@ char_text {
     width: 6vw;
     height: 4vh;
     border: none;
-    font-size: 120%;
+    font-size: 100%: 120%;
     font-weight: 200;
     color: white;
     border-radius: 10px;
@@ -71,7 +71,7 @@ char_text {
     width: 6vw;
     height: 4vh;
     border: none;
-    font-size: 120%;
+    font-size: 100%: 120%;
     font-weight: 200;
     color: white;
     border-radius: 10px;
@@ -89,7 +89,7 @@ char_text {
     font-weight: 400;
     font-family: Heebo;
     direction: ltr;
-    font-size: 70%;
+    font-size: 100%: 9pt;
     /*    z-index: -1;
 */
 }
@@ -190,7 +190,7 @@ char_text {
     padding: 0.8vw 2.4vw; /* 40% smaller than 2vw and 4vw */
     background-image: linear-gradient(to bottom, #fff, #f8f7f7);
     transition: transform 250ms ease-in-out;
-    font-size: 0.84vw; /* 40% smaller than 1.4vw */
+    font-size: 100%: 0.84vw; /* 40% smaller than 1.4vw */
     line-height: 1.08vw; /* 40% smaller than 1.8vw */
     color: #54547C;
     background-image: url('icon ionic-ios-search.svg');
@@ -293,7 +293,7 @@ char_text {
     }
 
 .PageMainTitle {
-    font-size: 20pt;
+    font-size:20pt;
     color: #62629A;
     background: linear-gradient(180deg, #fdf1d0 20%, #fffdf3 100%);
     border-radius: 25px;

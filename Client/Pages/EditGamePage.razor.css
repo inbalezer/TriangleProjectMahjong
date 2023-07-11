@@ -2,7 +2,7 @@
 }
 
 #PageMainTitle {
-    font-size: 20pt;
+    font-size: 100%: 16pt;
     color: #62629A;
     background: linear-gradient(180deg, #fdf1d0 20%, #fffdf3 100%);
     border-radius: 25px;
@@ -178,7 +178,7 @@
         height: 5vh;
         transform: translateX(9vw);
         direction: ltr;
-        font-size: 130%;
+        /*font-size: 100%: 130%;*/
         font-family: Heebo;
         margin-left: -30vw;
     }
@@ -216,7 +216,7 @@
 
 #general-settings-title {
     color: #54547C;
-    font-size: 150%;
+    /*font-size: 100%: 150%;*/
     font-weight: 900;
     padding-right: 24vw;
     padding-top: 1vh;
@@ -232,7 +232,7 @@
 
 #character-count-input1 {
     padding-top: 1vh;
-    font-size: 120%;
+    /*font-size: 100%: 120%;*/
     font-weight: 600;
     padding-right: 2vw;
     color: #54547C;
@@ -240,7 +240,7 @@
 
 #character-count-input2 {
     padding-top: 1vh;
-    font-size: 120%;
+    /*font-size: 100%: 120%;*/
     font-weight: 600;
     padding-right: 2vw;
     color: #54547C;
@@ -272,7 +272,7 @@
     margin-right: 0.5vw;
     margin-left: 1vw;
     padding-right: 1vw;
-    font-size: 100%;
+    font-size: 100%: 100%;
 }
 
 .input2 {
@@ -284,16 +284,16 @@
     margin-right: 0.5vw;
     margin-left: 1vw;
     padding-right: 1vw;
-    font-size: 100%;
+    font-size: 100%: 100%;
 }
 
 #instraction1 {
-    font-size: 80%;
+    /*font-size: 100%: 80%;*/
     font-weight: 300;
 }
 
 #instraction2 {
-    font-size: 80%;
+    /*font-size: 100%: 80%;*/
     font-weight: 300;
 }
 
@@ -311,7 +311,7 @@
 }
 
 .character-count {
-    font-size: 70%;
+    /*font-size: 100%: 70%;*/
     color: #707070;
     font-weight: 300;
     position: absolute;
@@ -319,11 +319,11 @@
 }
 
 #character-count1 {
-    margin-right: -3vw;
+    margin-right: -3.4vw;
 }
 
 #character-count2 {
-    margin-right: -9.8vw;
+    margin-right: -11.8vw;
 }
 
 /*--------------------------------------------------------------------------------------------------------------------
@@ -340,7 +340,7 @@
 
 #add-match-title {
     color: #54547C;
-    font-size: 150%;
+    /*font-size: 100%: 150%;*/
     font-weight: 900;
     padding-right: 24.5vw;
     padding-top: 1vh;
@@ -358,7 +358,7 @@
     position: relative;
     top: 16.5vh;
     margin-right: 0vw;
-    font-size: 120%;
+    /*font-size: 100%: 120%;*/
     font-weight: 500;
     text-align: center;
     color: #62629A;
@@ -536,7 +536,7 @@
 
 #all-matches-title {
     color: #54547C;
-    font-size: 150%;
+    /*font-size: 100%: 150%;*/
     font-weight: 900;
     padding-right: 13.5vw;
     padding-top: 1vh;
@@ -553,19 +553,19 @@
 
 #couples-span {
     font-weight: 400;
-    font-size: 120%;
+    /*font-size: 100%: 120%;*/
     margin-right: 3vw;
 }
 
 #edin-span {
     font-weight: 400;
-    font-size: 120%;
+    /*font-size: 100%: 120%;*/
     margin-right: 16vw;
 }
 
 #delet-span {
     font-weight: 400;
-    font-size: 120%;
+    /*font-size: 100%: 120%;*/
     margin-right: 3vw;
 }
 
@@ -580,7 +580,7 @@
     position: relative;
     top: 15vh;
     margin-right: 13vw;
-    font-size: 120%;
+    /*font-size: 100%: 120%;*/
     font-weight: 600;
     color: #62629A;
 }
@@ -589,7 +589,7 @@
     position: relative;
     top: 15vh;
     margin-right: 11.2vw;
-    font-size: 120%;
+    /*font-size: 100%: 120%;*/
     font-weight: 500;
     color: #62629A;
 }
@@ -637,7 +637,7 @@
 .regularUIBtn {
     background: linear-gradient(rgba(135,195,240) -24%, rgba(58,160,234) 70.96%);
     border: none;
-    font-size: 120%;
+    /*font-size: 100%: 120%;*/
     font-weight: 200;
     color: white;
     border-radius: 10px;
@@ -649,7 +649,7 @@
 .disabledSaveGameBtn {
     background: linear-gradient(rgba(220, 220, 220) -24%, rgb(230, 230, 230) 70.96%);
     border: none;
-    font-size: 120%;
+    /*font-size: 100%: 120%;*/
     font-weight: 200;
     color: white;
     border-radius: 10px;
@@ -662,7 +662,7 @@
 .disabledSaveMatchBtn {
     background: linear-gradient(rgba(220, 220, 220) -24%, rgb(230, 230, 230) 70.96%);
     border: none;
-    font-size: 120%;
+    /*font-size: 100%: 120%;*/
     font-weight: 200;
     color: white;
     border-radius: 10px;
@@ -675,7 +675,7 @@
 .disabledSaveNameInstBtn {
     background: linear-gradient(rgba(220, 220, 220) -24%, rgb(230, 230, 230) 70.96%);
     border: none;
-    font-size: 120%;
+    /*font-size: 100%: 120%;*/
     font-weight: 200;
     color: white;
     border-radius: 10px;
@@ -709,7 +709,7 @@
 .cancelChanges {
     cursor: pointer;
     background-color: white;
-    font-size: 120%;
+    /*font-size: 100%: 120%;*/
     border-radius: 8px;
     font-weight: 200;
     border: solid 2px #87C3F0;
@@ -726,7 +726,7 @@
 .disabledCancelChangesBtn {
     background: linear-gradient(rgba(220, 220, 220) -24%, rgb(230, 230, 230) 70.96%);
     border: none;
-    font-size: 120%;
+    /*font-size: 100%: 120%;*/
     font-weight: 200;
     color: white;
     border-radius: 10px;
@@ -778,7 +778,7 @@
 
 #publish-conditions-title {
     color: #54547C;
-    font-size: 150%;
+    /*font-size: 100%: 150%;*/
     font-weight: 900;
     padding-right: 13vw;
     padding-top: 1vh;
@@ -795,7 +795,7 @@
 .conditionsStyle {
     padding-right: 2vw;
     color: #54547C;
-    font-size: 130%;
+    /*font-size: 100%: 130%;*/
     font-weight: 500;
 }
 
@@ -812,7 +812,7 @@
 #deviding-line-PublishConditions {
     position: absolute;
     margin-right: 16vw;
-    margin-top: -11vh;
+    margin-top: -15vh;
     width: 0vh;
     height: 15vh;
     border: 0.5px solid rgba(213, 211, 211, 0.5);
@@ -833,7 +833,7 @@
     width: 8vw;
     height: 5vh;
     border: none;
-    font-size: 120%;
+    font-size: 100%: 120%;
     font-weight: 200;
     color: white;
     border-radius: 10px;
@@ -847,7 +847,7 @@
     width: 8vw;
     height: 5vh;
     border: none;
-    font-size: 120%;
+    font-size: 100%: 120%;
     font-weight: 200;
     color: white;
     border-radius: 10px;
@@ -862,7 +862,7 @@
     width: 8vw;
     height: 5vh;
     border: none;
-    font-size: 120%;
+    font-size: 100%: 120%;
     font-weight: 200;
     color: white;
     border-radius: 10px;
@@ -905,7 +905,7 @@
     border: 2px solid #62629A;
     width: 8vw;
     height: 5vh;
-    font-size: 120%;
+    font-size: 100%: 120%;
     font-weight: 200;
     border-radius: 10px;
     cursor: pointer;

@@ -5,37 +5,41 @@
     display: flex;
 }
 
-    .content {
-        margin-right: 2vw;
-        width:6vw;
-    }
+.content {
+    margin-right: 2vw;
+    width: 6vw;
+}
 
-.each-match-div{
-    position:relative;
-    height:15vh;
+.each-match-div {
+    position: relative;
+    display: flex;
+    height: 15vh;
+    justify-content: center;
+    align-items: center;
 }
 
 .text {
-    position: relative;
-    bottom: 4.5vh;
-    right: 2vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     color: #62629A;
-    font-size:120%;
-    font-weight:500;
-
+    font-size: 120%;
+    font-weight: 500;
+    word-wrap: anywhere;
+    /*    overflow-wrap: break-word;*/
+    hyphens: auto;
 }
+
+
+
 
 .image {
     position: relative;
-    bottom: 7vh;
-    right: 2.5vw;
-    
 }
 
 .brik {
     width: 7.5vw;
-    margin-top: -1.5vh;
-    margin-bottom: -7vh;
 }
 
 .ach-match-div {
@@ -63,7 +67,6 @@
 
 #disabled {
     opacity: 0.5;
-
 }
 
 .editPencil {
@@ -80,9 +83,9 @@
 }
 
 .trash {
-    margin-top:8vh;
+    margin-top: 8vh;
     cursor: pointer;
-    margin-right:4vw;
+    margin-right: 4vw;
 }
 
 

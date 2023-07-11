@@ -192,7 +192,7 @@ else
                         <div class="character-count-input">
                             <input maxlength="15" class="text-input-match1" type="text" placeholder="הזן את הטקסט כאן.." @bind="currentMatchToShow.FirstMatch" @oninput='e => HandleInput(e, "first")' />
 
-                            <p class="condition-text"> ניתן להכניס בין 1-15 תווים </p>
+                            <p class="condition-text"> ניתן להזין 1-15 תווים </p>
 
                             @if (!string.IsNullOrEmpty(currentMatchToShow.FirstMatch))
                             {
@@ -227,7 +227,7 @@ else
                             <InputFile id="FileInputID" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, true))"></InputFile>
 
                         </div>
-                        <p class="condition-text"> קבצי Png ,Jpeg בלבד </p>
+                        <p class="condition-text"> קבצי Png / Jpeg בלבד </p>
 
 
 
@@ -295,7 +295,7 @@ else
                             <InputFile id="FileInputID2" accept="image/png, image/jpeg" OnChange="((e) => UploadFile(e, false))"></InputFile>
 
                         </div>
-                        <p class="condition-text"> קבצי Png ,Jpeg בלבד </p>
+                        <p class="condition-text"> קבצי Png / Jpeg בלבד </p>
 
 
                         @if (myFileImage2 != "")
@@ -370,7 +370,7 @@ else
                         <div class="character-count-input">
                             <input maxlength="15" class="text-input-match1" placeholder="הזן את הטקסט כאן.." type="text" @bind="currentMatchToShow.SecondMatch"
                                    @oninput='e => HandleInput(e, "second")' />
-                            <p class="condition-text"> ניתן להכניס בין 1-15 תווים </p>
+                            <p class="condition-text"> ניתן להזין 1-15 תווים </p>
 
                             @if (!string.IsNullOrEmpty(currentMatchToShow.SecondMatch))
                             {

@@ -43,7 +43,7 @@ else
 
         @if (!string.IsNullOrEmpty(GameFullName))
         {
-            <span id="character-count1" class="character-count" style="@(characterGameNameLimit == characterCountGameName ? "color: red;" : "")">@characterGameNameLimit/ @characterCountGameName</span>
+            <span id="character-count1" class="character-count" style="@(characterGameNameLimit == characterCountGameName ? "color: #C95151;" : "")">@characterGameNameLimit/ @characterCountGameName</span>
 
         }
         <p id="instraction1">(1-17 תווים)</p>
@@ -66,7 +66,7 @@ else
         @if (!string.IsNullOrEmpty(GameInstruction))
         {
 
-            <span id="character-count2" class="character-count" style="@(characterGameInstructionLimit == characterCountInstruction ? "color: red;" : "")">@characterGameInstructionLimit/ @characterCountInstruction</span>
+            <span id="character-count2" class="character-count" style="@(characterGameInstructionLimit == characterCountInstruction ? "color: #C95151;" : "")">@characterGameInstructionLimit/ @characterCountInstruction</span>
         }
 
         <p id="instraction2">(1-23 תווים)</p>
@@ -195,7 +195,7 @@ else
                             @if (!string.IsNullOrEmpty(currentMatchToShow.FirstMatch))
                             {
 
-                                <span id="firstMatchChars" class="character-count" style="@(characterLimit == characterCountFirst ? "color: red;" : "")">@characterLimit/ @characterCountFirst</span>
+                                <span id="firstMatchChars" class="character-count" style="@(characterLimit == characterCountFirst ? "color: #C95151;" : "")">@characterLimit/ @characterCountFirst</span>
                             }
                         </div>
                     }
@@ -373,7 +373,7 @@ else
                             @if (!string.IsNullOrEmpty(currentMatchToShow.SecondMatch))
                             {
 
-                                <span id="secondMatchChars" class="character-count" style="@(characterLimit == characterCountSecond ? "color: red;" : "")">@characterLimit/ @characterCountSecond</span>
+                                <span id="secondMatchChars" class="character-count" style="@(characterLimit == characterCountSecond ? "color: #C95151;" : "")">@characterLimit/ @characterCountSecond</span>
                             }
                         </div>
 
@@ -465,7 +465,7 @@ else
             }
             else
             {
-                <span class="matches-counter">סה"כ @fullGame.MatchesList.Count/20 זוגות</span>
+                <span style="color:#C95151" class="matches-counter">סה"כ @fullGame.MatchesList.Count/20 זוגות</span>
                 Console.WriteLine(fullGame.MatchesList);
             }
 
@@ -908,7 +908,8 @@ z-index:-1;
 
     void closedReturnPopUp()
     {
-        //isReturnClicked = false;
+        isReturnClicked = false;
+        issavingDuringAddOrEdit = false;
         isDeleteButtonClicked = false;
         isPublishAndReturn = true;
 

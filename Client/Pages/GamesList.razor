@@ -45,7 +45,7 @@
         <input maxlength="17" class="@circularInput" type="text" @bind="gameName" placeholder="הקלד שם משחק..." @oninput='e => HandleInputGameName(e, "gameName")' />
         @if (!string.IsNullOrEmpty(gameName))
         {
-                <span class="character-count" style="@(characterGameNameLimit == characterCountGameName ? "color: red;" : "")"> @characterCountGameName / @characterGameNameLimit </span>
+                <span class="character-count" style="@(characterGameNameLimit == characterCountGameName ? "color: #C95151;" : "")"> @characterCountGameName / @characterGameNameLimit </span>
         }
 
 

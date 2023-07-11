@@ -546,7 +546,10 @@ else
 
         @* <input id="saveGameBtnId" class="@saveGameBtn" type="button" value="שמור וחזור למסך המשחקים" @onclick="@(async ()=> await returnToHome())" />*@
 
-        <input id="saveGameBtnId" class="@saveGameBtn" type="button" value="שמור וחזור למסך המשחקים" @onclick="turnOnReturnPopUp" />
+        <input style="position: relative;
+        height: 4.5vh;
+        width: 17vw;
+        right: 8vw;" id="saveGameBtnId" class="@saveGameBtn" type="button" value="שמור וחזור למסך המשחקים" @onclick="turnOnReturnPopUp" />
 
 
     }
@@ -771,7 +774,7 @@ z-index:-1;
     string saveMatch => IsButtonDisabled ? "disabledSaveMatchBtn" : "regularUIBtn";
     string saveNameAndIntruc => isSaveButtonDisabled ? "disabledSaveNameInstBtn" : "regularUIBtn";
     string cancelPublishBtnStates => isChanging ? "disabledCancelChangesBtn" : "cancelChanges";
-    string saveMatchWhileCancelBtn => isChanging ? "saveMatchId" : "saveMatchIdWhileCancelBtn";
+    string saveMatchWhileCancelBtn => editAvailable ? "saveMatchId" : "saveMatchIdWhileCancelBtn";
 
     @*string msg = "";*@
     bool isCancelPublishClicked = false;

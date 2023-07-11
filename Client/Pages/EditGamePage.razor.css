@@ -689,36 +689,36 @@
 
 #saveMatchId {
     position: relative;
-    top: 1.2999999999999972vh;
+    top: 1.6vh;
     width: 8vw;
     height: 4vh;
-    right: 23vw;
+    right: 27vw;
 }
 
 
 #saveMatchIdWhileCancelBtn {
     position: relative;
-    top: 1.2999999999999972vh;
+    top: 1.6vh;
     width: 8vw;
     height: 4vh;
-    right: 27vw;
+    right: 23vw;
 }
 
 .cancelChanges {
     cursor: pointer;
+    background-color: white;
+    font-size: 120%;
+    border-radius: 8px;
+    font-weight: 200;
+    border: solid 2px #87C3F0;
+    color: #62629A;
+    margin-right: 8.5vw;
+    position: relative;
     width: 8vw;
     height: 4vh;
-    background-color: white;
-    border-color: #42ABF3;
-    font-size: 120%;
-    font-weight: 200;
-    color: #62629A;
-    border-radius: 10px;
-    cursor: pointer;
     font-family: Heebo;
-    position: relative;
-    right: 27vw;
-    top: 92.5vh;
+    right: -17vw;
+    top: -4.5vh;
 }
 
 .disabledCancelChangesBtn {
@@ -741,11 +741,10 @@
 
 
 #saveGameBtnId {
-    position: absolute;
-    top: 44vh;
-    right: 8vw;
-    width: 17vw;
-    height: 5vh;
+        position: relative;
+        height: 4.5vh;
+        width: 17vw;
+        right: 8vw;
 }
 
 

@@ -47,6 +47,7 @@ char_text {
 #plusContainer {
     border: none;
     padding-bottom: 1vh;
+    
 }
 
 .disabledNewGameButton {
@@ -239,6 +240,7 @@ char_text {
     border-radius: 45px;
     padding-bottom: 3vh;
     background-color: rgba(255, 255, 255, 0.4);
+    padding-top:3vh;
 }
 
 #allGames {
@@ -258,22 +260,26 @@ char_text {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(239px, 1fr));
     grid-gap: 0vw;
+    margin-top: -3vh;
 }
 
 #allGames::-webkit-scrollbar {
     width: 0.5vw;
     background-color: transparent;
     right: 0;
+    padding-top: 15vh;
 }
 
     #allGames::-webkit-scrollbar-thumb {
         background-color: #535381;
         border-radius: 4px;
+        padding-top:15vh;
     }
 
-    #allGames:hover::-webkit-scrollbar-thumb {
-        background-color: #7d779b;
-    }
+#allGames:hover::-webkit-scrollbar-thumb {
+    background-color: #7d779b;
+    padding-top: 15vh;
+}
 
     #allGames:only-child {
         scrollbar-width: none;

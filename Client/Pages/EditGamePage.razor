@@ -908,8 +908,8 @@ z-index:-1;
 
     void closedReturnPopUp()
     {
-        isReturnClicked = false;
-        issavingDuringAddOrEdit = false;
+        //isReturnClicked = false;
+        //issavingDuringAddOrEdit = false;
         isDeleteButtonClicked = false;
         isPublishAndReturn = true;
 
@@ -939,9 +939,18 @@ z-index:-1;
         isMouseOver = isOver;
     }
 
-    void turnOnReturnPopUp()
+    protected async Task turnOnReturnPopUp()
     {
-        issavingDuringAddOrEdit = true;
+        if(string.IsNullOrEmpty(currentMatchToShow.FirstMatch) || string.IsNullOrEmpty(currentMatchToShow.SecondMatch))
+        {
+            await returnToHome();
+        }
+        else
+        {
+            issavingDuringAddOrEdit = true;
+            
+        }
+        
     }
     protected async Task checkIfEditOrAdd(MatchToUpdate matchToSave)
     {
@@ -963,6 +972,8 @@ z-index:-1;
     private void navigateToGamesScreen(bool value)
     {
         isPublishAndReturn = value;
+        isReturnClicked = false;
+        issavingDuringAddOrEdit = false;
 
         if (isPublishAndReturn)
         {

@@ -1,10 +1,14 @@
 ﻿.copyBtn {
-    background-image: url('../css/images/copy_icon.svg');
-    width: 2vw;
+    background-image: url(../css/images/copy_icon.svg);
+    width: 2.15vw;
     height: 5vh;
     background-size: cover;
     background-color: transparent;
     cursor: pointer;
+    padding-bottom: -9vh;
+    margin: -0.8vh;
+    margin-left: -7vh;
+    margin-bottom: -25vh;
 }
 
 

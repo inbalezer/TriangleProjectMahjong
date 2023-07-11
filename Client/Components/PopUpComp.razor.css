@@ -1,7 +1,7 @@
 ﻿
 body {
     direction: rtl;
-    z-index:1;
+    z-index: 1;
 }
 
 #content-div {
@@ -10,6 +10,7 @@ body {
     font-weight: 200;
     padding-top: 2%;
 }
+
 hr {
     margin-bottom: -2vh;
     width: 28vw;
@@ -50,8 +51,7 @@ hr {
     width: 40vw;
     height: 40vh;
     text-align: center;
-    padding-top:8vh;
-
+    padding-top: 8vh;
 }
 
 .popup-close {
@@ -69,40 +69,37 @@ hr {
 }
 
 .popup-buttons {
+    padding: 0 15vh;
     display: flex;
     justify-content: center;
     margin-top: 2vh;
 }
 
 .popup-button {
-    padding: 8px 16px;
-    margin: 0 8px;
+    margin: 0 2vh;
     cursor: pointer;
     font-size: 110%;
     border-radius: 10px;
-    font-family:Heebo;
+    font-family: Heebo;
 }
 
 
-.popupTitle
-{
-    padding:2vh;
-
+.popupTitle {
+    padding: 2vh;
 }
 
-#popupText1
-{
-    padding:1vh;
+#popupText1 {
+    padding: 1vh;
 }
 
 #popupText2 {
     margin: -3vh;
     margin-bottom: 2vh;
-    
 }
 
 .publishPopupCopy {
     display: flex;
     justify-content: center;
-    margin-bottom:1vh;
+    margin-bottom: 1vh;
+    padding-top: 2vh;
 }

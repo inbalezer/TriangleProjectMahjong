@@ -21,22 +21,22 @@
                 </p>
                 <p id="popupText2">
                     <span class="publishPopupCopy">
-                    @Text2 <span> @GameCodeToShow</span> <span>
-                        @ChildContent
+                        @Text2 <span style="margin-right:0.4vw;"> @GameCodeToShow</span> <span>
+                            @ChildContent
 
-                    </span>
+                        </span>
 
                     </span>
                 </p>
             </div>
-            
+
 
             @if (isDeleteCompClicked)
             {
                 callToActionPopUpColor = "rgba(201, 81, 81, 1)";
             }
             <div class="popup-buttons">
-                
+
                 @if (isReload)
                 {
                     <button class="popup-button" style="background-color: @callToActionPopUpColor ; color: @secondPopUpColor;" @onclick="()=> DeleteGameFromList(true)">@actionButtonText</button>
@@ -44,12 +44,12 @@
                 }
                 else
                 {
-                    
+
                     <button class="popup-button" style="background-color:@secondPopUpColor ; color: @callToActionPopUpColor; border: 2px solid @callToActionPopUpColor;" @onclick="() => IsDeleteButtonClicked(false)">@cancelButtonText</button>
                     <button class="popup-button" style="background-color: @callToActionPopUpColor ; color: @secondPopUpColor;" @onclick="()=> DeleteGameFromList(true)">@actionButtonText</button>
                 }
-               
-              
+
+
             </div>
         </div>
     </div>
@@ -62,12 +62,12 @@
     string secondPopUpColor = "white";
     [Parameter]
     public RenderFragment ChildContent { get; set; }
-      
+
 
     [Parameter]
     public bool notDeleted { get; set; }
 
-     [Parameter]
+    [Parameter]
     public string GameCodeToShow { get; set; }
 
     [Parameter]

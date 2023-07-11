@@ -78,12 +78,14 @@ else
 
         <button value="שמור" @onclick="(() => updateNameAndInstruction(gameWithInstruction))" id="SaveNameAndInstrucBtn" class="@saveNameAndIntruc" disabled="@isSaveButtonDisabled">
             <span style="display: contents;">
-                <span style="align-items: center; display: inline-flex">שמור <img style= "padding-right: 0.7vw;
+                <span style="align-items: center; display: inline-flex">
+                    שמור <img style="padding-right: 0.7vw;
     /* padding-top: 1.3vh; */
-    height: 2vh;" src="../css/edit game page/plus.svg" /></span>
+    height: 2vh;" src="../css/edit game page/plus.svg" />
+                </span>
                 @if (isSaveBtnClicked)
                 {
-                    <span >
+                    <span>
                         <lottie-player src="https://lottie.host/cbb86737-1d0c-4970-8b43-8ad5dfc74631/FwJpUmo6j9.json" speed="0.7" style="    width: 8vw; position: fixed; height: 8vh; top: 35.5vh; left: 63.5vw;" autoplay></lottie-player>
                     </span>
                     isSaveBtnClicked = false;
@@ -126,7 +128,7 @@ else
         @if (!isLimitMatches || editAvailable)
         {
             <div class="containerWithTwoDivs">
-                <div class="toggleSides" >
+                <div class="toggleSides">
                     <div class="imgOrTextToggle">
                         <img id="photoImg" src="@toggleImgSrc" />
                         <div class="toggleStick">
@@ -231,7 +233,7 @@ else
 
                         @if (myFileImage1 != "")
                         {
-                            <img class="chosen-img"  src="@myFileImage1" width="150" />
+                            <img class="chosen-img" src="@myFileImage1" width="150" />
                             @*<input type="button" value="העבר למחיקה " @onclick="MakeDeleteList" />*@
                         }
                         <br />
@@ -241,14 +243,14 @@ else
                         }
                         if (firstImgTooBig != "")
                         {
-                            <span class ="img-not-good1">@firstImgTooBig</span>
+                            <span class="img-not-good1">@firstImgTooBig</span>
                         }
                     }
 
                 </div>
 
-                <hr id="deviding-line-addMatch"/>
-                
+                <hr id="deviding-line-addMatch" />
+
                 <div class="toggleSides" id="rightSide">
 
 
@@ -277,7 +279,7 @@ else
                         if (myFileImage2 != "")
                         {
                             currentMatchToShow.SecondMatch = myFileImage2;
-                            <div  class="custom-input-file2">
+                            <div class="custom-input-file2">
                                 <label for="FileInputID2">שנה תמונה</label>
                             </div>
                         }
@@ -298,14 +300,14 @@ else
 
                         @if (myFileImage2 != "")
                         {
-                            <img class="chosen-img"src="@myFileImage2" width="150" />
+                            <img class="chosen-img" src="@myFileImage2" width="150" />
                             @*<input type="button" value="העבר למחיקה " @onclick="MakeDeleteList" />*@
                         }
                         <br />
 
                         if (unacceptedImg2 != "")
                         {
-                            <span class="img-not-good2" >@unacceptedImg2</span>
+                            <span class="img-not-good2">@unacceptedImg2</span>
                         }
                         if (secondImgTooBig != "")
                         {
@@ -391,11 +393,11 @@ else
                         {
                             isChanging = true;
                         }
-                        <input type="button" class="cancelChanges" value="בטל שינויים"  disabled=@isChanging @onclick="@(async ()=> await cancleChanges(currentMatchToShow.ID))" />
+                        <input type="button" class="cancelChanges" value="בטל שינויים" disabled=@isChanging @onclick="@(async ()=> await cancleChanges(currentMatchToShow.ID))" />
                     }
                     <br />
 
-                    
+
                 </div>
             </div>
             <input id="saveMatchId" class="@saveMatch" type="submit" value="שמור זוג" @onclick="(() =>AddMatch(currentMatchToShow))" disabled="@IsButtonDisabled" />
@@ -408,7 +410,7 @@ else
         {
             <div class="oops-div">
                 אופס...
-                <br/>
+                <br />
                 <span class="bold-span">  נראה שהגעת לכמות הזוגות המקסימאלית.</span>
                 <br />
                 ניתן לשמור את המשחק ולחזור למסך המשחקים :)
@@ -437,102 +439,102 @@ else
     <span id="delet-span">מחיקה</span>
     <hr id="table-underline" />
     <div id="all-matches-scroll">
-<div id="all-matches-without-scroll">
-        @if (isThereMatches)
-        {
-            <span id="isThereMatches1">
-                מאגר הזוגות עדיין ריק
-                
-            </span>
-            <br/>
-            <span id="isThereMatches2">לאחר השמירה, הזוגות יופיעו כאן :)</span>
-        }
-
-        else if (fullGame.MatchesList != null)
-        {
-            
-
-            if (fullGame.MatchesList.Count <= 18)
+        <div id="all-matches-without-scroll">
+            @if (isThereMatches)
             {
-                <span class="matches-counter">סה"כ @fullGame.MatchesList.Count זוגות</span>
+                <span id="isThereMatches1">
+                    מאגר הזוגות עדיין ריק
 
-            }
-            else if (fullGame.MatchesList.Count == 19)
-            {
-                <span class="matches-counter">סה"כ @fullGame.MatchesList.Count זוגות</span>
-                <span class="matches-counter2">שים לב, ניתן להוסיף רק עוד זוג אחד למאגר</span>
-
-            }
-            else
-            {
-                <span style="color:#C95151" class="matches-counter">סה"כ @fullGame.MatchesList.Count/20 זוגות</span>
-                Console.WriteLine(fullGame.MatchesList);
+                </span>
+                <br />
+                <span id="isThereMatches2">לאחר השמירה, הזוגות יופיעו כאן :)</span>
             }
 
-            @if (currentMatchIndex == 0)
+            else if (fullGame.MatchesList != null)
             {
 
-                foreach (MatchToShow match in fullGame.MatchesList)
+
+                if (fullGame.MatchesList.Count <= 18)
                 {
+                    <span class="matches-counter">סה"כ @fullGame.MatchesList.Count זוגות</span>
 
-                    <MatchComp matchText="@match.FirstMatch" matchText2="@match.SecondMatch" uploadedImg="" uploadedImg2="" DeleteCallBack="(() => deleteButtonClicked(match))" EditMatchCallBack="@(async ()=> await EditMatchRow(match.ID))" isImageClickable=@isEditMode></MatchComp>
-
-                    if (isDeleteButtonClicked)
-                    {
-                        <PopupComp ShowMsg="closedReturnPopUp" Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" Text2="@deleteTextPopUp2" isDeleteCompClicked="@isDeleteButtonClicked" GameIdToDelete="@(async () => await DeleteMatchRow(matchToDelete))" actionButtonText="מחק זוג " cancelButtonText="בטל"></PopupComp>
-
-                    }
                 }
-            }
-
-            else
-            {
-
-                foreach (MatchToShow match in fullGame.MatchesList)
+                else if (fullGame.MatchesList.Count == 19)
                 {
-                    if (currentMatchIndex != match.ID)
+                    <span class="matches-counter">סה"כ @fullGame.MatchesList.Count זוגות</span>
+                    <span class="matches-counter2">שים לב, ניתן להוסיף רק עוד זוג אחד למאגר</span>
+
+                }
+                else
+                {
+                    <span style="color:#C95151" class="matches-counter">סה"כ @fullGame.MatchesList.Count/20 זוגות</span>
+                    Console.WriteLine(fullGame.MatchesList);
+                }
+
+                @if (currentMatchIndex == 0)
+                {
+
+                    foreach (MatchToShow match in fullGame.MatchesList)
                     {
 
                         <MatchComp matchText="@match.FirstMatch" matchText2="@match.SecondMatch" uploadedImg="" uploadedImg2="" DeleteCallBack="(() => deleteButtonClicked(match))" EditMatchCallBack="@(async ()=> await EditMatchRow(match.ID))" isImageClickable=@isEditMode></MatchComp>
 
                         if (isDeleteButtonClicked)
                         {
-                            <PopupComp ShowMsg="closedReturnPopUp" Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" isDeleteCompClicked="@isDeleteButtonClicked" GameIdToDelete="@(async () => await DeleteMatchRow(matchToDelete))" actionButtonText="מחק זוג " cancelButtonText="בטל"></PopupComp>
+                            <PopupComp ShowMsg="closedReturnPopUp" Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" Text2="@deleteTextPopUp2" isDeleteCompClicked="@isDeleteButtonClicked" GameIdToDelete="@(async () => await DeleteMatchRow(matchToDelete))" actionButtonText="מחק זוג " cancelButtonText="בטל"></PopupComp>
 
                         }
-
-                    }
-
-                    else
-                    {
-
-                        <MatchComp iseditClassStyle=@true matchText="@match.FirstMatch" matchText2="@match.SecondMatch" uploadedImg="" uploadedImg2="" DeleteCallBack="(() => deleteButtonClicked(match))" EditMatchCallBack="@(async ()=> await EditMatchRow(match.ID))" isImageClickable=@isEditMode></MatchComp>
-
-
-
-                        if (isDeleteButtonClicked)
-                        {
-                            <PopupComp ShowMsg="closedReturnPopUp" Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" isDeleteCompClicked="@isDeleteButtonClicked" GameIdToDelete="@(async () => await DeleteMatchRow(matchToDelete))" actionButtonText="מחק זוג " cancelButtonText="בטל"></PopupComp>
-
-                        }
-
                     }
                 }
-            }
 
+                else
+                {
 
-
-
-
-
-
-
-            @*@if(!isEditMode)
+                    foreach (MatchToShow match in fullGame.MatchesList)
                     {
-                @class='@(isEditMode ? "disabled" : "")'
-                    }*@
+                        if (currentMatchIndex != match.ID)
+                        {
 
-        }
+                            <MatchComp matchText="@match.FirstMatch" matchText2="@match.SecondMatch" uploadedImg="" uploadedImg2="" DeleteCallBack="(() => deleteButtonClicked(match))" EditMatchCallBack="@(async ()=> await EditMatchRow(match.ID))" isImageClickable=@isEditMode></MatchComp>
+
+                            if (isDeleteButtonClicked)
+                            {
+                                <PopupComp ShowMsg="closedReturnPopUp" Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" isDeleteCompClicked="@isDeleteButtonClicked" GameIdToDelete="@(async () => await DeleteMatchRow(matchToDelete))" actionButtonText="מחק זוג " cancelButtonText="בטל"></PopupComp>
+
+                            }
+
+                        }
+
+                        else
+                        {
+
+                            <MatchComp iseditClassStyle=@true matchText="@match.FirstMatch" matchText2="@match.SecondMatch" uploadedImg="" uploadedImg2="" DeleteCallBack="(() => deleteButtonClicked(match))" EditMatchCallBack="@(async ()=> await EditMatchRow(match.ID))" isImageClickable=@isEditMode></MatchComp>
+
+
+
+                            if (isDeleteButtonClicked)
+                            {
+                                <PopupComp ShowMsg="closedReturnPopUp" Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" isDeleteCompClicked="@isDeleteButtonClicked" GameIdToDelete="@(async () => await DeleteMatchRow(matchToDelete))" actionButtonText="מחק זוג " cancelButtonText="בטל"></PopupComp>
+
+                            }
+
+                        }
+                    }
+                }
+
+
+
+
+
+
+
+
+                @*@if(!isEditMode)
+                        {
+                    @class='@(isEditMode ? "disabled" : "")'
+                        }*@
+
+            }
         </div>
     </div>
     @if (!isThereMatches)
@@ -542,10 +544,10 @@ else
             <p>@errorDeleteImgmsg</p>
         }
 
-       @* <input id="saveGameBtnId" class="@saveGameBtn" type="button" value="שמור וחזור למסך המשחקים" @onclick="@(async ()=> await returnToHome())" />*@
+        @* <input id="saveGameBtnId" class="@saveGameBtn" type="button" value="שמור וחזור למסך המשחקים" @onclick="@(async ()=> await returnToHome())" />*@
 
         <input id="saveGameBtnId" class="@saveGameBtn" type="button" value="שמור וחזור למסך המשחקים" @onclick="turnOnReturnPopUp" />
-        
+
 
     }
 
@@ -623,23 +625,23 @@ else
 
     <div class="allPublishBtns">
         <input type="button" class="@publishClasStyle custom-tooltip" title="@publishDuringEdit" value="@publishBtnValue" disabled="@isPublish" @onclick="@(async ()=> await publish("Published"))" />
-              
+
 
         @if (isReturnPublishClicked || fullGame.PublishStatus == "Published")
         {
             <input type="button" class="@cancelPublish" value="בטל פרסום" @onclick="@(async ()=> await publish("Eligible"))" />
             <img class="cancelPublishIcon" src="../css/edit game page/cancel publish icon.svg" />
-            
+
         }
         <div>
-            @if(publishBtnValue == "פרסם")
+            @if (publishBtnValue == "פרסם")
             {
                 <img class="publishIcon" src="../icon feather-plus.svg" />
             }
             else
             {
                 <img class="afterPublishIcon" src="../css/edit game page/published icon.svg" />
-               
+
             }
         </div>
     </div>
@@ -651,13 +653,13 @@ else
 @if (publishBtnValue == "פורסם")
 {
     publishClasStyle = "afterPublish";
-    
+
 }
 
 @if (publishBtnValue == "פורסם" && isReturnPublishClicked)
 {
-    
-    <PopupComp Headline="פורסם בהצלחה!" Text1="@publishMsg" Text2="@publishMsg2" GameCodeToShow="@gameCodeToShow"  GameIdToDelete="navigateToGameAfterPublish" actionButtonText="למשחק" ShowMsg="closedReturnPopUp" cancelButtonText="חזור למסך המשחקים" xClicked="(value) => navigateToGamesScreen(value)">
+
+    <PopupComp Headline="פורסם בהצלחה!" Text1="@publishMsg" Text2="@publishMsg2" GameCodeToShow="@gameCodeToShow" GameIdToDelete="navigateToGameAfterPublish" actionButtonText="למשחק" ShowMsg="closedReturnPopUp" cancelButtonText="חזור למסך המשחקים" xClicked="(value) => navigateToGamesScreen(value)">
         <lottie-player src="https://lottie.host/0cd64648-5a27-4896-96dc-b0847ac3b133/g5yILsQ8yu.json" background="transparent" speed="1" style=" width: 60vw;
     height: 60vh;
     position: absolute;
@@ -669,10 +671,10 @@ z-index:-1;
         @if (!string.IsNullOrEmpty(gameCodeToShow))
         {
             <CopyText myText="@gameCodeToShow"></CopyText>
-           
-            
 
-        }   
+
+
+        }
     </PopupComp>
     publishClasStyle = "afterPublish";
 
@@ -740,8 +742,8 @@ z-index:-1;
     string currentValue = "";
     string currentValue2 = "";
     string publishBtnValue = "פרסם";
-    string publishMsg = "איזה כיף, המשחק שלך מחכה לך במסך המשחקים.";
-    string publishMsg2 = " קוד המשחק שלך הוא:";
+    string publishMsg = "איזה כיף, המשחק מחכה לך במסך המשחקים.";
+    string publishMsg2 = "  קוד המשחק שלך הוא:  ";
     string unacceptedImg = "";
     string unacceptedImg2 = "";
     string previousValue = "";
@@ -843,7 +845,7 @@ z-index:-1;
             isEnoughMathces = false;
             isPublish = true;
 
-    @*await publish("Not Eligible");*@
+            @*await publish("Not Eligible");*@
 
         }
 
@@ -879,7 +881,7 @@ z-index:-1;
                 else
                 {
                     publishClasStyle = "abled-publish-button";
-                }               
+                }
             }
 
         }
@@ -945,16 +947,16 @@ z-index:-1;
 
     protected async Task turnOnReturnPopUp()
     {
-        if(string.IsNullOrEmpty(currentMatchToShow.FirstMatch) || string.IsNullOrEmpty(currentMatchToShow.SecondMatch))
+        if (string.IsNullOrEmpty(currentMatchToShow.FirstMatch) || string.IsNullOrEmpty(currentMatchToShow.SecondMatch))
         {
             await returnToHome();
         }
         else
         {
             issavingDuringAddOrEdit = true;
-            
+
         }
-        
+
     }
     protected async Task checkIfEditOrAdd(MatchToUpdate matchToSave)
     {
@@ -964,7 +966,7 @@ z-index:-1;
         }
         else
         {
-            issavingDuringAddOrEdit = true;           
+            issavingDuringAddOrEdit = true;
             await AddMatch(matchToSave);
         }
         //else
@@ -1083,7 +1085,7 @@ z-index:-1;
 
     protected async Task AddMatch(MatchToUpdate newMatchForIdentify)
     {
-       
+
         if (editMatch.ID > 0) // EDIT MATCH
         {
             newMatchForIdentify.GameID = newGameID;
@@ -1144,7 +1146,7 @@ z-index:-1;
 
                 editAvailable = false;
 
-                
+
                 unacceptedImg = "";
                 firstImgTooBig = "";
                 secondImgTooBig = "";
@@ -1156,7 +1158,7 @@ z-index:-1;
                     await returnToHome();
                 }
 
-                
+
             }
             else
             {

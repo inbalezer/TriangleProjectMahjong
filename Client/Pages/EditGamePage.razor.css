@@ -247,7 +247,7 @@
 }
 
 .character-count-input {
-    height: 1vh;
+    height: 0vh;
 }
 
 #firstMatchChars {
@@ -689,7 +689,7 @@
 
 #saveMatchId {
     position: relative;
-    top: 1.6vh;
+    top: 0.7vh;
     width: 8vw;
     height: 4vh;
     right: 27vw;
@@ -698,7 +698,7 @@
 
 #saveMatchIdWhileCancelBtn {
     position: relative;
-    top: 1.6vh;
+    top: 0.7vh;
     width: 8vw;
     height: 4vh;
     right: 23vw;

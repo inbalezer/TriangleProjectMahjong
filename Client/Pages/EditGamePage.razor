@@ -452,7 +452,7 @@ else
         {
             
 
-            if (fullGame.MatchesList.Count <= 11 && fullGame.MatchesList.Count <= 18)
+            if (fullGame.MatchesList.Count <= 18)
             {
                 <span class="matches-counter">סה"כ @fullGame.MatchesList.Count זוגות</span>
 
@@ -479,7 +479,7 @@ else
 
                     if (isDeleteButtonClicked)
                     {
-                        <PopupComp ShowMsg="closedReturnPopUp" Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" isDeleteCompClicked="@isDeleteButtonClicked" GameIdToDelete="@(async () => await DeleteMatchRow(matchToDelete))" actionButtonText="מחק זוג " cancelButtonText="בטל"></PopupComp>
+                        <PopupComp ShowMsg="closedReturnPopUp" Headline="@deleteHeadLinePopUp" Text1="@deleteTextPopUp1" Text2="@deleteTextPopUp2" isDeleteCompClicked="@isDeleteButtonClicked" GameIdToDelete="@(async () => await DeleteMatchRow(matchToDelete))" actionButtonText="מחק זוג " cancelButtonText="בטל"></PopupComp>
 
                     }
                 }
@@ -576,7 +576,7 @@ else
 {
     @*<PopupComp Headline="@returnHeadLinePopUp" Text1="@returnTextPopUp1" GameIdToDelete="@(async () => await returnToHome())" ShowMsg="closedReturnPopUp" actionButtonText="שמור וחזור למסך המשחקים " cancelButtonText="חזור ללא שמירה" xClicked="(value) => navigateToGamesScreen(value)"></PopupComp>*@
 
-    <PopupComp Headline="@returnHeadLinePopUp" Text1="@returnTextPopUp1" GameIdToDelete="@(async () => await checkIfEditOrAdd(currentMatchToShow))" ShowMsg="closedReturnPopUp" actionButtonText="שמור וחזור למסך המשחקים " cancelButtonText="חזור ללא שמירה" xClicked="(value) => navigateToGamesScreen(value)"></PopupComp>
+    <PopupComp Headline="@returnHeadLinePopUp" Text1="@returnTextPopUp1" Text2="@returnTextPopUp2" GameIdToDelete="@(async () => await checkIfEditOrAdd(currentMatchToShow))" ShowMsg="closedReturnPopUp" actionButtonText="שמור וחזור למסך המשחקים " cancelButtonText="חזור ללא שמירה" xClicked="(value) => navigateToGamesScreen(value)"></PopupComp>
 
 }
 
@@ -657,7 +657,7 @@ else
 @if (publishBtnValue == "פורסם" && isReturnPublishClicked)
 {
     
-    <PopupComp Headline="פורסם בהצלחה!" Text1="@publishMsg" Text2="@gameCodeToShow" GameIdToDelete="navigateToGameAfterPublish" actionButtonText="למשחק" ShowMsg="closedReturnPopUp" cancelButtonText="חזור למסך המשחקים" xClicked="(value) => navigateToGamesScreen(value)">
+    <PopupComp Headline="פורסם בהצלחה!" Text1="@publishMsg" Text2="@publishMsg2" GameCodeToShow="@gameCodeToShow"  GameIdToDelete="navigateToGameAfterPublish" actionButtonText="למשחק" ShowMsg="closedReturnPopUp" cancelButtonText="חזור למסך המשחקים" xClicked="(value) => navigateToGamesScreen(value)">
         <lottie-player src="https://lottie.host/0cd64648-5a27-4896-96dc-b0847ac3b133/g5yILsQ8yu.json" background="transparent" speed="1" style=" width: 60vw;
     height: 60vh;
     position: absolute;
@@ -668,8 +668,9 @@ z-index:-1;
 
         @if (!string.IsNullOrEmpty(gameCodeToShow))
         {
-
             <CopyText myText="@gameCodeToShow"></CopyText>
+           
+            
 
         }   
     </PopupComp>
@@ -726,9 +727,11 @@ z-index:-1;
     string fullGameMsg = "";
     string publishDuringEdit = "";
     string returnHeadLinePopUp = "חזור למסך ״המשחקים שלי״";
-    string returnTextPopUp1 = "אתה עומד לחזור למסך ״המשחקים שלי״. אם קיים זוג חדש שטרם שמרת, הוא לא ישמר. ";
+    string returnTextPopUp1 = "אתה עומד לחזור למסך ״המשחקים שלי״. ";
+    string returnTextPopUp2 = "אם קיים זוג חדש שטרם שמרת, הוא לא ישמר.";
     string deleteHeadLinePopUp = "מחיקת זוג";
-    string deleteTextPopUp1 = "אתה עומד למחוק את הזוג. האם אתה בטוח?";
+    string deleteTextPopUp1 = "אתה עומד למחוק את הזוג.";
+    string deleteTextPopUp2 = "האם אתה בטוח?";
     string gameNameToReturn = "";
     string myFileImage = "";
     string myFileImage1 = "";
@@ -737,7 +740,8 @@ z-index:-1;
     string currentValue = "";
     string currentValue2 = "";
     string publishBtnValue = "פרסם";
-    string publishMsg = " איזה כיף, המשחק שלך מחכה לך במסך המשחקים. קוד המשחק שלך הוא:";
+    string publishMsg = "איזה כיף, המשחק שלך מחכה לך במסך המשחקים.";
+    string publishMsg2 = " קוד המשחק שלך הוא:";
     string unacceptedImg = "";
     string unacceptedImg2 = "";
     string previousValue = "";

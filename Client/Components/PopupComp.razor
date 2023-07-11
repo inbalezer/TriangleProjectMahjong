@@ -19,12 +19,17 @@
                         <spn>"@gameName" </spn>
                     }
                 </p>
-                <p id="popupText2">@Text2 </p>
+                <p id="popupText2">
+                    <span class="publishPopupCopy">
+                    @Text2 <span> @GameCodeToShow</span> <span>
+                        @ChildContent
+
+                    </span>
+
+                    </span>
+                </p>
             </div>
-            <div>
-                @ChildContent
-                
-            </div>
+            
 
             @if (isDeleteCompClicked)
             {
@@ -61,6 +66,9 @@
 
     [Parameter]
     public bool notDeleted { get; set; }
+
+     [Parameter]
+    public string GameCodeToShow { get; set; }
 
     [Parameter]
     public int gameId { get; set; }

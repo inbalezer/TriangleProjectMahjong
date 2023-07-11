@@ -61,7 +61,16 @@
 
 .toggleSides {
     flex: 1;
+    height: 3vh;
 }
+
+
+#rightSide{
+    height:3vh;
+}
+
+
+
 
 * {
     padding: 0;
@@ -643,7 +652,7 @@
     font-weight: 200;
     color: white;
     border-radius: 10px;
-    cursor: not-allowed;
+    pointer-events: none;
     font-family: Heebo;
     width: 17vw;
     height: 5vh;
@@ -656,7 +665,6 @@
     font-weight: 200;
     color: white;
     border-radius: 10px;
-    cursor: not-allowed;
     font-family: Heebo;
     width: 8vw;
     height: 5vh;
@@ -670,10 +678,10 @@
     font-weight: 200;
     color: white;
     border-radius: 10px;
-    cursor: not-allowed;
     font-family: Heebo;
     margin-right: 8.5vw;
     position: relative;
+    pointer-events: none;
     width: 8vw;
     top: -2vh;
     width: 8vw;
@@ -681,8 +689,17 @@
 }
 
 #saveMatchId {
-    position: absolute;
-    top: 88vh;
+    position: relative;
+    top: 1.2999999999999972vh;
+    width: 8vw;
+    height: 4vh;
+    right: 23vw;
+}
+
+
+#saveMatchIdWhileCancelBtn {
+    position: relative;
+    top: 1.2999999999999972vh;
     width: 8vw;
     height: 4vh;
     right: 27vw;
@@ -700,18 +717,36 @@
     border-radius: 10px;
     cursor: pointer;
     font-family: Heebo;
-    position:absolute;
+    position:relative;
     right:27vw;
     top:92.5vh;
 }
 
+.disabledCancelChangesBtn {
+    background: linear-gradient(rgba(220, 220, 220) -24%, rgb(230, 230, 230) 70.96%);
+    border: none;
+    font-size: 120%;
+    font-weight: 200;
+    color: white;
+    border-radius: 10px;
+    margin-right: 8.5vw;
+    position: relative;
+    width: 8vw;
+    height: 4vh;
+    font-family: Heebo;
+    right: -17vw;
+    top: -4.5vh;
+}
+}
+
 
 #saveGameBtnId {
-position: relative;
-top: 1vh;
-right: 6vw;
-width: 17vw;
-height: 5vh;
+    position: absolute;
+    top: 44vh;
+    right: 8vw;
+    width: 17vw;
+    height: 5vh;
+
 }
 
 
@@ -803,7 +838,7 @@ height: 5vh;
     border-radius: 10px;
     cursor: pointer;
     font-family: Heebo;
-    margin-top: 3vh;
+    margin-top: -3vh;
 }
 
 .disabled-publish-button {
@@ -815,7 +850,8 @@ height: 5vh;
     font-weight: 200;
     color: white;
     border-radius: 10px;
-    cursor: not-allowed;
+    pointer-events: none;
+    pointer-events: none;
     font-family: Heebo;
     margin-top: 3vh;
 }
@@ -827,15 +863,18 @@ height: 5vh;
     border: none;
     font-size: 120%;
     font-weight: 200;
+    color: white;
     border-radius: 10px;
     cursor: not-allowed;
     font-family: Heebo;
+    margin-top: -3vh;
 }
 
 .publishIcon {
     position: relative;
     top: -2vw;
     right: 6vw;
+    cursor:pointer;
 }
 
 .afterPublishIcon {
@@ -849,10 +888,12 @@ height: 5vh;
 
 .cancelPublishIcon {
     position: relative;
-    width: 2vw;
     height: 2vh;
     top: 6.5vh;
     right: -2.4vw;
+    position: relative;
+
+    height: 2.4vh;
     cursor: pointer;
 }
 
@@ -869,7 +910,7 @@ height: 5vh;
     border-radius: 10px;
     cursor: pointer;
     font-family: Heebo;
-    margin-top: 6vh;
+    margin-top: 3vh;
     margin-right: -8vw;
 }
 

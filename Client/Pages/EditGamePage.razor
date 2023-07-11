@@ -393,14 +393,14 @@ else
                         {
                             isChanging = true;
                         }
-                        <input type="button" class="cancelChanges" value="בטל שינויים" disabled=@isChanging @onclick="@(async ()=> await cancleChanges(currentMatchToShow.ID))" />
+                        <input type="button" class="@cancelPublishBtnStates" value="בטל שינויים" disabled=@isChanging @onclick="@(async ()=> await cancleChanges(currentMatchToShow.ID))" />
                     }
                     <br />
 
 
                 </div>
             </div>
-            <input id="saveMatchId" class="@saveMatch" type="submit" value="שמור זוג" @onclick="(() =>AddMatch(currentMatchToShow))" disabled="@IsButtonDisabled" />
+            <input id="@saveMatchWhileCancelBtn" class="@saveMatch" type="submit" value="שמור זוג" @onclick="(() =>AddMatch(currentMatchToShow))" disabled="@IsButtonDisabled" />
 
 
 
@@ -770,7 +770,9 @@ z-index:-1;
     string saveGameBtn => isReturnButtonDisabled ? "disabledSaveGameBtn" : "regularUIBtn";
     string saveMatch => IsButtonDisabled ? "disabledSaveMatchBtn" : "regularUIBtn";
     string saveNameAndIntruc => isSaveButtonDisabled ? "disabledSaveNameInstBtn" : "regularUIBtn";
-
+    string cancelPublishBtnStates => isChanging ? "disabledCancelChangesBtn" : "cancelChanges";
+    string saveMatchWhileCancelBtn => isChanging ? "saveMatchId" : "saveMatchIdWhileCancelBtn";
+    
     @*string msg = "";*@
     bool isCancelPublishClicked = false;
     bool FirstIsText;

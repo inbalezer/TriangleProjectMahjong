@@ -35,7 +35,7 @@ hr {
 .popup-container {
     background-color: #fff;
     width: 30vw;
-    height: 22vh;
+    height: 24vh;
     border-radius: 20px;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
     padding: 20px;
@@ -69,15 +69,15 @@ hr {
 }
 
 .popup-buttons {
-    padding: 0 15px;
+    padding: 1.1999999999999993vw 1vw;
     display: flex;
     justify-content: center;
     margin-top: 2vh;
 }
 
 .popup-button {
-    padding: 8px 16px;
-    margin: 0 18px;
+    padding: 0.1vw 0.58vw;
+    margin: -1.2vw 1vw;
     cursor: pointer;
     font-size: 110%;
     border-radius: 10px;
@@ -104,3 +104,6 @@ hr {
     margin-bottom: 1vh;
     padding-top: 2vh;
 }
+
+
+

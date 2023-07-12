@@ -18,11 +18,11 @@
 
 @if (showWarningMessage || !isNameAndInstraction || GameFullName == "")
 {
-    <button class="@disabledArrow" @onclick="showMessageReturn" title="לא ניתן לשמור משחק ללא שם או הנחייה" disabled="@isReturnButtonDisabled "><img id="arrow1" src="../css/edit game page/arrow.svg" /> @returnText </button>
+    <button class="@disabledArrow" @onclick="showMessageReturn" title="לא ניתן לשמור משחק ללא שם או הנחייה" disabled="@isReturnButtonDisabled "><img id="arrow1" src="css/edit game page/arrow.svg" /> @returnText </button>
 }
 else
 {
-    <button style="" class="returnBtnClass" @onclick="showMessageReturn" @onmouseover="() => OnMouseOver(true)" @onmouseout="() => OnMouseOver(false)" disabled="@isReturnButtonDisabled"><img id="arrow1" src="../css/edit game page/arrow.svg" /> @returnText </button>
+    <button style="" class="returnBtnClass" @onclick="showMessageReturn" @onmouseover="() => OnMouseOver(true)" @onmouseout="() => OnMouseOver(false)" disabled="@isReturnButtonDisabled"><img id="arrow1" src="css/edit game page/arrow.svg" /> @returnText </button>
 
 }
 <div id="general-settings">
@@ -81,7 +81,7 @@ else
                 <span style="align-items: center; display: inline-flex">
                     שמור <img style="padding-right: 0.7vw;
     /* padding-top: 1.3vh; */
-    height: 2vh;" src="../css/edit game page/plus.svg" />
+    height: 2vh;" src="css/edit game page/plus.svg" />
                 </span>
                 @if (isSaveBtnClicked)
                 {
@@ -143,7 +143,7 @@ else
                     </div>
                     @*<InputCheckbox @bind-Value="textChanged" />*@
 
-                    <img class="big-brik" src="../css/edit game page/new big brik.svg" />
+                    <img class="big-brik" src="css/edit game page/new big brik.svg" />
 
                     @if (!textChanged)
                     {
@@ -269,7 +269,7 @@ else
                     @*<InputCheckbox @bind-Value="text2Changed" />*@
 
 
-                    <img class="big-brik" src="../css/edit game page/new big brik.svg" />
+                    <img class="big-brik" src="css/edit game page/new big brik.svg" />
 
                     @if (!text2Changed)
                     {
@@ -601,11 +601,11 @@ top:1.7vh;
     <span class="conditionsStyle">
         @if (isNameAndInstraction)
         {
-            <img class="NameAndInstraction" src="../css/edit game page/icon awesome-check-circle.svg" />
+            <img class="NameAndInstraction" src="css/edit game page/icon awesome-check-circle.svg" />
         }
         else
         {
-            <span><img class="NameAndInstraction" src="../css/edit game page/icon awesome-minus-circle.svg" /></span>
+            <span><img class="NameAndInstraction" src="css/edit game page/icon awesome-minus-circle.svg" /></span>
         }
 
         שם והנחיית המשחק
@@ -619,11 +619,11 @@ top:1.7vh;
 
         @if (isEnoughMathces)
         {
-            <span><img class="enoughMatches" src="../css/edit game page/icon awesome-check-circle.svg" /></span>
+            <span><img class="enoughMatches" src="css/edit game page/icon awesome-check-circle.svg" /></span>
         }
         else
         {
-            <span><img class="enoughMatches" src="../css/edit game page/icon awesome-minus-circle.svg" /></span>
+            <span><img class="enoughMatches" src="css/edit game page/icon awesome-minus-circle.svg" /></span>
         }
 
         מינימום 5 זוגות
@@ -640,17 +640,17 @@ top:1.7vh;
         @if (isReturnPublishClicked || fullGame.PublishStatus == "Published")
         {
             <input type="button" class="@cancelPublish" value="בטל פרסום" @onclick="@(async ()=> await publish("Eligible"))" />
-            <img class="cancelPublishIcon" src="../css/edit game page/cancel publish icon.svg" />
+            <img class="cancelPublishIcon" src="css/edit game page/cancel publish icon.svg" />
 
         }
         <div>
             @if (publishBtnValue == "פרסם")
             {
-                <img class="publishIcon" src="../icon feather-plus.svg" />
+                <img class="publishIcon" src="icon feather-plus.svg" />
             }
             else
             {
-                <img class="afterPublishIcon" src="../css/edit game page/published icon.svg" />
+                <img class="afterPublishIcon" src="css/edit game page/published icon.svg" />
 
             }
         </div>
@@ -763,11 +763,11 @@ z-index:-1;
     string publishClasStyle = "";
     string firstImgTooBig = "";
     string secondImgTooBig = "";
-    string toggleImgSrc => textChanged ? "../2material-photo.svg" : "../icon material-photo.svg";
-    string toggleTextSrc => textChanged ? "../2text-fields (2).svg" : "../icon material-text-fields.svg";
+    string toggleImgSrc => textChanged ? "2material-photo.svg" : "icon material-photo.svg";
+    string toggleTextSrc => textChanged ? "2text-fields (2).svg" : "icon material-text-fields.svg";
     string class1MoveCircle => textChanged ? "toggleCircle2" : "toggleCircle1";
-    string toggleImgSrc2 => text2Changed ? "../icon material-photo.svg" : "../2material-photo.svg";
-    string toggleTextSrc2 => text2Changed ? "../icon material-text-fields.svg" : "../2text-fields (2).svg";
+    string toggleImgSrc2 => text2Changed ? "icon material-photo.svg" : "2material-photo.svg";
+    string toggleTextSrc2 => text2Changed ? "icon material-text-fields.svg" : "2text-fields (2).svg";
     string class1MoveCircle2 => text2Changed ? "toggleCircle1" : "toggleCircle2";
     string returnText => isMouseOver ? "שמור וחזור" : "";
     string returnTextDis => isReturnButtonDisabled ? "לא ניתן לשמור משחק ללא שם והנחיה" : "->";

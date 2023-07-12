@@ -4,9 +4,9 @@
 
     <main>
         <div class="mainnavbar px-3">
-            <img id="logo" src="../asset 39.svg" />
-            <a class="main-nav-text" href="https://localhost:7265/gameslist/false">לעורך</a>
-            <a class="main-nav-text" href="https://localhost:7265/">למשחק</a>
+            <img id="logo" src="asset 39.svg" />
+            <a class="main-nav-text" href="/TriangleProject/Editor/GamesList/false">לעורך</a>
+            <a class="main-nav-text" href="">למשחק</a>
             <a class="main-nav-text" @onclick="(() => OpenPopup(youtube))">איך משחקים? </a>
             <a class="main-nav-text" @onclick="(() => OpenPopup(aboutText))">אודות</a>
         </div>
@@ -20,12 +20,12 @@
 
 @if (whichToOpen == "youtube")
 {
-    <GeneralPopUp imgSource="url('../how to play.png')" IsOpen="@isPopupOpen" YouTubeVideoId="diFDMkm2Ol0" />
+    <GeneralPopUp imgSource="url('how to play.png')" IsOpen="@isPopupOpen" YouTubeVideoId="diFDMkm2Ol0" />
 
 }
 else
 {
-    <GeneralPopUp imgSource="url('../odot.png')" IsOpen="@isPopupOpen" PopupText="אפיון ופיתוח: ענבל עזר, עדי פפיא ומלכה ברי אופיין ופותח במסגרת פרוייקט בקורסים: תכנות 2+תכנות אינטרקציה ואנימציה 2+ סביבות לימוד אינטרקטיבות 2" PopupLink="https://www.hit.ac.il/telem/overview" />
+    <GeneralPopUp imgSource="url('odot.png')" IsOpen="@isPopupOpen" PopupText="אפיון ופיתוח: ענבל עזר, עדי פפיא ומלכה ברי אופיין ופותח במסגרת פרוייקט בקורסים: תכנות 2+תכנות אינטרקציה ואנימציה 2+ סביבות לימוד אינטרקטיבות 2" PopupLink="https://www.hit.ac.il/telem/overview" />
 
 }
 

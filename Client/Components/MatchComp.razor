@@ -17,7 +17,7 @@
                     @if (matchText.Contains("uploadedFiles/"))
                     {
                         <div class="each-match-div">
-                            <img class="brik" src="../css/edit game page/mini brik.svg" />
+                            <img class="brik" src="css/edit game page/mini brik.svg" />
                             <img class="image" src="@matchText" width="75" height="75" />
 
                         </div>
@@ -27,7 +27,7 @@
                     else
                     {
                         <div class="each-match-div">
-                            <img class="brik" src="../css/edit game page/mini brik.svg" />
+                            <img class="brik" src="css/edit game page/mini brik.svg" />
                             <span class="text">@matchText</span>
                         </div>
                         
@@ -46,7 +46,7 @@
                     @if (matchText2.Contains("uploadedFiles/"))
                     {
                         <div class="each-match-div">
-                            <img class="brik" src="../css/edit game page/mini brik.svg" />
+                            <img class="brik" src="css/edit game page/mini brik.svg" />
                             <img class="image" src="@matchText2" width="75" height="75" />
                         </div>
                         
@@ -54,7 +54,7 @@
                     else
                     {
                         <div class="each-match-div">
-                            <img class="brik" src="../css/edit game page/mini brik.svg" />
+                            <img class="brik" src="css/edit game page/mini brik.svg" />
 
                             <span class="text">@matchText2</span>
                         </div>
@@ -66,11 +66,11 @@
         </div>
 
         <div>
-            <img class="@editPenStyle" src="../edit_pencil.svg" alt="Edit" style="cursor: pointer" @onclick="editMatch" />
+            <img class="@editPenStyle" src="edit_pencil.svg" alt="Edit" style="cursor: pointer" @onclick="editMatch" />
         </div>
 
         <div class="delete">
-            <img class="trash" src="../trash3.svg" alt="Delete" @onclick="deleteMatch" />
+            <img class="trash" src="trash3.svg" alt="Delete" @onclick="deleteMatch" />
         </div>
     </div>
     

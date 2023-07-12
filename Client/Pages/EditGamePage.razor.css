@@ -461,6 +461,7 @@
     position: relative;
     top: -16vh;
     right: -10vw;
+    background-color: #FFFDF3;
 }
 
 .custom-input-file1 label {
@@ -470,6 +471,9 @@
     color: white;
     border-radius: 5px;
     cursor: pointer;
+    position: relative;
+    font-weight: 400;
+    top: -1vh;
 }
 
 .custom-input-file1 {
@@ -487,8 +491,7 @@
     cursor: pointer;
     position: relative;
     font-weight: 400;
-    top: -4vh;
-    right: -0.35vw;
+    top: -1vh;
 }
     .custom-input-file2 {
     position: absolute;
@@ -824,7 +827,7 @@
 
 .allPublishBtns {
     position: relative;
-    top: -10vh;
+    top: -12vh;
     right: 20vw;
 }
 
@@ -833,7 +836,7 @@
     width: 8vw;
     height: 5vh;
     border: none;
-    font-size: 100%: 120%;
+    font-size: 100%;
     font-weight: 200;
     color: white;
     border-radius: 10px;
@@ -847,7 +850,7 @@
     width: 8vw;
     height: 5vh;
     border: none;
-    font-size: 100%: 120%;
+    font-size: 100%;
     font-weight: 200;
     color: white;
     border-radius: 10px;
@@ -858,11 +861,11 @@
 }
 
 .afterPublish {
-    background-image: linear-gradient(to bottom, #87f0c3, #2de396);
+    background-color: #9BD9A4;
     width: 8vw;
     height: 5vh;
     border: none;
-    font-size: 100%: 120%;
+    font-size: 100%;
     font-weight: 200;
     color: white;
     border-radius: 10px;
@@ -880,7 +883,7 @@
 
 .afterPublishIcon {
     position: relative;
-    top: -2vw;
+    top: -1.8vw;
     right: 6vw;
     height: 2.4vh;
     cursor: pointer;
@@ -889,11 +892,10 @@
 
 .cancelPublishIcon {
     position: relative;
-    height: 2vh;
     top: 6.5vh;
-    right: -2.4vw;
+    right: -1.75vw;
     position: relative;
-    height: 2.4vh;
+    height: 2vh;
     cursor: pointer;
 }
 
@@ -905,15 +907,14 @@
     border: 2px solid #62629A;
     width: 8vw;
     height: 5vh;
-    font-size: 100%: 120%;
+    font-size: 100%;
     font-weight: 200;
     border-radius: 10px;
     cursor: pointer;
     font-family: Heebo;
-    margin-top: 3vh;
+    margin-top: 5vh;
     margin-right: -8vw;
 }
-
 .publishCode {
     margin-bottom: 1vh;
 }

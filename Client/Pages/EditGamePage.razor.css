@@ -288,12 +288,12 @@
 }
 
 #instraction1 {
-    /*font-size: 100%: 80%;*/
+    font-size: 10pt;
     font-weight: 300;
 }
 
 #instraction2 {
-    /*font-size: 100%: 80%;*/
+    font-size: 10pt;
     font-weight: 300;
 }
 
@@ -308,6 +308,7 @@
     top: 1vh;
     width: 8vw;
     height: 4vh;
+    font-size: 12.5pt;
 }
 
 .character-count {
@@ -315,15 +316,17 @@
     color: #707070;
     font-weight: 300;
     position: absolute;
-    margin-top: 0.5vh;
+    margin-top: 1vh;
+    font-size: 9pt;
 }
+
 
 #character-count1 {
     margin-right: -3.4vw;
 }
 
 #character-count2 {
-    margin-right: -11.8vw;
+    margin-right: -10.4vw;
 }
 
 /*--------------------------------------------------------------------------------------------------------------------
@@ -502,18 +505,23 @@
 .img-not-good1 {
     position: absolute;
     color: #C95151;
-    margin-top: -4vh;
-    margin-right: 8.5vw;
-    width: 10vw;
+    margin-top: -3vh;
+    margin-right: 6.5vw;
+    width: 13vw;
+    font-size: 9pt;
+    font-weight: 400;
 }
 
 .img-not-good2 {
     position: absolute;
     color: #C95151;
-    margin-top: -4vh;
-    margin-right: 8.5vw;
-    width: 10vw;
+    margin-top: -3vh;
+    margin-right: 6.7vw;
+    width: 13vw;
+    font-size: 9pt;
+    font-weight: 400;
 }
+
 
 
 /*-------------------------------------------------------------------------------------------------------------------
@@ -535,6 +543,7 @@
     bottom: 46vh;
     right: 25vw;
     font-weight: 200;
+    font-size: 10pt;
 }
 
 #all-matches-title {
@@ -665,7 +674,7 @@
 .disabledSaveMatchBtn {
     background: linear-gradient(rgba(220, 220, 220) -24%, rgb(230, 230, 230) 70.96%);
     border: none;
-    /*font-size: 100%: 120%;*/
+    font-size: 12.5pt;
     font-weight: 200;
     color: white;
     border-radius: 10px;
@@ -673,6 +682,7 @@
     width: 8vw;
     height: 5vh;
     right: -20vw;
+    font-size: 12.5pt;
 }
 
 .disabledSaveNameInstBtn {
@@ -694,25 +704,27 @@
 
 #saveMatchId {
     position: relative;
-    top: 0.7vh;
+    top: 2.7vh;
     width: 8vw;
     height: 4vh;
     right: 27vw;
+    font-size: 12.5pt;
 }
 
 
 #saveMatchIdWhileCancelBtn {
     position: relative;
-    top: 0.7vh;
+    top: 2.7vh;
     width: 8vw;
     height: 4vh;
     right: 23vw;
+    font-size: 12.5pt;
 }
 
 .cancelChanges {
     cursor: pointer;
     background-color: white;
-    /*font-size: 100%: 120%;*/
+    font-size: 12.5pt;
     border-radius: 8px;
     font-weight: 200;
     border: solid 2px #87C3F0;
@@ -723,13 +735,13 @@
     height: 4vh;
     font-family: Heebo;
     right: -17vw;
-    top: -4.5vh;
+    top: -2.5vh;
 }
 
 .disabledCancelChangesBtn {
     background: linear-gradient(rgba(220, 220, 220) -24%, rgb(230, 230, 230) 70.96%);
     border: none;
-    /*font-size: 100%: 120%;*/
+    font-size: 12.5pt;
     font-weight: 200;
     color: white;
     border-radius: 10px;
@@ -739,7 +751,7 @@
     height: 4vh;
     font-family: Heebo;
     right: -17vw;
-    top: -4.5vh;
+    top: -2.5vh;
 }
 
 }
@@ -762,7 +774,8 @@
     border-radius: 5px;
     padding: 0.3vw;
     left: 0;
-    top: -1vh;
+    top: -3.3vh;
+    font-size: 8.5pt;
     /*    border: 2px solid rgba(208, 106, 106, 1);
 */
 }

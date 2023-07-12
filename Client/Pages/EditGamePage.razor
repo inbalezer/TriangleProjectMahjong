@@ -627,7 +627,10 @@ else
 
 
     <div class="allPublishBtns">
+
         <input type="button" class="@publishClasStyle custom-tooltip" title="@publishDuringEdit" value="@publishBtnValue" disabled="@isPublish" @onclick="@(async ()=> await publish("Published"))" />
+
+
 
 
         @if (isReturnPublishClicked || fullGame.PublishStatus == "Published")

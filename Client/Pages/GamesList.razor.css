@@ -55,7 +55,7 @@ char_text {
     width: 6vw;
     height: 4vh;
     border: none;
-    font-size: 100%: 120%;
+    font-size: 100%;
     font-weight: 200;
     color: white;
     border-radius: 10px;
@@ -71,7 +71,7 @@ char_text {
     width: 6vw;
     height: 4vh;
     border: none;
-    font-size: 100%: 120%;
+    font-size: 100%;
     font-weight: 200;
     color: white;
     border-radius: 10px;
@@ -293,13 +293,13 @@ char_text {
     }
 
 .PageMainTitle {
-    font-size:20pt;
+    font-size: 20pt;
     color: #62629A;
     background: linear-gradient(180deg, #fdf1d0 20%, #fffdf3 100%);
     border-radius: 25px;
     height: 4vh;
-    max-width: 305px;
-    padding: 15px;
+    max-width: 23vw;
+    padding: 2vh;
     margin: 0 auto;
     text-align: center;
     display: flex;

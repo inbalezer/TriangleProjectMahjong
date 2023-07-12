@@ -79,7 +79,7 @@ hr {
     padding: 0.1vw 0.58vw;
     margin: -1.2vw 1vw;
     cursor: pointer;
-    /*font-size: 100%: 110%;*/
+    font-size: 100%;
     border-radius: 10px;
     font-family: Heebo;
 }

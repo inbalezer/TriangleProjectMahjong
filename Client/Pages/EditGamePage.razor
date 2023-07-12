@@ -867,7 +867,7 @@ z-index:-1;
 
         if (isNameAndInstraction && isEnoughMathces)
         {
-    @*isPublish = false;*@
+            @*isPublish = false;*@
             if (fullGame.PublishStatus == "Not Eligible")
             {
                 await publish("Eligible");
@@ -879,7 +879,7 @@ z-index:-1;
             {
                 isPublish = false;
                 isPublish = false;
-                if (isEditAndCantPublish)
+                if (isEditAndCantPublish && publishBtnValue == "פרסם" )
                 {
                     publishClasStyle = "disabled-publish-button";
                     publishDuringEdit = "לא ניתן לפרסם משחק בעת עריכת זוג";
@@ -887,6 +887,7 @@ z-index:-1;
                 }
                 else
                 {
+                    publishDuringEdit = "";
                     publishClasStyle = "abled-publish-button";
                 }
             }
@@ -1053,7 +1054,7 @@ z-index:-1;
 
             if (!isCancelPublishClicked)
             {
-                if (isEditAndCantPublish)
+                if (isEditAndCantPublish && publishBtnValue == "פרסם")
                 {
                     publishClasStyle = "disabled-publish-button";
                     publishDuringEdit = "לא ניתן לפרסם משחק בעת עריכת זוג";
@@ -1061,6 +1062,7 @@ z-index:-1;
                 }
                 else
                 {
+                    publishDuringEdit = "";
                     publishClasStyle = "abled-publish-button";
                 }
 
@@ -1278,7 +1280,7 @@ z-index:-1;
             publishBtnValue = "פרסם";
             isPublish = false;
             isPublish = false;
-            if (isEditAndCantPublish)
+            if (isEditAndCantPublish && publishBtnValue == "פרסם")
             {
                 publishClasStyle = "disabled-publish-button";
                 publishDuringEdit = "לא ניתן לפרסם משחק בעת עריכת זוג";
@@ -1286,6 +1288,7 @@ z-index:-1;
             }
             else
             {
+                publishDuringEdit = "";
                 publishClasStyle = "abled-publish-button";
             }
 
@@ -1600,7 +1603,7 @@ z-index:-1;
         isEditAndCantPublish = true;
         currentMatchIndex = matchIdToEdit;
         publishClasStyle = "disabled-publish-button";
-        publishDuringEdit = "לא ניתן לפרסם משחק בעת עריכת זוג";
+        publishDuringEdit = "";
 
         var editMatchResponse = await Http.GetAsync("api/Matches/" + UserId + "/TempEdit" + "/" + matchIdToEdit);
         if (editMatchResponse.IsSuccessStatusCode)

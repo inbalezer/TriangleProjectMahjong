@@ -2,18 +2,16 @@
     <Found Context="routeData">
         @if (UserId > 0)
         {
-            <CascadingValue Value="@UserId">
-                @*<RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)  />*@
-                <RouteView RouteData="@routeData" DefaultLayout="typeof(MainLayout)" />
-
-                <FocusOnNavigate RouteData="@routeData" Selector="h1" />
-            </CascadingValue>
+                <CascadingValue Value="@UserId">
+                    <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+                    <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+                </CascadingValue>
         }
         else
         {
-            @*<p>loading Portelem</p>*@
+           @*<p>loading Portelem</p>*@
             <lottie-player src="https://lottie.host/01cd36e2-81e9-4cd6-8b5e-35d72f3a4e32/HInkM8iXo7.json" background="transparent" speed="2" style="display: flex; align-items: center; justify-content: center; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50%; height: 50%;" loop autoplay></lottie-player>
-
+        
         }
 
     </Found>

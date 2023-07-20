@@ -13,6 +13,7 @@
             else
             {
                 <p>@PopupText</p>
+                <p>@SeconderyText</p>
                 <a href="@PopupLink">הפקולטה לטכנולוגיות למידה</a>
             }
         </div>
@@ -28,6 +29,10 @@
 
     [Parameter]
     public string PopupText { get; set; }
+
+    [Parameter]
+    public string SeconderyText { get; set; }
+
     [Parameter]
     public string imgSource { get; set; }
 

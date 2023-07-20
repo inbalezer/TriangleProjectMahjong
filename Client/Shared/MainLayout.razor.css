@@ -35,9 +35,27 @@ article {
     margin-left: 1vw;
     position: relative;
     top: 2vh;
-    text-decoration:underline;
-    cursor:pointer;
+    text-decoration: none;
+    cursor: pointer;
 }
+
+    .main-nav-text:hover {
+        color: white;
+        margin-left: 1vw;
+        position: relative;
+        top: 2vh;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .main-nav-text:after {
+        color: white;
+        margin-left: 1vw;
+        position: relative;
+        top: 2vh;
+        text-decoration: underline;
+        cursor: pointer;
+    }
 
 main {
     flex: 1;

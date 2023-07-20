@@ -15,6 +15,7 @@
     display: flex;
     height: 15vh;
     align-items: center;
+    width:8vw;
 }
 
 
@@ -35,8 +36,9 @@
 
 
 .image {
-    position: relative;
-    right: -5vw;
+    position: absolute;
+    right: 1.8vw;
+
 }
 
 .brik {

@@ -9,6 +9,11 @@
     width: 100vw;
 }
 
+#video-play{
+    position:absolute;
+    right:5vw;
+}
+
 iframe {
     border: 0;
     height: 100%;

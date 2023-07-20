@@ -48,7 +48,7 @@ article {
         cursor: pointer;
     }
 
-    .main-nav-text:after {
+    .main-nav-text::after {
         color: white;
         margin-left: 1vw;
         position: relative;
